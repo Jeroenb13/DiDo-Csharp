@@ -33,7 +33,7 @@ namespace Dido
 
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            args.DrawingSession.DrawEllipse(155, 115, 80, 30, Colors.Black, 3);
+            args.DrawingSession.DrawEllipse(155, 115, 80, 30, Colors.Black, 10);
             args.DrawingSession.DrawText("Pekela", 130, 100, Colors.Yellow);
         }
     }
