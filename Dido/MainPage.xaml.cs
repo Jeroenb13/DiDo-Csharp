@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Windows.UI.Core;
+using System.Diagnostics;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -24,9 +27,11 @@ namespace Dido
 
     public sealed partial class MainPage : Page
     {
+       
         public MainPage()
         {
             this.InitializeComponent();
+            Window.Current.CoreWindow.KeyDown += KeyEventHandler;
         }
 
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -36,15 +41,13 @@ namespace Dido
             args.DrawingSession.DrawText("INF2J", 130, 100, Colors.Yellow);
         }
 
-        private void Grid_OnKeyDown(object sender, KeyEventArgs e)
+        private async void KeyEventHandler(CoreWindow sender, KeyEventArgs e)
         {
-            // Drawing na keypress
-            var key = e.Key.ToString();
-            // ToDo: Eerst de Canvas legen?
-            args.DrawingSession.DrawEllipse(155, 115, 80, 30, Colors.Black, 10);
-            args.DrawingSession.DrawText(str[0], 130, 100, Colors.Yellow);
-  
+            e.Handled = true; //gets unset in case of default
+            MessageDialog msgbox = new MessageDialog(e.VirtualKey.ToString(), "DiDo");
         }
+
+        
 
 
     }
