@@ -21,9 +21,7 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 
 namespace Dido
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -33,8 +31,21 @@ namespace Dido
 
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
+            // Standaard drawing
             args.DrawingSession.DrawEllipse(155, 115, 80, 30, Colors.Black, 10);
-            args.DrawingSession.DrawText("Pekela", 130, 100, Colors.Yellow);
+            args.DrawingSession.DrawText("INF2J", 130, 100, Colors.Yellow);
         }
+
+        private void Grid_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            // Drawing na keypress
+            var key = e.Key.ToString();
+            // ToDo: Eerst de Canvas legen?
+            args.DrawingSession.DrawEllipse(155, 115, 80, 30, Colors.Black, 10);
+            args.DrawingSession.DrawText(str[0], 130, 100, Colors.Yellow);
+  
+        }
+
+
     }
 }
