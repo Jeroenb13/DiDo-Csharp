@@ -31,7 +31,7 @@ namespace Dido
         public MainPage()
         {
             this.InitializeComponent();
-            Window.Current.CoreWindow.KeyDown += KeyEventHandler;
+            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
         }
 
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -41,10 +41,9 @@ namespace Dido
             args.DrawingSession.DrawText("INF2J", 130, 100, Colors.Yellow);
         }
 
-        private async void KeyEventHandler(CoreWindow sender, KeyEventArgs e)
+        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-            e.Handled = true; //gets unset in case of default
-            MessageDialog msgbox = new MessageDialog(e.VirtualKey.ToString(), "DiDo");
+           Debug.WriteLine(args.VirtualKey.ToString());
         }
 
         
