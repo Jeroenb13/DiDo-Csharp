@@ -65,35 +65,21 @@ namespace DiDo.Levels
             { "!", "new_row" }
         };
 
-        String levelOne = "SRRMRRRRRMRRRU"
-                    + "!" + "XffffffffffffT"
-                    + "!" + "XffgfffffffffT"
-                    + "!" + "XfffffffffffbT"
-                    + "!" + "XffffbfhffffbN"
-                    + "!" + "XffffbbffffffT"
-                    + "!" + "XfifffffffffbT"
-                    + "!" + "XffffffffffffT"
-                    + "!" + "XffffffjfffffN"
-                    + "!" + "XbbfffffffkffT"
-                    + "!" + "XfbffffffffffT"
-                    + "!" + "XfblffffbffffT"
-                    + "!" + "YVVVVVVVVVVVVW";
-
         String[,] levelone = {
                 {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
-                {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"}
+                {"P","f","f","f","f","f","f","f","f","f","f","f","f","T"},
+                {"X","f","f","g","f","f","f","f","f","f","f","f","f","T"},
+                {"X","f","f","f","f","f","f","f","f","f","f","f","b","T"},
+                {"X","f","f","f","f","b","f","h","f","f","f","f","b","N"},
+                {"X","f","f","f","f","b","b","f","f","f","f","f","f","T"},
+                {"X","f","i","f","f","f","f","f","f","f","f","f","b","T"},
+                {"X","f","f","f","f","f","f","f","f","f","f","f","f","T"},
+                {"X","f","f","f","f","f","f","j","f","f","f","f","f","N"},
+                {"X","b","b","f","f","f","f","f","f","f","k","f","f","T"},
+                {"X","f","b","f","f","f","f","f","f","f","f","f","f","T"},
+                {"P","f","b","l","f","f","f","f","b","f","f","f","f","T"},
+                {"P","f","f","f","f","f","f","f","f","f","f","f","b","T"},
+                {"Y","V","V","V","V","V","V","V","V","V","V","V","V","W"},
         };
 
     }
