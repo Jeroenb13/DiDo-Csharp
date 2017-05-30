@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\Scaling.cs" />
+    <Compile Include="Levels\Levels.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
