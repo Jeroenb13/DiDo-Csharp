@@ -60,35 +60,31 @@ namespace DiDo
 
 
         }
+ 
+    
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
+            int move_speed = 5;
+                     
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
-
-                playerX -= 5;
-
-
+                playerX -= move_speed;
             }
+
             if (args.VirtualKey == VirtualKey.D)
             {
-                playerX += 5;
-
-
+                playerX += move_speed;
             }
+
             if (args.VirtualKey == VirtualKey.W)
             {
-
-                playerY -= 5;
-
-
+                playerY -= move_speed;
             }
+
             if (args.VirtualKey == VirtualKey.S)
             {
-
-                playerY += 5;
-
-
+                playerY += move_speed;
             }
         }
 
