@@ -58,8 +58,6 @@ namespace DiDo
 
 
 
-
-
         }
  
     
@@ -146,31 +144,12 @@ namespace DiDo
 
                 percent[i] += (0.050f * scaleHeight);
 
-                if (pointY < 0f || pointY > 1080)
+                if (pointY < 0f || pointY > 1080 || pointX > 1920f || pointX < 0f)
                 {
                     bulletXPOS.RemoveAt(i);
                     bulletYPOS.RemoveAt(i);
                     percent.RemoveAt(i);
                 }
-                else if (pointY > 1080f)
-                {
-                    bulletXPOS.RemoveAt(i);
-                    bulletYPOS.RemoveAt(i);
-                    percent.RemoveAt(i);
-                }
-                else if (pointX > 1920f)
-                {
-                    bulletXPOS.RemoveAt(i);
-                    bulletYPOS.RemoveAt(i);
-                    percent.RemoveAt(i);
-                }
-                else if (pointX < 0f)
-                {
-                    bulletXPOS.RemoveAt(i);
-                    bulletYPOS.RemoveAt(i);
-                    percent.RemoveAt(i);
-                }
-
             }
 
             GameCanvas.Invalidate();
@@ -183,7 +162,7 @@ namespace DiDo
             {
                 GameState = 0;
                 RoundEnded = false;
-                countdown = 6;
+                countdown = 60;
 
             }
             else

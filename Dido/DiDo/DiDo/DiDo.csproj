@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\Scaling.cs" />
+    <Compile Include="Levels\Levels.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -112,7 +113,22 @@
     <Content Include="Assets\BG\ingame.png" />
     <Content Include="Assets\BG\level.png" />
     <Content Include="Assets\Bullets\drink-4.png" />
-    <Content Include="Assets\Char\JeroenSprite.png" />
+    <Content Include="Assets\Char\spr_daan.png" />
+    <Content Include="Assets\Char\spr_enemy.png" />
+    <Content Include="Assets\Char\spr_hayri.png" />
+    <Content Include="Assets\Char\spr_jeffrey.png" />
+    <Content Include="Assets\Char\spr_jeroen.png" />
+    <Content Include="Assets\Char\spr_jordy.png" />
+    <Content Include="Assets\Char\spr_matthew.png" />
+    <Content Include="Assets\Char\spr_max.png" />
+    <Content Include="Assets\Items\chest.png" />
+    <Content Include="Assets\Items\drink-1.png" />
+    <Content Include="Assets\Items\drink-2.png" />
+    <Content Include="Assets\Items\drink-3.png" />
+    <Content Include="Assets\Items\drink-4.png" />
+    <Content Include="Assets\Items\food-1.png" />
+    <Content Include="Assets\Items\food-2.png" />
+    <Content Include="Assets\Items\key.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -134,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
-    <Folder Include="Assets\Items\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
