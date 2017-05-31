@@ -21,6 +21,7 @@ namespace DiDo
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        // The images of the game
         public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
