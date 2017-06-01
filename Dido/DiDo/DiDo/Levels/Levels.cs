@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DiDo.Levels
 {
-    public class Levels
+    public static class Levels
     {
-        Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
+        public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge", new Uri("ms-appx:///Assets/Tiles/bridge.png")) },
             { "b", new Tile("crate", new Uri("ms-appx:///Assets/Tiles/crate.png")) },
@@ -34,7 +34,7 @@ namespace DiDo.Levels
             { "v", new Tile("path_0_cross" , new Uri("ms-appx:///Assets/Tiles/path_3.png"))},
             { "w", new Tile("path_0_t", new Uri("ms-appx:///Assets/Tiles/path_4.png")) },
             { "x", new Tile("path_90_straight" , new Uri("ms-appx:///Assets/Tiles/path_1.png"))},
-            { "y", new Tile( "path_90_turn", new Uri("ms-appx:///Assets/Tiles/path_2.png")) },
+            { "y", new Tile("path_90_turn", new Uri("ms-appx:///Assets/Tiles/path_2.png")) },
             { "z", new Tile("path_90_cross" , new Uri("ms-appx:///Assets/Tiles/path_3.png"))},
             { "A", new Tile("path_90_t", new Uri("ms-appx:///Assets/Tiles/path_4.png")) },
             { "B", new Tile("path_180_straight" , new Uri("ms-appx:///Assets/Tiles/path_1.png"))},
@@ -64,7 +64,7 @@ namespace DiDo.Levels
             { "Z", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water.png"))}
         };
 
-        String[,] levelOne = { // 14x14
+        public static String[,] levelOne = { // 14x14
                 {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
                 {"P","f","f","f","f","f","f","f","f","f","f","f","f","T"},
                 {"X","f","f","g","f","f","f","f","f","f","f","f","f","T"},
@@ -80,10 +80,11 @@ namespace DiDo.Levels
                 {"P","f","f","f","f","f","f","f","f","f","f","f","b","T"},
                 {"Y","V","V","V","V","V","V","V","V","V","V","V","V","W"},
         };
-        String[,] levelTwo = { 
+
+        public static String[,] levelTwo = { 
                 {"n","n","n","n","n","n","o","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
                 {"t","t","u","n","n","n","n","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","n","n","n","n","n","p","n","n","n","n","n","q","n","n","n"},
-                {"n","n","x","n","n","n","n","n","n","n","n","n","r","n"/**/,"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","x","n","n","n","n","n","n","n","n","n","r","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
                 {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
                 {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
                 {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
@@ -107,7 +108,7 @@ namespace DiDo.Levels
                 {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"}
         };
 
-        String[,] levelThree =  { //20x25
+        public static String[,] levelThree =  { //20x25
                 {" ", " ", " ", " ", " ", " ", " ", "S", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "U"},
                 {" ", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "b", "f", "f", "f", "T"},
                 {" ", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "b", "f", "f", "f", "T"},

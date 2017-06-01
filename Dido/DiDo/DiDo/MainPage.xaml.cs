@@ -23,7 +23,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player;
+        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player, test;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
@@ -121,6 +121,8 @@ namespace DiDo
             Level2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+
+            test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/rubbishbin.png"));
         }
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -130,7 +132,22 @@ namespace DiDo
             args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
             args.DrawingSession.DrawImage(Scaling.img(Player), playerX, playerY);
 
+            // Hier alles van een level doorlopen uit de Levels class, en die genereren.
             
+            
+
+            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
+                {
+                    args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x*32, y*32, Colors.Yellow);
+                    //args.DrawingSession.DrawImage(Scaling.img(test), 0, 0);
+                }
+            }
+
+            
+
+
 
             // Display projectiles
             for (int i = 0; i < bulletXPOS.Count; i++)

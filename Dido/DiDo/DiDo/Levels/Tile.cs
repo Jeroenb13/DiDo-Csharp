@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiDo.Levels
 {
-    class Tile
+    public class Tile
     {
         public string TileType { get; }
         public Uri Image { get; }
