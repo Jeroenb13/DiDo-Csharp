@@ -53,7 +53,7 @@ namespace DiDo.Levels
             { "O", new Tile("torch_180", new Uri("ms-appx:///Assets/Tiles/torch.png")) },
             { "P", new Tile("torch_270", new Uri("ms-appx:///Assets/Tiles/torch.png")) },
             { "Q", new Tile("tree", new Uri("ms-appx:///Assets/Tiles/tree.png")) },
-            { "R", new Tile("wall_0_straight", new Uri("ms-appx:///Assets/Tiles/wall-2.png")) },
+            { "R", new Tile("wall_0_strai ght", new Uri("ms-appx:///Assets/Tiles/wall-2.png")) },
             { "S", new Tile("wall_0_turn", new Uri("ms-appx:///Assets/Tiles/wall-1.png")) },
             { "T", new Tile("wall_90_straight", new Uri("ms-appx:///Assets/Tiles/wall-2.png")) },
             { "U", new Tile("wall_90_turn", new Uri("ms-appx:///Assets/Tiles/wall-1.png")) },
