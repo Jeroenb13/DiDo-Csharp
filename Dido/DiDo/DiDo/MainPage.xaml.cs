@@ -25,7 +25,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player, test;
+        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player, test, tmp, S, R, M, U, P, f, T, b, V, W, Y;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
@@ -61,7 +61,7 @@ namespace DiDo
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
             int move_speed = 5;
-                     
+
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
@@ -119,6 +119,24 @@ namespace DiDo
             Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
 
             test = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/rubbishbin.png"));
+
+
+
+
+            S = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-1.png"));
+            R = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-2.png"));
+            M = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/torch.png"));
+            U = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-1.png"));
+            P = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/torch.png"));
+            f = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/floor.png"));
+            T = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-2.png"));
+            b = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/crate.png"));
+            V = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-2.png"));
+            W = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-1.png"));
+            Y = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-1.png"));
+
+
+
         }
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -151,12 +169,20 @@ namespace DiDo
             {
                 for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
                 {
-                    //args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x*32, y*32, Colors.Yellow);
-                    //args.DrawingSession.DrawImage(Scaling.img(test), 0, 0);
+                    //args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x * 32, y * 32, Colors.Yellow);
+
+                    // Comment deze om verder te gaan zonder de error, is voor het renderen van de map
+                    //tmp = await CanvasBitmap.LoadAsync(sender, Levels.Levels.tiles[Levels.Levels.levelOne[x, y].ToString()].Image);
+                    args.DrawingSession.DrawImage(Scaling.img(
+                        S
+                        ), x * (32* MainPage.scaleWidth), y * (32* MainPage.scaleHeight)
+                    );
+                    Debug.WriteLine(Levels.Levels.levelOne[x, y].ToString());
+
                 }
             }
 
-            
+
 
 
 
