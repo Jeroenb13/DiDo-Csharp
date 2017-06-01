@@ -25,7 +25,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player, test, tmp, S, R, M, U, P, f, T, b, V, W, Y;
+        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player, test, tmp, S, R, M, U, P, f, T, b, V, W, Y, J, N;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
@@ -134,6 +134,9 @@ namespace DiDo
             V = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-2.png"));
             W = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-1.png"));
             Y = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/wall-1.png"));
+            J = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/rubbishbin.png"));
+            N = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Tiles/torch.png"));
+           
 
 
 
@@ -171,13 +174,43 @@ namespace DiDo
                 {
                     //args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x * 32, y * 32, Colors.Yellow);
 
-                    // Comment deze om verder te gaan zonder de error, is voor het renderen van de map
+                   
                     //tmp = await CanvasBitmap.LoadAsync(sender, Levels.Levels.tiles[Levels.Levels.levelOne[x, y].ToString()].Image);
+
+                    // Dirty Fix, en moet niet in elke frame gebeuren
+                    CanvasBitmap tempTile = S;
+                    if (Levels.Levels.levelOne[x, y].ToString() == "S") { tempTile = S; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "R") { tempTile = R; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "M") { tempTile = M; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "U") { tempTile = U; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "P") { tempTile = P; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "f") { tempTile = f; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "T") { tempTile = T; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "b") { tempTile = b; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "V") { tempTile = V; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "W") { tempTile = W; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "Y") { tempTile = Y; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "J") { tempTile = J; }
+                    else
+                    if (Levels.Levels.levelOne[x, y].ToString() == "N") { tempTile = N; }
+
+
                     args.DrawingSession.DrawImage(Scaling.img(
-                        S
-                        ), x * (32* MainPage.scaleWidth), y * (32* MainPage.scaleHeight)
+                        tempTile
+                        ), y * (32* MainPage.scaleWidth), x * (32* MainPage.scaleHeight)
                     );
-                    Debug.WriteLine(Levels.Levels.levelOne[x, y].ToString());
+                    //Debug.WriteLine(Levels.Levels.levelOne[x, y].ToString());
 
                 }
             }
