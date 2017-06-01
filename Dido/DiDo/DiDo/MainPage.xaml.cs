@@ -131,7 +131,7 @@ namespace DiDo
                 {
                     //args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x * 32, y * 32, Colors.Yellow);
 
-                    
+                    // Comment deze om verder te gaan zonder de error, is voor het renderen van de map
                     args.DrawingSession.DrawImage(Scaling.img(await CanvasBitmap.LoadAsync(sender, Levels.Levels.tiles[Levels.Levels.levelOne[x, y].ToString()].Image)), x * (32* MainPage.scaleWidth), y * (32* MainPage.scaleHeight));
                 }
             }
