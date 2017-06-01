@@ -96,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameElements\GameStateManager.cs" />
-    <Compile Include="GameElements\Scaling.cs" />
+    <Compile Include="GameElements\ImageManipulation.cs" />
     <Compile Include="Levels\Levels.cs" />
     <Compile Include="Levels\Tile.cs" />
     <Compile Include="MainPage.xaml.cs">

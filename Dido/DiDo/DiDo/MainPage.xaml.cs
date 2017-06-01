@@ -14,6 +14,7 @@ using Windows.UI;
 using Windows.System;
 using System.Diagnostics;
 using Windows.Graphics.Imaging;
+using Windows.UI.Xaml.Media;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -43,12 +44,14 @@ namespace DiDo
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
+        public static string keyPress;
+
 
         public MainPage()
         {
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
-            Scaling.SetScale();
+            ImageManipulation.SetScale();
             
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
@@ -56,28 +59,32 @@ namespace DiDo
         }
 
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
-        {      
+        {
             int move_speed = 5;
                      
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
                 playerX -= move_speed;
+                keyPress = "A";
             }
 
             if (args.VirtualKey == VirtualKey.D)
             {
                 playerX += move_speed;
+                keyPress = "D";
             }
 
             if (args.VirtualKey == VirtualKey.W)
             {
                 playerY -= move_speed;
+                keyPress = "W";
             }
 
             if (args.VirtualKey == VirtualKey.S)
             {
                 playerY += move_speed;
+                keyPress = "S";
             }
         }
 
@@ -95,7 +102,7 @@ namespace DiDo
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
             bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-            Scaling.SetScale();
+            ImageManipulation.SetScale();
         }
 
         private void GameCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
@@ -117,19 +124,34 @@ namespace DiDo
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
-            args.DrawingSession.DrawImage(Scaling.img(BG));
+            args.DrawingSession.DrawImage(ImageManipulation.img(BG));
             args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
-            args.DrawingSession.DrawImage(Scaling.img(Player), playerX, playerY);
-
-            // Hier alles van een level doorlopen uit de Levels class, en die genereren.
             
-            
+            if (keyPress == "A")
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), playerX, playerY);
+            }
+            else if (keyPress == "S")
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), playerX, playerY);
+            }
+             else if (keyPress == "D")
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), playerX, playerY);
+            }
+            else
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
+            }
+                // Hier alles van een level doorlopen uit de Levels class, en die genereren.
 
-            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
+
+
+                for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
             {
                 for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
                 {
-                    args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x*32, y*32, Colors.Yellow);
+                    //args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x*32, y*32, Colors.Yellow);
                     //args.DrawingSession.DrawImage(Scaling.img(test), 0, 0);
                 }
             }
@@ -147,7 +169,7 @@ namespace DiDo
                 pointX = (bulletX + (bulletXPOS[i] - bulletX) * percent[i]);
                 pointY = (bulletY + (bulletYPOS[i] - bulletY) * percent[i]);
 
-                args.DrawingSession.DrawImage(Scaling.img(Bullet), pointX - (34 * scaleWidth), pointY - (34 * scaleWidth));
+                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), pointX - (34 * scaleWidth), pointY - (34 * scaleWidth));
 
                 percent[i] += (0.050f * scaleHeight);
 
