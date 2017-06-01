@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Core;
 using DiDo.GameElements;
+//using DiDo.Levels;
 using System.Collections.Generic;
 using Windows.UI;
 using Windows.System;
@@ -119,7 +120,7 @@ namespace DiDo
             Level1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/ingame.png"));
             Level2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
-            Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/JeroenSprite.png"));
+            Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
         }
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -129,7 +130,7 @@ namespace DiDo
             args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
             args.DrawingSession.DrawImage(Scaling.img(Player), playerX, playerY);
 
-
+            
 
             // Display projectiles
             for (int i = 0; i < bulletXPOS.Count; i++)
