@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DiDo.Levels
 {
-    class Levels
+    public class Levels
     {
-        private Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
+        Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge", new Uri("ms-appx:///Assets/Tiles/bridge.png")) },
             { "b", new Tile("crate", new Uri("ms-appx:///Assets/Tiles/crate.png")) },

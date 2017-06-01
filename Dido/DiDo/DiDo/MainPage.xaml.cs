@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Core;
 using DiDo.GameElements;
+using DiDo.Levels;
 using System.Collections.Generic;
 using Windows.UI;
 using Windows.System;
@@ -129,7 +130,7 @@ namespace DiDo
             args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
             args.DrawingSession.DrawImage(Scaling.img(Player), playerX, playerY);
 
-
+            
 
             // Display projectiles
             for (int i = 0; i < bulletXPOS.Count; i++)

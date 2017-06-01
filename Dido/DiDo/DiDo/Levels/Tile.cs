@@ -8,9 +8,14 @@ namespace DiDo.Levels
 {
     class Tile
     {
-        public Tile(string tileType, Uri png)
+        public string TileType { get; }
+        public Uri Image { get; }
+        
+        public Tile(string tileType, Uri image)
         {
-
+            TileType = tileType;
+            Image = image;
         }
+        
     }
 }
