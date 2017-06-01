@@ -56,7 +56,7 @@ namespace DiDo
         }
 
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
-        {
+        {      
             int move_speed = 5;
 
             //to do keylijst maken keylijst
