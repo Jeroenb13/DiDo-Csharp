@@ -27,7 +27,7 @@ namespace DiDo.Levels
 
         public async void InitBitmap(ICanvasResourceCreator creator)
         {
-            Debug.WriteLine(this.Image.ToString());
+            //Debug.WriteLine(this.Image.ToString());
             this.Bitmap = await CanvasBitmap.LoadAsync(creator, this.Image);
         }
     }

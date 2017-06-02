@@ -135,9 +135,19 @@ namespace DiDo
             {
                 for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
                 {
+                    /*
+                    Comment deze 2 for loops als je een error krijgt
+                    */
                     string tileType = Levels.Levels.levelOne[x, y].ToString();
                     Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(ImageManipulation.img(tile.Bitmap), y * (32 * MainPage.scaleWidth), x * (32 * MainPage.scaleHeight));
+                    args.DrawingSession.DrawImage(
+                        ImageManipulation.img(
+                            tile.Bitmap
+                        ), 
+                        y * (32 * MainPage.scaleWidth), 
+                        x * (32 * MainPage.scaleHeight)
+                    );
+
                 }
             }
 
@@ -180,8 +190,10 @@ namespace DiDo
                 }
             }
 
+            // Background
+            //args.DrawingSession.DrawImage(ImageManipulation.img(BG));
+
             // Countdown
-            args.DrawingSession.DrawImage(ImageManipulation.img(BG));
             args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
 
         }
