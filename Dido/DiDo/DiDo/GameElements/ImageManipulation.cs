@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace DiDo.GameElements
 {
+    //Class to move the player around in a specific direction
     class ImageManipulation
     {
         public static Vector2 vec = new Vector2();
@@ -16,10 +17,9 @@ namespace DiDo.GameElements
             return vec;
         }
 
+        //Method to scale the window to every window size
         public static void SetScale()
         {
-            // Display Information
-
             MainPage.scaleWidth = (float)MainPage.bounds.Width / MainPage.DesignWidth;
             MainPage.scaleHeight = (float)MainPage.bounds.Height / MainPage.DesignHeight;
         }
@@ -50,7 +50,7 @@ namespace DiDo.GameElements
             Transform2DEffect image;
             image = new Transform2DEffect() { Source = source };
             //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation(270, vec);
+            image.TransformMatrix = Matrix3x2.CreateRotation((float)4.71, vec);
 
             return image;
         }
@@ -61,7 +61,7 @@ namespace DiDo.GameElements
             Transform2DEffect image;
             image = new Transform2DEffect() { Source = source };
             //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation(180, vec);
+            image.TransformMatrix = Matrix3x2.CreateRotation((float)3.14, vec);
 
             return image;
         }
@@ -72,7 +72,7 @@ namespace DiDo.GameElements
             Transform2DEffect image;
             image = new Transform2DEffect() { Source = source };
             //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation(80, vec);
+            image.TransformMatrix = Matrix3x2.CreateRotation((float)1.57, vec);
 
             return image;
         }
