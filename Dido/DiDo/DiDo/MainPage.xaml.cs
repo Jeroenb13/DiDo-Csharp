@@ -16,6 +16,7 @@ using System.Diagnostics;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using DiDo.Levels;
+using Microsoft.Graphics.Canvas.Effects;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -26,7 +27,8 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player;
+        public static Transform2DEffect Bullets;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
@@ -48,6 +50,8 @@ namespace DiDo
         public static string keyPress;
 
         public Player player = new DiDo.Player(0, 0);
+
+        public String level = "levelOne";
 
 
         public MainPage()
@@ -116,9 +120,9 @@ namespace DiDo
         async Task CreateResourcesAsync(CanvasControl sender)
         {
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
-            Level1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/ingame.png"));
-            Level2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
+            Bullets = ImageManipulation.img(Bullet);
+
             Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
 
             foreach (Tile t in Levels.Levels.tiles.Values)
@@ -129,26 +133,19 @@ namespace DiDo
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            GameStateManager.GSManager();   
-
-            GameCanvas.Invalidate();
+            GameStateManager.GSManager();
 
             // Level
-            // Herschrijven zodat het niet elke level opnieuw moet, en zorgen dat het in buffer komt.
-            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
+            var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
+            for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
             {
-                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
+                for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
                 {
-                    /*
-                    Comment deze 2 for loops als je een error krijgt
-                    */
-                    string tileType = Levels.Levels.levelOne[x, y].ToString();
+                    string tileType = gekozenLevel[x, y].ToString();
                     Tile tile = Levels.Levels.tiles[tileType];
                     args.DrawingSession.DrawImage(
-                        ImageManipulation.img(
-                            tile.Bitmap
-                        ), 
-                        y * (32 * MainPage.scaleWidth), 
+                        tile.Effect,
+                        y * (32 * MainPage.scaleWidth),
                         x * (32 * MainPage.scaleHeight)
                     );
 
@@ -175,12 +172,12 @@ namespace DiDo
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
 
-            // Display projectiles
+            // Show bullets
             foreach (Bullet bullet in bullets)
             {
                 bullet.x += bullet.velX;
                 bullet.y += bullet.velY;
-                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), bullet.x, bullet.y);
+                args.DrawingSession.DrawImage(Bullets, bullet.x, bullet.y);
 
                 if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
                 {
@@ -188,17 +185,13 @@ namespace DiDo
                 }
             }
 
+            // Remove Bullets
             foreach (Bullet bullet in bulletsToRemove)
             {
                 bullets.Remove(bullet);
             }
 
-            // Background
-            //args.DrawingSession.DrawImage(ImageManipulation.img(BG));
-
-            // Countdown
-            args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
-
+            GameCanvas.Invalidate();
         }
 
         private void GameCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

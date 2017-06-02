@@ -136,6 +136,12 @@
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
     <Content Include="Assets\Items\key.png" />
+    <Content Include="Assets\Menu\ExitButton.png" />
+    <Content Include="Assets\Menu\HelpButton.png" />
+    <Content Include="Assets\Menu\InvadeButton.png" />
+    <Content Include="Assets\Menu\logo.png" />
+    <Content Include="Assets\Menu\SettingsButton.png" />
+    <Content Include="Assets\Menu\StartButton.png" />
     <Content Include="Assets\Tiles\bridge.png" />
     <Content Include="Assets\Tiles\crack-1.png" />
     <Content Include="Assets\Tiles\crack-2.png" />

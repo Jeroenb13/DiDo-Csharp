@@ -12,7 +12,7 @@ namespace DiDo.GameElements
         {
             if (MainPage.RoundEnded == true)
             {
-                MainPage.BG = MainPage.Level2;
+                //MainPage.BG = MainPage.Level2;
             }
             else
             {
@@ -27,7 +27,7 @@ namespace DiDo.GameElements
                 }
                 else if (MainPage.GameState == 1)
                 {
-                    MainPage.BG = MainPage.Level1;
+                    //MainPage.BG = MainPage.Level1;
                 }
 
             }
