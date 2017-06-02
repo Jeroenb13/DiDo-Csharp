@@ -125,11 +125,41 @@ namespace DiDo
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            GameStateManager.GSManager();
-            args.DrawingSession.DrawImage(ImageManipulation.img(BG));
-            args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);     
+            GameStateManager.GSManager();   
 
-            // Display projectiles
+            GameCanvas.Invalidate();
+
+            // Level
+            // Herschrijven zodat het niet elke level opnieuw moet, en zorgen dat het in buffer komt.
+            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
+                {
+                    string tileType = Levels.Levels.levelOne[x, y].ToString();
+                    Tile tile = Levels.Levels.tiles[tileType];
+                    args.DrawingSession.DrawImage(ImageManipulation.img(tile.Bitmap), y * (32 * MainPage.scaleWidth), x * (32 * MainPage.scaleHeight));
+                }
+            }
+
+            // Player
+            if (keyPress == "A")
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), playerX, playerY);
+            }
+            else if (keyPress == "S")
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), playerX, playerY);
+            }
+            else if (keyPress == "D")
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), playerX, playerY);
+            }
+            else
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
+            }
+
+            // Bullets
             for (int i = 0; i < bulletXPOS.Count; i++)
             {
                 bulletX = playerX + (40 * scaleWidth);
@@ -149,37 +179,10 @@ namespace DiDo
                     percent.RemoveAt(i);
                 }
             }
-            GameCanvas.Invalidate();
 
-            // Herschrijven zodat het niet elke level opnieuw moet, en zorgen dat het in buffer komt.
-            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
-            {
-                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
-                {
-                    string tileType = Levels.Levels.levelOne[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(ImageManipulation.img(tile.Bitmap), y * (32 * MainPage.scaleWidth), x * (32 * MainPage.scaleHeight));
-                }
-            }
-
-
-            if (keyPress == "A")
-            {
-                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), playerX, playerY);
-            }
-            else if (keyPress == "S")
-            {
-                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), playerX, playerY);
-            }
-            else if (keyPress == "D")
-            {
-                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), playerX, playerY);
-            }
-            else
-            {
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
-            }
-
+            // Countdown
+            args.DrawingSession.DrawImage(ImageManipulation.img(BG));
+            args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
 
         }
 
