@@ -16,6 +16,7 @@ using System.Diagnostics;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using DiDo.Levels;
+using Microsoft.Graphics.Canvas.Effects;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -26,7 +27,8 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Level1, Level2, Level3, Bullet, Enemy1, Enemy2, Player;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
+        public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
@@ -118,10 +120,14 @@ namespace DiDo
         async Task CreateResourcesAsync(CanvasControl sender)
         {
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
-            Level1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/ingame.png"));
-            Level2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
-            Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
-            Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+            Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
+            Bullets = ImageManipulation.img(Bullet);
+
+            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+            Transform2DEffect PlayerA = ImageManipulation.imageA(Player_sprite);
+            Transform2DEffect PlayerS = ImageManipulation.imageS(Player_sprite);
+            Transform2DEffect PlayerD = ImageManipulation.imageD(Player_sprite);
+            Transform2DEffect PlayerW = ImageManipulation.imageW(Player_sprite);
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
@@ -131,8 +137,8 @@ namespace DiDo
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            GameStateManager.GSManager();   
- 
+            GameStateManager.GSManager();
+
             // Level
             var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
@@ -153,19 +159,19 @@ namespace DiDo
             // Player
             if (keyPress == "A")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
             }
             else if (keyPress == "S")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
             }
             else if (keyPress == "D")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
             }
             else
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
             }
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
@@ -175,7 +181,7 @@ namespace DiDo
             {
                 bullet.x += bullet.velX;
                 bullet.y += bullet.velY;
-                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), bullet.x, bullet.y);
+                args.DrawingSession.DrawImage(Bullets, bullet.x, bullet.y);
 
                 if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
                 {

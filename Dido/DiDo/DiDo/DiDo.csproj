@@ -119,6 +119,7 @@
   <ItemGroup>
     <Content Include="Assets\BG\ingame.png" />
     <Content Include="Assets\BG\level.png" />
+    <Content Include="Assets\Bullets\bullet.png" />
     <Content Include="Assets\Bullets\drink-4.png" />
     <Content Include="Assets\Char\spr_daan.png" />
     <Content Include="Assets\Char\spr_enemy.png" />
