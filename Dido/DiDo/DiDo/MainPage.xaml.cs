@@ -27,8 +27,8 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player;
-        public static Transform2DEffect Bullets;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
+        public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
@@ -120,10 +120,14 @@ namespace DiDo
         async Task CreateResourcesAsync(CanvasControl sender)
         {
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
-            Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
+            Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
 
-            Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+            Transform2DEffect PlayerA = ImageManipulation.imageA(Player_sprite);
+            Transform2DEffect PlayerS = ImageManipulation.imageS(Player_sprite);
+            Transform2DEffect PlayerD = ImageManipulation.imageD(Player_sprite);
+            Transform2DEffect PlayerW = ImageManipulation.imageW(Player_sprite);
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
@@ -155,19 +159,19 @@ namespace DiDo
             // Player
             if (keyPress == "A")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
             }
             else if (keyPress == "S")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
             }
             else if (keyPress == "D")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
             }
             else
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), player.x, player.y);
+                args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
             }
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
