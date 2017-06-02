@@ -36,6 +36,8 @@ namespace DiDo
 
         public static bool RoundEnded = false;
 
+        private bool assetsLoaded = false;
+
         //Lists Projectile
         public static List<float> bulletXPOS = new List<float>();
         public static List<float> bulletYPOS = new List<float>();
@@ -108,10 +110,7 @@ namespace DiDo
 
         private void GameCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
-            foreach(Tile t in Levels.Levels.tiles.Values)
-            {
-                t.InitBitmap(sender);
-            }
+            args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
         async Task CreateResourcesAsync(CanvasControl sender)
@@ -121,6 +120,11 @@ namespace DiDo
             Level2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+
+            foreach (Tile t in Levels.Levels.tiles.Values)
+            {
+                await t.InitBitmap(sender).AsAsyncAction();
+            }
         }
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -133,22 +137,22 @@ namespace DiDo
             // Herschrijven zodat het niet elke level opnieuw moet, en zorgen dat het in buffer komt.
             for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
             {
-                //for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
-                //{
-                //    /*
-                //    Comment deze 2 for loops als je een error krijgt
-                //    */
-                //    string tileType = Levels.Levels.levelOne[x, y].ToString();
-                //    Tile tile = Levels.Levels.tiles[tileType];
-                //    args.DrawingSession.DrawImage(
-                //        ImageManipulation.img(
-                //            tile.Bitmap
-                //        ), 
-                //        y * (32 * MainPage.scaleWidth), 
-                //        x * (32 * MainPage.scaleHeight)
-                //    );
+                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
+                {
+                    /*
+                    Comment deze 2 for loops als je een error krijgt
+                    */
+                    string tileType = Levels.Levels.levelOne[x, y].ToString();
+                    Tile tile = Levels.Levels.tiles[tileType];
+                    args.DrawingSession.DrawImage(
+                        ImageManipulation.img(
+                            tile.Bitmap
+                        ), 
+                        y * (32 * MainPage.scaleWidth), 
+                        x * (32 * MainPage.scaleHeight)
+                    );
 
-                //}
+                }
             }
 
             // Player

@@ -32,6 +32,7 @@ namespace DiDo.GameElements
             
             return image;
         }
+
         public static Transform2DEffect imageW(CanvasBitmap source)
         {
             vector2();

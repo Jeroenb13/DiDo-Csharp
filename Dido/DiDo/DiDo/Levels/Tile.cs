@@ -25,9 +25,8 @@ namespace DiDo.Levels
             Rotation = rotation;
         }
 
-        public async void InitBitmap(ICanvasResourceCreator creator)
+        public async Task InitBitmap(ICanvasResourceCreator creator)
         {
-            //Debug.WriteLine(this.Image.ToString());
             this.Bitmap = await CanvasBitmap.LoadAsync(creator, this.Image);
         }
     }
