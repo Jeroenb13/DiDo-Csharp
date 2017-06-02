@@ -133,22 +133,22 @@ namespace DiDo
             // Herschrijven zodat het niet elke level opnieuw moet, en zorgen dat het in buffer komt.
             for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
             {
-                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
-                {
-                    /*
-                    Comment deze 2 for loops als je een error krijgt
-                    */
-                    string tileType = Levels.Levels.levelOne[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                        ImageManipulation.img(
-                            tile.Bitmap
-                        ), 
-                        y * (32 * MainPage.scaleWidth), 
-                        x * (32 * MainPage.scaleHeight)
-                    );
+                //for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
+                //{
+                //    /*
+                //    Comment deze 2 for loops als je een error krijgt
+                //    */
+                //    string tileType = Levels.Levels.levelOne[x, y].ToString();
+                //    Tile tile = Levels.Levels.tiles[tileType];
+                //    args.DrawingSession.DrawImage(
+                //        ImageManipulation.img(
+                //            tile.Bitmap
+                //        ), 
+                //        y * (32 * MainPage.scaleWidth), 
+                //        x * (32 * MainPage.scaleHeight)
+                //    );
 
-                }
+                //}
             }
 
             // Player
@@ -166,7 +166,7 @@ namespace DiDo
             }
             else
             {
-               args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
             }
 
             // Bullets
