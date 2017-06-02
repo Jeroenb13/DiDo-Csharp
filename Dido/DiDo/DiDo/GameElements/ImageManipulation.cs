@@ -11,7 +11,8 @@ namespace DiDo.GameElements
         
         public static Vector2 vector2 ()
         {
-            vec.X = 16;
+            //Together the center point of the player
+            vec.X = 16; 
             vec.Y = 16;
             
             return vec;
@@ -33,6 +34,7 @@ namespace DiDo.GameElements
             return image;
         }
 
+        //In the MainPage class, when the 'W' button is pressed
         public static Transform2DEffect imageW(CanvasBitmap source)
         {
             vector2();
@@ -44,6 +46,7 @@ namespace DiDo.GameElements
             return image;
         }
 
+        //In the MainPage class, when the 'A' button is pressed
         public static Transform2DEffect imageA(CanvasBitmap source)
         {
             vector2();
@@ -55,6 +58,7 @@ namespace DiDo.GameElements
             return image;
         }
 
+        //In the MainPage class, when the 'S' button is pressed
         public static Transform2DEffect imageS(CanvasBitmap source)
         {
             vector2();
@@ -66,6 +70,7 @@ namespace DiDo.GameElements
             return image;
         }
 
+        //In the MainPage class, when the 'D' button is pressed
         public static Transform2DEffect imageD(CanvasBitmap source)
         {
             vector2();
