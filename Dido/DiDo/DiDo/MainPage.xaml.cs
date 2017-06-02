@@ -176,6 +176,8 @@ namespace DiDo
                 args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), player.x, player.y);
             }
 
+            List<Bullet> bulletsToRemove = new List<Bullet>();
+
             // Display projectiles
             foreach (Bullet bullet in bullets)
             {
@@ -185,8 +187,13 @@ namespace DiDo
 
                 if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
                 {
-                    bullets.Remove(bullet);
+                    bulletsToRemove.Add(bullet);
                 }
+            }
+
+            foreach (Bullet bullet in bulletsToRemove)
+            {
+                bullets.Remove(bullet);
             }
 
             // Background
@@ -221,11 +228,11 @@ namespace DiDo
                     float yVel = yPos - player.y;
 
                     // pythagorasmagie
-                    float c = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-                    float diff = c / 7;
+                    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+                    float scaling = distance / 25;
 
-                    xVel = xVel / diff;
-                    yVel = yVel / diff;
+                    xVel = xVel / scaling;
+                    yVel = yVel / scaling;
 
                     bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
                 }

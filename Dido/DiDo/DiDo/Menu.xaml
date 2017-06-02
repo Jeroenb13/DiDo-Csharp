@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="DiDo.Menu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DiDo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="645*"/>
+            <ColumnDefinition Width="645*"/>
+            <ColumnDefinition Width="645*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="325*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="159*"/>
+        </Grid.RowDefinitions>
+        <Rectangle x:Name="Logo" Fill="#FFF4F4F5" Stroke="Black" Grid.Row="1" d:LayoutOverrides="TopPosition, BottomPosition" Grid.Column="1"/>
+        <Button x:Name="Start" Content="Button" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch"/>
+        <Button x:Name="Invade" Content="Button" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"/>
+        <Button x:Name="Settings" Content="Button" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"/>
+        <Button x:Name="Help" Content="Button" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"/>
+        <Button x:Name="Exit" Content="Button" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch"/>
+
+
+    </Grid>
+</Page>
