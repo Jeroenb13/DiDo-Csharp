@@ -133,8 +133,8 @@ namespace DiDo
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            GameStateManager.GSManager();   
- 
+            GameStateManager.GSManager();
+
             // Level
             var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
