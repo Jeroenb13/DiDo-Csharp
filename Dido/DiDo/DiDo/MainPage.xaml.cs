@@ -30,22 +30,24 @@ namespace DiDo
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1280;
         public static float DesignHeight = 720;
-        public static float scaleWidth, scaleHeight, pointX, pointY, bulletX, bulletY, playerX, playerY, currPosPlayerX, currPosPlayerY;
+        public static float scaleWidth, scaleHeight, pointX, pointY;
 
         public static int countdown = 60; // 60
 
         public static bool RoundEnded = false;
 
+        private bool assetsLoaded = false;
+
         //Lists Projectile
-        public static List<float> bulletXPOS = new List<float>();
-        public static List<float> bulletYPOS = new List<float>();
-        public static List<float> percent = new List<float>();
+        public List<Bullet> bullets = new List<Bullet>();
 
         public static int GameState = 0; // startscreen
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
         public static string keyPress;
+
+        public Player player = new DiDo.Player(0, 0);
 
 
         public MainPage()
@@ -66,25 +68,25 @@ namespace DiDo
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
-                playerX -= move_speed;
+                player.x -= move_speed;
                 keyPress = "A";
             }
 
             if (args.VirtualKey == VirtualKey.D)
             {
-                playerX += move_speed;
+                player.x += move_speed;
                 keyPress = "D";
             }
 
             if (args.VirtualKey == VirtualKey.W)
             {
-                playerY -= move_speed;
+                player.y -= move_speed;
                 keyPress = "W";
             }
 
             if (args.VirtualKey == VirtualKey.S)
             {
-                playerY += move_speed;
+                player.y += move_speed;
                 keyPress = "S";
             }
         }
@@ -108,10 +110,7 @@ namespace DiDo
 
         private void GameCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
-            foreach(Tile t in Levels.Levels.tiles.Values)
-            {
-                t.InitBitmap(sender);
-            }
+            args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
         async Task CreateResourcesAsync(CanvasControl sender)
@@ -121,6 +120,11 @@ namespace DiDo
             Level2 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/drink-4.png"));
             Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+
+            foreach (Tile t in Levels.Levels.tiles.Values)
+            {
+                await t.InitBitmap(sender).AsAsyncAction();
+            }
         }
 
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -154,39 +158,31 @@ namespace DiDo
             // Player
             if (keyPress == "A")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), playerX, playerY);
+                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player), player.x, player.y);
             }
             else if (keyPress == "S")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), playerX, playerY);
+                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player), player.x, player.y);
             }
             else if (keyPress == "D")
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), playerX, playerY);
+                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player), player.x, player.y);
             }
             else
             {
-               args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), player.x, player.y);
             }
 
-            // Bullets
-            for (int i = 0; i < bulletXPOS.Count; i++)
+            // Display projectiles
+            foreach (Bullet bullet in bullets)
             {
-                bulletX = playerX + (40 * scaleWidth);
-                bulletY = playerY + (40 * scaleHeight);
+                bullet.x += bullet.velX;
+                bullet.y += bullet.velY;
+                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), bullet.x, bullet.y);
 
-                pointX = (bulletX + (bulletXPOS[i] - bulletX) * percent[i]);
-                pointY = (bulletY + (bulletYPOS[i] - bulletY) * percent[i]);
-
-                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), pointX - (34 * scaleWidth), pointY - (34 * scaleWidth));
-
-                percent[i] += (0.050f * scaleHeight);
-
-                if (pointY < 0f || pointY > 1080 || pointX > 1920f || pointX < 0f)
+                if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
                 {
-                    bulletXPOS.RemoveAt(i);
-                    bulletYPOS.RemoveAt(i);
-                    percent.RemoveAt(i);
+                    bullets.Remove(bullet);
                 }
             }
 
@@ -215,9 +211,20 @@ namespace DiDo
                 }
                 else if (GameState > 0)
                 {
-                    bulletXPOS.Add((float)e.GetPosition(GameCanvas).X);
-                    bulletYPOS.Add((float)e.GetPosition(GameCanvas).Y);
-                    percent.Add(0f);
+                    float xPos = (float)e.GetPosition(GameCanvas).X;
+                    float yPos = (float)e.GetPosition(GameCanvas).Y;
+
+                    float xVel = xPos - player.x;
+                    float yVel = yPos - player.y;
+
+                    // pythagorasmagie
+                    float c = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+                    float diff = c / 7;
+
+                    xVel = xVel / diff;
+                    yVel = yVel / diff;
+
+                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
                 }
             }
         }
