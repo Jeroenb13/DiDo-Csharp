@@ -23,7 +23,7 @@ namespace DiDo.Levels
             { "k", new Tile("floor_cracked_5", new Uri("ms-appx:///Assets/Tiles/crack-5.png"), true) },
             { "l", new Tile("floor_cracked_6", new Uri("ms-appx:///Assets/Tiles/crack-6.png"), true) },
             { "m", new Tile("gas", new Uri("ms-appx:///Assets/Tiles/gas.png")) },
-            { "n", new Tile("grass" , new Uri("ms-appx:///Assets/Tiles/grass.png"), true)},
+            { "n", new Tile("grass" , new Uri("ms-appx:///Assets/Tiles/grass_1.png"), true)},
             { "o", new Tile("grass_flower_1" , new Uri("ms-appx:///Assets/Tiles/flower-1.png"), true)},
             { "p", new Tile("grass_flower_2", new Uri("ms-appx:///Assets/Tiles/flower-2.png"), true) },
             { "q", new Tile("grass_flower_3", new Uri("ms-appx:///Assets/Tiles/flower-3.png"), true) },
