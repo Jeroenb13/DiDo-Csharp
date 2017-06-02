@@ -206,7 +206,7 @@ namespace DiDo
                     if (Levels.Levels.levelOne[x, y].ToString() == "N") { tempTile = N; }
 
 
-                    args.DrawingSession.DrawImage(Scaling.img(
+                    args.DrawingSession.DrawImage(ImageManipulation.img(
                         tempTile
                         ), y * (32* MainPage.scaleWidth), x * (32* MainPage.scaleHeight)
                     );
