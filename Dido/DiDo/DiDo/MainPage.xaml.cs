@@ -49,6 +49,9 @@ namespace DiDo
 
         public Player player = new DiDo.Player(0, 0);
 
+        public String level = "levelOne";
+        public int levelGenerated = 0;
+
 
         public MainPage()
         {
@@ -132,28 +135,28 @@ namespace DiDo
             GameStateManager.GSManager();   
 
             GameCanvas.Invalidate();
-
+            
             // Level
-            // Herschrijven zodat het niet elke level opnieuw moet, en zorgen dat het in buffer komt.
-            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
-            {
-                for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
+            //if(this.levelGenerated == 0) // Zorgen dat de level maar 1 keer generated word
+            //{
+                var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
+                for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
                 {
-                    /*
-                    Comment deze 2 for loops als je een error krijgt
-                    */
-                    string tileType = Levels.Levels.levelOne[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                        ImageManipulation.img(
-                            tile.Bitmap
-                        ), 
-                        y * (32 * MainPage.scaleWidth), 
-                        x * (32 * MainPage.scaleHeight)
-                    );
+                    for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
+                    {
+                        string tileType = gekozenLevel[x, y].ToString();
+                        Tile tile = Levels.Levels.tiles[tileType];
+                        args.DrawingSession.DrawImage(
+                            tile.Effect,
+                            y * (32 * MainPage.scaleWidth),
+                            x * (32 * MainPage.scaleHeight)
+                        );
 
+                    }
                 }
-            }
+                this.levelGenerated = 1;
+            //}
+            
 
             // Player
             if (keyPress == "A")
@@ -190,7 +193,7 @@ namespace DiDo
             //args.DrawingSession.DrawImage(ImageManipulation.img(BG));
 
             // Countdown
-            args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
+            //args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
 
         }
 
