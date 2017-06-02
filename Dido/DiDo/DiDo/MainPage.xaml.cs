@@ -156,7 +156,7 @@ namespace DiDo
             }
             else
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
+               args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
             }
 
             // Bullets
