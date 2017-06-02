@@ -225,11 +225,11 @@ namespace DiDo
                     float yVel = yPos - player.y;
 
                     // pythagorasmagie
-                    float c = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-                    float diff = c / 25;
+                    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+                    float scaling = distance / 25;
 
-                    xVel = xVel / diff;
-                    yVel = yVel / diff;
+                    xVel = xVel / scaling;
+                    yVel = yVel / scaling;
 
                     bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
                 }
