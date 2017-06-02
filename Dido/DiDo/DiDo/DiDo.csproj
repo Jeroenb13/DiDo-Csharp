@@ -136,6 +136,7 @@
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
     <Content Include="Assets\Items\key.png" />
+    <Content Include="Assets\Menu\logo.png" />
     <Content Include="Assets\Tiles\bridge.png" />
     <Content Include="Assets\Tiles\crack-1.png" />
     <Content Include="Assets\Tiles\crack-2.png" />
