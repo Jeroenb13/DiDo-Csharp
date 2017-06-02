@@ -164,17 +164,40 @@ namespace DiDo
             {
                 args.DrawingSession.DrawImage(ImageManipulation.imageW(Player), playerX, playerY);
             }
-                // Hier alles van een level doorlopen uit de Levels class, en die genereren.
+               
+
+            // Display projectiles
+            for (int i = 0; i < bulletXPOS.Count; i++)
+            {
+                bulletX = playerX + (40 * scaleWidth);
+                bulletY = playerY + (40 * scaleHeight);
+
+                pointX = (bulletX + (bulletXPOS[i] - bulletX) * percent[i]);
+                pointY = (bulletY + (bulletYPOS[i] - bulletY) * percent[i]);
+
+                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), pointX - (34 * scaleWidth), pointY - (34 * scaleWidth));
+
+                percent[i] += (0.050f * scaleHeight);
+
+                if (pointY < 0f || pointY > 1080 || pointX > 1920f || pointX < 0f)
+                {
+                    bulletXPOS.RemoveAt(i);
+                    bulletYPOS.RemoveAt(i);
+                    percent.RemoveAt(i);
+                }
+            }
+            GameCanvas.Invalidate();
+
+
+            // Hier alles van een level doorlopen uit de Levels class, en die genereren.
 
 
 
-                for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
+            for (int x = 0; x < Levels.Levels.levelOne.GetLength(0); x += 1)
             {
                 for (int y = 0; y < Levels.Levels.levelOne.GetLength(1); y += 1)
                 {
-                    //args.DrawingSession.DrawText(Levels.Levels.levelOne[x, y].ToString(), x * 32, y * 32, Colors.Yellow);
 
-                   
                     //tmp = await CanvasBitmap.LoadAsync(sender, Levels.Levels.tiles[Levels.Levels.levelOne[x, y].ToString()].Image);
 
                     // Dirty Fix, en moet niet in elke frame gebeuren
@@ -208,38 +231,14 @@ namespace DiDo
 
                     args.DrawingSession.DrawImage(ImageManipulation.img(
                         tempTile
-                        ), y * (32* MainPage.scaleWidth), x * (32* MainPage.scaleHeight)
+                        ), y * (32 * MainPage.scaleWidth), x * (32 * MainPage.scaleHeight)
                     );
                     //Debug.WriteLine(Levels.Levels.levelOne[x, y].ToString());
+                    // Bevat de waarde als string, bijvoorbeeld: S, en moet de variable S zijn.
 
                 }
             }
 
-
-
-
-
-            // Display projectiles
-            for (int i = 0; i < bulletXPOS.Count; i++)
-            {
-                bulletX = playerX + (40 * scaleWidth);
-                bulletY = playerY + (40 * scaleHeight);
-
-                pointX = (bulletX + (bulletXPOS[i] - bulletX) * percent[i]);
-                pointY = (bulletY + (bulletYPOS[i] - bulletY) * percent[i]);
-
-                args.DrawingSession.DrawImage(ImageManipulation.img(Bullet), pointX - (34 * scaleWidth), pointY - (34 * scaleWidth));
-
-                percent[i] += (0.050f * scaleHeight);
-
-                if (pointY < 0f || pointY > 1080 || pointX > 1920f || pointX < 0f)
-                {
-                    bulletXPOS.RemoveAt(i);
-                    bulletYPOS.RemoveAt(i);
-                    percent.RemoveAt(i);
-                }
-            }
-            GameCanvas.Invalidate();
         }
 
         private void GameCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
