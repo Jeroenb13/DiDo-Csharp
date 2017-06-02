@@ -50,7 +50,6 @@ namespace DiDo
         public Player player = new DiDo.Player(0, 0);
 
         public String level = "levelOne";
-        public int levelGenerated = 0;
 
 
         public MainPage()
@@ -133,30 +132,23 @@ namespace DiDo
         private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();   
-
-            GameCanvas.Invalidate();
-            
+ 
             // Level
-            //if(this.levelGenerated == 0) // Zorgen dat de level maar 1 keer generated word
-            //{
-                var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
-                for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
+            var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
+            for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
                 {
-                    for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
-                    {
-                        string tileType = gekozenLevel[x, y].ToString();
-                        Tile tile = Levels.Levels.tiles[tileType];
-                        args.DrawingSession.DrawImage(
-                            tile.Effect,
-                            y * (32 * MainPage.scaleWidth),
-                            x * (32 * MainPage.scaleHeight)
-                        );
+                    string tileType = gekozenLevel[x, y].ToString();
+                    Tile tile = Levels.Levels.tiles[tileType];
+                    args.DrawingSession.DrawImage(
+                        tile.Effect,
+                        y * (32 * MainPage.scaleWidth),
+                        x * (32 * MainPage.scaleHeight)
+                    );
 
-                    }
                 }
-                this.levelGenerated = 1;
-            //}
-            
+            }
 
             // Player
             if (keyPress == "A")
@@ -178,7 +170,7 @@ namespace DiDo
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
 
-            // Display projectiles
+            // Show bullets
             foreach (Bullet bullet in bullets)
             {
                 bullet.x += bullet.velX;
@@ -191,17 +183,13 @@ namespace DiDo
                 }
             }
 
+            // Remove Bullets
             foreach (Bullet bullet in bulletsToRemove)
             {
                 bullets.Remove(bullet);
             }
 
-            // Background
-            //args.DrawingSession.DrawImage(ImageManipulation.img(BG));
-
-            // Countdown
-            //args.DrawingSession.DrawText(countdown.ToString(), 100, 100, Colors.Yellow);
-
+            GameCanvas.Invalidate();
         }
 
         private void GameCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
