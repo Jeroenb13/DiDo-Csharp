@@ -8,14 +8,13 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Core;
 using DiDo.GameElements;
-//using DiDo.Levels;
+using DiDo.Levels;
 using System.Collections.Generic;
 using Windows.UI;
 using Windows.System;
 using System.Diagnostics;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
-using DiDo.Levels;
 using Microsoft.Graphics.Canvas.Effects;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -51,8 +50,7 @@ namespace DiDo
 
         public Player player = new DiDo.Player(0, 0);
 
-        public String level = "levelOne";
-
+        public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
         public MainPage()
         {
@@ -154,15 +152,16 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasControl sender)
         {
+            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
-
-            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
-            Transform2DEffect PlayerA = ImageManipulation.imageA(Player_sprite);
-            Transform2DEffect PlayerS = ImageManipulation.imageS(Player_sprite);
-            Transform2DEffect PlayerD = ImageManipulation.imageD(Player_sprite);
-            Transform2DEffect PlayerW = ImageManipulation.imageW(Player_sprite);
+            Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_enemy.png"));
+            
+            var PlayerA = ImageManipulation.imageA(Player_sprite);
+            var PlayerS = ImageManipulation.imageS(Player_sprite);
+            var PlayerD = ImageManipulation.imageD(Player_sprite);
+            var PlayerW = ImageManipulation.imageW(Player_sprite); // Zodat dit niet elk frame gebeurt maar slechts eenmalig
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
@@ -170,12 +169,11 @@ namespace DiDo
             }
         }
 
-        private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
 
             // Level
-            var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
             {
                 for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
@@ -197,19 +195,23 @@ namespace DiDo
             // Player
             if (keyPressed(VirtualKey.A))
             {
-                args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
             else if (keyPressed(VirtualKey.S))
             {
-                args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
             else if (keyPressed(VirtualKey.D))
             {
-                args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
             else
             {
-                args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
