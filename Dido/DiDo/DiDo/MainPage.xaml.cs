@@ -152,15 +152,16 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasControl sender)
         {
+            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_enemy.png"));
-            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
-            Transform2DEffect PlayerA = ImageManipulation.imageA(Player_sprite);
-            Transform2DEffect PlayerS = ImageManipulation.imageS(Player_sprite);
-            Transform2DEffect PlayerD = ImageManipulation.imageD(Player_sprite);
-            Transform2DEffect PlayerW = ImageManipulation.imageW(Player_sprite);
+            
+            var PlayerA = ImageManipulation.imageA(Player_sprite);
+            var PlayerS = ImageManipulation.imageS(Player_sprite);
+            var PlayerD = ImageManipulation.imageD(Player_sprite);
+            var PlayerW = ImageManipulation.imageW(Player_sprite); // Zodat dit niet elk frame gebeurt maar slechts eenmalig
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
