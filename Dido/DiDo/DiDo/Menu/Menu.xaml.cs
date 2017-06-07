@@ -53,29 +53,14 @@ namespace DiDo
             Application.Current.Exit();
         }
 
-        private void Start_Holding(object sender, HoldingRoutedEventArgs e)
+        private void onPointerEnter(object sender, PointerRoutedEventArgs e)
         {
-            
+            VisualStateManager.GoToState(this, "VisualStateNormal", false);
         }
 
-        private void Invade_Holding(object sender, HoldingRoutedEventArgs e)
+        private void onPointerExit(object sender, PointerRoutedEventArgs e)
         {
-
-        }
-
-        private void Settings_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-
-        }
-
-        private void Help_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-
-        }
-
-        private void Exit_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-
+            VisualStateManager.GoToState(this, "VisualStateAnimate", false);
         }
     }
 }
