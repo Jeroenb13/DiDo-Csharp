@@ -30,7 +30,7 @@ namespace DiDo
 
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            MainPage.GameState = 1;
+            Frame.Navigate(typeof(MainPage));
         }
 
         private void Invade_Tapped(object sender, TappedRoutedEventArgs e)
@@ -56,11 +56,13 @@ namespace DiDo
         private void onPointerEnter(object sender, PointerRoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "VisualStateNormal", false);
+           // UseSystemFocusVisuals = false;
         }
 
         private void onPointerExit(object sender, PointerRoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "VisualStateAnimate", false);
+            //UseSystemFocusVisuals = false;
         }
     }
 }
