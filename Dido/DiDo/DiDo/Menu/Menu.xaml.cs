@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,7 +32,14 @@ namespace DiDo
 
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+            try
+            {
+                this.Frame.Navigate(typeof(MainPage));
+
+            }catch(Exception ex)
+            {
+               var m = ex.Message;
+            }
         }
 
         private void Invade_Tapped(object sender, TappedRoutedEventArgs e)
