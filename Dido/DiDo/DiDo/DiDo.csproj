@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bullet.cs" />
+    <Compile Include="Collide.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\ImageManipulation.cs" />

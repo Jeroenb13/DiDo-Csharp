@@ -52,6 +52,8 @@ namespace DiDo
 
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
+        public float temp_x, temp_y; // Tijdelijk
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -172,13 +174,24 @@ namespace DiDo
         public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
-
+            Collide collision = new Collide();
             // Level
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
             {
                 for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
                 {
                     string tileType = gekozenLevel[x, y].ToString();
+
+                    if (collision.collide(tileType))
+                    {
+                        if (temp_x != (x * (32 * MainPage.scaleHeight)) && temp_y != (y * (32 * MainPage.scaleWidth))) { // Tijdelijk
+                            temp_x = x * (32 * MainPage.scaleHeight);
+                            temp_y = y * (32 * MainPage.scaleWidth);
+
+                            collision.collisionDetection(player, x * (32 * MainPage.scaleHeight), y * (32 * MainPage.scaleWidth)); // Collision detection
+                        }
+                    }
+
                     Tile tile = Levels.Levels.tiles[tileType];
                     args.DrawingSession.DrawImage(
                         tile.Effect,
