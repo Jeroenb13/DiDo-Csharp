@@ -52,6 +52,8 @@ namespace DiDo
 
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
+        public float temp_x, temp_y; // Tijdelijk
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -182,7 +184,12 @@ namespace DiDo
 
                     if (collision.collide(tileType))
                     {
-                        collision.collisionDetection(player, x, y);
+                        if (temp_x != (x * (32 * MainPage.scaleHeight)) && temp_y != (y * (32 * MainPage.scaleWidth))) { // Tijdelijk
+                            temp_x = x * (32 * MainPage.scaleHeight);
+                            temp_y = y * (32 * MainPage.scaleWidth);
+
+                            collision.collisionDetection(player, x * (32 * MainPage.scaleHeight), y * (32 * MainPage.scaleWidth)); // Collision detection
+                        }
                     }
 
                     Tile tile = Levels.Levels.tiles[tileType];
