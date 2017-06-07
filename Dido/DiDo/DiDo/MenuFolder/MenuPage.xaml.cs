@@ -1,13 +1,12 @@
-﻿using System;
+﻿using DiDo.MenuFolder.Help;
+using DiDo.MenuFolder.Settings;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -18,43 +17,45 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DiDo
+namespace DiDo.MenuFolder
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Menu : Page
+    public sealed partial class MenuPage : Page
     {
-        public Menu()
+        public MenuPage()
         {
             this.InitializeComponent();
         }
-
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {
             try
             {
+                MainPage.countdown = 10;
                 this.Frame.Navigate(typeof(MainPage));
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-               var m = ex.Message;
+                var m = ex.Message;
             }
         }
 
         private void Invade_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void Settings_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void Settings_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+           
+            this. Frame.Navigate(typeof(SettingPage), null);
         }
 
-        private void Help_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void Help_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(HelpPage), null);
         }
 
         private void Exit_Tapped(object sender, TappedRoutedEventArgs e)
@@ -65,7 +66,7 @@ namespace DiDo
         private void onPointerEnter(object sender, PointerRoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "VisualStateNormal", false);
-           // UseSystemFocusVisuals = false;
+            // UseSystemFocusVisuals = false;
         }
 
         private void onPointerExit(object sender, PointerRoutedEventArgs e)
@@ -73,5 +74,6 @@ namespace DiDo
             VisualStateManager.GoToState(this, "VisualStateAnimate", false);
             //UseSystemFocusVisuals = false;
         }
+    
     }
 }

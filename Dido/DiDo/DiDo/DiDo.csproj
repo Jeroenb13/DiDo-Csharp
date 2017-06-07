@@ -106,8 +106,14 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\Menu.xaml.cs">
-      <DependentUpon>Menu.xaml</DependentUpon>
+    <Compile Include="MenuFolder\Help\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuFolder\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuFolder\Settings\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectType.cs" />
     <Compile Include="Player.cs" />
@@ -144,9 +150,11 @@
     <Content Include="Assets\Menu\ExitButton.png" />
     <Content Include="Assets\Menu\HelpButton.png" />
     <Content Include="Assets\Menu\InvadeButton.png" />
+    <Content Include="Assets\Menu\kruis.png" />
     <Content Include="Assets\Menu\logo.png" />
     <Content Include="Assets\Menu\SettingsButton.png" />
     <Content Include="Assets\Menu\StartButton.png" />
+    <Content Include="Assets\Menu\wasd.jpg" />
     <Content Include="Assets\Tiles\bridge.png" />
     <Content Include="Assets\Tiles\crack-1.png" />
     <Content Include="Assets\Tiles\crack-2.png" />
@@ -205,7 +213,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Menu\Menu.xaml">
+    <Page Include="MenuFolder\Help\HelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFolder\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFolder\Settings\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
