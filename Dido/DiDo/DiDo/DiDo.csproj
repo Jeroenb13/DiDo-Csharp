@@ -100,6 +100,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\ImageManipulation.cs" />
+    <Compile Include="Grid.cs" />
     <Compile Include="Levels\Levels.cs" />
     <Compile Include="Levels\Tile.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -108,6 +109,7 @@
     <Compile Include="Menu\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectType.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

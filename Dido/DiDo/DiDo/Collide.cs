@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiDo.Levels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -56,6 +57,7 @@ namespace DiDo
             else
             {
                 Debug.WriteLine("Het is niet raak!");
+                
             }
         }
     }

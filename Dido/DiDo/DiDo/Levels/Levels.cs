@@ -64,7 +64,7 @@ namespace DiDo.Levels
             { "Z", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water.png"))}
         };
 
-        public static String[,] levelOne = { // 14x14
+        public static String[,] levelOne = { // 14x14   
             {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
             {"P","f","f","f","f","f","f","f","f","f","f","f","f","T"},
             {"X","f","f","g","f","f","f","f","f","f","f","f","f","T"},
@@ -80,7 +80,7 @@ namespace DiDo.Levels
             {"P","f","f","f","f","f","f","f","f","f","f","f","b","T"},
             {"Y","V","V","V","V","V","V","V","V","V","V","V","V","W"},
         };
-        public static String[,] levelTwo = {
+        public static String[,] levelTwo =  { // 35 x 24
             {"n","n","n","n","n","n","o","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
             {"t","t","u","n","n","n","n","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","n","n","n","n","n","o","n","n","n","n","n","o","n","n","n"},
             {"n","n","x","n","n","n","n","n","n","n","n","n","o","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
@@ -130,7 +130,7 @@ namespace DiDo.Levels
             {"Y", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "W"},
         };
 
-        public static String[,] levelFour = {
+        public static String[,] levelFour = { // 26 x 26
             {"S","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","U","H","H","H"},
             {"X","b","b","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","T","H","H","H"},
             {"X","b","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","T","H","H","H"},
@@ -159,7 +159,7 @@ namespace DiDo.Levels
             {"H","H","H","Y","V","V","V","V","V","V","W","H","H","H","H","Y","V","V","V","V","V","V","V","V","V","W"}
         };
 
-        public static String[,] levelFive = {
+        public static String[,] levelFive = { // 39 x 21
             {"c","D","q","p","q","p","q","p","q","r","c","c","c","1","0","3","c","1","0","3","c","1","0","3","c","1","0","3","c","c","c","c","c","f","f","f","f","f","f"},
             {"c","D","p","q","p","q","p","q","p","r","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
             {"c","B","z","z","z","z","z","z","z","s","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f"},
