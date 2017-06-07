@@ -129,6 +129,7 @@
     <Content Include="Assets\Char\spr_jordy.png" />
     <Content Include="Assets\Char\spr_matthew.png" />
     <Content Include="Assets\Char\spr_max.png" />
+    <Content Include="Assets\icon.ico" />
     <Content Include="Assets\Items\chest.png" />
     <Content Include="Assets\Items\drink-1.png" />
     <Content Include="Assets\Items\drink-2.png" />

@@ -47,7 +47,7 @@ namespace DiDo
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public static string keyPress;
+        public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
         public Player player = new DiDo.Player(0, 0);
 
@@ -63,35 +63,61 @@ namespace DiDo
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
             Window.Current.CoreWindow.KeyDown += CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
         }
 
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
             int move_speed = 5;
 
+            keysPressed[args.VirtualKey] = true;
+
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
-                player.x -= move_speed;
-                keyPress = "A";
+                player.velX = -move_speed;
             }
 
             if (args.VirtualKey == VirtualKey.D)
             {
-                player.x += move_speed;
-                keyPress = "D";
+                player.velX = move_speed;
             }
 
             if (args.VirtualKey == VirtualKey.W)
             {
-                player.y -= move_speed;
-                keyPress = "W";
+                player.velY = -move_speed;
             }
 
             if (args.VirtualKey == VirtualKey.S)
             {
-                player.y += move_speed;
-                keyPress = "S";
+                player.velY = move_speed;
+            }
+        }
+
+        private void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
+        {
+
+            keysPressed[args.VirtualKey] = false;
+
+            //to do keylijst maken keylijst
+            if (args.VirtualKey == VirtualKey.A)
+            {
+                player.velX = 0;
+            }
+
+            if (args.VirtualKey == VirtualKey.D)
+            {
+                player.velX = 0;
+            }
+
+            if (args.VirtualKey == VirtualKey.W)
+            {
+                player.velY = 0;
+            }
+
+            if (args.VirtualKey == VirtualKey.S)
+            {
+                player.velY = 0;
             }
         }
 
@@ -110,6 +136,15 @@ namespace DiDo
         {
             bounds = ApplicationView.GetForCurrentView().VisibleBounds;
             ImageManipulation.SetScale();
+        }
+
+        private Boolean keyPressed(VirtualKey key)
+        {
+            if (keysPressed.ContainsKey(key))
+            {
+                return keysPressed[key];
+            }
+            return false;
         }
 
         private void GameCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
@@ -156,16 +191,19 @@ namespace DiDo
                 }
             }
 
+            player.x += player.velX;
+            player.y += player.velY;
+
             // Player
-            if (keyPress == "A")
+            if (keyPressed(VirtualKey.A))
             {
                 args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
             }
-            else if (keyPress == "S")
+            else if (keyPressed(VirtualKey.S))
             {
                 args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
             }
-            else if (keyPress == "D")
+            else if (keyPressed(VirtualKey.D))
             {
                 args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
             }
