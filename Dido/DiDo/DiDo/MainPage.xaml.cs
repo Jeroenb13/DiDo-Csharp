@@ -299,6 +299,7 @@ namespace DiDo
                 }
                 else if (GameState > 0)
                 {
+                    RoundTimer.Start();
                     float xPos = (float)e.GetPosition(GameCanvas).X;
                     float yPos = (float)e.GetPosition(GameCanvas).Y;
 

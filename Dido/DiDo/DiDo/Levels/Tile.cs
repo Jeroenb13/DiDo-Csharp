@@ -17,6 +17,9 @@ namespace DiDo.Levels
         public bool CanWalk { get; }
         public int Rotation { get; }
 
+        public float xPos { get; }
+        public float yPos { get; }
+
         public CanvasBitmap Bitmap { get; private set; }
         public Transform2DEffect Effect { get; private set; }
 
@@ -25,7 +28,7 @@ namespace DiDo.Levels
             TileType = tileType;
             Image = image;
             CanWalk = canWalk;
-            Rotation = rotation;
+            Rotation = rotation;      
         }
 
         public async Task InitBitmap(ICanvasResourceCreator creator)
