@@ -194,19 +194,23 @@ namespace DiDo
             // Player
             if (keyPressed(VirtualKey.A))
             {
-                args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
             else if (keyPressed(VirtualKey.S))
             {
-                args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
             else if (keyPressed(VirtualKey.D))
             {
-                args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
             else
             {
-                args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
+                //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
