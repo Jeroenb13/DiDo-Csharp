@@ -8,14 +8,13 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Core;
 using DiDo.GameElements;
-//using DiDo.Levels;
+using DiDo.Levels;
 using System.Collections.Generic;
 using Windows.UI;
 using Windows.System;
 using System.Diagnostics;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
-using DiDo.Levels;
 using Microsoft.Graphics.Canvas.Effects;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -51,8 +50,7 @@ namespace DiDo
 
         public Player player = new DiDo.Player(0, 0);
 
-        public String level = "levelOne";
-
+        public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
         public MainPage()
         {
@@ -157,7 +155,7 @@ namespace DiDo
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
-
+            Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_enemy.png"));
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             Transform2DEffect PlayerA = ImageManipulation.imageA(Player_sprite);
             Transform2DEffect PlayerS = ImageManipulation.imageS(Player_sprite);
@@ -170,12 +168,11 @@ namespace DiDo
             }
         }
 
-        private void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
 
             // Level
-            var gekozenLevel = Levels.Levels.levelOne; // Dit later ook aanpassen
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
             {
                 for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)

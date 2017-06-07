@@ -30,7 +30,7 @@ namespace DiDo
 
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            MainPage.GameState = 1;
         }
 
         private void Invade_Tapped(object sender, TappedRoutedEventArgs e)
