@@ -171,13 +171,19 @@ namespace DiDo
         public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
-
+            Collide collision = new Collide();
             // Level
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
             {
                 for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
                 {
                     string tileType = gekozenLevel[x, y].ToString();
+
+                    if (collision.collide(tileType))
+                    {
+                        collision.collisionDetection(player, x, y);
+                    }
+
                     Tile tile = Levels.Levels.tiles[tileType];
                     args.DrawingSession.DrawImage(
                         tile.Effect,
