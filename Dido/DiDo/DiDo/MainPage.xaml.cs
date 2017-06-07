@@ -53,6 +53,8 @@ namespace DiDo
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
         public float temp_x, temp_y; // Tijdelijk
+        public double xPos, yPos; // tijdelijk
+        public String type_tile;
 
         public MainPage()
         {
@@ -171,6 +173,28 @@ namespace DiDo
             }
         }
 
+        public void getTile(float x, float y)
+        {
+            double x_round = Math.Floor((x/ scaleWidth) / 32);
+            double y_round = Math.Floor((y/ scaleHeight) / 32);
+            //if (gekozenLevel[(int)x_round, (int)y_round] != null)
+            //{
+
+                Debug.WriteLine("scaleWidth: " + scaleWidth + " | scaleHeight: " + scaleHeight);
+
+                Debug.WriteLine("x: " + x + " | x_round: " + x_round);
+                Debug.WriteLine("y: " + y + " | y_round: " + y_round);
+
+                Debug.WriteLine("Type: " + gekozenLevel[(int)x_round, (int)y_round].ToString());
+
+                xPos = x_round;
+                yPos = y_round;
+                type_tile = gekozenLevel[(int)y_round, (int)x_round].ToString();
+            //}
+
+            //return gekozenLevel[(int)x_round, (int)y_round].ToString();
+        }
+
         public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
@@ -188,7 +212,7 @@ namespace DiDo
                             temp_x = x * (32 * MainPage.scaleHeight);
                             temp_y = y * (32 * MainPage.scaleWidth);
 
-                            collision.collisionDetection(player, x * (32 * MainPage.scaleHeight), y * (32 * MainPage.scaleWidth)); // Collision detection
+                            //collision.collisionDetection(player, x * (32 * MainPage.scaleHeight), y * (32 * MainPage.scaleWidth)); // Collision detection
                         }
                     }
 
@@ -210,21 +234,25 @@ namespace DiDo
             {
                 //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+                
             }
             else if (keyPressed(VirtualKey.S))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+                
             }
             else if (keyPressed(VirtualKey.D))
             {
                 //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+                
             }
             else
             {
                 //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+                
             }
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
@@ -247,6 +275,9 @@ namespace DiDo
             {
                 bullets.Remove(bullet);
             }
+
+            getTile(player.x, player.y); // Test
+            args.DrawingSession.DrawText("X: " + xPos + " | Y: " + yPos + " | Type: " + type_tile, 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
 
             GameCanvas.Invalidate();
         }
@@ -287,7 +318,7 @@ namespace DiDo
         }
         private void GameCanvas_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            Debug.WriteLine(e.GetCurrentPoint(GameCanvas).RawPosition.ToString());
+            //Debug.WriteLine(e.GetCurrentPoint(GameCanvas).RawPosition.ToString());
         }
     }
 }
