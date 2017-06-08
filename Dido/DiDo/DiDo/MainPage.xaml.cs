@@ -275,9 +275,9 @@ namespace DiDo
                 bullets.Remove(bullet);
             }
 
-            //getTile(player.x, player.y); // Test
-            //args.DrawingSession.DrawText("X: " + xPos + " | Y: " + yPos + " | Type: " + type_tile, 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 700, Colors.Black); // Toon de player location, Tijdelijk
+            getTile(player.x, player.y); // Test
+            args.DrawingSession.DrawText("X: " + xPos + " | Y: " + yPos + " | Type: " + type_tile, 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 700, Colors.Black); // Toon de player location, Tijdelijk
 
             GameCanvas.Invalidate();
         }
