@@ -80,19 +80,13 @@ namespace DiDo
             if (args.VirtualKey == VirtualKey.A)
             {
                 player.velX = -move_speed;
-            }
-
-            if (args.VirtualKey == VirtualKey.D)
+            } else if (args.VirtualKey == VirtualKey.D)
             {
                 player.velX = move_speed;
-            }
-
-            if (args.VirtualKey == VirtualKey.W)
+            } else if (args.VirtualKey == VirtualKey.W)
             {
                 player.velY = -move_speed;
-            }
-
-            if (args.VirtualKey == VirtualKey.S)
+            } else if (args.VirtualKey == VirtualKey.S)
             {
                 player.velY = move_speed;
             }
@@ -107,22 +101,17 @@ namespace DiDo
             if (args.VirtualKey == VirtualKey.A)
             {
                 player.velX = 0;
-            }
-
-            if (args.VirtualKey == VirtualKey.D)
+            } else if (args.VirtualKey == VirtualKey.D)
             {
                 player.velX = 0;
-            }
-
-            if (args.VirtualKey == VirtualKey.W)
+            } else if (args.VirtualKey == VirtualKey.W)
+            {
+                player.velY = 0;
+            } else if (args.VirtualKey == VirtualKey.S)
             {
                 player.velY = 0;
             }
 
-            if (args.VirtualKey == VirtualKey.S)
-            {
-                player.velY = 0;
-            }
         }
 
         private void RoundTimer_Tick(object sender, object e)
@@ -220,6 +209,7 @@ namespace DiDo
             player.y += player.velY;
 
             // Player
+
             if (keyPressed(VirtualKey.A))
             {
                 String tile = getTile(player.x - -8, player.y);
@@ -229,7 +219,7 @@ namespace DiDo
                 }
                 //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-                
+
             }
             else if (keyPressed(VirtualKey.S))
             {
@@ -240,7 +230,7 @@ namespace DiDo
                     player.y -= move_speed;
                 }
                 args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-                
+
             }
             else if (keyPressed(VirtualKey.D))
             {
@@ -251,7 +241,7 @@ namespace DiDo
                     player.x -= move_speed;
                 }
                 args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-                
+
             }
             else
             {
@@ -262,7 +252,7 @@ namespace DiDo
                 }
                 //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-                
+
             }
 
             List<Bullet> bulletsToRemove = new List<Bullet>();
