@@ -48,7 +48,7 @@ namespace DiDo
 
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public Player player = new DiDo.Player(0, 0);
+        public Player player = new DiDo.Player(0,0);
 
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
@@ -173,32 +173,29 @@ namespace DiDo
             }
         }
 
-        public void getTile(float x, float y)
+        public String getTile(float x, float y)
         {
             double x_round = Math.Floor((x/ scaleWidth) / 32);
             double y_round = Math.Floor((y/ scaleHeight) / 32);
-            //if (gekozenLevel[(int)x_round, (int)y_round] != null)
-            //{
-
-                Debug.WriteLine("scaleWidth: " + scaleWidth + " | scaleHeight: " + scaleHeight);
-
-                Debug.WriteLine("x: " + x + " | x_round: " + x_round);
-                Debug.WriteLine("y: " + y + " | y_round: " + y_round);
-
-                Debug.WriteLine("Type: " + gekozenLevel[(int)x_round, (int)y_round].ToString());
 
                 xPos = x_round;
                 yPos = y_round;
                 type_tile = gekozenLevel[(int)y_round, (int)x_round].ToString();
-            //}
 
-            //return gekozenLevel[(int)x_round, (int)y_round].ToString();
+            return gekozenLevel[(int)x_round, (int)y_round].ToString();
         }
 
         public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GameStateManager.GSManager();
             Collide collision = new Collide();
+
+            if (player.x == 0 && player.y == 0)
+            {
+                player.x = 32 * scaleWidth;
+                player.y = 32 * scaleHeight;
+            }
+
             // Level
             for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
             {
@@ -278,6 +275,7 @@ namespace DiDo
 
             getTile(player.x, player.y); // Test
             args.DrawingSession.DrawText("X: " + xPos + " | Y: " + yPos + " | Type: " + type_tile, 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 700, Colors.Black); // Toon de player location, Tijdelijk
 
             GameCanvas.Invalidate();
         }
