@@ -34,30 +34,30 @@
                     <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/logo.png"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Button x:Name="Start" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Tapped="Start_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit">
+            <Button x:Name="Start" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Tapped="Start_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0" RequestedTheme="Dark">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/StartButton.png"/>
                 </Button.Background>
             </Button>
 
-            <Button x:Name="Invade" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" Tapped="Invade_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit">
+            <Button x:Name="Invade" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" Tapped="Invade_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/InvadeButton.png"/>
 
                 </Button.Background>
 
             </Button>
-            <Button x:Name="Settings" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Tapped="Settings_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit">
+            <Button x:Name="Settings" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Tapped="Settings_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/SettingsButton.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Help" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Tapped="Help_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit">
+            <Button x:Name="Help" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Tapped="Help_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/HelpButton.png"/>
                 </Button.Background>
             </Button>
-        <Button x:Name="Exit" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" Tapped="Exit_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit">
+        <Button x:Name="Exit" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" Tapped="Exit_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/ExitButton.png"/>
             </Button.Background>
