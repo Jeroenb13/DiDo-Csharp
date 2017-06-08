@@ -56,6 +56,8 @@ namespace DiDo
         public double xPos, yPos; // tijdelijk
         public String type_tile;
 
+        public int move_speed = 5;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -70,7 +72,7 @@ namespace DiDo
 
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
-            int move_speed = 5;
+            //int move_speed = 5;
 
             keysPressed[args.VirtualKey] = true;
 
@@ -182,7 +184,7 @@ namespace DiDo
                 yPos = y_round;
                 type_tile = gekozenLevel[(int)y_round, (int)x_round].ToString();
 
-            return gekozenLevel[(int)x_round, (int)y_round].ToString();
+            return type_tile;
         }
 
         public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -202,17 +204,6 @@ namespace DiDo
                 for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
                 {
                     string tileType = gekozenLevel[x, y].ToString();
-
-                    if (collision.collide(tileType))
-                    {
-                        if (temp_x != (x * (32 * MainPage.scaleHeight)) && temp_y != (y * (32 * MainPage.scaleWidth))) { // Tijdelijk
-                            temp_x = x * (32 * MainPage.scaleHeight);
-                            temp_y = y * (32 * MainPage.scaleWidth);
-
-                            //collision.collisionDetection(player, x * (32 * MainPage.scaleHeight), y * (32 * MainPage.scaleWidth)); // Collision detection
-                        }
-                    }
-
                     Tile tile = Levels.Levels.tiles[tileType];
                     args.DrawingSession.DrawImage(
                         tile.Effect,
@@ -223,12 +214,19 @@ namespace DiDo
                 }
             }
 
+            
+
             player.x += player.velX;
             player.y += player.velY;
 
             // Player
             if (keyPressed(VirtualKey.A))
             {
+                String tile = getTile(player.x - -8, player.y);
+                if (tile == "X" || tile == "P" || tile == "b") // goed
+                {
+                    player.x += move_speed;
+                }
                 //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
                 
@@ -236,17 +234,32 @@ namespace DiDo
             else if (keyPressed(VirtualKey.S))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                String tile = getTile(player.x, player.y + 16);
+                if (tile == "V" || tile == "b")
+                {
+                    player.y -= move_speed;
+                }
                 args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
                 
             }
             else if (keyPressed(VirtualKey.D))
             {
                 //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
+                String tile = getTile(player.x + 16, player.y);
+                if (tile == "T" || tile == "b") // goed
+                {
+                    player.x -= move_speed;
+                }
                 args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
                 
             }
             else
             {
+                String tile = getTile(player.x, player.y - -5);
+                if (tile == "R" || tile == "M" || tile == "b")
+                {
+                    player.y += move_speed;
+                }
                 //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
                 args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
                 
