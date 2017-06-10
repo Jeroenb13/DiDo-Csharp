@@ -64,6 +64,12 @@ namespace DiDo.Levels
             { "Z", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water.png"))}
         };
 
+        public static Tile getTile(String key)
+        {
+            Tile tile = tiles[key];
+            return tile;
+        }
+
         public static String[,] levelOne = { // 14x14   
             {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
             {"P","f","f","f","f","f","f","f","f","f","f","f","f","T"},

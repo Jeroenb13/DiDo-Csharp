@@ -48,15 +48,13 @@ namespace DiDo
 
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public Player player = new DiDo.Player(0,0);
+        public Player player = new Player("Spy",32, 32);
 
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
         public float temp_x, temp_y; // Tijdelijk
-        public double xPos, yPos; // tijdelijk
-        public String type_tile;
-
-        public int move_speed = 5;
+        public double xPos, yPos, xPos2, yPos2; // tijdelijk
+        //public String type_tile;
 
         public MainPage()
         {
@@ -70,6 +68,7 @@ namespace DiDo
             Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
         }
 
+        //Character Movement 
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
             //int move_speed = 5;
@@ -79,16 +78,16 @@ namespace DiDo
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
-                player.velX = -move_speed;
+                player.velX = -player.move_speed;
             } else if (args.VirtualKey == VirtualKey.D)
             {
-                player.velX = move_speed;
+                player.velX = player.move_speed;
             } else if (args.VirtualKey == VirtualKey.W)
             {
-                player.velY = -move_speed;
+                player.velY = -player.move_speed;
             } else if (args.VirtualKey == VirtualKey.S)
             {
-                player.velY = move_speed;
+                player.velY = player.move_speed;
             }
         }
 
@@ -113,6 +112,57 @@ namespace DiDo
             }
 
         }
+        public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            player.x += player.velX;
+            player.y += player.velY;
+
+            if (keyPressed(VirtualKey.A))
+            {
+                Tile tile = getTile(player.x, player.y);
+                if (tile.CanWalk == false) //positief
+                {
+                    player.x += player.move_speed;
+                }
+                //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+
+            }
+            else if (keyPressed(VirtualKey.S))
+            {
+                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                Tile tile = getTile(player.x, player.y);
+                if (tile.CanWalk == false)
+                {
+                    player.y -= player.move_speed;
+                }
+                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+
+            }
+            else if (keyPressed(VirtualKey.D))
+            {
+                //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
+                Tile tile = getTile(player.x, player.y);
+                if (tile.CanWalk == false) //positief
+                {
+                    player.x -= player.move_speed;
+                }
+                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+
+            }
+            else
+            {
+                Tile tile = getTile(player.x, player.y);
+                if (tile.CanWalk == false)
+                {
+                    player.y += player.move_speed;
+                }
+                //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+            }
+        }
+
+        //---------->Character Movement Stop 
 
         private void RoundTimer_Tick(object sender, object e)
         {
@@ -164,16 +214,47 @@ namespace DiDo
             }
         }
 
-        public String getTile(float x, float y)
+        public String getTileType(float x, float y)
         {
-            double x_round = Math.Floor((x/ scaleWidth) / 32);
-            double y_round = Math.Floor((y/ scaleHeight) / 32);
+            return getTile(x, y).TileType;
+        }
 
-                xPos = x_round;
-                yPos = y_round;
-                type_tile = gekozenLevel[(int)y_round, (int)x_round].ToString();
+        public Tile getTile(float x, float y)
+        {
+            double x_round = Math.Floor((x / scaleWidth) / 32);
+            double y_round = Math.Floor((y / scaleHeight) / 32);
+            xPos = x_round * 32;
+            yPos = y_round * 32;
+            xPos2 = xPos + 32;
+            yPos2 = yPos + 32;
+            String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
+            Tile tile = Levels.Levels.getTile(tile_Type);
 
-            return type_tile;
+            return tile;
+        }
+
+        public void bulletHandling(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            List<Bullet> bulletsToRemove = new List<Bullet>();
+
+            // Show bullets
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.x += bullet.velX;
+                bullet.y += bullet.velY;
+                args.DrawingSession.DrawImage(Bullets, bullet.x, bullet.y);
+
+                if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
+                {
+                    bulletsToRemove.Add(bullet);
+                }
+            }
+
+            // Remove Bullets
+            foreach (Bullet bullet in bulletsToRemove)
+            {
+                bullets.Remove(bullet);
+            }
         }
 
         public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -202,81 +283,10 @@ namespace DiDo
                 }
             }
 
-            
-
-            player.x += player.velX;
-            player.y += player.velY;
-
-            // Player
-
-            if (keyPressed(VirtualKey.A))
-            {
-                String tile = getTile(player.x - -8, player.y);
-                if (tile == "X" || tile == "P" || tile == "b") // goed
-                {
-                    player.x += move_speed;
-                }
-                //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
-                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
-            }
-            else if (keyPressed(VirtualKey.S))
-            {
-                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
-                String tile = getTile(player.x, player.y + 16);
-                if (tile == "V" || tile == "b")
-                {
-                    player.y -= move_speed;
-                }
-                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
-            }
-            else if (keyPressed(VirtualKey.D))
-            {
-                //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
-                String tile = getTile(player.x + 16, player.y);
-                if (tile == "T" || tile == "b") // goed
-                {
-                    player.x -= move_speed;
-                }
-                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
-            }
-            else
-            {
-                String tile = getTile(player.x, player.y - -5);
-                if (tile == "R" || tile == "M" || tile == "b")
-                {
-                    player.y += move_speed;
-                }
-                //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
-            }
-
-            List<Bullet> bulletsToRemove = new List<Bullet>();
-
-            // Show bullets
-            foreach (Bullet bullet in bullets)
-            {
-                bullet.x += bullet.velX;
-                bullet.y += bullet.velY;
-                args.DrawingSession.DrawImage(Bullets, bullet.x, bullet.y);
-
-                if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
-                {
-                    bulletsToRemove.Add(bullet);
-                }
-            }
-
-            // Remove Bullets
-            foreach (Bullet bullet in bulletsToRemove)
-            {
-                bullets.Remove(bullet);
-            }
-
-            getTile(player.x, player.y); // Test
-            args.DrawingSession.DrawText("X: " + xPos + " | Y: " + yPos + " | Type: " + type_tile, 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            movementCharacter(sender, args);
+            bulletHandling(sender, args);
+           
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + getTileType(player.x, player.y), 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 700, Colors.Black); // Toon de player location, Tijdelijk
 
             GameCanvas.Invalidate();

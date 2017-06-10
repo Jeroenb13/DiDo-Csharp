@@ -95,12 +95,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Bullet.cs" />
-    <Compile Include="Collide.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Character\Characters.cs" />
+    <Compile Include="Character\Position.cs" />
+    <Compile Include="Items\Bullet.cs" />
+    <Compile Include="GameElements\Collide.cs" />
+    <Compile Include="Character\Entity.cs" />
     <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\ImageManipulation.cs" />
-    <Compile Include="Grid.cs" />
+    <Compile Include="Items\Item.cs" />
     <Compile Include="Levels\Levels.cs" />
     <Compile Include="Levels\Tile.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -115,8 +117,7 @@
     <Compile Include="MenuFolder\Settings\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObjectType.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Character\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

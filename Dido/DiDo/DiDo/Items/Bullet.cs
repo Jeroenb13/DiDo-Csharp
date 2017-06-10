@@ -10,10 +10,8 @@ namespace DiDo
     {
         public float velX { get; set; }
         public float velY { get; set; }
-        public Bullet(float x, float y, float velX, float velY)
+        public Bullet(float x, float y, float velX, float velY) : base(x, y)
         {
-            this.x = x;
-            this.y = y;
             this.velX = velX;
             this.velY = velY;
         }
