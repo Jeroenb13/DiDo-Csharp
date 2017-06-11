@@ -7,7 +7,7 @@ using DiDo.Character;
 
 namespace DiDo
 {
-    public class Entity : Position
+    public abstract class Entity : Position
     {
         private Position position;
 

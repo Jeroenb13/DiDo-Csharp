@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 
 namespace DiDo.Character
 {
-    public class Characters : Entity
+    public abstract class Characters : Entity
     {
         private int healthPoints { get; set; }
-        private Item[] items;
-
+        protected Weapon[] weapons;
+        public Weapon currentWeapon;
+        protected int currentWeaponIndex;
         public Characters(float x, float y) : base(x, y)
         {
-
+            currentWeaponIndex = 0;
+            weapons = new Weapon[3];
         }
 
         public int getHealth()
@@ -24,12 +26,25 @@ namespace DiDo.Character
 
         public Item getItem(int index)
         {
-            return items[index];
+            return weapons[index];
         }
 
-        public void setItem(int index, Item newItem)
+        public string inventory()
         {
-            items[index] = newItem;
+            string inventory = "";
+            foreach (Weapon weapon in weapons)
+            {
+                if(weapon != null)
+                {
+                    inventory = inventory + " | " + weapon.name;
+                }
+            }
+            return inventory;
+        }
+
+        public void setItem(int index, Weapon newWeapon)
+        {
+            weapons[index] = newWeapon;
         }
     }
 }

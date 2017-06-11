@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace DiDo.Items
 {
-    public class Item
+    public abstract class Item : ItemEntity
     {
         private Object item;
+        public String name { get; set; }
 
-        public void changeItem(Object item)
+        public Item(float x, float y) : base(x, y)
         {
-            this.item = item;
         }
     }
 }

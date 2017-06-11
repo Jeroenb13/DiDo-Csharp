@@ -16,6 +16,7 @@ using System.Diagnostics;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Microsoft.Graphics.Canvas.Effects;
+using DiDo.Character;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -29,8 +30,8 @@ namespace DiDo
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public static float DesignWidth = 1280;
-        public static float DesignHeight = 720;
+        public static float DesignWidth = 1920;
+        public static float DesignHeight = 1080;
         public static float scaleWidth, scaleHeight, pointX, pointY;
 
         public static int countdown = 60; // 60
@@ -48,7 +49,7 @@ namespace DiDo
 
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public Player player = new Player("Spy",32, 32);
+        public MyPlayer player = new MyPlayer("Spy",32, 32);
 
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
@@ -286,8 +287,10 @@ namespace DiDo
             movementCharacter(sender, args);
             bulletHandling(sender, args);
            
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + getTileType(player.x, player.y), 10, 650, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 700, Colors.Black); // Toon de player location, Tijdelijk
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + getTileType(player.x, player.y), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
+            args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
+            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
 
             GameCanvas.Invalidate();
         }
@@ -322,8 +325,11 @@ namespace DiDo
 
                     xVel = xVel / scaling;
                     yVel = yVel / scaling;
-
-                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
+                    if(player.currentWeapon.getAmmo() >= 1)
+                    {
+                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
+                        player.currentWeapon.reduceAmmo();
+                    }
                 }
             }
         }
