@@ -12,8 +12,8 @@ namespace DiDo.Character
     public abstract class ClientPlayer : Player
     {
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
-        Window.Current.CoreWindow.KeyDown += CoreWindow_Keydown;
-        Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
+        //Window.Current.CoreWindow.KeyDown += CoreWindow_Keydown;
+        //Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
 
         public ClientPlayer(string name, float x, float y) : base(name, x, y)
         {
@@ -21,7 +21,7 @@ namespace DiDo.Character
         }
 
         //Character Movement 
-        private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
+        public void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
             //int move_speed = 5;
 
@@ -30,7 +30,7 @@ namespace DiDo.Character
             //to do keylijst maken keylijst
             if (args.VirtualKey == VirtualKey.A)
             {
-                velX = move_speed;
+                velX = -move_speed;
             }
             else if (args.VirtualKey == VirtualKey.D)
             {
@@ -38,7 +38,7 @@ namespace DiDo.Character
             }
             else if (args.VirtualKey == VirtualKey.W)
             {
-                velY = move_speed;
+                velY = -move_speed;
             }
             else if (args.VirtualKey == VirtualKey.S)
             {
@@ -46,7 +46,7 @@ namespace DiDo.Character
             }
         }
 
-        private void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
+        public void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
         {
 
             keysPressed[args.VirtualKey] = false;

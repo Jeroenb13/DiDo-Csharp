@@ -65,8 +65,9 @@ namespace DiDo
             
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
-            //Window.Current.CoreWindow.KeyDown += CoreWindow_Keydown;
-            //Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
+            Window.Current.CoreWindow.KeyDown += player.CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += player.CoreWindow_Keyup;
+            
         }
 
         //Character Movement 
@@ -113,6 +114,7 @@ namespace DiDo
         //    }
 
         //}
+
         public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args)
         {
             player.x += player.velX;
