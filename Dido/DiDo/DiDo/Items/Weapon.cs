@@ -9,7 +9,7 @@ namespace DiDo.Items
 {
     public abstract class Weapon : Item
     {
-        public int magazine;       //Number of rounds per magazine
+        protected int magazine;       //Number of rounds per magazine
 
         public Weapon(float x, float y) : base(x, y)
         {
