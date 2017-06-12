@@ -69,50 +69,56 @@ namespace DiDo
             //Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
         }
 
-        //Character Movement 
-        //private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
-        //{
-        //    //int move_speed = 5;
+        Character Movement
+        private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
+        {
+            //int move_speed = 5;
 
-        //    keysPressed[args.VirtualKey] = true;
+            keysPressed[args.VirtualKey] = true;
 
-        //    //to do keylijst maken keylijst
-        //    if (args.VirtualKey == VirtualKey.A)
-        //    {
-        //        player.velX = -player.move_speed;
-        //    } else if (args.VirtualKey == VirtualKey.D)
-        //    {
-        //        player.velX = player.move_speed;
-        //    } else if (args.VirtualKey == VirtualKey.W)
-        //    {
-        //        player.velY = -player.move_speed;
-        //    } else if (args.VirtualKey == VirtualKey.S)
-        //    {
-        //        player.velY = player.move_speed;
-        //    }
-        //}
+            //to do keylijst maken keylijst
+            if (args.VirtualKey == VirtualKey.A)
+            {
+                player.velX = -player.move_speed;
+            }
+            else if (args.VirtualKey == VirtualKey.D)
+            {
+                player.velX = player.move_speed;
+            }
+            else if (args.VirtualKey == VirtualKey.W)
+            {
+                player.velY = -player.move_speed;
+            }
+            else if (args.VirtualKey == VirtualKey.S)
+            {
+                player.velY = player.move_speed;
+            }
+        }
 
-        //private void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
-        //{
+        private void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
+        {
 
-        //    keysPressed[args.VirtualKey] = false;
+            keysPressed[args.VirtualKey] = false;
 
-        //    //to do keylijst maken keylijst
-        //    if (args.VirtualKey == VirtualKey.A)
-        //    {
-        //        player.velX = 0;
-        //    } else if (args.VirtualKey == VirtualKey.D)
-        //    {
-        //        player.velX = 0;
-        //    } else if (args.VirtualKey == VirtualKey.W)
-        //    {
-        //        player.velY = 0;
-        //    } else if (args.VirtualKey == VirtualKey.S)
-        //    {
-        //        player.velY = 0;
-        //    }
+            //to do keylijst maken keylijst
+            if (args.VirtualKey == VirtualKey.A)
+            {
+                player.velX = 0;
+            }
+            else if (args.VirtualKey == VirtualKey.D)
+            {
+                player.velX = 0;
+            }
+            else if (args.VirtualKey == VirtualKey.W)
+            {
+                player.velY = 0;
+            }
+            else if (args.VirtualKey == VirtualKey.S)
+            {
+                player.velY = 0;
+            }
 
-        //}
+        }
         public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args)
         {
             player.x += player.velX;
