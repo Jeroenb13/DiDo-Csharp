@@ -69,7 +69,7 @@ namespace DiDo
             //Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
         }
 
-        Character Movement
+        // Character Movement
         private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
             //int move_speed = 5;
