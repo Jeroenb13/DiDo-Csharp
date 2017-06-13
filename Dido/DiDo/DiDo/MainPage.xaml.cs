@@ -84,8 +84,8 @@ namespace DiDo
         public void updateMousePoint(object sender, PointerRoutedEventArgs e)
         {
             var pointerPoint = e.GetCurrentPoint(GameCanvas);
-            float xPos = (float)pointerPoint.Position.X / (float)GameCanvas.ActualWidth;
-            float yPos = (float)pointerPoint.Position.Y / (float)GameCanvas.ActualHeight;
+            int xPos = (int)pointerPoint.Position.X;
+            int yPos = (int)pointerPoint.Position.Y;
             Point newPoint = new Point(xPos, yPos);
             this.mousePoint = newPoint;
         }
