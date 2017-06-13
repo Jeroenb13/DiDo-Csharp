@@ -36,49 +36,14 @@ namespace DiDo.GameElements
         }
 
         //In the MainPage class, when the 'W' button is pressed
-        public static Transform2DEffect imageW(CanvasBitmap source)
+        public static Transform2DEffect imageW(CanvasBitmap source, double radians)
         {
             vector2();
             Transform2DEffect image;
             image = new Transform2DEffect() { Source = source };
             //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation(0);
-
-            return image;
-        }
-
-        //In the MainPage class, when the 'A' button is pressed
-        public static Transform2DEffect imageA(CanvasBitmap source)
-        {
-            vector2();
-            Transform2DEffect image;
-            image = new Transform2DEffect() { Source = source };
-            //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation((float)4.71, vec);
-
-            return image;
-        }
-
-        //In the MainPage class, when the 'S' button is pressed
-        public static Transform2DEffect imageS(CanvasBitmap source)
-        {
-            vector2();
-            Transform2DEffect image;
-            image = new Transform2DEffect() { Source = source };
-            //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation((float)3.14, vec);
-
-            return image;
-        }
-
-        //In the MainPage class, when the 'D' button is pressed
-        public static Transform2DEffect imageD(CanvasBitmap source)
-        {
-            vector2();
-            Transform2DEffect image;
-            image = new Transform2DEffect() { Source = source };
-            //image.TransformMatrix = Matrix3x2.CreateScale(MainPage.scaleWidth, MainPage.scaleHeight);
-            image.TransformMatrix = Matrix3x2.CreateRotation((float)1.57, vec);
+            image.TransformMatrix = Matrix3x2.CreateRotation((float)radians);
+            image.TransformMatrix = Matrix3x2.CreateRotation((float)radians, vec);
 
             return image;
         }
