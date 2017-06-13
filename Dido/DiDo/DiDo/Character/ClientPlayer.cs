@@ -11,6 +11,8 @@ namespace DiDo.Character
 {
     public abstract class ClientPlayer : Player
     {
+        public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
+
         public ClientPlayer(string name, float x, float y) : base(name, x, y)
         {
 

@@ -17,6 +17,7 @@ using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Microsoft.Graphics.Canvas.Effects;
 using DiDo.Character;
+using Windows.UI.Xaml.Input;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -33,7 +34,8 @@ namespace DiDo
         public static float DesignWidth = 1920;
         public static float DesignHeight = 1080;
         public static float scaleWidth, scaleHeight, pointX, pointY;
-
+        public Point playerPoint;
+        public Point mousePoint;
         public static int countdown = 60; // 60
 
         public static bool RoundEnded = false;
@@ -59,60 +61,35 @@ namespace DiDo
 
         public MainPage()
         {
+            
+            mousePoint = new Point();
+            playerPoint = new Point(player.x, player.y);
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
             ImageManipulation.SetScale();
             
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
-            //Window.Current.CoreWindow.KeyDown += CoreWindow_Keydown;
-            //Window.Current.CoreWindow.KeyUp += CoreWindow_Keyup;
+            Window.Current.CoreWindow.KeyDown += player.CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += player.CoreWindow_Keyup;
+        }
+        
+        public void updatePoint(Player player)
+        {
+            Point newPoint = new Point(player.x, player.y);
+            this.playerPoint = newPoint;
         }
 
-        //Character Movement 
-        //private void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
-        //{
-        //    //int move_speed = 5;
 
-        //    keysPressed[args.VirtualKey] = true;
+        public void updateMousePoint(object sender, PointerRoutedEventArgs e)
+        {
+            var pointerPoint = e.GetCurrentPoint(GameCanvas);
+            float xPos = (float)pointerPoint.Position.X / (float)GameCanvas.ActualWidth;
+            float yPos = (float)pointerPoint.Position.Y / (float)GameCanvas.ActualHeight;
+            Point newPoint = new Point(xPos, yPos);
+            this.mousePoint = newPoint;
+        }
 
-        //    //to do keylijst maken keylijst
-        //    if (args.VirtualKey == VirtualKey.A)
-        //    {
-        //        player.velX = -player.move_speed;
-        //    } else if (args.VirtualKey == VirtualKey.D)
-        //    {
-        //        player.velX = player.move_speed;
-        //    } else if (args.VirtualKey == VirtualKey.W)
-        //    {
-        //        player.velY = -player.move_speed;
-        //    } else if (args.VirtualKey == VirtualKey.S)
-        //    {
-        //        player.velY = player.move_speed;
-        //    }
-        //}
-
-        //private void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
-        //{
-
-        //    keysPressed[args.VirtualKey] = false;
-
-        //    //to do keylijst maken keylijst
-        //    if (args.VirtualKey == VirtualKey.A)
-        //    {
-        //        player.velX = 0;
-        //    } else if (args.VirtualKey == VirtualKey.D)
-        //    {
-        //        player.velX = 0;
-        //    } else if (args.VirtualKey == VirtualKey.W)
-        //    {
-        //        player.velY = 0;
-        //    } else if (args.VirtualKey == VirtualKey.S)
-        //    {
-        //        player.velY = 0;
-        //    }
-
-        //}
         public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args)
         {
             player.x += player.velX;
@@ -286,17 +263,21 @@ namespace DiDo
 
             movementCharacter(sender, args);
             bulletHandling(sender, args);
-           
+            updatePoint(player);
+
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + getTileType(player.x, player.y), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
+            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
+            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
 
             GameCanvas.Invalidate();
         }
 
-        private void GameCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            
             if (RoundEnded == true)
             {
                 GameState = 0;
@@ -335,6 +316,7 @@ namespace DiDo
         }
         private void GameCanvas_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
+            updateMousePoint(sender, e);
             //Debug.WriteLine(e.GetCurrentPoint(GameCanvas).RawPosition.ToString());
         }
     }
