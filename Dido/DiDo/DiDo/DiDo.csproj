@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Characters.cs" />
+    <Compile Include="Character\ClientController.cs" />
     <Compile Include="Character\ClientPlayer.cs" />
     <Compile Include="Character\MyPlayer.cs" />
     <Compile Include="Character\Position.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiDo.Levels
 {
-    public static class Levels
+    public class Levels
     {
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
@@ -70,6 +70,26 @@ namespace DiDo.Levels
         public static Tile getTile(String key)
         {
             Tile tile = tiles[key];
+            return tile;
+        }
+
+
+        public String getTileType(float x, float y, String [,] gekozenLevel)
+        {
+            return getPlayerTile(x, y, gekozenLevel).TileType;
+        }
+
+        public Tile getPlayerTile(float x, float y, String[,] gekozenLevel)
+        {
+            double x_round = Math.Floor((x) / 32);
+            double y_round = Math.Floor((y) / 32);
+            double xPos = x_round * 32;
+            double yPos = y_round * 32;
+            double xPos2 = xPos + 32;
+            double yPos2 = yPos + 32;
+            String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
+            Tile tile = getTile(tile_Type);
+
             return tile;
         }
 
