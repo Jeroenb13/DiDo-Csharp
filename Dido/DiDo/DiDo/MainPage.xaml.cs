@@ -181,7 +181,7 @@ namespace DiDo
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
-            Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_enemy.png"));
+            Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
              // Zodat dit niet elk frame gebeurt maar slechts eenmalig
 
             foreach (Tile t in Levels.Levels.tiles.Values)
