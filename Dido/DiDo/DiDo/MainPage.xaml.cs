@@ -37,9 +37,9 @@ namespace DiDo
         public Point playerPoint;
         public Point mousePoint;
         public static int countdown = 60; // 60
-
+        private ClientController controller;
         public static bool RoundEnded = false;
-
+        private Levels.Levels levels;
         private bool assetsLoaded = false;
 
         //Lists Projectile
@@ -48,8 +48,6 @@ namespace DiDo
         public static int GameState = 0; // startscreen
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
-
-        public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
         public MyPlayer player = new MyPlayer("Spy",32, 32);
 
@@ -61,7 +59,8 @@ namespace DiDo
 
         public MainPage()
         {
-            
+            levels = new Levels.Levels();
+            controller = new ClientController();
             mousePoint = new Point();
             playerPoint = new Point(player.x, player.y);
             this.InitializeComponent();
@@ -102,45 +101,6 @@ namespace DiDo
             return radians;
         }
 
-        public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args)
-        {
-            player.x += player.velX;
-            player.y += player.velY;
-
-            if (keyPressed(VirtualKey.A))
-            {
-                Tile tile = getTile(player.x, player.y);
-                if (tile.CanWalk == false) //positief
-                {
-                    player.x += player.move_speed;
-                }
-            }
-            else if (keyPressed(VirtualKey.S))
-            {
-                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
-                Tile tile = getTile(player.x, player.y);
-                if (tile.CanWalk == false)
-                {
-                    player.y -= player.move_speed;
-                }
-            }
-            else if (keyPressed(VirtualKey.D))
-            {
-                Tile tile = getTile(player.x, player.y);
-                if (tile.CanWalk == false) //positief
-                {
-                    player.x -= player.move_speed;
-                }
-            }
-            else
-            {
-                Tile tile = getTile(player.x, player.y);
-                if (tile.CanWalk == false)
-                {
-                    player.y += player.move_speed;
-                }
-            }
-        }
 
         //---------->Character Movement Stop 
 
@@ -161,15 +121,6 @@ namespace DiDo
             ImageManipulation.SetScale();
         }
 
-        private Boolean keyPressed(VirtualKey key)
-        {
-            if (keysPressed.ContainsKey(key))
-            {
-                return keysPressed[key];
-            }
-            return false;
-        }
-
         private void GameCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
@@ -181,32 +132,13 @@ namespace DiDo
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
-            Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_enemy.png"));
+            Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_matthew.png"));
              // Zodat dit niet elk frame gebeurt maar slechts eenmalig
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
                 await t.InitBitmap(sender).AsAsyncAction();
             }
-        }
-
-        public String getTileType(float x, float y)
-        {
-            return getTile(x, y).TileType;
-        }
-
-        public Tile getTile(float x, float y)
-        {
-            double x_round = Math.Floor((x / scaleWidth) / 32);
-            double y_round = Math.Floor((y / scaleHeight) / 32);
-            xPos = x_round * 32;
-            yPos = y_round * 32;
-            xPos2 = xPos + 32;
-            yPos2 = yPos + 32;
-            String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
-            Tile tile = Levels.Levels.getTile(tile_Type);
-
-            return tile;
         }
 
         public void bulletHandling(CanvasControl sender, CanvasDrawEventArgs args)
@@ -259,13 +191,13 @@ namespace DiDo
                 }
             }
 
-            movementCharacter(sender, args);
+            controller.movementCharacter(sender, args, player, levels, gekozenLevel);
             bulletHandling(sender, args);
             updatePoint(player);
 
             //Debug
             args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + getTileType(player.x, player.y), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
