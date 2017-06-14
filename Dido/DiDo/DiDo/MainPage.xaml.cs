@@ -90,6 +90,18 @@ namespace DiDo
             this.mousePoint = newPoint;
         }
 
+        public double radians(Point mouse, Point player)
+        {
+            float x2 = (float)mouse.X;
+            float x1 = (float)player.X;
+            float y2 = (float)mouse.Y;
+            float y1 = (float)player.Y;
+
+            double radians = Math.Atan2((y2 - y1), (x2 - x1));
+            double Angle = radians * (180 / Math.PI);
+            return radians;
+        }
+
         public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args)
         {
             player.x += player.velX;
@@ -102,9 +114,6 @@ namespace DiDo
                 {
                     player.x += player.move_speed;
                 }
-                //args.DrawingSession.DrawImage(PlayerA, player.x, player.y);
-                args.DrawingSession.DrawImage(ImageManipulation.imageA(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
             }
             else if (keyPressed(VirtualKey.S))
             {
@@ -114,19 +123,14 @@ namespace DiDo
                 {
                     player.y -= player.move_speed;
                 }
-                args.DrawingSession.DrawImage(ImageManipulation.imageS(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
             }
             else if (keyPressed(VirtualKey.D))
             {
-                //args.DrawingSession.DrawImage(PlayerD, player.x, player.y);
                 Tile tile = getTile(player.x, player.y);
                 if (tile.CanWalk == false) //positief
                 {
                     player.x -= player.move_speed;
                 }
-                args.DrawingSession.DrawImage(ImageManipulation.imageD(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-
             }
             else
             {
@@ -135,8 +139,6 @@ namespace DiDo
                 {
                     player.y += player.move_speed;
                 }
-                //args.DrawingSession.DrawImage(PlayerW, player.x, player.y);
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             }
         }
 
@@ -180,11 +182,7 @@ namespace DiDo
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_enemy.png"));
-
-            Transform2DEffect PlayerA = ImageManipulation.imageA(Player_sprite);
-            Transform2DEffect PlayerS = ImageManipulation.imageS(Player_sprite);
-            Transform2DEffect PlayerD = ImageManipulation.imageD(Player_sprite);
-            Transform2DEffect PlayerW = ImageManipulation.imageW(Player_sprite); // Zodat dit niet elk frame gebeurt maar slechts eenmalig
+             // Zodat dit niet elk frame gebeurt maar slechts eenmalig
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
@@ -265,12 +263,16 @@ namespace DiDo
             bulletHandling(sender, args);
             updatePoint(player);
 
+            //Debug
+            args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + getTileType(player.x, player.y), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
             args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
+            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
+            //Debug end
 
             GameCanvas.Invalidate();
         }
