@@ -44,14 +44,14 @@ namespace DiDo.Character
         /// <param name="player"> The player character</param>
         /// <param name="gekozenLevel">The chosen level</param>
         /// <param name="level">the tilemap for the level</param>
-        public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args, Player player, Levels.Levels gekozenLevel, String[,] level)
+        public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args, Player player, Levels.Levels level)
         {
             player.x += player.velX;
             player.y += player.velY;
 
             if (keyPressed(VirtualKey.A))
             {
-                Tile tile = gekozenLevel.getPlayerTile(player.x -1, player.y, level);
+                Tile tile = level.getPlayerTile(player.x -1, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positief
                 {
                     player.x -= player.move_speed;
@@ -61,7 +61,7 @@ namespace DiDo.Character
             else if (keyPressed(VirtualKey.S))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
-                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y+31, level);
+                Tile tile = level.getPlayerTile(player.x, player.y+31, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y += player.move_speed;
@@ -70,7 +70,7 @@ namespace DiDo.Character
             }
             else if (keyPressed(VirtualKey.D))
             {
-                Tile tile = gekozenLevel.getPlayerTile(player.x+33, player.y, level);
+                Tile tile = level.getPlayerTile(player.x+33, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positief
                 {
                     player.x += player.move_speed;
@@ -79,7 +79,7 @@ namespace DiDo.Character
             }
             else if (keyPressed(VirtualKey.W))
             {
-                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y-1, level);
+                Tile tile = level.getPlayerTile(player.x, player.y-1, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
