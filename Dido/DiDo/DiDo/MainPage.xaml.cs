@@ -60,7 +60,7 @@ namespace DiDo
         public MainPage()
         {
             levels = new Levels.Levels();
-            controller = new ClientController();
+            controller = new ClientController(player.name, player.x, player.y);
             mousePoint = new Point();
             playerPoint = new Point(player.x, player.y);
             this.InitializeComponent();
@@ -69,8 +69,8 @@ namespace DiDo
             
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
-            Window.Current.CoreWindow.KeyDown += player.CoreWindow_Keydown;
-            Window.Current.CoreWindow.KeyUp += player.CoreWindow_Keyup;
+            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
         }
         
         public void updatePoint(Player player)
