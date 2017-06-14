@@ -10,7 +10,7 @@ namespace DiDo
 {
     public abstract class Player : Characters
     {
-        private String name;
+        public String name { get; }
         public float velX { get; set; } = 0;
         public float velY { get; set; } = 0;
         public int move_speed = 5;
