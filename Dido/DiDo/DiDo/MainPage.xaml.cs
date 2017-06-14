@@ -132,7 +132,7 @@ namespace DiDo
                     player.x -= player.move_speed;
                 }
             }
-            else
+            else if (keyPressed(VirtualKey.W))
             {
                 Tile tile = getTile(player.x, player.y);
                 if (tile.CanWalk == false)
