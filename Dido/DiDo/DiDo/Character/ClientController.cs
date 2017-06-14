@@ -40,6 +40,10 @@ namespace DiDo.Character
                 {
                     player.x -= player.move_speed;
                 }
+                else
+                {
+                    player.x += player.move_speed;
+                }
             }
             else if (keyPressed(VirtualKey.S))
             {
@@ -49,6 +53,10 @@ namespace DiDo.Character
                 {
                     player.y += player.move_speed;
                 }
+                else
+                {
+                    player.y -= player.move_speed;
+                }
             }
             else if (keyPressed(VirtualKey.D))
             {
@@ -57,6 +65,10 @@ namespace DiDo.Character
                 {
                     player.x += player.move_speed;
                 }
+                else
+                {
+                    player.x -= player.move_speed;
+                }
             }
             else if (keyPressed(VirtualKey.W))
             {
@@ -64,6 +76,10 @@ namespace DiDo.Character
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
+                }
+                else
+                {
+                    player.y += player.move_speed;
                 }
             }
         }
