@@ -23,11 +23,11 @@ namespace DiDo.Levels
             { "k", new Tile("crack5", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-5.png"), true) },
             { "l", new Tile("crack6", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-6.png"), true) },
             { "m", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/spr_disco.png"), true) },
-            { "n", new Tile("flower1", new Uri("ms-appx:///Assets/Tiles/floors/flower/flower_1.png"), true) },
-            { "o", new Tile("flower2", new Uri("ms-appx:///Assets/Tiles/floors/flower/flower_2.png"), true) },
-            { "p", new Tile("flower3", new Uri("ms-appx:///Assets/Tiles/floors/flower/flower_3.png"), true) },
-            { "q", new Tile("flower4", new Uri("ms-appx:///Assets/Tiles/floors/flower/flower_4.png"), true ) },
-            { "r", new Tile("flower5", new Uri("ms-appx:///Assets/Tiles/floors/flower/flower_5.png"), true ) },
+            { "n", new Tile("flower1", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_1.png"), true) },
+            { "o", new Tile("flower2", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_2.png"), true) },
+            { "p", new Tile("flower3", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_3.png"), true) },
+            { "q", new Tile("flower4", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_4.png"), true ) },
+            { "r", new Tile("flower5", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_5.png"), true ) },
             { "s", new Tile("grass1", new Uri("ms-appx:///Assets/Tiles/floors/grass/grass_1.png"), true ) },
             { "t", new Tile("grass2", new Uri("ms-appx:///Assets/Tiles/floors/grass/grass_2.png"), true ) },
             { "u", new Tile("grass3", new Uri("ms-appx:///Assets/Tiles/floors/grass/grass_3.png"), true ) },
@@ -138,7 +138,7 @@ namespace DiDo.Levels
             {"X", "b", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "f", "T"},
             {"Y", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "W"},
         };
-
+/**
         public static String[,] levelFour = { // 26 x 26
             {"S","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","U","H","H","H"},
             {"X","b","b","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","T","H","H","H"},
@@ -167,7 +167,7 @@ namespace DiDo.Levels
             {"H","H","H","X","f","f","f","f","f","f","T","H","H","H","H","X","f","f","f","f","f","f","f","f","f","T"},
             {"H","H","H","Y","V","V","V","V","V","V","W","H","H","H","H","Y","V","V","V","V","V","V","V","V","V","W"}
         };
-
+**/
         public static String[,] levelFive = { // 39 x 21
             {"c","D","q","p","q","p","q","p","q","r","c","c","c","1","0","3","c","1","0","3","c","1","0","3","c","1","0","3","c","c","c","c","c","f","f","f","f","f","f"},
             {"c","D","p","q","p","q","p","q","p","r","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
@@ -191,6 +191,7 @@ namespace DiDo.Levels
             {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
             {"c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","c","c","c","c","f","f","f","f","f","f"}};
 
+        /**
         public static String[,] levelSix =
         { // 36x25
             {"S","R","R","R","R","R","R","R","U","H","H","H","H","H","H","H","H","H","H","H","H","H","S","R","R","R","R","R","R","R","R","R","R","R","R","U"},
@@ -219,6 +220,7 @@ namespace DiDo.Levels
             {"X","f","f","f","f","f","f","f","f","f","f","f","b","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","T"},
             {"Y","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","W"}
     };
+    **/
 
 }
 }
