@@ -28,6 +28,22 @@ namespace DiDo.Character
             return false;
         }
 
+        /// <summary>
+        /// Checks if the player can walk on the tile
+        /// </summary>
+        public void checkTile(Player player, Levels.Levels chosenLevel, String[,] level)
+        {
+     
+        }
+
+        /// <summary>
+        /// Movement for the character
+        /// </summary>
+        /// <param name="sender"> Event handler</param>
+        /// <param name="args">Event handler</param>
+        /// <param name="player"> The player character</param>
+        /// <param name="gekozenLevel">The chosen level</param>
+        /// <param name="level">the tilemap for the level</param>
         public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args, Player player, Levels.Levels gekozenLevel, String[,] level)
         {
             player.x += player.velX;
@@ -35,56 +51,44 @@ namespace DiDo.Character
 
             if (keyPressed(VirtualKey.A))
             {
-                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y, level);
+                Tile tile = gekozenLevel.getPlayerTile(player.x -1, player.y, level);
                 if (tile.CanWalk == true) //positief
                 {
                     player.x -= player.move_speed;
                 }
-                else
-                {
-                    player.x += player.move_speed;
-                }
+                
             }
             else if (keyPressed(VirtualKey.S))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
-                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y, level);
+                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y+31, level);
                 if (tile.CanWalk == true)
                 {
                     player.y += player.move_speed;
                 }
-                else
-                {
-                    player.y -= player.move_speed;
-                }
+               
             }
             else if (keyPressed(VirtualKey.D))
             {
-                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y, level);
+                Tile tile = gekozenLevel.getPlayerTile(player.x+33, player.y, level);
                 if (tile.CanWalk == true) //positief
                 {
                     player.x += player.move_speed;
                 }
-                else
-                {
-                    player.x -= player.move_speed;
-                }
+                
             }
             else if (keyPressed(VirtualKey.W))
             {
-                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y, level);
+                Tile tile = gekozenLevel.getPlayerTile(player.x, player.y-1, level);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
                 }
-                else
-                {
-                    player.y += player.move_speed;
-                }
+               
             }
         }
 
-        //Character Movement 
+        //Keydown events for character movement
         public void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
             //int move_speed = 5;
@@ -110,6 +114,7 @@ namespace DiDo.Character
             }
         }
 
+        //Key up events to check if the key is stopped being pressed.
         public void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
         {
 

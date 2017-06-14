@@ -12,10 +12,10 @@ namespace DiDo.Levels
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
             { "b", new Tile("bridge90", new Uri("ms-appx:///Assets/Tiles/bridge/90.png"), true) },
-            { "c", new Tile("door0", new Uri("ms-appx:///Assets/Tiles/door//0.png") ) },
+            { "c", new Tile("door0", new Uri("ms-appx:///Assets/Tiles/door/0.png") ) },
             { "d", new Tile("door90", new Uri("ms-appx:///Assets/Tiles/door/90.png") ) },
-            { "e", new Tile("door180", new Uri("ms-appx:///Assets/Tiles/door/0.png") ) },
-            { "f", new Tile("door270", new Uri("ms-appx:///Assets/Tiles/door/90.png") ) },
+            { "e", new Tile("door180", new Uri("ms-appx:///Assets/Tiles/door/180.png") ) },
+            { "f", new Tile("door270", new Uri("ms-appx:///Assets/Tiles/door/270.png") ) },
             { "g", new Tile("crack1", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-1.png"), true) },
             { "h", new Tile("crack2", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-2.png"), true) },
             { "i", new Tile("crack3", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-3.png"), true) },
@@ -79,6 +79,13 @@ namespace DiDo.Levels
             return getPlayerTile(x, y, gekozenLevel).TileType;
         }
 
+        /// <summary>
+        /// Gets the desired tile according to the given coords
+        /// </summary>
+        /// <param name="x">The x coord of the tile</param>
+        /// <param name="y">The y coord of the tile</param>
+        /// <param name="gekozenLevel">The current level</param>
+        /// <returns>The desired tile</returns>
         public Tile getPlayerTile(float x, float y, String[,] gekozenLevel)
         {
             double x_round = Math.Floor((x) / 32);
@@ -109,7 +116,7 @@ namespace DiDo.Levels
             {"L","w","w","w","w","w","w","w","w","w","w","w","w","J"},
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","S"},
         };
-        */
+       
 
         public static String[,] levelTwo =  { // 35 x 24
             {"n","n","n","n","n","n","o","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
