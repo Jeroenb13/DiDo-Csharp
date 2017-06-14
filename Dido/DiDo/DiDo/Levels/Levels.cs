@@ -103,8 +103,6 @@ namespace DiDo.Levels
             {"T","I","I","I","I","I","I","I","S"}
         };
 
-        /*
-         * public static String[,] levelOne = {  
         public static String[,] testLvl =
         { //Test level
             { "s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s" },
@@ -130,7 +128,8 @@ namespace DiDo.Levels
 
         };
 
-        public static String[,] levelOne = { // 14x14   
+        /*
+        public static String[,] levelOne = { 
             {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
             {"P","w","w","w","w","w","w","w","w","w","w","w","w","T"},
             {"X","w","w","w","w","w","w","w","w","w","w","w","w","T"},

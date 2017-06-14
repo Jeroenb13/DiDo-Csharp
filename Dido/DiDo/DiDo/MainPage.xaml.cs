@@ -51,7 +51,7 @@ namespace DiDo
 
         public MyPlayer player = new MyPlayer("Spy",32, 32);
 
-        public static String[,] gekozenLevel = Levels.Levels.testLvl;
+        public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
         public float temp_x, temp_y; // Tijdelijk
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
