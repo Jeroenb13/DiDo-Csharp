@@ -14,8 +14,8 @@ namespace DiDo.Levels
             { "b", new Tile("bridge90", new Uri("ms-appx:///Assets/Tiles/bridge/90.png"), true) },
             { "c", new Tile("door0", new Uri("ms-appx:///Assets/Tiles/door//0.png") ) },
             { "d", new Tile("door90", new Uri("ms-appx:///Assets/Tiles/door/90.png") ) },
-            { "e", new Tile("door180", new Uri("ms-appx:///Assets/Tiles/bridge/0.png") ) },
-            { "f", new Tile("door270", new Uri("ms-appx:///Assets/Tiles/bridge/90.png") ) },
+            { "e", new Tile("door180", new Uri("ms-appx:///Assets/Tiles/door/0.png") ) },
+            { "f", new Tile("door270", new Uri("ms-appx:///Assets/Tiles/door/90.png") ) },
             { "g", new Tile("crack1", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-1.png"), true) },
             { "h", new Tile("crack2", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-2.png"), true) },
             { "i", new Tile("crack3", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-3.png"), true) },
@@ -158,7 +158,6 @@ namespace DiDo.Levels
             {"X", "b", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "f", "T"},
             {"Y", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "V", "W"},
         };
-/**
         public static String[,] levelFour = { // 26 x 26
             {"S","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","U","H","H","H"},
             {"X","b","b","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","T","H","H","H"},
@@ -187,7 +186,6 @@ namespace DiDo.Levels
             {"H","H","H","X","f","f","f","f","f","f","T","H","H","H","H","X","f","f","f","f","f","f","f","f","f","T"},
             {"H","H","H","Y","V","V","V","V","V","V","W","H","H","H","H","Y","V","V","V","V","V","V","V","V","V","W"}
         };
-**/
         public static String[,] levelFive = { // 39 x 21
             {"c","D","q","p","q","p","q","p","q","r","c","c","c","1","0","3","c","1","0","3","c","1","0","3","c","1","0","3","c","c","c","c","c","f","f","f","f","f","f"},
             {"c","D","p","q","p","q","p","q","p","r","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
@@ -211,7 +209,7 @@ namespace DiDo.Levels
             {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
             {"c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","c","c","c","c","f","f","f","f","f","f"}};
 
-        /**
+
         public static String[,] levelSix =
         { // 36x25
             {"S","R","R","R","R","R","R","R","U","H","H","H","H","H","H","H","H","H","H","H","H","H","S","R","R","R","R","R","R","R","R","R","R","R","R","U"},
@@ -240,7 +238,6 @@ namespace DiDo.Levels
             {"X","f","f","f","f","f","f","f","f","f","f","f","b","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","T"},
             {"Y","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","W"}
     };
-    **/
 
 }
 }
