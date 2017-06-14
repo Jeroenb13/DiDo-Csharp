@@ -165,6 +165,67 @@
     <Content Include="Assets\Menu\SettingsButton.png" />
     <Content Include="Assets\Menu\StartButton.png" />
     <Content Include="Assets\Menu\wasd.jpg" />
+    <Content Include="Assets\Tiles\bridge\0.png" />
+    <Content Include="Assets\Tiles\bridge\90.png" />
+    <Content Include="Assets\Tiles\crate.png" />
+    <Content Include="Assets\Tiles\door\0.png" />
+    <Content Include="Assets\Tiles\door\180.png" />
+    <Content Include="Assets\Tiles\door\270.png" />
+    <Content Include="Assets\Tiles\door\90.png" />
+    <Content Include="Assets\Tiles\fence.png" />
+    <Content Include="Assets\Tiles\floors\cracked\crack-1.png" />
+    <Content Include="Assets\Tiles\floors\cracked\crack-2.png" />
+    <Content Include="Assets\Tiles\floors\cracked\crack-3.png" />
+    <Content Include="Assets\Tiles\floors\cracked\crack-4.png" />
+    <Content Include="Assets\Tiles\floors\cracked\crack-5.png" />
+    <Content Include="Assets\Tiles\floors\cracked\crack-6.png" />
+    <Content Include="Assets\Tiles\floors\disco\blue.png" />
+    <Content Include="Assets\Tiles\floors\disco\cyan.png" />
+    <Content Include="Assets\Tiles\floors\disco\green.png" />
+    <Content Include="Assets\Tiles\floors\disco\pink.png" />
+    <Content Include="Assets\Tiles\floors\disco\spr_disco.png" />
+    <Content Include="Assets\Tiles\floors\disco\yellow.png" />
+    <Content Include="Assets\Tiles\floors\floor.png" />
+    <Content Include="Assets\Tiles\floors\flowers\flower_1.png" />
+    <Content Include="Assets\Tiles\floors\flowers\flower_2.png" />
+    <Content Include="Assets\Tiles\floors\flowers\flower_3.png" />
+    <Content Include="Assets\Tiles\floors\flowers\flower_4.png" />
+    <Content Include="Assets\Tiles\floors\flowers\flower_5.png" />
+    <Content Include="Assets\Tiles\floors\grass\grass_1.png" />
+    <Content Include="Assets\Tiles\floors\grass\grass_2.png" />
+    <Content Include="Assets\Tiles\floors\grass\grass_3.png" />
+    <Content Include="Assets\Tiles\floors\grass\grass_4.png" />
+    <Content Include="Assets\Tiles\gas.png" />
+    <Content Include="Assets\Tiles\paths\cross\0.png" />
+    <Content Include="Assets\Tiles\paths\straight\0.png" />
+    <Content Include="Assets\Tiles\paths\straight\90.png" />
+    <Content Include="Assets\Tiles\paths\turn\0.png" />
+    <Content Include="Assets\Tiles\paths\turn\180.png" />
+    <Content Include="Assets\Tiles\paths\turn\270.png" />
+    <Content Include="Assets\Tiles\paths\turn\90.png" />
+    <Content Include="Assets\Tiles\paths\t\0.png" />
+    <Content Include="Assets\Tiles\paths\t\180.png" />
+    <Content Include="Assets\Tiles\paths\t\270.png" />
+    <Content Include="Assets\Tiles\paths\t\90.png" />
+    <Content Include="Assets\Tiles\rubbishbin.png" />
+    <Content Include="Assets\Tiles\seat.png" />
+    <Content Include="Assets\Tiles\spr_disco.png" />
+    <Content Include="Assets\Tiles\table.png" />
+    <Content Include="Assets\Tiles\tree.png" />
+    <Content Include="Assets\Tiles\walls\straight\0.png" />
+    <Content Include="Assets\Tiles\walls\straight\180.png" />
+    <Content Include="Assets\Tiles\walls\straight\270.png" />
+    <Content Include="Assets\Tiles\walls\straight\90.png" />
+    <Content Include="Assets\Tiles\walls\torch\0.png" />
+    <Content Include="Assets\Tiles\walls\torch\180.png" />
+    <Content Include="Assets\Tiles\walls\torch\270.png" />
+    <Content Include="Assets\Tiles\walls\torch\90.png" />
+    <Content Include="Assets\Tiles\walls\turn\0.png" />
+    <Content Include="Assets\Tiles\walls\turn\180.png" />
+    <Content Include="Assets\Tiles\walls\turn\270.png" />
+    <Content Include="Assets\Tiles\walls\turn\90.png" />
+    <Content Include="Assets\Tiles\water.png" />
+    <Content Include="Assets\Tiles\water_sand.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -198,7 +259,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
-    <Folder Include="Assets\Tiles\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

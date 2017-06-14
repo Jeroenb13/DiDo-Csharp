@@ -65,14 +65,12 @@ namespace DiDo.MenuFolder
 
         private void onPointerEnter(object sender, PointerRoutedEventArgs e)
         {
-            VisualStateManager.GoToState(this, "VisualStateNormal", false);
-            // UseSystemFocusVisuals = false;
+
         }
 
         private void onPointerExit(object sender, PointerRoutedEventArgs e)
         {
-            VisualStateManager.GoToState(this, "VisualStateAnimate", false);
-            //UseSystemFocusVisuals = false;
+
         }
     
     }
