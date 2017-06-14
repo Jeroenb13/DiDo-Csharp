@@ -93,7 +93,18 @@ namespace DiDo.Levels
             return tile;
         }
 
-        public static String[,] levelOne = { // 14x14   
+        public static String[,] levelOne = {
+            {"Q","I","I","I","I","I","I","I","R"},
+            {"J","s","t","u","v","u","Z","s","J"},
+            {"J","s","t","u","v","u","t","s","J"},
+            {"J","s","t","U","v","u","t","s","J"},
+            {"J","U","t","u","v","u","Z","s","J"},
+            {"J","s","t","u","v","u","t","s","J"},
+            {"T","I","I","I","I","I","I","I","S"}
+        };
+
+        /*
+         * public static String[,] levelOne = {  
             {"S","R","R","M","R","R","R","R","R","M","R","R","R","U"},
             {"P","w","w","w","w","w","w","w","w","w","w","w","w","T"},
             {"X","w","w","w","w","w","w","w","w","w","w","w","w","T"},
@@ -109,6 +120,8 @@ namespace DiDo.Levels
             {"P","f","f","f","f","f","f","f","f","f","f","f","b","T"},
             {"Y","V","V","V","V","V","V","V","V","V","V","V","V","W"},
         };
+        */
+
         public static String[,] levelTwo =  { // 35 x 24
             {"n","n","n","n","n","n","o","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
             {"t","t","u","n","n","n","n","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","n","n","n","n","n","o","n","n","n","n","n","o","n","n","n"},
