@@ -51,7 +51,7 @@ namespace DiDo
 
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public MyPlayer player = new MyPlayer("Spy",32, 32);
+        public MyPlayer player = new MyPlayer("Spy", 32, 32);
 
         public static String[,] gekozenLevel = Levels.Levels.levelOne;
 
