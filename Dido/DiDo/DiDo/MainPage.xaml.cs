@@ -29,10 +29,10 @@ namespace DiDo
     {
         // The images of the game
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
-        public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
+        public static Transform2DEffect Bullets;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public static float DesignWidth = 1920;
-        public static float DesignHeight = 1080;
+        public static float DesignWidth = 1280;
+        public static float DesignHeight = 720;
         public static float scaleWidth, scaleHeight, pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
@@ -80,12 +80,12 @@ namespace DiDo
 
             foreach (Enemy enemy in enemies)
             {
-                args.DrawingSession.DrawImage(ImageManipulation.imageW(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
+                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
 
             //Debug
-            args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
@@ -115,9 +115,10 @@ namespace DiDo
                     string tileType = levels.gekozenLevel[x, y].ToString();
                     Tile tile = Levels.Levels.tiles[tileType];
                     args.DrawingSession.DrawImage(
-                        tile.Effect,
+                         tile.Effect,
                         y * (32 * MainPage.scaleWidth),
                         x * (32 * MainPage.scaleHeight)
+                       
                     );
 
                 }
