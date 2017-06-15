@@ -98,7 +98,12 @@ namespace DiDo.Levels
 
         public String getTileType(float x, float y, String [,] gekozenLevel)
         {
-            return getPlayerTile(x, y, gekozenLevel).TileType;
+            Tile tile = getPlayerTile(x, y, gekozenLevel);
+            if(tile == null)
+            {
+                return null;
+            }
+            return tile.TileType;
         }
 
         /// <summary>
@@ -116,6 +121,12 @@ namespace DiDo.Levels
             double yPos = y_round * 32;
             double xPos2 = xPos + 32;
             double yPos2 = yPos + 32;
+
+            if(y_round >= gekozenLevel.GetLength(1) || x_round >= gekozenLevel.GetLength(2))
+            {
+                return null;
+            }
+
             String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
             Tile tile = getTile(tile_Type);
 
