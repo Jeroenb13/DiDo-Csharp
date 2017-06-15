@@ -41,7 +41,7 @@ namespace DiDo
         public static bool RoundEnded = false;
         private Levels.Levels levels;
         private bool assetsLoaded = false;
-
+        public static string[,] ChosenLevel;
         //Lists Projectile
         public List<Bullet> bullets = new List<Bullet>();
 
@@ -52,6 +52,56 @@ namespace DiDo
         public MyPlayer player = new MyPlayer("Spy",32, 32);
 
         public float temp_x, temp_y; // Tijdelijk
+
+        private void GameCanvas_CreateResources_1(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
+        {
+            args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
+        }
+
+        private void GameCanvas_Draw_1(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        {
+            GameStateManager.GSManager();
+
+            if (player.x == 0 && player.y == 0)
+            {
+                player.x = 32 * scaleWidth;
+                player.y = 32 * scaleHeight;
+            }
+
+            // Level
+            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
+                {
+                    string tileType = levels.gekozenLevel[x, y].ToString();
+                    Tile tile = Levels.Levels.tiles[tileType];
+                    args.DrawingSession.DrawImage(
+                        tile.Effect,
+                        y * (32 * MainPage.scaleWidth),
+                        x * (32 * MainPage.scaleHeight)
+                    );
+
+                }
+            }
+
+            controller.movementCharacter(sender, args, player, levels);
+            bulletHandling(sender, args);
+            updatePoint(player);
+
+            //Debug
+            args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
+            args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
+            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
+            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
+            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
+            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
+            //Debug end
+
+            GameCanvas.Invalidate();
+        }
+
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
         //public String type_tile;
 
@@ -119,12 +169,8 @@ namespace DiDo
             ImageManipulation.SetScale();
         }
 
-        private void GameCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
-        {
-            args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
-        }
 
-        async Task CreateResourcesAsync(CanvasControl sender)
+        async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
@@ -139,7 +185,7 @@ namespace DiDo
             }
         }
 
-        public void bulletHandling(CanvasControl sender, CanvasDrawEventArgs args)
+        public void bulletHandling(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             List<Bullet> bulletsToRemove = new List<Bullet>();
 
@@ -163,49 +209,7 @@ namespace DiDo
             }
         }
 
-        public void GameCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
-        {
-            GameStateManager.GSManager();
-            
-            if (player.x == 0 && player.y == 0)
-            {
-                player.x = 32 * scaleWidth;
-                player.y = 32 * scaleHeight;
-            }
-
-            // Level
-            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
-            {
-                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
-                {
-                    string tileType = levels.gekozenLevel[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                        tile.Effect,
-                        y * (32 * MainPage.scaleWidth),
-                        x * (32 * MainPage.scaleHeight)
-                    );
-
-                }
-            }
-
-            controller.movementCharacter(sender, args, player, levels);
-            bulletHandling(sender, args);
-            updatePoint(player);
-
-            //Debug
-            args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
-            args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
-            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
-            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
-            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
-            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-            //Debug end
-
-            GameCanvas.Invalidate();
-        }
+ 
 
         private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {

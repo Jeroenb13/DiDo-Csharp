@@ -44,7 +44,7 @@ namespace DiDo.Character
         /// <param name="player"> The player character</param>
         /// <param name="gekozenLevel">The chosen level</param>
         /// <param name="level">the tilemap for the level</param>
-        public void movementCharacter(CanvasControl sender, CanvasDrawEventArgs args, Player player, Levels.Levels level)
+        public void movementCharacter(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args, Player player, Levels.Levels level)
         {
             player.x += player.velX;
             player.y += player.velY;
