@@ -64,8 +64,8 @@ namespace DiDo.Levels
             { "Y", new Tile("empty", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png")) },         // AVAILABLE
             { "Z", new Tile("table", new Uri("ms-appx:///Assets/Tiles/table.png") ) },
             { "1", new Tile("tree", new Uri("ms-appx:///Assets/Tiles/tree.png")) },
-            { "2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water.png")) },
-            { "3", new Tile("watersand", new Uri("ms-appx:///Assets/Tiles/water_sand.png"), true) },
+            { "2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/1.png")) },
+            { "3", new Tile("watersand", new Uri("ms-appx:///Assets/Tiles/water/water_sand.png"), true) },
             { "4", new Tile("barfloorblack", new Uri("ms-appx:///Assets/Tiles/floors/bar/black.png"), true) },
             { "5", new Tile("barfloorwhite", new Uri("ms-appx:///Assets/Tiles/floors/bar/white.png"), true) },
             { "6", new Tile("barstraight0", new Uri("ms-appx:///Assets/Tiles/bar/straight/0.png")) },
