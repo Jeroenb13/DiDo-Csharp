@@ -49,7 +49,7 @@ namespace DiDo
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public MyPlayer player = new MyPlayer("Spy",32, 32);
+        public MyPlayer player = new MyPlayer("Spy",32, 96);
 
         public List<Enemy> enemies = new List<Enemy>();
 
