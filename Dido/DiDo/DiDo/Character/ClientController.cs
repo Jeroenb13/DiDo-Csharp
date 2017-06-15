@@ -112,7 +112,19 @@ namespace DiDo.Character
                         }
                     }
                 }
-}
+            }
+            else if(keyPressed(VirtualKey.Number1))
+            {
+                player.changeWeapon(1);
+            }
+            else if (keyPressed(VirtualKey.Number2))
+            {
+                player.changeWeapon(2);
+            }
+            else if (keyPressed(VirtualKey.Number3))
+            {
+                player.changeWeapon(3);
+            }
         }
 
         //Keydown events for character movement

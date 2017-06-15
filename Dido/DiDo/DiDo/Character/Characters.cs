@@ -63,8 +63,6 @@ namespace DiDo.Character
 
         public void pickUpWeapon(Weapon weapon)
         {
-            if (weapon.x >= x && weapon.x <= (x + 16) && weapon.y >= y && weapon.y <= (y - 16))
-            {
                 if (weapons[0] != null && weapons[1] != null && weapons[2] != null)
                 {
                     setItem(currentWeaponIndex, weapon);
@@ -77,10 +75,32 @@ namespace DiDo.Character
                 {
                     setItem(1, weapon);
                 }
-                else
+                else if (weapons[0] != null && weapons[1] != null && weapons[2] == null)
                 {
                     setItem(2, weapon);
                 }
+                else if (weapons[0] == null && weapons[1] == null && weapons[2] == null)
+                {
+                    setItem(0, weapon);
+                }
+        }
+
+        public void changeWeapon(int number)
+        {
+            if (number == 1)
+            {
+                currentWeaponIndex = 0;
+                currentWeapon = weapons[0];
+            }
+            else if (number == 2)
+            {
+                currentWeaponIndex = 1;
+                currentWeapon = weapons[1];
+            }
+            else if (number == 3)
+            {
+                currentWeaponIndex = 2;
+                currentWeapon = weapons[2];
             }
         }
     }
