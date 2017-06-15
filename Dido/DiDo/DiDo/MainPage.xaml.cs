@@ -51,6 +51,8 @@ namespace DiDo
 
         public MyPlayer player = new MyPlayer("Spy",32, 32);
 
+        public List<Enemy> enemies = new List<Enemy>();
+
         public float temp_x, temp_y; // Tijdelijk
 
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
@@ -75,6 +77,12 @@ namespace DiDo
             controller.movementCharacter(sender, args, player, levels);
             bulletHandling(sender, args);
             updatePoint(player);
+
+            foreach (Enemy enemy in enemies)
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
+                args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
+            }
 
             //Debug
             args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
@@ -131,6 +139,10 @@ namespace DiDo
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
+
+            this.enemies.Add(new Enemy("Freek", 128, 32)); // De AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 192, 96)); // De AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 256, 128)); // De AI Enemy 3
         }
         
         public void updatePoint(Player player)
@@ -200,6 +212,7 @@ namespace DiDo
         public void bulletHandling(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             List<Bullet> bulletsToRemove = new List<Bullet>();
+            List<int> enemiesToRemove = new List<int>();
 
             // Show bullets
             foreach (Bullet bullet in bullets)
@@ -212,12 +225,33 @@ namespace DiDo
                 {
                     bulletsToRemove.Add(bullet);
                 }
+
+                int emeniesCount = 0;
+                foreach (Enemy enemy in enemies)
+                {
+                    if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
+                    {
+                        enemy.hit(bullet.damage);
+                        if(enemy.health() <= 0)
+                        {
+                            enemiesToRemove.Add(emeniesCount); // Enemy klaar zetten om te verwijderen
+                        }
+                        bulletsToRemove.Add(bullet); // kogel na een hit verwijderen
+                    }
+                    emeniesCount++;
+                }
             }
 
             // Remove Bullets
             foreach (Bullet bullet in bulletsToRemove)
             {
                 bullets.Remove(bullet);
+            }
+
+            // Remove enemies
+            foreach (int removeEnemy in enemiesToRemove)
+            {
+                enemies.RemoveAt(removeEnemy);
             }
         }
 
@@ -256,7 +290,8 @@ namespace DiDo
                     yVel = yVel / scaling;
                     if(player.currentWeapon.getAmmo() >= 1)
                     {
-                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
+                        //Debug.WriteLine(player.currentWeapon.getDamage());
+                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                         player.currentWeapon.reduceAmmo();
                     }
                 }
