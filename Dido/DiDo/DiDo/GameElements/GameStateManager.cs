@@ -22,7 +22,7 @@ namespace DiDo.GameElements
                 }
                 else if (MainPage.GameState == 1)
                 {
-                    MainPage.ChosenLevel = Levels.Levels.levelOne;
+                    MainPage.ChosenLevel = Levels.Levels.levelTwo;
                 }
 
             }

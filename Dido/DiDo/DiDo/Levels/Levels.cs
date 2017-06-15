@@ -8,7 +8,7 @@ namespace DiDo.Levels
 {
     public class Levels
     {
-        public String[,] gekozenLevel = levelOne;
+        public String[,] gekozenLevel = levelTwo;
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
