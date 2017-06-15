@@ -36,7 +36,7 @@
         </Rectangle>
 
         
-        <Button x:Name="Start" Grid.Column="1" Content="Start" FontSize="30" FontFamily="FFF Forward" Background="White" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Tapped="Start_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
+        <Button x:Name="Start" Grid.Column="1" Content="Start" FontSize="30" FontFamily="FFF Forward" Background="White" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Tapped="Start_Tapped" BorderThickness="0">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -46,7 +46,7 @@
         </Button>
 
 
-        <Button x:Name="Invade" Grid.Column="1" Content="Invade" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" Tapped="Invade_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
+        <Button x:Name="Invade" Grid.Column="1" Content="Invade" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" Tapped="Invade_Tapped"  BorderThickness="0">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -56,7 +56,7 @@
         </Button>
 
 
-        <Button x:Name="Settings" Grid.Column="1" Content="Settings" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Tapped="Settings_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
+        <Button x:Name="Settings" Grid.Column="1" Content="Settings" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Tapped="Settings_Tapped"  BorderThickness="0">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -66,7 +66,7 @@
         </Button>
 
 
-        <Button x:Name="Help" Grid.Column="1" Content="Help" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Tapped="Help_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
+        <Button x:Name="Help" Grid.Column="1" Content="Help" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Tapped="Help_Tapped" BorderThickness="0">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -76,7 +76,7 @@
         </Button>
 
 
-        <Button x:Name="Exit" Grid.Column="1" Content="Exit" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" Tapped="Exit_Tapped" PointerEntered="onPointerEnter" PointerExited="onPointerExit" BorderThickness="0">
+        <Button x:Name="Exit" Grid.Column="1" Content="Exit" FontSize="30" FontFamily="FFF Forward" Background="White"  HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" Tapped="Exit_Tapped" BorderThickness="0">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>

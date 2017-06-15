@@ -100,6 +100,7 @@ namespace DiDo.Levels
             return tile;
         }
 
+        //dungeon
         public static String[,] levelOne = { // 14x14   
             {"Q","I","I","I","I","I","I","I","I","I","I","I","I","R"},
             {"L","w","w","w","w","w","w","w","w","w","w","w","w","J"},
@@ -117,7 +118,7 @@ namespace DiDo.Levels
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","S"},
         };
        
-
+        //grassy planes
         public static String[,] levelTwo =  { // 35 x 24
             {"n","n","n","n","n","n","o","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
             {"t","t","u","n","n","n","n","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","n","n","n","n","n","o","n","n","n","n","n","o","n","n","n"},

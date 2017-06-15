@@ -63,15 +63,6 @@ namespace DiDo.MenuFolder
             Application.Current.Exit();
         }
 
-        private void onPointerEnter(object sender, PointerRoutedEventArgs e)
-        {
-
-        }
-
-        private void onPointerExit(object sender, PointerRoutedEventArgs e)
-        {
-
-        }
     
     }
 }
