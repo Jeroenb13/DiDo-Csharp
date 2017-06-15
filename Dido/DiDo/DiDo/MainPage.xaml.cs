@@ -51,8 +51,6 @@ namespace DiDo
 
         public MyPlayer player = new MyPlayer("Spy",32, 32);
 
-        public static String[,] gekozenLevel = Levels.Levels.levelOne;
-
         public float temp_x, temp_y; // Tijdelijk
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
         //public String type_tile;
@@ -176,11 +174,11 @@ namespace DiDo
             }
 
             // Level
-            for (int x = 0; x < gekozenLevel.GetLength(0); x += 1)
+            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
             {
-                for (int y = 0; y < gekozenLevel.GetLength(1); y += 1)
+                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
                 {
-                    string tileType = gekozenLevel[x, y].ToString();
+                    string tileType = levels.gekozenLevel[x, y].ToString();
                     Tile tile = Levels.Levels.tiles[tileType];
                     args.DrawingSession.DrawImage(
                         tile.Effect,
@@ -191,13 +189,13 @@ namespace DiDo
                 }
             }
 
-            controller.movementCharacter(sender, args, player, levels, gekozenLevel);
+            controller.movementCharacter(sender, args, player, levels);
             bulletHandling(sender, args);
             updatePoint(player);
 
             //Debug
             args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
