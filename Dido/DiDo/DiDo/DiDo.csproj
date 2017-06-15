@@ -156,6 +156,8 @@
     <Content Include="Assets\Items\drink-4.png" />
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
+    <Content Include="Assets\Items\gun-1.png" />
+    <Content Include="Assets\Items\gun-3.png" />
     <Content Include="Assets\Items\key.png" />
     <Content Include="Assets\Menu\ExitButton.png" />
     <Content Include="Assets\Menu\HelpButton.png" />

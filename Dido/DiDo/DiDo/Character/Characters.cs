@@ -29,6 +29,19 @@ namespace DiDo.Character
             return weapons[index];
         }
 
+        public Item dropItem()
+        {
+            Item droppedWeapon = currentWeapon;
+            if (currentWeapon != null)
+            {
+                weapons[currentWeaponIndex].x = x;
+                weapons[currentWeaponIndex].y = y;
+                weapons[currentWeaponIndex] = null;
+                currentWeapon = null;
+            }
+            return droppedWeapon;
+        }
+
         public string inventory()
         {
             string inventory = "";
