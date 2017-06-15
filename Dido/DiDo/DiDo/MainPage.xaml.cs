@@ -29,10 +29,10 @@ namespace DiDo
     {
         // The images of the game
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
-        public static Transform2DEffect Bullets;
+        public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public static float DesignWidth = 1280;
-        public static float DesignHeight = 720;
+        public static float DesignWidth = 1920;
+        public static float DesignHeight = 1080;
         public static float scaleWidth, scaleHeight, pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
@@ -55,6 +55,8 @@ namespace DiDo
 
         public float temp_x, temp_y; // Tijdelijk
 
+        public double frames = 0;
+
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
@@ -62,6 +64,7 @@ namespace DiDo
 
         private void GameCanvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
+            this.frames++;
             GameStateManager.GSManager();
 
             if (player.x == 0 && player.y == 0)
@@ -107,23 +110,47 @@ namespace DiDo
 
         public void  drawLevel(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
-            
+            var frames_sprite = (int)(this.frames % 4) + 1;
+
             for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
             {
                 for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
                 {
                     string tileType = levels.gekozenLevel[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                         tile.Effect,
+                    string tmp = tileType + "_" + frames_sprite;
+
+                    
+                    if (Levels.Levels.tiles.ContainsKey(tmp))
+                    {
+                        //Debug.WriteLine(tmp);
+                        Tile tile = Levels.Levels.tiles[tileType + "_" + frames_sprite];
+                        args.DrawingSession.DrawImage(
+                        tile.Effect,
                         y * (32 * MainPage.scaleWidth),
                         x * (32 * MainPage.scaleHeight)
-                       
                     );
+                    } else
+                    {
+                        Tile tile = Levels.Levels.tiles[tileType];
+                        args.DrawingSession.DrawImage(
+                        tile.Effect,
+                        y * (32 * MainPage.scaleWidth),
+                        x * (32 * MainPage.scaleHeight)
+                    );
+                    }
+
+                   
+
+
 
                 }
             }
-            
+
+            if (this.frames > 60)
+            {
+                this.frames = 0;
+            }
+
         }
        
         public MainPage()
