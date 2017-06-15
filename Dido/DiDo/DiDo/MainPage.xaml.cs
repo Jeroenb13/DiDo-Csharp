@@ -57,6 +57,8 @@ namespace DiDo
 
         public double frames = 0;
 
+        public Random random = new Random();
+
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
@@ -125,18 +127,18 @@ namespace DiDo
                         //Debug.WriteLine(tmp);
                         Tile tile = Levels.Levels.tiles[tileType + "_" + frames_sprite];
                         args.DrawingSession.DrawImage(
-                        tile.Effect,
-                        y * (32 * MainPage.scaleWidth),
-                        x * (32 * MainPage.scaleHeight)
-                    );
+                            tile.Effect,
+                            y * (32 * MainPage.scaleWidth),
+                            x * (32 * MainPage.scaleHeight)
+                        );
                     } else
                     {
                         Tile tile = Levels.Levels.tiles[tileType];
                         args.DrawingSession.DrawImage(
-                        tile.Effect,
-                        y * (32 * MainPage.scaleWidth),
-                        x * (32 * MainPage.scaleHeight)
-                    );
+                            tile.Effect,
+                            y * (32 * MainPage.scaleWidth),
+                            x * (32 * MainPage.scaleHeight)
+                        );
                     }
 
                    
