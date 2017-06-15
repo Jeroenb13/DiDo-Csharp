@@ -51,6 +51,8 @@ namespace DiDo
 
         public MyPlayer player = new MyPlayer("Spy",32, 32);
 
+        public List<Enemy> enemies = new List<Enemy>();
+
         public float temp_x, temp_y; // Tijdelijk
 
         private void GameCanvas_CreateResources_1(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
@@ -88,6 +90,12 @@ namespace DiDo
             bulletHandling(sender, args);
             updatePoint(player);
 
+            foreach (Enemy enemy in enemies)
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.imageW(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
+                args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
+            }
+
             //Debug
             args.DrawingSession.DrawImage(ImageManipulation.imageW(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
@@ -119,6 +127,10 @@ namespace DiDo
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
+
+            this.enemies.Add(new Enemy("Freek", 128, 32)); // De AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 192, 96)); // De AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 256, 128)); // De AI Enemy 3
         }
         
         public void updatePoint(Player player)
@@ -199,6 +211,15 @@ namespace DiDo
                 if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
                 {
                     bulletsToRemove.Add(bullet);
+                }
+
+                foreach (Enemy enemy in enemies)
+                {
+                    if (bullet.y == enemy.y && bullet.x == enemy.x)
+                    {
+                        enemy.hit();
+                        bulletsToRemove.Add(bullet); // kogel na een hit verwijderen
+                    }
                 }
             }
 
