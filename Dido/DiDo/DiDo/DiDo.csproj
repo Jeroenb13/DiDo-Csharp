@@ -98,6 +98,7 @@
     <Compile Include="Character\Characters.cs" />
     <Compile Include="Character\ClientController.cs" />
     <Compile Include="Character\ClientPlayer.cs" />
+    <Compile Include="Character\Enemy.cs" />
     <Compile Include="Character\MyPlayer.cs" />
     <Compile Include="Character\Position.cs" />
     <Compile Include="Items\ARWeapon.cs" />
