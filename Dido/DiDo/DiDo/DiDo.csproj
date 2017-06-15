@@ -172,6 +172,13 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Tiles\bar\straight\0.png" />
+    <Content Include="Assets\Tiles\bar\straight\180.png" />
+    <Content Include="Assets\Tiles\bar\straight\90.png" />
+    <Content Include="Assets\Tiles\bar\turn\0.png" />
+    <Content Include="Assets\Tiles\bar\turn\180.png" />
+    <Content Include="Assets\Tiles\bar\turn\270.png" />
+    <Content Include="Assets\Tiles\bar\turn\90.png" />
     <Content Include="Assets\Tiles\bridge\0.png" />
     <Content Include="Assets\Tiles\bridge\90.png" />
     <Content Include="Assets\Tiles\crate.png" />
@@ -227,6 +234,10 @@
     <Content Include="Assets\Tiles\spr_disco.png" />
     <Content Include="Assets\Tiles\table.png" />
     <Content Include="Assets\Tiles\tree.png" />
+    <Content Include="Assets\Tiles\walls\inset\0.png" />
+    <Content Include="Assets\Tiles\walls\inset\180.png" />
+    <Content Include="Assets\Tiles\walls\inset\270.png" />
+    <Content Include="Assets\Tiles\walls\inset\90.png" />
     <Content Include="Assets\Tiles\walls\straight\0.png" />
     <Content Include="Assets\Tiles\walls\straight\180.png" />
     <Content Include="Assets\Tiles\walls\straight\270.png" />
@@ -268,8 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
-    <Folder Include="Assets\Tiles\bar\" />
-    <Folder Include="Assets\Tiles\walls\inset\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
