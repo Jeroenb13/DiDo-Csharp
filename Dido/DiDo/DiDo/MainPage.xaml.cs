@@ -200,6 +200,7 @@ namespace DiDo
         public void bulletHandling(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             List<Bullet> bulletsToRemove = new List<Bullet>();
+            List<int> enemiesToRemove = new List<int>();
 
             // Show bullets
             foreach (Bullet bullet in bullets)
@@ -213,13 +214,19 @@ namespace DiDo
                     bulletsToRemove.Add(bullet);
                 }
 
+                int emeniesCount = 0;
                 foreach (Enemy enemy in enemies)
                 {
-                    if (bullet.y == enemy.y && bullet.x == enemy.x)
+                    if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
                     {
-                        enemy.hit();
+                        enemy.hit(bullet.damage);
+                        if(enemy.health() <= 0)
+                        {
+                            enemiesToRemove.Add(emeniesCount); // Enemy klaar zetten om te verwijderen
+                        }
                         bulletsToRemove.Add(bullet); // kogel na een hit verwijderen
                     }
+                    emeniesCount++;
                 }
             }
 
@@ -227,6 +234,12 @@ namespace DiDo
             foreach (Bullet bullet in bulletsToRemove)
             {
                 bullets.Remove(bullet);
+            }
+
+            // Remove enemies
+            foreach (int removeEnemy in enemiesToRemove)
+            {
+                enemies.RemoveAt(removeEnemy);
             }
         }
 
@@ -265,7 +278,8 @@ namespace DiDo
                     yVel = yVel / scaling;
                     if(player.currentWeapon.getAmmo() >= 1)
                     {
-                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
+                        //Debug.WriteLine(player.currentWeapon.getDamage());
+                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                         player.currentWeapon.reduceAmmo();
                     }
                 }

@@ -39,5 +39,10 @@ namespace DiDo.Items
                 this.magazine = magazine - 1;
             }
         }
+
+        public override int getDamage()
+        {
+            return this.damage;
+        }
     }
 }

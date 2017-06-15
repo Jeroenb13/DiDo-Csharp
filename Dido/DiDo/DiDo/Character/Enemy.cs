@@ -16,7 +16,7 @@ namespace DiDo.Character
         public Enemy(String name, float x, float y)
         {
             this.name = name;
-            this.Health = 5;
+            this.Health = 100;
             this.x = x;
             this.y = y;
         }
