@@ -36,7 +36,7 @@ namespace DiDo.GameElements
         }
 
         //In the MainPage class, when the 'W' button is pressed
-        public static Transform2DEffect imageW(CanvasBitmap source, double radians)
+        public static Transform2DEffect image(CanvasBitmap source, double radians)
         {
             vector2();
             Transform2DEffect image;

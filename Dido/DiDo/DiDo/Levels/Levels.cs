@@ -8,7 +8,7 @@ namespace DiDo.Levels
 {
     public class Levels
     {
-        public String[,] gekozenLevel = levelTwo;
+        public String[,] gekozenLevel = levelFive;
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
@@ -23,7 +23,42 @@ namespace DiDo.Levels
             { "j", new Tile("crack4", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-4.png"), true) },
             { "k", new Tile("crack5", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-5.png"), true) },
             { "l", new Tile("crack6", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-6.png"), true) },
-            { "m", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/spr_disco.png"), true) },
+
+            { "m", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
+            { "m_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+
+            { "m2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m2_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) }, // blue
+            { "m2_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) }, // cyan
+            { "m2_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) }, // green
+            { "m2_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) }, // pink
+            { "m2_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) }, // yellow
+            
+            { "m3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m3_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m3_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+            { "m3_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m3_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m3_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+
+            { "m4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m4_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m4_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
+            { "m4_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m4_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m4_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+
+            { "m5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m5_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
+            { "m5_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m5_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m5_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+            { "m5_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+
             { "n", new Tile("flower1", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_1.png"), true) },
             { "o", new Tile("flower2", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_2.png"), true) },
             { "p", new Tile("flower3", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_3.png"), true) },
@@ -41,7 +76,7 @@ namespace DiDo.Levels
             { "B", new Tile("t90", new Uri("ms-appx:///Assets/Tiles/paths/t/90.png"), true) },
             { "C", new Tile("t180", new Uri("ms-appx:///Assets/Tiles/paths/t/180.png"),true ) },
             { "D", new Tile("t270", new Uri("ms-appx:///Assets/Tiles/paths/t/270.png"), true ) },
-            { "E", new Tile("turn0", new Uri("ms-appx:///Assets/Tiles/paths//turn/0.png"), true ) },
+            { "E", new Tile("turn0", new Uri("ms-appx:///Assets/Tiles/paths/turn/0.png"), true ) },
             { "F", new Tile("turn90", new Uri("ms-appx:///Assets/Tiles/paths/turn/90.png"), true ) },
             { "G", new Tile("turn180", new Uri("ms-appx:///Assets/Tiles/paths/turn/180.png"), true) },
             { "H", new Tile("turn270", new Uri("ms-appx:///Assets/Tiles/paths/turn/270.png"), true) },
@@ -49,10 +84,26 @@ namespace DiDo.Levels
             { "J", new Tile("wallS90", new Uri("ms-appx:///Assets/Tiles/walls/straight/90.png")) },
             { "K", new Tile("wallS180", new Uri("ms-appx:///Assets/Tiles/walls/straight/180.png")) },
             { "L", new Tile("wallS270", new Uri("ms-appx:///Assets/Tiles/walls/straight/270.png")) },
-            { "M", new Tile("torch0", new Uri("ms-appx:///Assets/Tiles/walls/torch/0.png")) },
-            { "N", new Tile("torch90", new Uri("ms-appx:///Assets/Tiles/walls/torch/90.png")) },
-            { "O", new Tile("torch180", new Uri("ms-appx:///Assets/Tiles/walls/torch/180.png")) },
-            { "P", new Tile("torch270", new Uri("ms-appx:///Assets/Tiles/walls/torch/270.png")) },
+            { "M", new Tile("torch0", new Uri("ms-appx:///Assets/Tiles/walls/torch/0/1.png")) },
+            { "M_1", new Tile("torch0", new Uri("ms-appx:///Assets/Tiles/walls/torch/0/1.png")) },
+            { "M_2", new Tile("torch0", new Uri("ms-appx:///Assets/Tiles/walls/torch/0/2.png")) },
+            { "M_3", new Tile("torch0", new Uri("ms-appx:///Assets/Tiles/walls/torch/0/3.png")) },
+            { "M_4", new Tile("torch0", new Uri("ms-appx:///Assets/Tiles/walls/torch/0/4.png")) },
+            { "N", new Tile("torch90", new Uri("ms-appx:///Assets/Tiles/walls/torch/90/1.png")) },
+            { "N_1", new Tile("torch90", new Uri("ms-appx:///Assets/Tiles/walls/torch/90/1.png")) },
+            { "N_2", new Tile("torch90", new Uri("ms-appx:///Assets/Tiles/walls/torch/90/2.png")) },
+            { "N_3", new Tile("torch90", new Uri("ms-appx:///Assets/Tiles/walls/torch/90/3.png")) },
+            { "N_4", new Tile("torch90", new Uri("ms-appx:///Assets/Tiles/walls/torch/90/4.png")) },
+            { "O", new Tile("torch180", new Uri("ms-appx:///Assets/Tiles/walls/torch/180/1.png")) },
+            { "O_1", new Tile("torch180", new Uri("ms-appx:///Assets/Tiles/walls/torch/180/1.png")) },
+            { "O_2", new Tile("torch180", new Uri("ms-appx:///Assets/Tiles/walls/torch/180/2.png")) },
+            { "O_3", new Tile("torch180", new Uri("ms-appx:///Assets/Tiles/walls/torch/180/3.png")) },
+            { "O_4", new Tile("torch180", new Uri("ms-appx:///Assets/Tiles/walls/torch/180/4.png")) },
+            { "P", new Tile("torch270", new Uri("ms-appx:///Assets/Tiles/walls/torch/270/1.png")) },
+            { "P_1", new Tile("torch270", new Uri("ms-appx:///Assets/Tiles/walls/torch/270/1.png")) },
+            { "P_2", new Tile("torch270", new Uri("ms-appx:///Assets/Tiles/walls/torch/270/2.png")) },
+            { "P_3", new Tile("torch270", new Uri("ms-appx:///Assets/Tiles/walls/torch/270/3.png")) },
+            { "P_4", new Tile("torch270", new Uri("ms-appx:///Assets/Tiles/walls/torch/270/4.png")) },
             { "Q", new Tile("wallT0", new Uri("ms-appx:///Assets/Tiles/walls/turn/0.png")) },
             { "R", new Tile("wallT90", new Uri("ms-appx:///Assets/Tiles/walls/turn/90.png")) },
             { "S", new Tile("wallT180", new Uri("ms-appx:///Assets/Tiles/walls/turn/180.png")) },
@@ -61,11 +112,32 @@ namespace DiDo.Levels
             { "V", new Tile("fence", new Uri("ms-appx:///Assets/Tiles/fence.png")) },
             { "W", new Tile("gas", new Uri("ms-appx:///Assets/Tiles/gas.png")) },
             { "X", new Tile("rubbishbin", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png") ) },
-            { "Y", new Tile("seat", new Uri("ms-appx:///Assets/Tiles/seat.png")) },
+            { "Y", new Tile("empty", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png")) },         // AVAILABLE
             { "Z", new Tile("table", new Uri("ms-appx:///Assets/Tiles/table.png") ) },
             { "1", new Tile("tree", new Uri("ms-appx:///Assets/Tiles/tree.png")) },
-            { "2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water.png")) },
-            { "3", new Tile("watersand", new Uri("ms-appx:///Assets/Tiles/water_sand.png"), true) }
+            { "2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/1.png")) },
+            { "2_1", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/1.png")) },
+            { "2_2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/2.png")) },
+            { "2_3", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/3.png")) },
+            { "2_4", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/4.png")) },
+            { "3", new Tile("watersand", new Uri("ms-appx:///Assets/Tiles/water/water_sand.png"), true) },
+            { "4", new Tile("barfloorblack", new Uri("ms-appx:///Assets/Tiles/floors/bar/black.png"), true) },
+            { "5", new Tile("barfloorwhite", new Uri("ms-appx:///Assets/Tiles/floors/bar/white.png"), true) },
+            { "6", new Tile("barstraight0", new Uri("ms-appx:///Assets/Tiles/bar/straight/0.png")) },
+            { "7", new Tile("barstraight90", new Uri("ms-appx:///Assets/Tiles/bar/straight/90.png")) },
+            { "8", new Tile("barstraight180", new Uri("ms-appx:///Assets/Tiles/bar/straight/180.png")) },
+            { "9", new Tile("barturn0", new Uri("ms-appx:///Assets/Tiles/bar/turn/0.png")) },
+            { "0", new Tile("barturn90", new Uri("ms-appx:///Assets/Tiles/bar/turn/90.png")) },
+            { "!", new Tile("seatstraight0", new Uri("ms-appx:///Assets/Tiles/seat/straight/0.png")) },
+            { "@", new Tile("seatstraight180", new Uri("ms-appx:///Assets/Tiles/seat/straight/180.png")) },
+            { "#", new Tile("seatturn0", new Uri("ms-appx:///Assets/Tiles/seat/turn/0.png")) },
+            { "$", new Tile("seatturn90", new Uri("ms-appx:///Assets/Tiles/seat/turn/90.png")) },
+            { "%", new Tile("seatturn180", new Uri("ms-appx:///Assets/Tiles/seat/turn/180.png")) },
+            { "^", new Tile("seatturn270", new Uri("ms-appx:///Assets/Tiles/seat/turn/270.png")) },
+            { "&", new Tile("wallinset0", new Uri("ms-appx:///Assets/Tiles/walls/inset/0.png")) },
+            { "*", new Tile("wallinset90", new Uri("ms-appx:///Assets/Tiles/walls/inset/90.png")) },
+            { "(", new Tile("wallinset180", new Uri("ms-appx:///Assets/Tiles/walls/inset/180.png")) },
+            { ")", new Tile("wallinset270", new Uri("ms-appx:///Assets/Tiles/walls/inset/270.png")) }
         };
 
         public static Tile getTile(String key)
@@ -77,7 +149,12 @@ namespace DiDo.Levels
 
         public String getTileType(float x, float y, String [,] gekozenLevel)
         {
-            return getPlayerTile(x, y, gekozenLevel).TileType;
+            Tile tile = getPlayerTile(x, y, gekozenLevel);
+            if(tile == null)
+            {
+                return null;
+            }
+            return tile.TileType;
         }
 
         /// <summary>
@@ -95,6 +172,12 @@ namespace DiDo.Levels
             double yPos = y_round * 32;
             double xPos2 = xPos + 32;
             double yPos2 = yPos + 32;
+
+            if(y_round >= gekozenLevel.GetLength(1) || x_round >= gekozenLevel.GetLength(2))
+            {
+                return null;
+            }
+
             String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
             Tile tile = getTile(tile_Type);
 
@@ -121,30 +204,30 @@ namespace DiDo.Levels
        
         //grassy planes
         public static String[,] levelTwo =  { // 35 x 24
-            {"n","n","n","n","n","n","o","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
-            {"t","t","u","n","n","n","n","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","n","n","n","n","n","o","n","n","n","n","n","o","n","n","n"},
-            {"n","n","x","n","n","n","n","n","n","n","n","n","o","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
-            {"n","n","x","o","n","G","t","u","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","o","n","n","n","n","n","n","n","n","n","n","n"},
-            {"n","n","I","t","t","y","n","C","t","u","n","n","n","n","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n","n","n","n","n"},
-            {"n","G","y","n","n","n","n","n","n","C","t","t","t","w","t","t","t","t","a","a","a","a","w","t","t","u","n","o","n","n","n","n","n","o","n"},
-            {"n","x","n","n","n","n","n","n","Q","Q","n","n","n","x","n","n","n","n","Z","Z","Z","Z","x","n","Q","C","t","t","u","n","n","n","n","n","n"},
-            {"n","C","t","t","u","n","n","Q","Q","Q","n","n","n","x","n","n","n","n","Z","Z","Z","Z","C","Q","Q","Q","n","n","x","n","n","n","n","n","n"},
-            {"n","n","n","n","x","n","n","n","Q","n","n","n","n","C","u","n","n","n","Z","Z","Z","Z","Z","x","Q","Q","n","n","x","n","n","G","t","t","t"},
-            {"n","n","G","t","y","n","n","n","n","n","n","n","o","n","x","n","n","n","n","Z","Z","Z","Z","C","t","t","t","t","v","t","t","y","n","n","n"},
-            {"n","n","x","n","n","n","n","n","n","n","n","n","n","n","C","t","t","u","n","Z","Z","Z","Z","Z","n","n","n","n","x","n","n","n","n","n","n"},
-            {"n","n","x","n","n","n","n","n","o","n","n","n","n","n","n","o","n","x","n","n","Z","Z","Z","Z","n","n","n","G","y","n","n","Q","n","n","n"},
-            {"o","n","C","u","n","n","Z","Z","Z","Z","n","n","n","G","t","t","u","x","n","Z","Z","Z","Z","Z","n","o","G","y","n","n","Q","Q","Q","n","n"},
-            {"n","n","n","x","n","Z","Z","Z","Z","Z","Z","Z","n","x","n","n","C","y","n","n","Z","Z","Z","Z","Z","n","x","n","n","n","Q","Q","Q","n","n"},
-            {"n","n","n","x","n","Z","Z","Z","Z","Z","Z","Z","n","x","n","n","n","n","o","n","Z","Z","Z","Z","Z","G","y","n","n","n","n","Q","n","n","n"},
-            {"n","n","n","C","u","n","Z","Z","Z","Z","Z","Z","n","C","w","t","t","u","n","n","n","Z","Z","Z","Z","x","n","n","n","n","n","n","n","n","n"},
-            {"n","n","n","n","x","n","Z","Z","Z","Z","Z","Z","n","n","x","n","n","C","t","t","t","a","a","a","a","y","n","n","n","n","n","n","n","n","n"},
-            {"n","n","n","n","x","n","o","Z","Z","Z","Z","Q","n","n","x","n","n","n","n","n","n","Z","Z","Z","Z","n","Q","n","n","n","n","n","n","n","n"},
-            {"n","n","n","n","x","n","n","Z","Z","Z","Q","Q","Q","n","C","t","t","u","n","n","n","Z","Z","Z","Z","Q","Q","Q","n","n","n","n","n","n","n"},
-            {"n","n","n","n","C","t","u","n","n","n","Q","Q","n","n","n","n","n","x","n","n","n","Z","Z","Z","Z","Q","Q","n","n","n","n","o","n","n","n"},
-            {"n","n","n","n","n","n","C","t","t","t","u","n","n","n","n","n","n","x","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n"},
-            {"n","n","n","n","n","n","n","n","n","n","C","t","t","t","t","t","t","y","n","n","n","Z","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n"},
-            {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n"},
-            {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","o","n","n","n","Z","Z","Z","Z","n","n","n","n","n","n","n","n","n"}
+            {"s","s","s","s","s","s","n","s","s","s","s","s","s","s","s","2","2","2","2","2","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s"},
+            {"y","y","E","s","s","s","s","s","s","s","s","s","s","s","s","s","2","2","2","2","s","s","s","s","s","n","s","s","s","s","s","n","s","s","s"},
+            {"s","s","z","s","s","s","s","s","s","s","s","s","n","s","s","s","2","2","2","2","2","s","s","s","s","s","s","s","s","s","s","s","s","s","s"},
+            {"s","s","z","n","s","H","y","E","s","s","s","s","s","s","s","s","s","2","2","2","2","2","s","n","s","s","s","s","s","s","s","s","s","s","s"},
+            {"s","s","D","y","y","F","s","G","y","E","s","s","s","s","s","s","s","2","2","2","2","2","s","s","s","s","s","s","s","s","s","s","s","s","s"},
+            {"s","H","F","s","s","s","s","s","s","G","y","y","y","A","y","y","y","y","a","a","a","a","A","y","y","E","s","n","s","s","s","s","s","n","s"},
+            {"s","z","s","s","s","s","s","s","1","1","s","s","s","z","s","s","s","s","2","2","2","2","z","s","1","G","y","y","E","s","s","s","s","s","s"},
+            {"s","G","y","y","E","s","s","1","1","1","s","s","s","z","s","s","s","s","2","2","2","2","G","1","1","1","s","s","z","s","s","s","s","s","s"},
+            {"s","s","s","s","z","s","s","s","1","s","s","s","s","G","E","s","s","s","2","2","2","2","2","z","1","1","s","s","z","s","s","H","y","y","y"},
+            {"s","s","H","y","F","s","s","s","s","s","s","s","n","s","z","s","s","s","s","2","2","2","2","G","y","y","y","y","x","y","y","F","s","s","s"},
+            {"s","s","z","s","s","s","s","s","s","s","s","s","s","s","G","y","y","E","s","2","2","2","2","2","s","s","s","s","z","s","s","s","s","s","s"},
+            {"s","s","z","s","s","s","s","s","n","s","s","s","s","s","s","n","s","z","s","s","2","2","2","2","s","s","s","H","F","s","s","1","s","s","s"},
+            {"n","s","G","E","s","s","2","2","2","2","s","s","s","H","y","y","E","z","s","2","2","2","2","2","s","n","H","F","s","s","1","1","1","s","s"},
+            {"s","s","s","z","s","2","2","2","2","2","2","2","s","z","s","s","G","F","s","s","2","2","2","2","2","s","z","s","s","s","1","1","1","s","s"},
+            {"s","s","s","z","s","2","2","2","2","2","2","2","s","z","s","s","s","s","n","s","2","2","2","2","2","H","F","s","s","s","s","1","s","s","s"},
+            {"s","s","s","G","E","s","2","2","2","2","2","2","s","G","A","y","y","E","s","s","s","2","2","2","2","z","s","s","s","s","s","s","s","s","s"},
+            {"s","s","s","s","z","s","2","2","2","2","2","2","s","s","z","s","s","G","y","y","y","a","a","a","a","F","s","s","s","s","s","s","s","s","s"},
+            {"s","s","s","s","z","s","n","2","2","2","2","1","s","s","z","s","s","s","s","s","s","2","2","2","2","s","1","s","s","s","s","s","s","s","s"},
+            {"s","s","s","s","z","s","s","2","2","2","1","1","1","s","G","y","y","E","s","s","s","2","2","2","2","1","1","1","s","s","s","s","s","s","s"},
+            {"s","s","s","s","G","y","E","s","s","s","1","1","s","s","s","s","s","z","s","s","s","2","2","2","2","1","1","s","s","s","s","n","s","s","s"},
+            {"s","s","s","s","s","s","G","y","y","y","E","s","s","s","s","s","s","z","s","s","s","2","2","2","2","2","s","s","s","s","s","s","s","s","s"},
+            {"s","s","s","s","s","s","s","s","s","s","G","y","y","y","y","y","y","F","s","s","s","2","2","2","2","2","s","s","s","s","s","s","s","s","s"},
+            {"s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","2","2","2","2","s","s","s","s","s","s","s","s","s"},
+            {"s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","n","s","s","s","2","2","2","2","s","s","s","s","s","s","s","s","s"}
         };
 
         public static String[,] levelThree =  { //20x25
@@ -198,27 +281,27 @@ namespace DiDo.Levels
             {"H","H","H","Y","V","V","V","V","V","V","W","H","H","H","H","Y","V","V","V","V","V","V","V","V","V","W"}
         };
         public static String[,] levelFive = { // 39 x 21
-            {"c","D","q","p","q","p","q","p","q","r","c","c","c","1","0","3","c","1","0","3","c","1","0","3","c","1","0","3","c","c","c","c","c","f","f","f","f","f","f"},
-            {"c","D","p","q","p","q","p","q","p","r","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
-            {"c","B","z","z","z","z","z","z","z","s","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f","f"},
-            {"c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","c","f","f","f","f","f","f","f","f","f"},
-            {"c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","7","4","5","c","c","c","c","c","f","f","f","f","f","f"}};
+            {"m","8","4","5","4","5","4","5","4","6","m","m","m","#","!","$","m","#","!","$","m","#","!","$","m","#","!","$","m","m","m","m","m","w","w","w","w","w","w"},
+            {"m","8","5","4","5","4","5","4","5","6","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w"},
+            {"m","0","7","7","7","7","7","7","7","9","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w"},
+            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w"},
+            {"m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","m","m","m","m","w","w","w","w","w","w"}};
 
 
         public static String[,] levelSix =

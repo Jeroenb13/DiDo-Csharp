@@ -52,17 +52,24 @@ namespace DiDo
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public MyPlayer player = new MyPlayer("Spy",32, 32);
+        public MyPlayer player = new MyPlayer("Spy",32, 96);
+
+        public List<Enemy> enemies = new List<Enemy>();
 
         public float temp_x, temp_y; // Tijdelijk
 
-        private void GameCanvas_CreateResources_1(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
+        public double frames = 0;
+
+        public Random random = new Random();
+
+        private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
-        private void GameCanvas_Draw_1(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        private void GameCanvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
+            this.frames++;
             GameStateManager.GSManager();
 
             if (player.x == 0 && player.y == 0)
@@ -71,25 +78,19 @@ namespace DiDo
                 player.y = 32 * scaleHeight;
             }
 
+
             // Level
-            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
-            {
-                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
-                {
-                    string tileType = levels.gekozenLevel[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                        tile.Effect,
-                        y * (32 * MainPage.scaleWidth),
-                        x * (32 * MainPage.scaleHeight)
-                    );
 
-                }
-            }
-
+            drawLevel(sender, args);
             controller.movementCharacter(sender, args, player, levels);
             bulletHandling(sender, args);
             updatePoint(player);
+
+            foreach (Enemy enemy in enemies)
+            {
+                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
+                args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
+            }
 
             //Debug
             foreach(Weapon weapon in weapons)
@@ -110,7 +111,10 @@ namespace DiDo
             args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
             //Debug end
 
+
             GameCanvas.Invalidate();
+
+            
         }
 
         public string inventory()
@@ -127,8 +131,54 @@ namespace DiDo
         }
 
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
-        //public String type_tile;
+                                                //public String type_tile;
 
+
+        public void  drawLevel(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        {
+            var frames_sprite = (int)(this.frames / 15) + 1;
+
+            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
+                {
+                    string tileType = levels.gekozenLevel[x, y].ToString();
+                    string tmp = tileType + "_" + frames_sprite;
+
+                    
+                    if (Levels.Levels.tiles.ContainsKey(tmp))
+                    {
+                        //Debug.WriteLine(tmp);
+                        Tile tile = Levels.Levels.tiles[tileType + "_" + frames_sprite];
+                        args.DrawingSession.DrawImage(
+                            tile.Effect,
+                            y * (32 * MainPage.scaleWidth),
+                            x * (32 * MainPage.scaleHeight)
+                        );
+                    } else
+                    {
+                        Tile tile = Levels.Levels.tiles[tileType];
+                        args.DrawingSession.DrawImage(
+                            tile.Effect,
+                            y * (32 * MainPage.scaleWidth),
+                            x * (32 * MainPage.scaleHeight)
+                        );
+                    }
+
+                   
+
+
+
+                }
+            }
+
+            if (this.frames > 60)
+            {
+                this.frames = 0;
+            }
+
+        }
+       
         public MainPage()
         {
             weapons = new Weapon[100];
@@ -144,6 +194,10 @@ namespace DiDo
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
+
+            this.enemies.Add(new Enemy("Freek", 128, 32)); // De AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 192, 96)); // De AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 256, 128)); // De AI Enemy 3
         }
         
         public void updatePoint(Player player)
@@ -235,6 +289,7 @@ namespace DiDo
         public void bulletHandling(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             List<Bullet> bulletsToRemove = new List<Bullet>();
+            List<int> enemiesToRemove = new List<int>();
 
             // Show bullets
             foreach (Bullet bullet in bullets)
@@ -247,12 +302,33 @@ namespace DiDo
                 {
                     bulletsToRemove.Add(bullet);
                 }
+
+                int emeniesCount = 0;
+                foreach (Enemy enemy in enemies)
+                {
+                    if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
+                    {
+                        enemy.hit(bullet.damage);
+                        if(enemy.health() <= 0)
+                        {
+                            enemiesToRemove.Add(emeniesCount); // Enemy klaar zetten om te verwijderen
+                        }
+                        bulletsToRemove.Add(bullet); // kogel na een hit verwijderen
+                    }
+                    emeniesCount++;
+                }
             }
 
             // Remove Bullets
             foreach (Bullet bullet in bulletsToRemove)
             {
                 bullets.Remove(bullet);
+            }
+
+            // Remove enemies
+            foreach (int removeEnemy in enemiesToRemove)
+            {
+                enemies.RemoveAt(removeEnemy);
             }
         }
 
@@ -291,7 +367,8 @@ namespace DiDo
                     yVel = yVel / scaling;
                     if(player.currentWeapon.getAmmo() >= 1)
                     {
-                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel));
+                        //Debug.WriteLine(player.currentWeapon.getDamage());
+                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                         player.currentWeapon.reduceAmmo();
                     }
                 }

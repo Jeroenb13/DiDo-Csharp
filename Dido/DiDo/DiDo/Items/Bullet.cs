@@ -10,10 +10,13 @@ namespace DiDo
     {
         public float velX { get; set; }
         public float velY { get; set; }
-        public Bullet(float x, float y, float velX, float velY) : base(x, y)
+
+        public int damage { get; set; }
+        public Bullet(float x, float y, float velX, float velY, int damage) : base(x, y)
         {
             this.velX = velX;
             this.velY = velY;
+            this.damage = damage;
         }
     }
 }
