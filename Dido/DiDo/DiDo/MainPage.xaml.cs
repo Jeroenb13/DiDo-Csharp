@@ -59,16 +59,24 @@ namespace DiDo
 
         public Random random = new Random();
 
+
+        /// <summary>
+        /// Creates the resources of the game
+        /// </summary>
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
+        /// <summary>
+        /// This method draws the player and the level 60 times per second
+        /// </summary>
         private void GameCanvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             this.frames++;
             GameStateManager.GSManager();
 
+            // scales the player
             if (player.x == 0 && player.y == 0)
             {
                 player.x = 32 * scaleWidth;
@@ -76,13 +84,19 @@ namespace DiDo
             }
 
 
-            // Level
-
+            // draws the Level
             drawLevel(sender, args);
+
+            //character movement
             controller.movementCharacter(sender, args, player, levels);
+
+            //bullet handling
             bulletHandling(sender, args);
+
+    
             updatePoint(player);
 
+            //draws the enemy
             foreach (Enemy enemy in enemies)
             {
                 args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
@@ -101,6 +115,7 @@ namespace DiDo
             //Debug end
 
 
+            // triggers the draw event 60 times per second
             GameCanvas.Invalidate();
 
             
@@ -109,7 +124,10 @@ namespace DiDo
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
                                                 //public String type_tile;
 
-
+       
+        /// <summary>
+        /// draws the sprites for the level
+        /// </summary>
         public void  drawLevel(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             var frames_sprite = (int)(this.frames / 15) + 1;
@@ -121,7 +139,7 @@ namespace DiDo
                     string tileType = levels.gekozenLevel[x, y].ToString();
                     string tmp = tileType + "_" + frames_sprite;
 
-                    
+                    // makes the sprite move
                     if (Levels.Levels.tiles.ContainsKey(tmp))
                     {
                         //Debug.WriteLine(tmp);
