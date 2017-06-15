@@ -94,10 +94,25 @@ namespace DiDo.Character
                 Weapon weapon = (Weapon)player.dropItem();
 
             }
-            //else if (keyPressed(VirtualKey.H))
-            //{
-            //    player.setItem();
-            //}
+            else if (keyPressed(VirtualKey.H))
+            {
+                for (int i = 0; i < mainPage.weapons.Length; i++)
+                {
+                    System.Diagnostics.Debug.WriteLine("Player: " + player.x + ", " + player.y);
+                    System.Diagnostics.Debug.Write(weapons);
+                    if (mainPage.weapons[i] != null)
+                    {
+                        if ((mainPage.weapons[i].x) - 32 < player.x && player.x < (mainPage.weapons[i].x + 32))
+                        {
+                            if ((mainPage.weapons[i].y) - 32 < player.y && player.y < (mainPage.weapons[i].y + 32))
+                            {
+                                player.pickUpWeapon(mainPage.weapons[i]);
+                                mainPage.removeItem(mainPage.weapons[i]);
+                            }
+                        }
+                    }
+                }
+}
         }
 
         //Keydown events for character movement

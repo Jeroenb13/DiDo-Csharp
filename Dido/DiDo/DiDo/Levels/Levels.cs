@@ -8,7 +8,7 @@ namespace DiDo.Levels
 {
     public class Levels
     {
-        public String[,] gekozenLevel = levelFive;
+        public String[,] gekozenLevel = testLevel;
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
@@ -339,5 +339,22 @@ namespace DiDo.Levels
             {"Y","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","W"}
     };
 
-}
+    public static String[,] testLevel = {
+        {"Q","M","M","M","I","I","I","I","I","I","I","I","I","I","I","R"},
+        {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
+        {"L","m5","m4","m3","m2","m","r","q","p","o","n","2","w","w","w","N"},
+        {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
+        {"P","m5","m4","m3","m2","m","w","w","w","w","w","w","w","w","w","N"},
+        {"P","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
+        {"P","v","u","t","s","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","v","u","t","s","w","w","w","K","K","K","K","K","K","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"T","K","K","O","O","O","K","K","K","K","K","K","K","K","K","S"}
+    };
+
+    }
 }

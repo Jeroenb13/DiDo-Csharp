@@ -269,16 +269,17 @@ namespace DiDo
                     weapons[i] = (Weapon)player.dropItem();
                 }
             }
-            //if(player.dropItem() != null)
-            //{
-            //    for(int i = 0; i < weapons.Length; i++)
-            //    {
-            //        if (weapons[i] == null)
-            //        {
-            //            weapons[i] = (Weapon)player.dropItem();
-            //        }
-            //    }
-            //}
+        }
+
+        public void removeItem(Weapon item)
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                if (weapons[i] == item)
+                {
+                    weapons[i] = null;
+                }
+            }
         }
 
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
@@ -383,11 +384,14 @@ namespace DiDo
 
                     xVel = xVel / scaling;
                     yVel = yVel / scaling;
-                    if(player.currentWeapon.getAmmo() >= 1)
+                    if(player.currentWeapon != null)
                     {
-                        //Debug.WriteLine(player.currentWeapon.getDamage());
-                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-                        player.currentWeapon.reduceAmmo();
+                        if (player.currentWeapon.getAmmo() >= 1)
+                        {
+                            //Debug.WriteLine(player.currentWeapon.getDamage());
+                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                            player.currentWeapon.reduceAmmo();
+                        }
                     }
                 }
             }
