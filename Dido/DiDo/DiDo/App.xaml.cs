@@ -78,7 +78,7 @@ namespace DiDo
                 }
 
                 // Startup size fullscreen
-                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+                //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
 
                 // Ensure the current window is active
                 Window.Current.Activate();

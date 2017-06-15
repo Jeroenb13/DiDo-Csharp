@@ -110,7 +110,7 @@ namespace DiDo
 
         public void  drawLevel(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
-            var frames_sprite = (int)(this.frames % 4) + 1;
+            var frames_sprite = (int)(this.frames / 15) + 1;
 
             for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
             {
