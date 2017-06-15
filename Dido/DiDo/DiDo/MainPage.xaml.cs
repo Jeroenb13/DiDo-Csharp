@@ -53,12 +53,12 @@ namespace DiDo
 
         public float temp_x, temp_y; // Tijdelijk
 
-        private void GameCanvas_CreateResources_1(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
+        private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
-        private void GameCanvas_Draw_1(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        private void GameCanvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             GameStateManager.GSManager();
 
@@ -68,22 +68,10 @@ namespace DiDo
                 player.y = 32 * scaleHeight;
             }
 
+
             // Level
-            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
-            {
-                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
-                {
-                    string tileType = levels.gekozenLevel[x, y].ToString();
-                    Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                        tile.Effect,
-                        y * (32 * MainPage.scaleWidth),
-                        x * (32 * MainPage.scaleHeight)
-                    );
 
-                }
-            }
-
+            drawLevel(sender, args);
             controller.movementCharacter(sender, args, player, levels);
             bulletHandling(sender, args);
             updatePoint(player);
@@ -99,12 +87,36 @@ namespace DiDo
             args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
             //Debug end
 
+
             GameCanvas.Invalidate();
+
+            
         }
 
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
-        //public String type_tile;
+                                                //public String type_tile;
 
+
+        public void  drawLevel(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        {
+            
+            for (int x = 0; x < levels.gekozenLevel.GetLength(0); x += 1)
+            {
+                for (int y = 0; y < levels.gekozenLevel.GetLength(1); y += 1)
+                {
+                    string tileType = levels.gekozenLevel[x, y].ToString();
+                    Tile tile = Levels.Levels.tiles[tileType];
+                    args.DrawingSession.DrawImage(
+                        tile.Effect,
+                        y * (32 * MainPage.scaleWidth),
+                        x * (32 * MainPage.scaleHeight)
+                    );
+
+                }
+            }
+            
+        }
+       
         public MainPage()
         {
             levels = new Levels.Levels();
