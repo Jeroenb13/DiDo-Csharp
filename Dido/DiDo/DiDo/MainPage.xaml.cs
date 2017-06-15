@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Microsoft.Graphics.Canvas.Effects;
 using DiDo.Character;
 using Windows.UI.Xaml.Input;
+using DiDo.Items;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -28,7 +29,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite, Pistol, Assault_Rifle;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1920;
@@ -45,11 +46,13 @@ namespace DiDo
         //Lists Projectile
         public List<Bullet> bullets = new List<Bullet>();
 
+        public Weapon[] weapons;
+
         public static int GameState = 0; // startscreen
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public MyPlayer player = new MyPlayer("Spy",32, 32);
+        public MyPlayer player = new MyPlayer("Spy",32, 96);
 
         public List<Enemy> enemies = new List<Enemy>();
 
@@ -104,11 +107,19 @@ namespace DiDo
             }
 
             //Debug
+            foreach(Weapon weapon in weapons)
+            {
+                if(weapon != null)
+                {
+                    args.DrawingSession.DrawImage(Pistol, weapon.x, weapon.y);
+                }
+            }
+
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
-            args.DrawingSession.DrawText("Inventory: " + player.inventory(), 10, 700, Colors.Black);
-            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
+            args.DrawingSession.DrawText("Inventory: " + inventory(), 10, 700, Colors.Black);
+            //args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
             args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
@@ -119,6 +130,19 @@ namespace DiDo
             GameCanvas.Invalidate();
 
             
+        }
+
+        public string inventory()
+        {
+            string inventory = "";
+            foreach (Weapon weapon in weapons)
+            {
+                if (weapon != null)
+                {
+                    inventory = inventory + " | " + weapon.name;
+                }
+            }
+            return inventory;
         }
 
         public double xPos, yPos, xPos2, yPos2; // tijdelijk
@@ -175,8 +199,9 @@ namespace DiDo
        
         public MainPage()
         {
+            weapons = new Weapon[100];
             levels = new Levels.Levels();
-            controller = new ClientController(player.name, player.x, player.y);
+            controller = new ClientController(this, player.name, player.x, player.y);
             mousePoint = new Point();
             playerPoint = new Point(player.x, player.y);
             this.InitializeComponent();
@@ -235,6 +260,27 @@ namespace DiDo
             }
         }
 
+        public void addItem()
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                if (weapons[i] == null)
+                {
+                    weapons[i] = (Weapon)player.dropItem();
+                }
+            }
+            //if(player.dropItem() != null)
+            //{
+            //    for(int i = 0; i < weapons.Length; i++)
+            //    {
+            //        if (weapons[i] == null)
+            //        {
+            //            weapons[i] = (Weapon)player.dropItem();
+            //        }
+            //    }
+            //}
+        }
+
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
             bounds = ApplicationView.GetForCurrentView().VisibleBounds;
@@ -247,6 +293,7 @@ namespace DiDo
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
+            Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Items/gun-3.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
              // Zodat dit niet elk frame gebeurt maar slechts eenmalig

@@ -8,15 +8,18 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.System;
 using DiDo.Levels;
 using Windows.UI.Core;
+using DiDo.Items;
 
 namespace DiDo.Character
 {
     public class ClientController : ClientPlayer
     {
+        private MainPage mainPage;
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public ClientController(string name, float x, float y) : base(name, x, y)
+        public ClientController(MainPage mainPage, string name, float x, float y) : base(name, x, y)
         {
+            this.mainPage = mainPage;   
         }
 
         private Boolean keyPressed(VirtualKey key)
@@ -84,8 +87,17 @@ namespace DiDo.Character
                 {
                     player.y -= player.move_speed;
                 }
-               
             }
+            else if(keyPressed(VirtualKey.G))
+            {
+                mainPage.addItem();
+                Weapon weapon = (Weapon)player.dropItem();
+
+            }
+            //else if (keyPressed(VirtualKey.H))
+            //{
+            //    player.setItem();
+            //}
         }
 
         //Keydown events for character movement

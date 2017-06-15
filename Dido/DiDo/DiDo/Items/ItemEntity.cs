@@ -8,8 +8,8 @@ namespace DiDo.Items
 {
     public abstract class ItemEntity
     {
-        public float x { get; }
-        public float y { get; }
+        public float x { get; set; }
+        public float y { get; set; }
 
         public ItemEntity(float x, float y)
         {
