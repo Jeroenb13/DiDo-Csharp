@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -75,6 +76,10 @@ namespace DiDo
                     // parameter
                     rootFrame.Navigate(typeof(MenuPage), e.Arguments);
                 }
+
+                // Startup size fullscreen
+                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
