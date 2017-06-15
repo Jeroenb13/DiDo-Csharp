@@ -21,5 +21,7 @@ namespace DiDo.Items
         }
 
         public abstract void reduceAmmo();
+
+        public abstract int getDamage();
     }
 }
