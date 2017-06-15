@@ -77,11 +77,17 @@ namespace DiDo
                 {
                     string tileType = levels.gekozenLevel[x, y].ToString();
                     Tile tile = Levels.Levels.tiles[tileType];
-                    args.DrawingSession.DrawImage(
-                        tile.Effect,
-                        y * (32 * MainPage.scaleWidth),
-                        x * (32 * MainPage.scaleHeight)
-                    );
+                    try
+                    {
+                        args.DrawingSession.DrawImage(
+                            tile.Effect,
+                            y * (32 * MainPage.scaleWidth),
+                            x * (32 * MainPage.scaleHeight)
+                        );
+                    } catch (System.IO.FileNotFoundException)
+                    {
+                        Debug.WriteLine("File not found: " + tile.Image);
+                    }
 
                 }
             }
