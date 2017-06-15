@@ -383,11 +383,14 @@ namespace DiDo
 
                     xVel = xVel / scaling;
                     yVel = yVel / scaling;
-                    if(player.currentWeapon.getAmmo() >= 1)
+                    if(player.currentWeapon != null)
                     {
-                        //Debug.WriteLine(player.currentWeapon.getDamage());
-                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-                        player.currentWeapon.reduceAmmo();
+                        if (player.currentWeapon.getAmmo() >= 1)
+                        {
+                            //Debug.WriteLine(player.currentWeapon.getDamage());
+                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                            player.currentWeapon.reduceAmmo();
+                        }
                     }
                 }
             }
