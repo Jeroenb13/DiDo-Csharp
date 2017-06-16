@@ -245,7 +245,7 @@ namespace DiDo
 
             double radians = Math.Atan2((y2 - y1), (x2 - x1));
             double Angle = radians * (180 / Math.PI);
-            return radians + (0.5 * Math.PI);
+            return radians + (0.5 * Math.PI); // half of pi added, so that the players head follows the cursor, instead of its arms.
         }
 
 
@@ -293,7 +293,7 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
-            Arms_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_arms.png"));
+            Arms_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/idle/1.png"));
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
