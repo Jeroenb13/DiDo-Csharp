@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DiDoCommon.Network;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -34,20 +36,15 @@ namespace DiDoServer
                     data = null;
                     
                     NetworkStream stream = client.GetStream();
+                    BinaryReader reader = new BinaryReader(stream);
 
-                    int i;
-                    
-                    while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                    while (true)
                     {
-                        data = Encoding.ASCII.GetString(bytes, 0, i);
-                        Console.WriteLine("Received: {0}", data);
-                        
-                        data = data.ToUpper();
+                        int type = reader.ReadInt16();
+                        int length = reader.ReadInt16();
+                        HeapByteBuf buf = new HeapByteBuf(reader.ReadBytes(length), length);
 
-                        byte[] msg = Encoding.ASCII.GetBytes(data);
-                        
-                        stream.Write(msg, 0, msg.Length);
-                        Console.WriteLine("Sent: {0}", data);
+                        Console.WriteLine("Packet type: " + type + " length: " + length);
                     }
                     
                     client.Close();
