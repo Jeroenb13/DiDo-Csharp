@@ -204,6 +204,11 @@
     <Content Include="Assets\Menu\SettingsButton.png" />
     <Content Include="Assets\Menu\StartButton.png" />
     <Content Include="Assets\Menu\wasd.jpg" />
+    <Content Include="Assets\Sound\reload.mp3" />
+    <Content Include="Assets\Sound\reload.wav" />
+    <Content Include="Assets\Sound\shot.mp3" />
+    <Content Include="Assets\Sound\shot.wav" />
+    <Content Include="Assets\Sound\Zapper-16-Bit.mp3" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />

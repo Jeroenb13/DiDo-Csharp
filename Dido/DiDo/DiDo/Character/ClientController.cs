@@ -120,6 +120,7 @@ namespace DiDo.Character
                     // The current weapon has additional ammo
                     if (player.currentWeapon.getAdditionalAmmo() > 0)
                     {
+                        mainPage.snd_reload.Play();
                         int difference = player.currentWeapon.getMagazineSize() - player.currentWeapon.getAmmo();
                         if (player.currentWeapon.getAdditionalAmmo() <= difference)
                         {

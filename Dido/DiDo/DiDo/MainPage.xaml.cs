@@ -67,6 +67,8 @@ namespace DiDo
         public double frames = 0;
 
         public Random random = new Random();
+
+        public MediaElement snd_backgroundMusic, snd_shot, snd_reload;
  
 
         /// <summary>
@@ -75,6 +77,17 @@ namespace DiDo
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
+        }
+
+        private async Task<MediaElement> getSound(String filename)
+        {
+            MediaElement mysong = new MediaElement();
+            var uri = new Uri("ms-appx:///Assets/Sound/" + filename);
+            Windows.Storage.StorageFile file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uri);
+            var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            mysong.SetSource(stream, file.ContentType);
+
+            return mysong;
         }
 
         /// <summary>
@@ -320,6 +333,11 @@ namespace DiDo
        /// </summary>
         public MainPage()
         {
+            // Play background music
+            snd_backgroundMusic = getSound("Zapper-16-Bit.mp3").Result;
+            snd_shot = getSound("shot.mp3").Result;
+            snd_reload = getSound("reload.mp3").Result;
+            snd_backgroundMusic.Play();
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
@@ -616,6 +634,8 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
+                            snd_shot.Play();
+
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                             player.currentWeapon.reduceAmmo();
