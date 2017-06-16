@@ -136,14 +136,21 @@ namespace DiDo.Character
             else if(keyPressed(VirtualKey.Number1))
             {
                 player.changeWeapon(1);
+                mainPage.reloadArms();
             }
             else if (keyPressed(VirtualKey.Number2))
             {
                 player.changeWeapon(2);
+                mainPage.reloadArms();
             }
             else if (keyPressed(VirtualKey.Number3))
             {
                 player.changeWeapon(3);
+                mainPage.reloadArms();
+            }
+            else if (keyPressed(VirtualKey.Space))
+            {
+                player.hit(1);
             }
         }
 

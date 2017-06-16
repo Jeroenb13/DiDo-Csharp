@@ -297,6 +297,9 @@
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
     <Content Include="Assets\Tiles\whiteTile.png" />
+    <Content Include="Assets\UI\gun-1.png" />
+    <Content Include="Assets\UI\gun-2.png" />
+    <Content Include="Assets\UI\gun-3.png" />
     <Content Include="Assets\UI\Health\health-empty.png" />
     <Content Include="Assets\UI\Health\health-full.png" />
     <Content Include="Assets\UI\Health\health-half.png" />
