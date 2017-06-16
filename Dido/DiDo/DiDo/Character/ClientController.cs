@@ -90,10 +90,9 @@ namespace DiDo.Character
             }
             else if(keyPressed(VirtualKey.G))
             {
-                mainPage.addItem();
-                Weapon weapon = (Weapon)player.dropItem();
-
+                mainPage.addItem(player);
             }
+
             else if (keyPressed(VirtualKey.H))
             {
                 for (int i = 0; i < mainPage.weapons.Length; i++)
@@ -109,6 +108,27 @@ namespace DiDo.Character
                                 player.pickUpWeapon(mainPage.weapons[i]);
                                 mainPage.removeItem(mainPage.weapons[i]);
                             }
+                        }
+                    }
+                }
+            }
+            else if (keyPressed(VirtualKey.R))
+            {
+                // The current weapon holds less bullets than it can
+                if (player.currentWeapon.getAmmo() < player.currentWeapon.getMagazineSize())
+                {
+                    // The current weapon has additional ammo
+                    if (player.currentWeapon.getAdditionalAmmo() > 0)
+                    {
+                        int difference = player.currentWeapon.getMagazineSize() - player.currentWeapon.getAmmo();
+                        if (player.currentWeapon.getAdditionalAmmo() <= difference)
+                        {
+                            player.currentWeapon.setAmmo(player.currentWeapon.getAmmo() + player.currentWeapon.getAdditionalAmmo());
+                            player.currentWeapon.setAdditionalAmmo(0);
+                        } else
+                        {
+                            player.currentWeapon.setAmmo(player.currentWeapon.getMagazineSize());
+                            player.currentWeapon.setAdditionalAmmo(player.currentWeapon.getAdditionalAmmo() - difference);
                         }
                     }
                 }
