@@ -314,8 +314,8 @@ namespace DiDo
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            this.enemies.Add(new Enemy("Freek", 256, 224)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 384, 96)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Freek", 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 256, 128)); // The AI Enemy 2
             this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
         }
         
