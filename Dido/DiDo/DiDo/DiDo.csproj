@@ -89,6 +89,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Char\arms\AR.png" />
+    <Content Include="Assets\Char\arms\Pistol.png" />
+    <Content Include="Assets\Char\arms\SMG.png" />
     <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
   </ItemGroup>
