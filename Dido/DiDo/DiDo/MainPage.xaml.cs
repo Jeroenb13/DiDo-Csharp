@@ -33,7 +33,7 @@ namespace DiDo
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public Rect ui = new Rect(15, 700, 1000, 150); //UI element 
+        public Rect ui = new Rect(1150, 5, 200, 755); //UI element 
         public static float pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
@@ -123,7 +123,7 @@ namespace DiDo
             for (int i = 0; i < 5; i++)
             {
                 tempHealth -= 20;
-                int x = 605 + (i * 60);
+                int x = 1000 + (i * 60);
                 if (tempHealth >= 9)
                 {
                     args.DrawingSession.DrawImage(Health_Full, x, 705);
@@ -143,18 +143,22 @@ namespace DiDo
             args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            args.DrawingSession.DrawImage(Char_UI, 25, 735); //Adding the character playing to the UI element
-            args.DrawingSession.DrawImage(CurrentWeapon, 225, 735); //Adding the current weapon to the UI element
             //args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-            args.DrawingSession.DrawText("Player: " + player.name, 25, 705, Colors.Navy);
-            args.DrawingSession.DrawText("Weapon: " + player.currentWeapon.name, 225, 705, Colors.Navy);
-            args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 705, Colors.Navy);
-            args.DrawingSession.DrawText("Additional ammo: " + player.currentWeapon.getAdditionalAmmo(), 425, 755, Colors.Navy);
-            args.DrawingSession.DrawText("Health: " + player.getHealth(), 800, 705, Colors.DarkRed);
+
+            args.DrawingSession.DrawText("PLAYER", 1225, 10, Colors.Black); // Adding text to the UI element
+            args.DrawingSession.DrawText(player.name, 1225, 40, Colors.MediumBlue); //Adding playername to the UI element
+            args.DrawingSession.DrawImage(Char_UI, 1210, 70); //Adding the character playing to the UI element
+            args.DrawingSession.DrawText("WEAPON", 1210, 210, Colors.Navy); // Adding text to the UI 
+            args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
+            args.DrawingSession.DrawImage(CurrentWeapon, 1225, 270); //Adding the current weapon to the UI element
+            args.DrawingSession.DrawText("AMMO", 1225, 410, Colors.Navy);
+            args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue);
+            args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed);
+            args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed);
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
             //Debug end
 
