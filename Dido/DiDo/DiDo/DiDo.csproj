@@ -128,6 +128,7 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Player.cs" />
+    <Compile Include="Multiplayer\MpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +295,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiDoCommon\DiDoCommon.csproj">
+      <Project>{81a42a69-b9ca-471d-8257-af7ed927d65d}</Project>
+      <Name>DiDoCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
