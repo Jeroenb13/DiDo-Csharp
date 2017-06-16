@@ -245,12 +245,13 @@ namespace DiDo
             this.mousePoint = newPoint;
         }
 
-        public double radians(Point mouse, Point player)
+        public double radians(Point mouse, Point player, int size = 32)
         {
+            int halfSize = size / 2;
             float x2 = (float)mouse.X;
-            float x1 = (float)player.X;
+            float x1 = (float)player.X + halfSize;
             float y2 = (float)mouse.Y;
-            float y1 = (float)player.Y;
+            float y1 = (float)player.Y + halfSize;
 
             double radians = Math.Atan2((y2 - y1), (x2 - x1));
             double Angle = radians * (180 / Math.PI);
@@ -404,7 +405,7 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
-                            CurrentArms = Arms_sprite_AR_idle;
+                            CurrentArms = Arms_sprite_AR_aiming;
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                             player.currentWeapon.reduceAmmo();
