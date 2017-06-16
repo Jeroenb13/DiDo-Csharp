@@ -11,8 +11,10 @@ namespace DiDo.Items
     {
         private int damage = 10;            //Damage per round
 
-        public PistolWeapon(int magazine, float x, float y) : base(x, y)
+        public PistolWeapon(int magazine, int additional, int magazineSize, float x, float y) : base(x, y)
         {
+            this.additional = additional;
+            this.magazineSize = magazineSize;
             name = "Pistol";
             if (magazine >= 16)
             {
