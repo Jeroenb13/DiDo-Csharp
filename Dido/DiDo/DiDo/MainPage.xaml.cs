@@ -19,6 +19,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using DiDo.Character;
 using Windows.UI.Xaml.Input;
 using DiDo.Items;
+using Windows.System.Threading;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -138,6 +139,7 @@ namespace DiDo
             args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 605, Colors.Black);
             args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 605, Colors.Black);
+            args.DrawingSession.DrawText("Additional ammo: " + player.currentWeapon.getAdditionalAmmo(), 425, 805, Colors.Black);
             args.DrawingSession.DrawText("Health: " + player.getHealth(), 625, 605, Colors.Navy);
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 500, 800, 100)
             //Debug end
@@ -415,6 +417,11 @@ namespace DiDo
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                             player.currentWeapon.reduceAmmo();
+
+                            ThreadPoolTimer.CreatePeriodicTimer((t) =>
+                            {
+                                CurrentArms = Arms_sprite_AR_idle;
+                            }, TimeSpan.FromSeconds(1));
                         }
                     }
                 }
