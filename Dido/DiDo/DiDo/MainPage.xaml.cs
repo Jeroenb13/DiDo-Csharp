@@ -304,23 +304,6 @@ namespace DiDo
        /// </summary>
         public MainPage()
         {
-            weapons = new Weapon[100];
-            levels = new Levels.Levels();
-            controller = new ClientController(this, player.name, player.x, player.y);
-            mousePoint = new Point();
-            
-            this.InitializeComponent();
-            Window.Current.SizeChanged += Current_SizeChanged;
-            
-            RoundTimer.Tick += RoundTimer_Tick;
-            RoundTimer.Interval = new TimeSpan(0, 0, 1);
-            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
-            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
-
-            this.enemies.Add(new Enemy("Freek", 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
-
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
@@ -350,6 +333,26 @@ namespace DiDo
             {
                 player = new MyPlayer("Max", 32, 96);
             }
+            controller = new ClientController(this, player.name, player.x, player.y);
+            weapons = new Weapon[100];
+            levels = new Levels.Levels();
+            
+            mousePoint = new Point();
+            
+            this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
+            
+            RoundTimer.Tick += RoundTimer_Tick;
+            RoundTimer.Interval = new TimeSpan(0, 0, 1);
+            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
+
+            this.enemies.Add(new Enemy("Freek", 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 256, 128)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
+
+
+
         }
         
         public void updatePoint(Player player)
@@ -449,8 +452,6 @@ namespace DiDo
             Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
             Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
             reloadArms();
-            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
-            StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
             UI_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-2.png"));
@@ -496,7 +497,6 @@ namespace DiDo
             Health_Full = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
             Health_Half = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-half.png"));
             Health_Empty = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-empty.png"));
-            Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
 
             // So that this isn't done on each frame, but only once.
 
