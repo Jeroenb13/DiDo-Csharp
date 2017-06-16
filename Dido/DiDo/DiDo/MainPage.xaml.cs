@@ -1,27 +1,31 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Microsoft.Graphics.Canvas.Effects;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Input;
 using DiDo.GameElements;
 using DiDo.Levels;
-using System.Collections.Generic;
-using Windows.UI;
-using Windows.System;
-using System.Diagnostics;
-using Windows.Graphics.Imaging;
-using Windows.UI.Xaml.Media;
-using Microsoft.Graphics.Canvas.Effects;
 using DiDo.Character;
-using Windows.UI.Xaml.Input;
 using DiDo.Items;
 using DiDo.MenuFolder;
+using System.Diagnostics;
+using Windows.System;
+using Windows.Graphics.Imaging;
+using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+// Resource list:
+// * http://stackoverflow.com
+// * 
 
 namespace DiDo
 {
@@ -30,7 +34,8 @@ namespace DiDo
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        // The images of the game
+
+        //CanvastBitmap: The images used by the game
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
@@ -62,7 +67,7 @@ namespace DiDo
         public double frames = 0;
 
         public Random random = new Random();
-
+ 
 
         /// <summary>
         /// Creates the resources of the game
@@ -88,19 +93,19 @@ namespace DiDo
             }
 
 
-            // draws the Level
+            //Draws the Level
             drawLevel(sender, args);
 
-            //character movement
+            //Character movement
             controller.movementCharacter(sender, args, player, levels);
 
-            //bullet handling
+            //Bullet handling
             bulletHandling(sender, args);
 
     
             updatePoint(player);
 
-            //draws the enemy
+            //Draws the enemy
             foreach (Enemy enemy in enemies)
             {
                 enemy.randomWalk();
@@ -117,29 +122,30 @@ namespace DiDo
                 }
             }
 
-
-            int tempHealth = player.getHealth() + 10;
-            
-            //Adding the healthbar to the UI element
-            for (int i = 0; i < 5; i++)
+            /// <summary>
+            /// //Adding the healthbar to the UI element
+            /// </summary>
+            int tempHealth = player.getHealth() + 10; //Get the health and adding 10 to it
+            for (int i = 0; i < 5; i++) // Draws 5 lives to the UI
             {
-                tempHealth -= 20;
-                int x = 1000 + (i * 60);
+                tempHealth -= 20; //Max health is 100 / 5 lives = 20
+
+                int x = 1000 + (i * 60); //Positions of the lives
                 if (tempHealth >= 9)
                 {
-                    args.DrawingSession.DrawImage(Health_Full, x, 705);
+                    args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
                 }
                 else if (tempHealth >= -1)
                 {
-                    args.DrawingSession.DrawImage(Health_Half, x, 705);
+                    args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
                 }
                 else
                 {
-                    args.DrawingSession.DrawImage(Health_Empty, x, 705);
+                    args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
                 }
             }
 
-            reloadArms();
+            reloadArms(); //Method for showing the right gun in the UI
 
             args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
@@ -156,14 +162,14 @@ namespace DiDo
             args.DrawingSession.DrawText("WEAPON", 1210, 210, Colors.Navy); // Adding text to the UI 
             args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
             args.DrawingSession.DrawImage(CurrentWeapon, 1225, 270); //Adding the current weapon to the UI element
-            args.DrawingSession.DrawText("AMMO", 1225, 410, Colors.Navy);
-            args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue);
-            args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed);
-            args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed);
+            args.DrawingSession.DrawText("AMMO", 1225, 410, Colors.Navy); //Adding text to the UI element
+            args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue); //Adding the bullets and the total bulletamount to the UI element
+            args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed); //Adding text to the UI element
+            args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed); //Adding the health amount to the UI element
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
             //Debug end
 
-            // triggers the draw event 60 times per second
+            //Triggers the draw event 60 times per second
             GameCanvas.Invalidate();
         }
 
