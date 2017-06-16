@@ -320,12 +320,8 @@ namespace DiDo
             ImageManipulation.SetScale();
         }
 
-
-        async Task CreateResourcesAsync(CanvasAnimatedControl sender)
+        public void reloadArms()
         {
-            Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
-            Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
-            Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
             if (player.currentWeapon.GetType() == typeof(ARWeapon))
             {
                 CurrentArms = Arms_AR;
@@ -338,6 +334,15 @@ namespace DiDo
             {
                 CurrentArms = Arms_SMG;
             }
+        }
+
+
+        async Task CreateResourcesAsync(CanvasAnimatedControl sender)
+        {
+            Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
+            Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
+            Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
+            reloadArms();
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
