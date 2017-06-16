@@ -160,10 +160,16 @@ namespace DiDo
             args.DrawingSession.DrawText(player.name, 1225, 40, Colors.MediumBlue); //Adding playername to the UI element
             args.DrawingSession.DrawImage(Char_UI, 1210, 70); //Adding the character playing to the UI element
             args.DrawingSession.DrawText("WEAPON", 1210, 210, Colors.Navy); // Adding text to the UI 
-            args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
-            args.DrawingSession.DrawImage(CurrentWeapon, 1225, 270); //Adding the current weapon to the UI element
+            if (player.currentWeapon != null)
+            {
+                args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
+                args.DrawingSession.DrawImage(CurrentWeapon, 1225, 270); //Adding the current weapon to the UI element
+            }
             args.DrawingSession.DrawText("AMMO", 1225, 410, Colors.Navy); //Adding text to the UI element
-            args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue); //Adding the bullets and the total bulletamount to the UI element
+            if (player.currentWeapon != null)
+            {
+                args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue); //Adding the bullets and the total bulletamount to the UI element
+            }
             args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed); //Adding text to the UI element
             args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed); //Adding the health amount to the UI element
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
@@ -438,17 +444,26 @@ namespace DiDo
 
         public void reloadArms()
         {
-            if (player.currentWeapon.GetType() == typeof(ARWeapon))
+            Type weaponType = null;
+            try
+            {
+                weaponType = player.currentWeapon.GetType();
+            }
+            catch (Exception e)
+            {
+                weaponType = typeof(PistolWeapon);
+            }
+            if (weaponType == typeof(ARWeapon))
             {
                 CurrentArms = Arms_AR;
                 CurrentWeapon = UI_AR;
             }
-            else if (player.currentWeapon.GetType() == typeof(PistolWeapon))
+            else if (weaponType == typeof(PistolWeapon))
             {
                 CurrentArms = Arms_Pistol;
                 CurrentWeapon = UI_Pistol;
             }
-            else if (player.currentWeapon.GetType() == typeof(SMGWeapon))
+            else if (weaponType == typeof(SMGWeapon))
             {
                 CurrentArms = Arms_SMG;
                 CurrentWeapon = UI_SMG;
