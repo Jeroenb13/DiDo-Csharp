@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiDoCommon.Network.Packet;
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
@@ -17,10 +18,21 @@ namespace DiDoCommon.Network
             this.ClientSocket = clientSocket;
             this.ParsingPacket = false;
         }
-
+        
         internal void ParsePacket(HeapByteBuf body)
         {
             ushort type = this.ParsingPacketId;
+            AbstractPacket packet = PacketRegistry.CreateInstance(type);
+            packet.ReadFrom(body);
+            this.HandlePacket(packet);
+        }
+
+        internal void HandlePacket(AbstractPacket packet)
+        {
+            if(packet is PacketPlayerLogin){
+                PacketPlayerLogin p = (PacketPlayerLogin)packet;
+                //p.Username
+            }
         }
     }
 }

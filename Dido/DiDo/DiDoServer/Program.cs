@@ -6,8 +6,8 @@ namespace DiDoServer
     {
         static void Main(string[] args)
         {
-            DiDoServer server = new DiDoServer(IPAddress.Any, 13000);
-            server.Start();
+            DiDoServer server = new DiDoServer();
+            server.Listen(IPAddress.Any, 13000);
         }
     }
 }

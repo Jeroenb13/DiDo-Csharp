@@ -6,50 +6,47 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DiDoServer
 {
     public class DiDoServer
     {
-        private readonly IPAddress listenAddress;
-        private readonly UInt16 port;
         private readonly List<ConnectionHandler> clientConnections = new List<ConnectionHandler>();
+        private readonly ManualResetEvent connectionEstablished = new ManualResetEvent(false);
 
-        private Socket serverSocket;
-
-        public DiDoServer(IPAddress listenAddress, UInt16 port)
+        public void Listen(IPAddress listenAddress, UInt16 port)
         {
-            this.listenAddress = listenAddress;
-            this.port = port;
-        }
-
-        public void Start()
-        {
+            Socket serverSocket = null;
             try
             {
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                serverSocket.Bind(new IPEndPoint(this.listenAddress, this.port));
+                serverSocket.Bind(new IPEndPoint(listenAddress, port));
                 serverSocket.Listen(128);
-                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+
+                while (true)
+                {
+                    this.connectionEstablished.Reset();
+
+                    serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), serverSocket);
+
+                    this.connectionEstablished.WaitOne();
+                }
             }
             catch (SocketException e)
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-            finally
-            {
-                serverSocket.Close();
-            }
-
-            Console.WriteLine("\nHit enter to continue...");
-            Console.Read();
         }
 
         private void AcceptCallback(IAsyncResult ar)
         {
+            this.connectionEstablished.Set();
+
             try
             {
+                Socket serverSocket = (Socket)ar.AsyncState;
                 Socket clientSocket = serverSocket.EndAccept(ar);
                 ConnectionHandler connHandler = new ConnectionHandler(clientSocket);
                 this.clientConnections.Add(connHandler);
