@@ -118,7 +118,7 @@ namespace DiDo
             {
                 if(weapon != null)
                 {
-                    args.DrawingSession.DrawImage(Pistol, weapon.x, weapon.y);
+                    args.DrawingSession.DrawImage(UI_Pistol, weapon.x, weapon.y);
                 }
             }
 
