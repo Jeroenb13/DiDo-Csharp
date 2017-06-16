@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace DiDoCommon.Network
 {
@@ -506,7 +505,10 @@ namespace DiDoCommon.Network
 
         public int EnsureWritable(int minWritableBytes, bool force)
         {
-            Contract.Ensures(minWritableBytes >= 0);
+            if(minWritableBytes < 0)
+            {
+                throw new ArgumentOutOfRangeException("minWritableBytes should be >= 0");
+            }
 
             if (minWritableBytes <= this.WritableBytes)
             {
