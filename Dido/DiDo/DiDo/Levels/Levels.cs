@@ -8,7 +8,7 @@ namespace DiDo.Levels
 {
     public class Levels
     {
-        public String[,] gekozenLevel = levelFive;
+        public String[,] gekozenLevel = levelThree;
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
@@ -136,7 +136,8 @@ namespace DiDo.Levels
             { "&", new Tile("wallinset0", new Uri("ms-appx:///Assets/Tiles/walls/inset/0.png")) },
             { "*", new Tile("wallinset90", new Uri("ms-appx:///Assets/Tiles/walls/inset/90.png")) },
             { "(", new Tile("wallinset180", new Uri("ms-appx:///Assets/Tiles/walls/inset/180.png")) },
-            { ")", new Tile("wallinset270", new Uri("ms-appx:///Assets/Tiles/walls/inset/270.png")) }
+            { ")", new Tile("wallinset270", new Uri("ms-appx:///Assets/Tiles/walls/inset/270.png")) },
+            { "wit", new Tile("whitetile", new Uri("ms-appx:///Assets/Tiles/whiteTile.png")) }
         };
 
         public static Tile getTile(String key)
@@ -230,12 +231,12 @@ namespace DiDo.Levels
         };
 
         public static String[,] levelThree =  { //20x25
-            {"Q", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "R"},
-            {"L", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "b", "f", "f", "f", "J"},
-            {"L", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "b", "f", "f", "f", "J"},
-            {"L", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
-            {"L", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
-            {"L", " ", " ", " ", " ", " ", " ", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
+            {"wit", "wit", "wit", "wit", "wit", "wit", "Q", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "I", "R"},
+            {"wit", "wit", "wit", "wit", "wit", "wit", "J", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "b", "f", "f", "f", "J"},
+            {"wit", "wit", "wit", "wit", "wit", "wit", "J", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "b", "f", "b", "f", "f", "f", "J"},
+            {"wit", "wit", "wit", "wit", "wit", "wit", "J", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
+            {"wit", "wit", "wit", "wit", "wit", "wit", "J", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
+            {"Q", "I", "I", "I", "I", "I", "S", "X", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
             {"L", "R", "R", "R", "R", "R", "R", "W", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
             {"L", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},
             {"L", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "J"},

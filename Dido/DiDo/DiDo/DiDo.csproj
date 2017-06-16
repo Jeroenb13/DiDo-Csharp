@@ -282,6 +282,7 @@
     <Content Include="Assets\Tiles\water\3.png" />
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
+    <Content Include="Assets\Tiles\whiteTile.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
