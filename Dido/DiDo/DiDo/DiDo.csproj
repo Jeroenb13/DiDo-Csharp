@@ -129,6 +129,7 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Player.cs" />
+    <Compile Include="Multiplayer\MpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +283,7 @@
     <Content Include="Assets\Tiles\water\3.png" />
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
+    <Content Include="Assets\Tiles\whiteTile.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
@@ -311,6 +313,12 @@
     <Folder Include="Assets\Bullets\NewFolder1\" />
     <Folder Include="Assets\Char\arms\Pistol\" />
     <Folder Include="Assets\Char\arms\SMG\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiDoCommon\DiDoCommon.csproj">
+      <Project>{81a42a69-b9ca-471d-8257-af7ed927d65d}</Project>
+      <Name>DiDoCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
