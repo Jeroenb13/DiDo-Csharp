@@ -55,7 +55,7 @@ namespace DiDo.Character
             if (keyPressed(VirtualKey.A))
             {
                 Tile tile = level.getPlayerTile(player.x -1, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positief
+                if (tile.CanWalk == true) //positive
                 {
                     player.x -= player.move_speed;
                 }
@@ -74,7 +74,7 @@ namespace DiDo.Character
             else if (keyPressed(VirtualKey.D))
             {
                 Tile tile = level.getPlayerTile(player.x+33, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positief
+                if (tile.CanWalk == true) //positive
                 {
                     player.x += player.move_speed;
                 }
@@ -134,7 +134,7 @@ namespace DiDo.Character
 
             keysPressed[args.VirtualKey] = true;
 
-            //to do keylijst maken keylijst
+            // TODO: make keylist
             if (args.VirtualKey == VirtualKey.A)
             {
                 velX = -move_speed;
@@ -159,7 +159,7 @@ namespace DiDo.Character
 
             keysPressed[args.VirtualKey] = false;
 
-            //to do keylijst maken keylijst
+            // TODO: make keylist
             if (args.VirtualKey == VirtualKey.A)
             {
                 velX = 0;
