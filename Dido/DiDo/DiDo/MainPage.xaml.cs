@@ -33,7 +33,7 @@ namespace DiDo
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentArms, Arms_sprite_AR_aiming, Arms_sprite_AR_idle, Arms_sprite_AR_walking, Player_sprite, Pistol, Assault_Rifle, Health_Player, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public Rect ui = new Rect(15, 600, 800, 100); //UI element 
+        public Rect ui = new Rect(15, 600, 1000, 100); //UI element 
         public static float DesignWidth = 1920;
         public static float DesignHeight = 1080;
         public static float scaleWidth, scaleHeight, pointX, pointY;
@@ -123,9 +123,9 @@ namespace DiDo
             //Adding the healthbar to the UI element
             for (int i = 0; i < 5; i++)
             {
-                for (int y = 605; y < 705; y += 20)
+                for (int y = 605; y < 905; y += 60)
                 {
-                    args.DrawingSession.DrawImage(Health_Player, y, 625);
+                    args.DrawingSession.DrawImage(Health_Player, y, 615);
                 }
             }
 
@@ -139,11 +139,11 @@ namespace DiDo
             //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-           args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
+            args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 605, Colors.Black);
             args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 605, Colors.Black);
             args.DrawingSession.DrawText("Additional ammo: " + player.currentWeapon.getAdditionalAmmo(), 425, 805, Colors.Black);
-            args.DrawingSession.DrawText("Health: " + player.getHealth(), 625, 605, Colors.Navy);
+            args.DrawingSession.DrawText("Health: " + player.getHealth(), 830, 605, Colors.Navy);
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 500, 800, 100)
             //Debug end
 
