@@ -103,6 +103,7 @@ namespace DiDo
             //draws the enemy
             foreach (Enemy enemy in enemies)
             {
+                enemy.randomWalk();
                 args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
@@ -226,8 +227,8 @@ namespace DiDo
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            this.enemies.Add(new Enemy("Freek", 128, 32)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 192, 96)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Freek", 256, 224)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 384, 96)); // The AI Enemy 2
             this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
         }
         
@@ -304,7 +305,10 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
-            Arms_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/idle/1.png"));
+            Arms_sprite_AR_aiming = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/aiming/1.png"));
+            Arms_sprite_AR_idle = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/idle/1.png"));
+            Arms_sprite_AR_walking = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/walking/1.png"));
+            CurrentArms = Arms_sprite_AR_idle;
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
@@ -389,6 +393,7 @@ namespace DiDo
                 else if (GameState > 0)
                 {
                     RoundTimer.Start();
+
                     float xPos = (float)e.GetPosition(GameCanvas).X;
                     float yPos = (float)e.GetPosition(GameCanvas).Y;
 
@@ -405,6 +410,7 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
+                            CurrentArms = Arms_sprite_AR_idle;
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                             player.currentWeapon.reduceAmmo();

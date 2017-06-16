@@ -89,6 +89,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,8 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Player.cs" />
+    <Compile Include="Multiplayer\HeapByteBuf.cs" />
+    <Compile Include="Multiplayer\MpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +292,7 @@
     <Content Include="Assets\Tiles\water\3.png" />
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
+    <Content Include="Assets\Tiles\whiteTile.png" />
     <Content Include="Assets\UI\Health\health-empty.png" />
     <Content Include="Assets\UI\Health\health-full.png" />
     <Content Include="Assets\UI\Health\health-half.png" />
