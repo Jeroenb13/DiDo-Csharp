@@ -22,6 +22,12 @@ namespace DiDo.Character
             weapons = new Weapon[1];
             setItem(0, pistol);
             currentWeapon = weapons[0];
+
+            int seed = char.ToUpper(name[0]) - 64;
+            seed += char.ToUpper(name[2]) - 64;
+            this.random = new Random(seed);
+
+            this.direction = random.Next(0, 4);
         }
 
         public void hit(int damage = 1)
