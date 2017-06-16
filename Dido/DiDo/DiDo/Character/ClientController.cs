@@ -54,7 +54,7 @@ namespace DiDo.Character
 
             if (keyPressed(VirtualKey.A))
             {
-                Tile tile = level.getPlayerTile((player.x -1) * MainPage.scaleWidth, player.y * MainPage.scaleHeight, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x -1, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positive
                 {
                     player.x -= player.move_speed;
@@ -64,7 +64,7 @@ namespace DiDo.Character
             else if (keyPressed(VirtualKey.S))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
-                Tile tile = level.getPlayerTile((player.x * MainPage.scaleWidth), (player.y+33) * MainPage.scaleHeight, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x, player.y+33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y += player.move_speed;
@@ -73,7 +73,7 @@ namespace DiDo.Character
             }
             else if (keyPressed(VirtualKey.D))
             {
-                Tile tile = level.getPlayerTile((player.x+33) * MainPage.scaleWidth, player.y * MainPage.scaleHeight, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x+33, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positive
                 {
                     player.x += player.move_speed;
@@ -82,7 +82,7 @@ namespace DiDo.Character
             }
             else if (keyPressed(VirtualKey.W))
             {
-                Tile tile = level.getPlayerTile(player.x * MainPage.scaleWidth, (player.y-1) * MainPage.scaleHeight, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x, player.y-1, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
