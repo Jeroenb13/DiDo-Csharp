@@ -30,7 +30,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Player, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public Rect ui = new Rect(15, 600, 1000, 100); //UI element 
@@ -118,14 +118,27 @@ namespace DiDo
                 }
             }
 
-            
+
+            int tempHealth = player.getHealth();
             
             //Adding the healthbar to the UI element
             for (int i = 0; i < 5; i++)
             {
                 for (int y = 605; y < 905; y += 60)
                 {
-                    args.DrawingSession.DrawImage(Health_Player, y, 615);
+                    tempHealth -= 20;
+                    if (tempHealth > 20)
+                    {
+                        args.DrawingSession.DrawImage(Health_Full, y, 615);
+                    }
+                    else if (tempHealth > 10)
+                    {
+                        args.DrawingSession.DrawImage(Health_Half, y, 615);
+                    }
+                    else
+                    {
+                        args.DrawingSession.DrawImage(Health_Empty, y, 615);
+                    }
                 }
             }
 
@@ -332,7 +345,9 @@ namespace DiDo
             Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Items/gun-3.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
-            Health_Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
+            Health_Full = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
+            Health_Empty = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-half.png"));
+            Health_Half = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-empty.png"));
             Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
 
              // So that this isn't done on each frame, but only once.

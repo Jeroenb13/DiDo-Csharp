@@ -17,6 +17,7 @@ namespace DiDo.Character
         {
             currentWeaponIndex = 0;
             weapons = new Weapon[3];
+            healthPoints = 100;
         }
 
         public int getHealth()
