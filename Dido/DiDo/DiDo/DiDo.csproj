@@ -237,6 +237,7 @@
     <Content Include="Assets\Tiles\floors\grass\grass_3.png" />
     <Content Include="Assets\Tiles\floors\grass\grass_4.png" />
     <Content Include="Assets\Tiles\gas.png" />
+    <Content Include="Assets\Tiles\gridviewtile.png" />
     <Content Include="Assets\Tiles\paths\cross\0.png" />
     <Content Include="Assets\Tiles\paths\straight\0.png" />
     <Content Include="Assets\Tiles\paths\straight\90.png" />
