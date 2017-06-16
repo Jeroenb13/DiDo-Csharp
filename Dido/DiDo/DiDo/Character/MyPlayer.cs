@@ -40,24 +40,5 @@ namespace DiDo.Character
                 }
             }
         }
-
-        public void changeWeapon(int number)
-        {
-            if(number == 1)
-            {
-                currentWeaponIndex = 0;
-                currentWeapon = weapons[0];
-            }
-            else if(number == 2)
-            {
-                currentWeaponIndex = 1;
-                currentWeapon = weapons[1];
-            }
-            else if(number == 3)
-            {
-                currentWeaponIndex = 2;
-                currentWeapon = weapons[2];
-            }
-        }
     }
 }

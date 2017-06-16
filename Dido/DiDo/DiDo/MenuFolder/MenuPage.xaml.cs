@@ -24,9 +24,16 @@ namespace DiDo.MenuFolder
     /// </summary>
     public sealed partial class MenuPage : Page
     {
+        FontFamily fffForward = new FontFamily("/Assets/FFFFORWARD.TTF#FFF Forward");
         public MenuPage()
         {
             this.InitializeComponent();
+
+            Start.FontFamily = fffForward;
+            Invade.FontFamily = fffForward;
+            Settings.FontFamily = fffForward;
+            Help.FontFamily = fffForward;
+            Exit.FontFamily = fffForward;
         }
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {

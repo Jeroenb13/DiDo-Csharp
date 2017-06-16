@@ -8,15 +8,18 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.System;
 using DiDo.Levels;
 using Windows.UI.Core;
+using DiDo.Items;
 
 namespace DiDo.Character
 {
     public class ClientController : ClientPlayer
     {
+        private MainPage mainPage;
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public ClientController(string name, float x, float y) : base(name, x, y)
+        public ClientController(MainPage mainPage, string name, float x, float y) : base(name, x, y)
         {
+            this.mainPage = mainPage;   
         }
 
         private Boolean keyPressed(VirtualKey key)
@@ -52,7 +55,7 @@ namespace DiDo.Character
             if (keyPressed(VirtualKey.A))
             {
                 Tile tile = level.getPlayerTile(player.x -1, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positief
+                if (tile.CanWalk == true) //positive
                 {
                     player.x -= player.move_speed;
                 }
@@ -71,7 +74,7 @@ namespace DiDo.Character
             else if (keyPressed(VirtualKey.D))
             {
                 Tile tile = level.getPlayerTile(player.x+33, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positief
+                if (tile.CanWalk == true) //positive
                 {
                     player.x += player.move_speed;
                 }
@@ -84,7 +87,43 @@ namespace DiDo.Character
                 {
                     player.y -= player.move_speed;
                 }
-               
+            }
+            else if(keyPressed(VirtualKey.G))
+            {
+                mainPage.addItem();
+                Weapon weapon = (Weapon)player.dropItem();
+
+            }
+            else if (keyPressed(VirtualKey.H))
+            {
+                for (int i = 0; i < mainPage.weapons.Length; i++)
+                {
+                    System.Diagnostics.Debug.WriteLine("Player: " + player.x + ", " + player.y);
+                    System.Diagnostics.Debug.Write(weapons);
+                    if (mainPage.weapons[i] != null)
+                    {
+                        if ((mainPage.weapons[i].x) - 32 < player.x && player.x < (mainPage.weapons[i].x + 32))
+                        {
+                            if ((mainPage.weapons[i].y) - 32 < player.y && player.y < (mainPage.weapons[i].y + 32))
+                            {
+                                player.pickUpWeapon(mainPage.weapons[i]);
+                                mainPage.removeItem(mainPage.weapons[i]);
+                            }
+                        }
+                    }
+                }
+            }
+            else if(keyPressed(VirtualKey.Number1))
+            {
+                player.changeWeapon(1);
+            }
+            else if (keyPressed(VirtualKey.Number2))
+            {
+                player.changeWeapon(2);
+            }
+            else if (keyPressed(VirtualKey.Number3))
+            {
+                player.changeWeapon(3);
             }
         }
 
@@ -95,7 +134,7 @@ namespace DiDo.Character
 
             keysPressed[args.VirtualKey] = true;
 
-            //to do keylijst maken keylijst
+            // TODO: make keylist
             if (args.VirtualKey == VirtualKey.A)
             {
                 velX = -move_speed;
@@ -120,7 +159,7 @@ namespace DiDo.Character
 
             keysPressed[args.VirtualKey] = false;
 
-            //to do keylijst maken keylijst
+            // TODO: make keylist
             if (args.VirtualKey == VirtualKey.A)
             {
                 velX = 0;
