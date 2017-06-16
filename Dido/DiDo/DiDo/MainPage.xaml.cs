@@ -178,7 +178,78 @@ namespace DiDo
         public double xPos, yPos, xPos2, yPos2; // Temporary
                                                 //public String type_tile;
 
-       
+        /// <summary>
+        /// Checks if the player ammo is null or not and returns the amount
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerAmmo()
+        {
+            string ammo;
+            if (player.currentWeapon == null)
+            {
+                ammo = "";
+            }
+            else
+            {
+                ammo = player.currentWeapon.getAmmo().ToString();
+            }
+            return ammo;
+        }
+
+        /// <summary>
+        /// Checks if the player name is null or not and returns the name
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerName()
+        {
+            string name;
+            if (player.name == null)
+            {
+                name = "";
+            }
+            else
+            {
+                name = player.name;
+            }
+            return name;
+        }
+
+        /// <summary>
+        /// Checks if the player weapon name is null or not and returns the name
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerWeaponName()
+        {
+            string weaponName;
+            if (player.currentWeapon == null)
+            {
+                weaponName = "";
+            }
+            else
+            {
+                weaponName = player.currentWeapon.name;
+            }
+            return weaponName;
+        }
+
+        /// <summary>
+        /// Checks if playerAdditional ammo is null or not and returns the amount
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerWeaponAdditionalAmmo()
+        {
+            string additionalAmmo;
+            if(player.currentWeapon == null)
+            {
+                additionalAmmo = "";
+            }
+            else
+            {
+                additionalAmmo = player.currentWeapon.getAdditionalAmmo().ToString();
+            }
+            return additionalAmmo;
+        }
+
         /// <summary>
         /// draws the sprites for the level
         /// </summary>
