@@ -29,10 +29,10 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentArms, Arms_sprite_AR_aiming, Arms_sprite_AR_idle, Arms_sprite_AR_walking, Player_sprite, Pistol, Assault_Rifle;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Arms_sprite, Player_sprite, Pistol, Assault_Rifle, Health_Player, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public Rect ui = new Rect(15, 500, 800, 100); //UI element 
+        public Rect ui = new Rect(15, 600, 800, 100); //UI element 
         public static float DesignWidth = 1920;
         public static float DesignHeight = 1080;
         public static float scaleWidth, scaleHeight, pointX, pointY;
@@ -53,7 +53,7 @@ namespace DiDo
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public MyPlayer player = new MyPlayer("Spy",32, 96);
+        public MyPlayer player = new MyPlayer("Jeroen",32, 96);
 
         public List<Enemy> enemies = new List<Enemy>();
 
@@ -117,30 +117,33 @@ namespace DiDo
                 }
             }
 
-            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
-            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame   
-            //args.DrawingSession.DrawText("Inventory World: " + inventory(), 10, 700, Colors.Black);
-            //args.DrawingSession.DrawText("Inventory Player: " + player.inventory(), 300, 700, Colors.Black);
-            //args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
-            
+            //Adding the healthbar to the UI element
+            for (int i = 0; i < 5; i++)
+            {
+                for (int y = 605; y < 705; y += 20)
+                {
+                    args.DrawingSession.DrawImage(Health_Player, y, 625);
+                }
+            }
+
+            args.DrawingSession.DrawImage(ImageManipulation.image(Arms_sprite, radians(mousePoint, playerPoint)), player.x, player.y);
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+            args.DrawingSession.DrawImage(Char_UI, 25, 635); //Adding the character playing to the UI element
             //args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-            args.DrawingSession.DrawText("Inventory: " + player.inventory(), 25, 525, Colors.Black);
-            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 525, Colors.Black);
-            args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 525, Colors.Black);
-            args.DrawingSession.DrawText("Health: " + player.getHealth(), 625, 525, Colors.Black);
+            args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
+            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 605, Colors.Black);
+            args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 605, Colors.Black);
+            args.DrawingSession.DrawText("Health: " + player.getHealth(), 625, 605, Colors.Navy);
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 500, 800, 100)
             //Debug end
 
-
             // triggers the draw event 60 times per second
             GameCanvas.Invalidate();
-
-            
         }
 
         public string inventory()
@@ -312,6 +315,9 @@ namespace DiDo
             Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Items/gun-3.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
+            Health_Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
+            Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
+
              // So that this isn't done on each frame, but only once.
 
             foreach (Tile t in Levels.Levels.tiles.Values)
