@@ -89,6 +89,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Char\arms\AR.png" />
+    <Content Include="Assets\Char\arms\Pistol.png" />
+    <Content Include="Assets\Char\arms\SMG.png" />
     <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
   </ItemGroup>
@@ -246,6 +249,7 @@
     <Content Include="Assets\Tiles\floors\grass\grass_3.png" />
     <Content Include="Assets\Tiles\floors\grass\grass_4.png" />
     <Content Include="Assets\Tiles\gas.png" />
+    <Content Include="Assets\Tiles\gridviewtile.png" />
     <Content Include="Assets\Tiles\paths\cross\0.png" />
     <Content Include="Assets\Tiles\paths\straight\0.png" />
     <Content Include="Assets\Tiles\paths\straight\90.png" />
@@ -302,9 +306,15 @@
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
     <Content Include="Assets\Tiles\whiteTile.png" />
+    <Content Include="Assets\UI\gun-1.png" />
+    <Content Include="Assets\UI\gun-2.png" />
+    <Content Include="Assets\UI\gun-3.png" />
     <Content Include="Assets\UI\Health\health-empty.png" />
     <Content Include="Assets\UI\Health\health-full.png" />
     <Content Include="Assets\UI\Health\health-half.png" />
+    <Content Include="Assets\Weapons\gun-1.png" />
+    <Content Include="Assets\Weapons\gun-2.png" />
+    <Content Include="Assets\Weapons\gun-3.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>

@@ -11,7 +11,7 @@ namespace DiDo.Items
         private int magazine { get; set; }  //Number of Rounds per magazine
         private int damage = 10;            //Damage per Round
 
-        public SMGWeapon(int magazine, float x, float y) : base(x, y)
+        public SMGWeapon(int magazine, int total, float x, float y) : base(x, y)
         {
             name = "Sub Machine Gun";
             if (magazine >= 25)

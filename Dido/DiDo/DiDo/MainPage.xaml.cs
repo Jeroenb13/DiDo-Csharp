@@ -20,6 +20,7 @@ using DiDo.Character;
 using Windows.UI.Xaml.Input;
 using DiDo.Items;
 using DiDo.MenuFolder;
+using Windows.System.Threading;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -30,13 +31,11 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentArms, Arms_sprite_AR_aiming, Arms_sprite_AR_idle, Arms_sprite_AR_walking, Player_sprite, Pistol, Assault_Rifle, Health_Player, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public Rect ui = new Rect(15, 600, 800, 100); //UI element 
-        public static float DesignWidth = 1280;
-        public static float DesignHeight = 720;
-        public static float scaleWidth, scaleHeight, pointX, pointY;
+        public Rect ui = new Rect(15, 700, 1000, 150); //UI element 
+        public static float pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
         public static int countdown = 60; // 60
@@ -84,8 +83,8 @@ namespace DiDo
             // scales the player
             if (player.x == 0 && player.y == 0)
             {
-                player.x = 32 * scaleWidth;
-                player.y = 32 * scaleHeight;
+                player.x = 32;
+                player.y = 32;
             }
 
 
@@ -118,29 +117,46 @@ namespace DiDo
                 }
             }
 
+
+            int tempHealth = player.getHealth() + 10;
+            
             //Adding the healthbar to the UI element
             for (int i = 0; i < 5; i++)
             {
-                for (int y = 605; y < 705; y += 20)
+                tempHealth -= 20;
+                int x = 605 + (i * 60);
+                if (tempHealth >= 9)
                 {
-                    args.DrawingSession.DrawImage(Health_Player, y, 625);
+                    args.DrawingSession.DrawImage(Health_Full, x, 705);
+                }
+                else if (tempHealth >= -1)
+                {
+                    args.DrawingSession.DrawImage(Health_Half, x, 705);
+                }
+                else
+                {
+                    args.DrawingSession.DrawImage(Health_Empty, x, 705);
                 }
             }
 
-            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x * scaleWidth, player.y *scaleHeight);
-            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x * scaleWidth, player.y * scaleHeight); // TODO: make it so that scaling and rotation is not processed each frame      
-            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x * scaleWidth, player.y* scaleHeight); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            args.DrawingSession.DrawImage(Char_UI, 25, 635); //Adding the character playing to the UI element
+            reloadArms();
+
+            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+            args.DrawingSession.DrawImage(Char_UI, 25, 735); //Adding the character playing to the UI element
+            args.DrawingSession.DrawImage(CurrentWeapon, 225, 735); //Adding the current weapon to the UI element
             //args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-            args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
-            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 605, Colors.Black);
-            args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 605, Colors.Black);
-            args.DrawingSession.DrawText("Health: " + player.getHealth(), 625, 605, Colors.Navy);
-            args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 500, 800, 100)
+            args.DrawingSession.DrawText("Player: " + player.name, 25, 705, Colors.Navy);
+            args.DrawingSession.DrawText("Weapon: " + player.currentWeapon.name, 225, 705, Colors.Navy);
+            args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 705, Colors.Navy);
+            args.DrawingSession.DrawText("Additional ammo: " + player.currentWeapon.getAdditionalAmmo(), 425, 755, Colors.Navy);
+            args.DrawingSession.DrawText("Health: " + player.getHealth(), 800, 705, Colors.DarkRed);
+            args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
             //Debug end
 
             // triggers the draw event 60 times per second
@@ -163,7 +179,78 @@ namespace DiDo
         public double xPos, yPos, xPos2, yPos2; // Temporary
                                                 //public String type_tile;
 
-       
+        /// <summary>
+        /// Checks if the player ammo is null or not and returns the amount
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerAmmo()
+        {
+            string ammo;
+            if (player.currentWeapon == null)
+            {
+                ammo = "";
+            }
+            else
+            {
+                ammo = player.currentWeapon.getAmmo().ToString();
+            }
+            return ammo;
+        }
+
+        /// <summary>
+        /// Checks if the player name is null or not and returns the name
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerName()
+        {
+            string name;
+            if (player.name == null)
+            {
+                name = "";
+            }
+            else
+            {
+                name = player.name;
+            }
+            return name;
+        }
+
+        /// <summary>
+        /// Checks if the player weapon name is null or not and returns the name
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerWeaponName()
+        {
+            string weaponName;
+            if (player.currentWeapon == null)
+            {
+                weaponName = "";
+            }
+            else
+            {
+                weaponName = player.currentWeapon.name;
+            }
+            return weaponName;
+        }
+
+        /// <summary>
+        /// Checks if playerAdditional ammo is null or not and returns the amount
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerWeaponAdditionalAmmo()
+        {
+            string additionalAmmo;
+            if(player.currentWeapon == null)
+            {
+                additionalAmmo = "";
+            }
+            else
+            {
+                additionalAmmo = player.currentWeapon.getAdditionalAmmo().ToString();
+            }
+            return additionalAmmo;
+        }
+
         /// <summary>
         /// draws the sprites for the level
         /// </summary>
@@ -185,20 +272,21 @@ namespace DiDo
                         Tile tile = Levels.Levels.tiles[tileType + "_" + frames_sprite];
                         args.DrawingSession.DrawImage(
                             tile.Effect,
-                            y * (32 * scaleWidth),
-                            x * (32 * scaleHeight)
+                            y * 32,
+                            x * 32
                         );
                     } else
                     {
                         Tile tile = Levels.Levels.tiles[tileType];
                         args.DrawingSession.DrawImage(
                             tile.Effect,
-                            y * (32 * scaleWidth),
-                            x * (32 * scaleHeight)
+                            y * 32,
+                            x * 32
                         );
+
                     }
 
-                   
+
 
 
 
@@ -223,16 +311,14 @@ namespace DiDo
             
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
-            ImageManipulation.SetScale();
             
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            playerPoint = new Point(player.x, player.y);
-            this.enemies.Add(new Enemy("Freek", 256, 224)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 384, 96)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Freek", 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 256, 128)); // The AI Enemy 2
             this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
 
 
@@ -309,13 +395,14 @@ namespace DiDo
             }
         }
 
-        public void addItem()
+        public void addItem(Characters character)
         {
             for (int i = 0; i < weapons.Length; i++)
             {
                 if (weapons[i] == null)
                 {
-                    weapons[i] = (Weapon)player.dropItem();
+                    weapons[i] = character.currentWeapon;
+                    character.dropItem();
                 }
             }
         }
@@ -334,23 +421,42 @@ namespace DiDo
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
             bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-            ImageManipulation.SetScale();
+        }
+
+        public void reloadArms()
+        {
+            if (player.currentWeapon.GetType() == typeof(ARWeapon))
+            {
+                CurrentArms = Arms_AR;
+                CurrentWeapon = UI_AR;
+            }
+            else if (player.currentWeapon.GetType() == typeof(PistolWeapon))
+            {
+                CurrentArms = Arms_Pistol;
+                CurrentWeapon = UI_Pistol;
+            }
+            else if (player.currentWeapon.GetType() == typeof(SMGWeapon))
+            {
+                CurrentArms = Arms_SMG;
+                CurrentWeapon = UI_SMG;
+            }
         }
 
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
-            Arms_sprite_AR_aiming = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/aiming/1.png"));
-            Arms_sprite_AR_idle = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/idle/1.png"));
-            Arms_sprite_AR_walking = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/walking/1.png"));
-            CurrentArms = Arms_sprite_AR_idle;
-            
+            Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
+            Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
+            Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
+            reloadArms();
+            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
-            Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Items/gun-3.png"));
+            UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
+            UI_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-2.png"));
+            UI_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-3.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
-            Health_Player = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
@@ -387,6 +493,10 @@ namespace DiDo
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_max.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Max.png"));
             }
+            Health_Full = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
+            Health_Half = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-half.png"));
+            Health_Empty = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-empty.png"));
+            Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
 
             // So that this isn't done on each frame, but only once.
 
@@ -413,19 +523,20 @@ namespace DiDo
                     bulletsToRemove.Add(bullet);
                 }
 
-                int emeniesCount = 0;
+                int enemiesCount = 0;
                 foreach (Enemy enemy in enemies)
                 {
                     if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
                     {
-                        enemy.hit(bullet.damage);
-                        if(enemy.health() <= 0)
+                        enemy.hit(player.currentWeapon.getDamage());
+                        if(enemy.getHealth() <= 0)
                         {
-                            enemiesToRemove.Add(emeniesCount); // Prepare enemy to be removed
+                            addItem(enemy);
+                            enemiesToRemove.Add(enemiesCount); // Enemy klaar zetten om te verwijderen
                         }
                         bulletsToRemove.Add(bullet); // Remove the bullet upon impact
                     }
-                    emeniesCount++;
+                    enemiesCount++;
                 }
             }
 
@@ -480,7 +591,6 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
-                            CurrentArms = Arms_sprite_AR_aiming;
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
                             player.currentWeapon.reduceAmmo();

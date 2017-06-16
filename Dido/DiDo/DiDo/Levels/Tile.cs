@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 
 namespace DiDo.Levels
 {
@@ -34,6 +35,13 @@ namespace DiDo.Levels
         public async Task InitBitmap(ICanvasResourceCreator creator)
         {
             this.Bitmap = await CanvasBitmap.LoadAsync(creator, this.Image);
+            this.Effect = ImageManipulation.img(this.Bitmap);
+        }
+
+        public void resizeBitmap(ICanvasResourceCreator creator)
+        {
+            var scaledSoftwareBitmap = CanvasBitmap.CreateFromSoftwareBitmap(creator, new SoftwareBitmap(BitmapPixelFormat.Bgra8, (int) 128, (int)128));
+            this.Bitmap = scaledSoftwareBitmap;
             this.Effect = ImageManipulation.img(this.Bitmap);
         }
     }
