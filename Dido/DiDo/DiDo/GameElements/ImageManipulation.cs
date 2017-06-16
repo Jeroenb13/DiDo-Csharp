@@ -13,8 +13,8 @@ namespace DiDo.GameElements
         public static Vector2 vector2 ()
         {
             //Together the center point of the player
-            vec.X = 16; 
-            vec.Y = 16;
+            vec.X = 16 * MainPage.scaleWidth; 
+            vec.Y = 16 * MainPage.scaleHeight;
             
             return vec;
         }
