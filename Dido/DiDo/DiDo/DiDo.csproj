@@ -89,6 +89,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Char\arms\AR.png" />
+    <Content Include="Assets\Char\arms\Pistol.png" />
+    <Content Include="Assets\Char\arms\SMG.png" />
+    <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +105,7 @@
     <Compile Include="Character\Enemy.cs" />
     <Compile Include="Character\MyPlayer.cs" />
     <Compile Include="Character\Position.cs" />
+    <Compile Include="GameElements\GameUI.cs" />
     <Compile Include="Items\ARWeapon.cs" />
     <Compile Include="Items\Bullet.cs" />
     <Compile Include="GameElements\Collide.cs" />
@@ -128,6 +133,8 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Player.cs" />
+    <Compile Include="Multiplayer\HeapByteBuf.cs" />
+    <Compile Include="Multiplayer\MpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +148,25 @@
     <Content Include="Assets\BG\level.png" />
     <Content Include="Assets\Bullets\bullet.png" />
     <Content Include="Assets\Bullets\drink-4.png" />
-    <Content Include="Assets\Char\spr_arms.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\1.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\2.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\3.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\4.png" />
+    <Content Include="Assets\Char\arms\AR\idle\1.png" />
+    <Content Include="Assets\Char\arms\AR\idle\2.png" />
+    <Content Include="Assets\Char\arms\AR\idle\3.png" />
+    <Content Include="Assets\Char\arms\AR\idle\4.png" />
+    <Content Include="Assets\Char\arms\AR\walking\1.png" />
+    <Content Include="Assets\Char\arms\AR\walking\2.png" />
+    <Content Include="Assets\Char\arms\AR\walking\3.png" />
+    <Content Include="Assets\Char\arms\AR\walking\4.png" />
+    <Content Include="Assets\Char\Char_UI\Daan.png" />
+    <Content Include="Assets\Char\Char_UI\Hayri.png" />
+    <Content Include="Assets\Char\Char_UI\Jeffrey.png" />
+    <Content Include="Assets\Char\Char_UI\Jeroen.png" />
+    <Content Include="Assets\Char\Char_UI\Jordy.png" />
+    <Content Include="Assets\Char\Char_UI\Matthew.png" />
+    <Content Include="Assets\Char\Char_UI\Max.png" />
     <Content Include="Assets\Char\spr_daan.png" />
     <Content Include="Assets\Char\spr_enemy.png" />
     <Content Include="Assets\Char\spr_hayri.png" />
@@ -215,6 +240,7 @@
     <Content Include="Assets\Tiles\floors\grass\grass_3.png" />
     <Content Include="Assets\Tiles\floors\grass\grass_4.png" />
     <Content Include="Assets\Tiles\gas.png" />
+    <Content Include="Assets\Tiles\gridviewtile.png" />
     <Content Include="Assets\Tiles\paths\cross\0.png" />
     <Content Include="Assets\Tiles\paths\straight\0.png" />
     <Content Include="Assets\Tiles\paths\straight\90.png" />
@@ -270,6 +296,13 @@
     <Content Include="Assets\Tiles\water\3.png" />
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
+    <Content Include="Assets\Tiles\whiteTile.png" />
+    <Content Include="Assets\UI\Health\health-empty.png" />
+    <Content Include="Assets\UI\Health\health-full.png" />
+    <Content Include="Assets\UI\Health\health-half.png" />
+    <Content Include="Assets\Weapons\gun-1.png" />
+    <Content Include="Assets\Weapons\gun-2.png" />
+    <Content Include="Assets\Weapons\gun-3.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
@@ -297,6 +330,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
+    <Folder Include="Assets\Char\arms\Pistol\" />
+    <Folder Include="Assets\Char\arms\SMG\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

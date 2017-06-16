@@ -10,7 +10,7 @@ namespace DiDo.Character
 {
     public class MyPlayer : ClientPlayer
     {
-        private PistolWeapon pistol = new PistolWeapon(15, 0, 0);
+        private PistolWeapon pistol = new PistolWeapon(15, 60, 15, 0, 0);
         public MyPlayer(string name, float x, float y) : base(name, x, y)
         {
             healthPoints = 100;
