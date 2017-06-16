@@ -13,7 +13,7 @@ namespace DiDo.Character
         private Random random;
         public int direction;
         public int stepSize = 2;
-        private PistolWeapon pistol = new PistolWeapon(15, 0, 0);
+        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 0, 0);
 
         public Enemy(String name, float x, float y) : base(name, x, y)
         {
@@ -26,7 +26,7 @@ namespace DiDo.Character
 
         public void hit(int damage = 1)
         {
-            this.Health = this.Health - damage;
+            this.healthPoints = this.healthPoints - damage;
         }
 
         public String debugName()
