@@ -32,11 +32,11 @@ namespace DiDo.Levels
             { "m_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
 
             { "m2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
-            { "m2_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) }, // blue
-            { "m2_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) }, // cyan
+            { "m2_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) }, // yellow
+            { "m2_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) }, // pink
             { "m2_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) }, // green
-            { "m2_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) }, // pink
-            { "m2_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) }, // yellow
+            { "m2_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) }, // cyan
+            { "m2_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) }, // blue
             
             { "m3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m3_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
@@ -112,7 +112,6 @@ namespace DiDo.Levels
             { "V", new Tile("fence", new Uri("ms-appx:///Assets/Tiles/fence.png")) },
             { "W", new Tile("gas", new Uri("ms-appx:///Assets/Tiles/gas.png")) },
             { "X", new Tile("rubbishbin", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png") ) },
-            { "Y", new Tile("empty", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png")) },         // AVAILABLE
             { "Z", new Tile("table", new Uri("ms-appx:///Assets/Tiles/table.png") ) },
             { "1", new Tile("tree", new Uri("ms-appx:///Assets/Tiles/tree.png")) },
             { "2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/1.png")) },
