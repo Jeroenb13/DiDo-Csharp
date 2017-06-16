@@ -29,7 +29,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite, Pistol, Assault_Rifle;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Arms_sprite, Player_sprite, Pistol, Assault_Rifle;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float DesignWidth = 1920;
@@ -115,6 +115,7 @@ namespace DiDo
                 }
             }
 
+            args.DrawingSession.DrawImage(ImageManipulation.image(Arms_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
@@ -244,7 +245,7 @@ namespace DiDo
 
             double radians = Math.Atan2((y2 - y1), (x2 - x1));
             double Angle = radians * (180 / Math.PI);
-            return radians;
+            return radians + (0.5 * Math.PI);
         }
 
 
@@ -292,6 +293,7 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
+            Arms_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_arms.png"));
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
