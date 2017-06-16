@@ -152,10 +152,10 @@ namespace DiDo
             //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-            args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
-            args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 605, Colors.Black);
-            args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 605, Colors.Black);
-            args.DrawingSession.DrawText("Additional ammo: " + player.currentWeapon.getAdditionalAmmo(), 425, 805, Colors.Black);
+            args.DrawingSession.DrawText("Player: " + getPlayerName(), 25, 605, Colors.Navy);
+            args.DrawingSession.DrawText("InHand: " + getPlayerWeaponName(), 225, 605, Colors.Black);
+            args.DrawingSession.DrawText("Ammo: " + getPlayerAmmo() , 425, 605, Colors.Black);
+            args.DrawingSession.DrawText("Additional ammo: " + getPlayerWeaponAdditionalAmmo(), 425, 805, Colors.Black);
             args.DrawingSession.DrawText("Health: " + player.getHealth(), 830, 605, Colors.Navy);
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 500, 800, 100)
             //Debug end
@@ -180,7 +180,78 @@ namespace DiDo
         public double xPos, yPos, xPos2, yPos2; // Temporary
                                                 //public String type_tile;
 
-       
+        /// <summary>
+        /// Checks if the player ammo is null or not and returns the amount
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerAmmo()
+        {
+            string ammo;
+            if (player.currentWeapon == null)
+            {
+                ammo = "";
+            }
+            else
+            {
+                ammo = player.currentWeapon.getAmmo().ToString();
+            }
+            return ammo;
+        }
+
+        /// <summary>
+        /// Checks if the player name is null or not and returns the name
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerName()
+        {
+            string name;
+            if (player.name == null)
+            {
+                name = "";
+            }
+            else
+            {
+                name = player.name;
+            }
+            return name;
+        }
+
+        /// <summary>
+        /// Checks if the player weapon name is null or not and returns the name
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerWeaponName()
+        {
+            string weaponName;
+            if (player.currentWeapon == null)
+            {
+                weaponName = "";
+            }
+            else
+            {
+                weaponName = player.currentWeapon.name;
+            }
+            return weaponName;
+        }
+
+        /// <summary>
+        /// Checks if playerAdditional ammo is null or not and returns the amount
+        /// </summary>
+        /// <returns></returns>
+        public string getPlayerWeaponAdditionalAmmo()
+        {
+            string additionalAmmo;
+            if(player.currentWeapon == null)
+            {
+                additionalAmmo = "";
+            }
+            else
+            {
+                additionalAmmo = player.currentWeapon.getAdditionalAmmo().ToString();
+            }
+            return additionalAmmo;
+        }
+
         /// <summary>
         /// draws the sprites for the level
         /// </summary>
