@@ -9,6 +9,10 @@
     <Import_RootNamespace>DiDoCommon</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Network\ConnectionHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\HeapByteBuf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packet\AbstractPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packet\PacketPlayerLogin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packet\PacketRegistry.cs" />
   </ItemGroup>
 </Project>

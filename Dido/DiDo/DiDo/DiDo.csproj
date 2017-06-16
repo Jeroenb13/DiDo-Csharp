@@ -129,7 +129,6 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Player.cs" />
-    <Compile Include="Multiplayer\HeapByteBuf.cs" />
     <Compile Include="Multiplayer\MpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -315,6 +314,7 @@
     <Folder Include="Assets\Char\arms\Pistol\" />
     <Folder Include="Assets\Char\arms\SMG\" />
   </ItemGroup>
+  <Import Project="..\DiDoCommon\DiDoCommon.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
