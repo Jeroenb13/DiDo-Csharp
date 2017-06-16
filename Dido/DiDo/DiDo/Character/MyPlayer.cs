@@ -13,32 +13,11 @@ namespace DiDo.Character
         private PistolWeapon pistol = new PistolWeapon(15, 60, 15, 0, 0);
         public MyPlayer(string name, float x, float y) : base(name, x, y)
         {
+            healthPoints = 100;
+            weapons = new Weapon[3];
             setItem(0, pistol);
             currentWeapon = weapons[0];
-        }
-
-
-        public void pickUpWeapon(Weapon weapon)
-        {
-            if (weapon.x >= x && weapon.x <= (x + 16) && weapon.y >= y && weapon.y <= (y - 16))
-            {
-                if (weapons[0] != null && weapons[1] != null && weapons[2] != null)
-                {
-                    setItem(currentWeaponIndex, weapon);
-                }
-                else if(weapons[0] == null && weapons[1] != null && weapons[2] != null)
-                {
-                    setItem(0, weapon);
-                }
-                else if (weapons[0] != null && weapons[1] == null && weapons[2] != null)
-                {
-                    setItem(1, weapon);
-                }
-                else
-                {
-                    setItem(2, weapon);
-                }
-            }
+            //weapons[0].x = 1337;
         }
     }
 }

@@ -293,13 +293,14 @@ namespace DiDo
             }
         }
 
-        public void addItem()
+        public void addItem(Characters character)
         {
             for (int i = 0; i < weapons.Length; i++)
             {
                 if (weapons[i] == null)
                 {
-                    weapons[i] = (Weapon)player.dropItem();
+                    weapons[i] = character.currentWeapon;
+                    character.dropItem();
                 }
             }
         }
@@ -375,19 +376,20 @@ namespace DiDo
                     bulletsToRemove.Add(bullet);
                 }
 
-                int emeniesCount = 0;
+                int enemiesCount = 0;
                 foreach (Enemy enemy in enemies)
                 {
                     if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
                     {
-                        enemy.hit(bullet.damage);
-                        if(enemy.health() <= 0)
+                        enemy.hit(player.currentWeapon.getDamage());
+                        if(enemy.getHealth() <= 0)
                         {
-                            enemiesToRemove.Add(emeniesCount); // Prepare enemy to be removed
+                            addItem(enemy);
+                            enemiesToRemove.Add(enemiesCount); // Enemy klaar zetten om te verwijderen
                         }
                         bulletsToRemove.Add(bullet); // Remove the bullet upon impact
                     }
-                    emeniesCount++;
+                    enemiesCount++;
                 }
             }
 

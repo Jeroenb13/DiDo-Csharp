@@ -90,10 +90,9 @@ namespace DiDo.Character
             }
             else if(keyPressed(VirtualKey.G))
             {
-                mainPage.addItem();
-                Weapon weapon = (Weapon)player.dropItem();
-
+                mainPage.addItem(player);
             }
+
             else if (keyPressed(VirtualKey.H))
             {
                 for (int i = 0; i < mainPage.weapons.Length; i++)
