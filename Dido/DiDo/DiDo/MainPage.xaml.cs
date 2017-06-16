@@ -120,7 +120,7 @@ namespace DiDo
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Inventory World: " + inventory(), 10, 700, Colors.Black);
-            args.DrawingSession.DrawText("Inventory Player: " + player.inventory(), 300, 700, Colors.Black);
+            args.DrawingSession.DrawText("Inventory Player: " + player.inventory(), 600, 700, Colors.Black);
             //args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
             args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
@@ -262,13 +262,14 @@ namespace DiDo
             }
         }
 
-        public void addItem()
+        public void addItem(Characters character)
         {
             for (int i = 0; i < weapons.Length; i++)
             {
                 if (weapons[i] == null)
                 {
-                    weapons[i] = (Weapon)player.dropItem();
+                    weapons[i] = character.currentWeapon;
+                    character.dropItem();
                 }
             }
         }
@@ -325,19 +326,20 @@ namespace DiDo
                     bulletsToRemove.Add(bullet);
                 }
 
-                int emeniesCount = 0;
+                int enemiesCount = 0;
                 foreach (Enemy enemy in enemies)
                 {
                     if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
                     {
-                        enemy.hit(bullet.damage);
-                        if(enemy.health() <= 0)
+                        enemy.hit(player.currentWeapon.getDamage());
+                        if(enemy.getHealth() <= 0)
                         {
-                            enemiesToRemove.Add(emeniesCount); // Enemy klaar zetten om te verwijderen
+                            addItem(enemy);
+                            enemiesToRemove.Add(enemiesCount); // Enemy klaar zetten om te verwijderen
                         }
                         bulletsToRemove.Add(bullet); // kogel na een hit verwijderen
                     }
-                    emeniesCount++;
+                    enemiesCount++;
                 }
             }
 

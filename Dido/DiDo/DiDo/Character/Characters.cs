@@ -9,19 +9,25 @@ namespace DiDo.Character
 {
     public abstract class Characters : Entity
     {
-        private int healthPoints { get; set; }
+        public string name { get; }
+        protected int healthPoints { get; set; }
         protected Weapon[] weapons;
         public Weapon currentWeapon;
         protected int currentWeaponIndex;
-        public Characters(float x, float y) : base(x, y)
+        public Characters(string name, float x, float y) : base(x, y)
         {
+            this.name = name;
             currentWeaponIndex = 0;
-            weapons = new Weapon[3];
         }
 
         public int getHealth()
         {
             return healthPoints;
+        }
+
+        public void hit(int damage)
+        {
+            this.healthPoints = this.healthPoints - damage;
         }
 
         public Item getItem(int index)
@@ -31,13 +37,13 @@ namespace DiDo.Character
 
         public Item dropItem()
         {
-            Item droppedWeapon = currentWeapon;
-            if (currentWeapon != null)
+            Item droppedWeapon = this.currentWeapon;
+            if (droppedWeapon != null)
             {
                 weapons[currentWeaponIndex].x = x;
                 weapons[currentWeaponIndex].y = y;
                 weapons[currentWeaponIndex] = null;
-                currentWeapon = null;
+                this.currentWeapon = null;
             }
             return droppedWeapon;
         }
@@ -63,26 +69,22 @@ namespace DiDo.Character
 
         public void pickUpWeapon(Weapon weapon)
         {
-                if (weapons[0] != null && weapons[1] != null && weapons[2] != null)
+            bool setWeapon = false;
+            for(int i = 0; i < weapons.Length && !setWeapon; i ++)
+            {
+                if (weapons[i] == null)
                 {
-                    setItem(currentWeaponIndex, weapon);
+                    setItem(i, weapon);
+                    setWeapon = true;
                 }
-                else if (weapons[0] == null && weapons[1] != null && weapons[2] != null)
-                {
-                    setItem(0, weapon);
-                }
-                else if (weapons[0] != null && weapons[1] == null && weapons[2] != null)
-                {
-                    setItem(1, weapon);
-                }
-                else if (weapons[0] != null && weapons[1] != null && weapons[2] == null)
-                {
-                    setItem(2, weapon);
-                }
-                else if (weapons[0] == null && weapons[1] == null && weapons[2] == null)
-                {
-                    setItem(0, weapon);
-                }
+                             
+            }
+            if (setWeapon == false)
+            {
+                dropItem();
+                setItem(currentWeaponIndex, weapon);
+                setWeapon = true;
+            }
         }
 
         public void changeWeapon(int number)
