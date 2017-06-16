@@ -145,6 +145,10 @@ namespace DiDo.Character
             {
                 player.changeWeapon(3);
             }
+            else if (keyPressed(VirtualKey.Space))
+            {
+                player.hit(1);
+            }
         }
 
         //Keydown events for character movement

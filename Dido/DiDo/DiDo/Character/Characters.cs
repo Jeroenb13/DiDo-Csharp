@@ -14,6 +14,7 @@ namespace DiDo.Character
         protected Weapon[] weapons;
         public Weapon currentWeapon;
         protected int currentWeaponIndex;
+        public Boolean alive = true;
         public Characters(string name, float x, float y) : base(x, y)
         {
             this.name = name;
@@ -29,7 +30,14 @@ namespace DiDo.Character
 
         public void hit(int damage)
         {
-            this.healthPoints = this.healthPoints - damage;
+            if (this.alive)
+            {
+                this.healthPoints = this.healthPoints - damage;
+                if (this.healthPoints <= 0)
+                {
+                    this.alive = false;
+                }
+            }
         }
 
         public Item getItem(int index)
