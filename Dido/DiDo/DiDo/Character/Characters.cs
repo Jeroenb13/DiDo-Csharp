@@ -29,6 +29,19 @@ namespace DiDo.Character
             return weapons[index];
         }
 
+        public Item dropItem()
+        {
+            Item droppedWeapon = currentWeapon;
+            if (currentWeapon != null)
+            {
+                weapons[currentWeaponIndex].x = x;
+                weapons[currentWeaponIndex].y = y;
+                weapons[currentWeaponIndex] = null;
+                currentWeapon = null;
+            }
+            return droppedWeapon;
+        }
+
         public string inventory()
         {
             string inventory = "";
@@ -45,6 +58,50 @@ namespace DiDo.Character
         public void setItem(int index, Weapon newWeapon)
         {
             weapons[index] = newWeapon;
+        }
+
+
+        public void pickUpWeapon(Weapon weapon)
+        {
+                if (weapons[0] != null && weapons[1] != null && weapons[2] != null)
+                {
+                    setItem(currentWeaponIndex, weapon);
+                }
+                else if (weapons[0] == null && weapons[1] != null && weapons[2] != null)
+                {
+                    setItem(0, weapon);
+                }
+                else if (weapons[0] != null && weapons[1] == null && weapons[2] != null)
+                {
+                    setItem(1, weapon);
+                }
+                else if (weapons[0] != null && weapons[1] != null && weapons[2] == null)
+                {
+                    setItem(2, weapon);
+                }
+                else if (weapons[0] == null && weapons[1] == null && weapons[2] == null)
+                {
+                    setItem(0, weapon);
+                }
+        }
+
+        public void changeWeapon(int number)
+        {
+            if (number == 1)
+            {
+                currentWeaponIndex = 0;
+                currentWeapon = weapons[0];
+            }
+            else if (number == 2)
+            {
+                currentWeaponIndex = 1;
+                currentWeapon = weapons[1];
+            }
+            else if (number == 3)
+            {
+                currentWeaponIndex = 2;
+                currentWeapon = weapons[2];
+            }
         }
     }
 }

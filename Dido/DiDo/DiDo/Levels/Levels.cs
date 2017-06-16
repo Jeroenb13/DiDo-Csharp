@@ -23,12 +23,42 @@ namespace DiDo.Levels
             { "j", new Tile("crack4", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-4.png"), true) },
             { "k", new Tile("crack5", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-5.png"), true) },
             { "l", new Tile("crack6", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-6.png"), true) },
-            { "m", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/spr_disco.png"), true) },
+
+            { "m", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
             { "m_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
             { "m_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
             { "m_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+
+            { "m2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m2_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) }, // blue
+            { "m2_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) }, // cyan
+            { "m2_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) }, // green
+            { "m2_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) }, // pink
+            { "m2_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) }, // yellow
+            
+            { "m3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m3_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m3_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+            { "m3_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m3_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m3_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+
+            { "m4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m4_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m4_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
+            { "m4_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m4_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m4_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+
+            { "m5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+            { "m5_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
+            { "m5_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m5_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m5_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+            { "m5_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
+
             { "n", new Tile("flower1", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_1.png"), true) },
             { "o", new Tile("flower2", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_2.png"), true) },
             { "p", new Tile("flower3", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_3.png"), true) },
@@ -119,7 +149,12 @@ namespace DiDo.Levels
 
         public String getTileType(float x, float y, String [,] gekozenLevel)
         {
-            return getPlayerTile(x, y, gekozenLevel).TileType;
+            Tile tile = getPlayerTile(x, y, gekozenLevel);
+            if(tile == null)
+            {
+                return null;
+            }
+            return tile.TileType;
         }
 
         /// <summary>
@@ -137,6 +172,12 @@ namespace DiDo.Levels
             double yPos = y_round * 32;
             double xPos2 = xPos + 32;
             double yPos2 = yPos + 32;
+
+            //if(y_round >= gekozenLevel.GetLength(1) || x_round >= gekozenLevel.GetLength(2))
+            //{
+            //    return null;
+            //}
+
             String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
             Tile tile = getTile(tile_Type);
 
@@ -239,28 +280,34 @@ namespace DiDo.Levels
             {"H","H","H","X","f","f","f","f","f","f","T","H","H","H","H","X","f","f","f","f","f","f","f","f","f","T"},
             {"H","H","H","Y","V","V","V","V","V","V","W","H","H","H","H","Y","V","V","V","V","V","V","V","V","V","W"}
         };
+
+        //Disco YEAH
         public static String[,] levelFive = { // 39 x 21
-            {"m","8","4","5","4","5","4","5","4","6","m","m","m","1","!","$","m","1","!","$","m","1","!","$","m","1","!","$","m","m","m","m","m","w","w","w","w","w","w"},
-            {"m","8","5","4","5","4","5","4","5","6","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w"},
-            {"m","0","7","7","7","7","7","7","7","8","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w"},
-            {"m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w"},
-            {"m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","m","m","m","m","w","w","w","w","w","w"}};
+            {"Q","I","I","I","I","I","I","I","I","I","I","I","I","M","I","I","I","I","I","I","I","I","I","I","I","I","M","I","I","I","I","I","I","I","I","M","I","I","I","I","R"},
+            {"L","m","8","4","5","4","5","4","5","4","6","m","m","m","#","!","$","m","#","!","$","m","#","!","$","m","#","!","$","m","m","m","m","m","w","w","w","w","w","w","J"},
+            {"L","m2","8","5","4","5","4","5","4","5","6","m","m","m3","m4","m2","m5","m3","m5","m","m","m","m4","m5","m2","m4","m4","m3","m","m3","m3","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m3","0","7","7","7","7","7","7","7","9","m3","m","m3","m5","m3","m2","m2","m5","m","m4","m5","m3","m4","m4","m3","m","m5","m4","m4","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m4","m5","m2","m4","m4","m3","m4","m5","m3","m4","m4","m3","m4","m5","m4","m4","m4","m3","m4","m5","m5","m4","m4","m3","m2","m5","m","m3","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m5","m3","m5","m2","m2","m2","m","m","m4","m5","m2","m4","m4","m3","m3","m2","m3","m5","m3","m5","m2","m4","m2","m4","m5","m","m4","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m","m4","m2","m4","m2","m4","m4","m5","m5","m4","m4","m3","m3","m4","m5","m3","m4","m4","m3","m4","m5","m4","m4","m4","m3","m4","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m2","m5","m4","m5","m2","m5","m2","m5","m2","m3","m2","m2","m5","m3","m2","m3","m4","m5","m4","m5","m2","m4","m4","m2","m5","m","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m3","m5","m2","m5","m3","m2","m","m5","m","m4","m5","m2","m4","m4","m3","m","m2","m5","m2","m3","m2","m","m5","m4","m3","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m4","m3","m3","m4","m4","m3","m4","m3","m3","m4","m5","m3","m4","m4","m3","m4","m5","m4","m4","m4","m3","m4","m5","m2","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m5","m2","m4","m5","m2","m2","m5","m4","m2","m","m3","m4","m","m2","m4","m3","m5","m","m3","m","m4","m5","m2","m","m5","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m","m2","m2","m2","m2","m2","m3","m2","m2","m5","m3","m2","m4","m","m5","m4","m5","m2","m4","m4","m2","m5","m2","m4","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m2","m3","m2","m2","m3","m4","m4","m2","m4","m5","m2","m3","m4","m2","m","m","m3","m","m","m2","m3","m4","m5","m4","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m3","m4","m2","m2","m5","m2","m3","m2","m2","m5","m3","m2","m3","m4","m5","m4","m5","m2","m4","m4","m3","m","m2","m2","m4","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m4","m2","m3","m5","m2","m4","m","m","m","m","m","m","m","m","m","m","m5","m","m","m","m","m","m","m","m","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m5","m4","m4","m3","m3","m5","m","m2","m3","m4","m5","m2","m","m4","m5","m2","m4","m3","m2","m4","m5","m4","m3","m2","m3","m","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m","m2","m2","m2","m5","m2","m3","m4","m","m5","m4","m3","m2","m","m2","m4","m3","m5","m4","m","m2","m3","m5","m4","m2","m3","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m2","m2","m2","m2","m2","m3","m2","m3","m4","m5","m","m5","m4","m3","m2","m","m2","m3","m4","m5","m","m2","m5","m3","m4","m3","m5","w","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m3","m2","m3","m2","m2","m2","m","m5","m4","m2","m2","m2","m4","m4","m2","m3","m","m4","m3","m5","m4","m2","m","m3","m2","m5","m4","m3","w","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m4","m3","m5","m3","m3","m2","m2","m4","m3","m5","m3","m3","m2","m","m5","m4","m3","m2","m","m2","m3","m4","m5","m3","m4","m2","m3","m2","m5","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m5","m4","m2","m2","m2","m4","m","m5","m4","m2","m2","m2","m4","m2","m5","m5","m3","m2","m3","m4","m2","m3","m4","m5","m4","m2","m5","m4","m2","m3","w","w","w","w","w","w","w","w","w","J"},
+            {"L","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","m","m","m","m","w","w","w","w","w","w","J"},
+            {"T","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","S"}
+
+        };
 
 
         public static String[,] levelSix =
@@ -292,5 +339,22 @@ namespace DiDo.Levels
             {"Y","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","V","W"}
     };
 
-}
+    public static String[,] testLevel = {
+        {"Q","M","M","M","I","I","I","I","I","I","I","I","I","I","I","R"},
+        {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
+        {"L","m5","m4","m3","m2","m","r","q","p","o","n","2","w","w","w","N"},
+        {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
+        {"P","m5","m4","m3","m2","m","w","w","w","w","w","w","w","w","w","N"},
+        {"P","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
+        {"P","v","u","t","s","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","v","u","t","s","w","w","w","K","K","K","K","K","K","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+        {"T","K","K","O","O","O","K","K","K","K","K","K","K","K","K","S"}
+    };
+
+    }
 }

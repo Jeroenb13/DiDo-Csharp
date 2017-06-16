@@ -141,6 +141,18 @@
     <Content Include="Assets\BG\level.png" />
     <Content Include="Assets\Bullets\bullet.png" />
     <Content Include="Assets\Bullets\drink-4.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\1.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\2.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\3.png" />
+    <Content Include="Assets\Char\arms\AR\aiming\4.png" />
+    <Content Include="Assets\Char\arms\AR\idle\1.png" />
+    <Content Include="Assets\Char\arms\AR\idle\2.png" />
+    <Content Include="Assets\Char\arms\AR\idle\3.png" />
+    <Content Include="Assets\Char\arms\AR\idle\4.png" />
+    <Content Include="Assets\Char\arms\AR\walking\1.png" />
+    <Content Include="Assets\Char\arms\AR\walking\2.png" />
+    <Content Include="Assets\Char\arms\AR\walking\3.png" />
+    <Content Include="Assets\Char\arms\AR\walking\4.png" />
     <Content Include="Assets\Char\spr_daan.png" />
     <Content Include="Assets\Char\spr_enemy.png" />
     <Content Include="Assets\Char\spr_hayri.png" />
@@ -157,6 +169,8 @@
     <Content Include="Assets\Items\drink-4.png" />
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
+    <Content Include="Assets\Items\gun-1.png" />
+    <Content Include="Assets\Items\gun-3.png" />
     <Content Include="Assets\Items\key.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Menu\ExitButton.png" />
@@ -294,6 +308,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
+    <Folder Include="Assets\Char\arms\Pistol\" />
+    <Folder Include="Assets\Char\arms\SMG\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

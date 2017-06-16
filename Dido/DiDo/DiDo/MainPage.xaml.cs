@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Microsoft.Graphics.Canvas.Effects;
 using DiDo.Character;
 using Windows.UI.Xaml.Input;
+using DiDo.Items;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DiDo
@@ -28,7 +29,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Player_sprite;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Arms_sprite, Player_sprite, Pistol, Assault_Rifle;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public Rect ui = new Rect(15, 500, 800, 100); //UI element 
@@ -46,30 +47,40 @@ namespace DiDo
         //Lists Projectile
         public List<Bullet> bullets = new List<Bullet>();
 
+        public Weapon[] weapons;
+
         public static int GameState = 0; // startscreen
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public MyPlayer player = new MyPlayer("Spy",32, 32);
+        public MyPlayer player = new MyPlayer("Spy",32, 96);
 
         public List<Enemy> enemies = new List<Enemy>();
 
-        public float temp_x, temp_y; // Tijdelijk
+        public float temp_x, temp_y; // Temporary
 
         public double frames = 0;
 
         public Random random = new Random();
 
+
+        /// <summary>
+        /// Creates the resources of the game
+        /// </summary>
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
+        /// <summary>
+        /// This method draws the player and the level 60 times per second
+        /// </summary>
         private void GameCanvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             this.frames++;
             GameStateManager.GSManager();
 
+            // scales the player
             if (player.x == 0 && player.y == 0)
             {
                 player.x = 32 * scaleWidth;
@@ -77,13 +88,19 @@ namespace DiDo
             }
 
 
-            // Level
-
+            // draws the Level
             drawLevel(sender, args);
+
+            //character movement
             controller.movementCharacter(sender, args, player, levels);
+
+            //bullet handling
             bulletHandling(sender, args);
+
+    
             updatePoint(player);
 
+            //draws the enemy
             foreach (Enemy enemy in enemies)
             {
                 args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
@@ -91,6 +108,20 @@ namespace DiDo
             }
 
             //Debug
+            foreach(Weapon weapon in weapons)
+            {
+                if(weapon != null)
+                {
+                    args.DrawingSession.DrawImage(Pistol, weapon.x, weapon.y);
+                }
+            }
+
+            args.DrawingSession.DrawImage(ImageManipulation.image(Arms_sprite, radians(mousePoint, playerPoint)), player.x, player.y);
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame   
+            //args.DrawingSession.DrawText("Inventory World: " + inventory(), 10, 700, Colors.Black);
+            //args.DrawingSession.DrawText("Inventory Player: " + player.inventory(), 300, 700, Colors.Black);
+            //args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name + " " + player.currentWeapon.getAmmo(), 10, 750, Colors.Black);
+            
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             //args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
@@ -105,15 +136,32 @@ namespace DiDo
             //Debug end
 
 
+            // triggers the draw event 60 times per second
             GameCanvas.Invalidate();
 
             
         }
 
-        public double xPos, yPos, xPos2, yPos2; // tijdelijk
+        public string inventory()
+        {
+            string inventory = "";
+            foreach (Weapon weapon in weapons)
+            {
+                if (weapon != null)
+                {
+                    inventory = inventory + " | " + weapon.name;
+                }
+            }
+            return inventory;
+        }
+
+        public double xPos, yPos, xPos2, yPos2; // Temporary
                                                 //public String type_tile;
 
-
+       
+        /// <summary>
+        /// draws the sprites for the level
+        /// </summary>
         public void  drawLevel(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             var frames_sprite = (int)(this.frames / 15) + 1;
@@ -125,7 +173,7 @@ namespace DiDo
                     string tileType = levels.gekozenLevel[x, y].ToString();
                     string tmp = tileType + "_" + frames_sprite;
 
-                    
+                    // makes the sprite move
                     if (Levels.Levels.tiles.ContainsKey(tmp))
                     {
                         //Debug.WriteLine(tmp);
@@ -161,8 +209,9 @@ namespace DiDo
        
         public MainPage()
         {
+            weapons = new Weapon[100];
             levels = new Levels.Levels();
-            controller = new ClientController(player.name, player.x, player.y);
+            controller = new ClientController(this, player.name, player.x, player.y);
             mousePoint = new Point();
             playerPoint = new Point(player.x, player.y);
             this.InitializeComponent();
@@ -174,9 +223,9 @@ namespace DiDo
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            this.enemies.Add(new Enemy("Freek", 128, 32)); // De AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 192, 96)); // De AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 256, 128)); // De AI Enemy 3
+            this.enemies.Add(new Enemy("Freek", 128, 32)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 192, 96)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
         }
         
         public void updatePoint(Player player)
@@ -204,7 +253,7 @@ namespace DiDo
 
             double radians = Math.Atan2((y2 - y1), (x2 - x1));
             double Angle = radians * (180 / Math.PI);
-            return radians;
+            return radians + (0.5 * Math.PI); // half of pi added, so that the players head follows the cursor, instead of its arms.
         }
 
 
@@ -221,6 +270,28 @@ namespace DiDo
             }
         }
 
+        public void addItem()
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                if (weapons[i] == null)
+                {
+                    weapons[i] = (Weapon)player.dropItem();
+                }
+            }
+        }
+
+        public void removeItem(Weapon item)
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                if (weapons[i] == item)
+                {
+                    weapons[i] = null;
+                }
+            }
+        }
+
         private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
             bounds = ApplicationView.GetForCurrentView().VisibleBounds;
@@ -230,12 +301,14 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
+            Arms_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR/idle/1.png"));
             Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
             StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
+            Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Items/gun-3.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
-             // Zodat dit niet elk frame gebeurt maar slechts eenmalig
+             // So that this isn't done on each frame, but only once.
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
@@ -268,9 +341,9 @@ namespace DiDo
                         enemy.hit(bullet.damage);
                         if(enemy.health() <= 0)
                         {
-                            enemiesToRemove.Add(emeniesCount); // Enemy klaar zetten om te verwijderen
+                            enemiesToRemove.Add(emeniesCount); // Prepare enemy to be removed
                         }
-                        bulletsToRemove.Add(bullet); // kogel na een hit verwijderen
+                        bulletsToRemove.Add(bullet); // Remove the bullet upon impact
                     }
                     emeniesCount++;
                 }
@@ -316,17 +389,20 @@ namespace DiDo
                     float xVel = xPos - player.x;
                     float yVel = yPos - player.y;
 
-                    // pythagorasmagie
+                    // pythagorasmagic
                     float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
                     float scaling = distance / 25;
 
                     xVel = xVel / scaling;
                     yVel = yVel / scaling;
-                    if(player.currentWeapon.getAmmo() >= 1)
+                    if(player.currentWeapon != null)
                     {
-                        //Debug.WriteLine(player.currentWeapon.getDamage());
-                        bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-                        player.currentWeapon.reduceAmmo();
+                        if (player.currentWeapon.getAmmo() >= 1)
+                        {
+                            //Debug.WriteLine(player.currentWeapon.getDamage());
+                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                            player.currentWeapon.reduceAmmo();
+                        }
                     }
                 }
             }
