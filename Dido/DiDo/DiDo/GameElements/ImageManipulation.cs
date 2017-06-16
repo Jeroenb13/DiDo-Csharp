@@ -5,7 +5,7 @@ using Windows.Foundation;
 
 namespace DiDo.GameElements
 {
-    //Class to move the player around in a specific direction
+    ///Class to move the player around in a specific direction
     class ImageManipulation
     {
         public static Vector2 vec = new Vector2();
@@ -13,19 +13,25 @@ namespace DiDo.GameElements
         public static Vector2 vector2 ()
         {
             //Together the center point of the player
-            vec.X = 16; 
-            vec.Y = 16;
+            vec.X = 16 * MainPage.scaleWidth; 
+            vec.Y = 16 * MainPage.scaleHeight;
             
             return vec;
         }
-
-        //Method to scale the window to every window size
+        /// <summary>
+        /// Method to scale the window to every window size
+        /// </summary>
         public static void SetScale()
         {
             MainPage.scaleWidth = (float)MainPage.bounds.Width / MainPage.DesignWidth;
             MainPage.scaleHeight = (float)MainPage.bounds.Height / MainPage.DesignHeight;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static Transform2DEffect img(CanvasBitmap source)
         {
             Transform2DEffect image;
@@ -35,7 +41,12 @@ namespace DiDo.GameElements
             return image;
         }
 
-        //In the MainPage class, when the 'W' button is pressed
+        /// <summary>
+        /// In the MainPage class, when the 'W' button is pressed
+        /// </summary>
+        /// <param name="source">The source of an image</param>
+        /// <param name="radians">The radians of the image</param>
+        /// <returns>an image</returns>
         public static Transform2DEffect image(CanvasBitmap source, double radians)
         {
             vector2();

@@ -102,6 +102,7 @@
     <Compile Include="Character\Enemy.cs" />
     <Compile Include="Character\MyPlayer.cs" />
     <Compile Include="Character\Position.cs" />
+    <Compile Include="GameElements\GameUI.cs" />
     <Compile Include="Items\ARWeapon.cs" />
     <Compile Include="Items\Bullet.cs" />
     <Compile Include="GameElements\Collide.cs" />
@@ -156,6 +157,13 @@
     <Content Include="Assets\Char\arms\AR\walking\2.png" />
     <Content Include="Assets\Char\arms\AR\walking\3.png" />
     <Content Include="Assets\Char\arms\AR\walking\4.png" />
+    <Content Include="Assets\Char\Char_UI\Daan.png" />
+    <Content Include="Assets\Char\Char_UI\Hayri.png" />
+    <Content Include="Assets\Char\Char_UI\Jeffrey.png" />
+    <Content Include="Assets\Char\Char_UI\Jeroen.png" />
+    <Content Include="Assets\Char\Char_UI\Jordy.png" />
+    <Content Include="Assets\Char\Char_UI\Matthew.png" />
+    <Content Include="Assets\Char\Char_UI\Max.png" />
     <Content Include="Assets\Char\spr_daan.png" />
     <Content Include="Assets\Char\spr_enemy.png" />
     <Content Include="Assets\Char\spr_hayri.png" />
@@ -286,6 +294,9 @@
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
     <Content Include="Assets\Tiles\whiteTile.png" />
+    <Content Include="Assets\UI\Health\health-empty.png" />
+    <Content Include="Assets\UI\Health\health-full.png" />
+    <Content Include="Assets\UI\Health\health-half.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
