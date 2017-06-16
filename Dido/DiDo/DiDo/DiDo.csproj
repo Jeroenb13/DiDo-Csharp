@@ -123,8 +123,17 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuFolder\CharacterSwitch.xaml.cs">
+      <DependentUpon>CharacterSwitch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuFolder\Help\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuFolder\InvadeConnect.xaml.cs">
+      <DependentUpon>InvadeConnect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuFolder\InvadePage.xaml.cs">
+      <DependentUpon>InvadePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenuFolder\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
@@ -318,7 +327,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MenuFolder\CharacterSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MenuFolder\Help\HelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFolder\InvadeConnect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFolder\InvadePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

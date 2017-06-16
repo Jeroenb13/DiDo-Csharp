@@ -1,4 +1,5 @@
 ﻿using DiDo.Items;
+using DiDo.Levels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,26 +43,44 @@ namespace DiDo.Character
 
         public void randomWalk()
         {
-            if (this.random.Next(0, 20) == 1)
+            DiDo.Levels.Levels level = new DiDo.Levels.Levels();
+
+
+            if (this.random.Next(0, 30) == 1)
             {
                 this.direction = random.Next(0, 4);
             }
-
             if (this.direction == 0)
             {
-                this.y += stepSize;
+                Tile nextTile = level.getPlayerTile(this.x, this.y + 1, level.gekozenLevel);
+                if (nextTile.CanWalk == true)
+                {
+                    this.y += stepSize;
+                }
             }
             else if (this.direction == 1)
             {
-                this.x += stepSize;
+                Tile nextTile = level.getPlayerTile(this.x + 1, this.y, level.gekozenLevel);
+                if (nextTile.CanWalk == true)
+                {
+                    this.x += stepSize;
+                }
             }
             else if (this.direction == 2)
             {
-                this.y -= stepSize;
+                Tile nextTile = level.getPlayerTile(this.x, this.y - 1, level.gekozenLevel);
+                if (nextTile.CanWalk == true)
+                {
+                    this.y -= stepSize;
+                }
             }
             else
             {
-                this.x -= stepSize;
+                Tile nextTile = level.getPlayerTile(this.x - 1, this.y, level.gekozenLevel);
+                if (nextTile.CanWalk == true)
+                {
+                    this.x -= stepSize;
+                }
             }
         }
 

@@ -19,6 +19,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using DiDo.Character;
 using Windows.UI.Xaml.Input;
 using DiDo.Items;
+using DiDo.MenuFolder;
 using Windows.System.Threading;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -52,7 +53,7 @@ namespace DiDo
 
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
 
-        public MyPlayer player = new MyPlayer("Jeroen",32, 96);
+        public MyPlayer player;
 
         public List<Enemy> enemies = new List<Enemy>();
 
@@ -302,14 +303,46 @@ namespace DiDo
             }
 
         }
-       
+       /// <summary>
+       /// Initialisation of the mainpage for singleplayer
+       /// </summary>
         public MainPage()
         {
+
+            if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
+            {
+                player = new MyPlayer("Jeroen", 32, 96);
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
+            {
+                player = new MyPlayer("Jeffrey", 32, 96);
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
+            {
+                player = new MyPlayer("Daan", 32, 96);
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
+            {
+                player = new MyPlayer("Jordy", 32, 96);
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
+            {
+                player = new MyPlayer("Matthew", 32, 96);
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
+            {
+                player = new MyPlayer("Hayri", 32, 96);
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
+            {
+                player = new MyPlayer("Max", 32, 96);
+            }
+            controller = new ClientController(this, player.name, player.x, player.y);
             weapons = new Weapon[100];
             levels = new Levels.Levels();
-            controller = new ClientController(this, player.name, player.x, player.y);
+            
             mousePoint = new Point();
-            playerPoint = new Point(player.x, player.y);
+            
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
             
@@ -318,9 +351,12 @@ namespace DiDo
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            this.enemies.Add(new Enemy("Freek", 256, 224)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 384, 96)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Freek", 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 256, 128)); // The AI Enemy 2
             this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
+
+
+
         }
         
         public void updatePoint(Player player)
@@ -420,20 +456,53 @@ namespace DiDo
             Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
             Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
             reloadArms();
-            Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
-            StartScreen = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/BG/level.png"));
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
             UI_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-2.png"));
             UI_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-3.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
+
+            if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeffrey.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeffrey.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_daan.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Daan.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jordy.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jordy.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_matthew.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Matthew.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Hayri.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_max.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Max.png"));
+            }
             Health_Full = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
             Health_Half = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-half.png"));
             Health_Empty = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-empty.png"));
-            Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
 
-             // So that this isn't done on each frame, but only once.
+            // So that this isn't done on each frame, but only once.
 
             foreach (Tile t in Levels.Levels.tiles.Values)
             {
