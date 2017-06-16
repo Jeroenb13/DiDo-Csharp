@@ -118,6 +118,8 @@ namespace DiDo
                 }
             }
 
+            
+            
             //Adding the healthbar to the UI element
             for (int i = 0; i < 5; i++)
             {
@@ -131,12 +133,13 @@ namespace DiDo
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawImage(Char_UI, 25, 635); //Adding the character playing to the UI element
+            args.DrawingSession.DrawImage(Pistol, 225, 635); //Adding the current weapon to the UI element
             //args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-            args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
+           args.DrawingSession.DrawText("Player: " + player.name, 25, 605, Colors.Navy);
             args.DrawingSession.DrawText("InHand: " + player.currentWeapon.name, 225, 605, Colors.Black);
             args.DrawingSession.DrawText("Ammo: " + player.currentWeapon.getAmmo(), 425, 605, Colors.Black);
             args.DrawingSession.DrawText("Additional ammo: " + player.currentWeapon.getAdditionalAmmo(), 425, 805, Colors.Black);

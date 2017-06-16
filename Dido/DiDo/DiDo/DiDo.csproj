@@ -300,6 +300,9 @@
     <Content Include="Assets\UI\Health\health-empty.png" />
     <Content Include="Assets\UI\Health\health-full.png" />
     <Content Include="Assets\UI\Health\health-half.png" />
+    <Content Include="Assets\Weapons\gun-1.png" />
+    <Content Include="Assets\Weapons\gun-2.png" />
+    <Content Include="Assets\Weapons\gun-3.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
