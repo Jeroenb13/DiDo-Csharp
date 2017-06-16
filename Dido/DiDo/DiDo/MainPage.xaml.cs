@@ -29,7 +29,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {
         // The images of the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, Arms_sprite, Player_sprite, Pistol, Assault_Rifle, Health_Player, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentArms, Arms_sprite_AR_aiming, Arms_sprite_AR_idle, Arms_sprite_AR_walking, Player_sprite, Pistol, Assault_Rifle, Health_Player, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public Rect ui = new Rect(15, 600, 800, 100); //UI element 
@@ -126,7 +126,7 @@ namespace DiDo
                 }
             }
 
-            args.DrawingSession.DrawImage(ImageManipulation.image(Arms_sprite, radians(mousePoint, playerPoint)), player.x, player.y);
+            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
             args.DrawingSession.DrawImage(Char_UI, 25, 635); //Adding the character playing to the UI element
