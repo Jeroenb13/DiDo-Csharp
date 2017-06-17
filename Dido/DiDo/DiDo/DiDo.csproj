@@ -92,6 +92,8 @@
     <Content Include="Assets\Char\arms\AR.png" />
     <Content Include="Assets\Char\arms\Pistol.png" />
     <Content Include="Assets\Char\arms\SMG.png" />
+    <Content Include="Assets\Char\Char_UI\samus.png" />
+    <Content Include="Assets\Char\spr_samus.png" />
     <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
   </ItemGroup>

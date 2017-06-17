@@ -384,7 +384,7 @@ namespace DiDo
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
             {
-                player = new MyPlayer("Jordy", 150, 150, 0, 3, 32, 96);
+                player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
             {
@@ -397,6 +397,11 @@ namespace DiDo
             else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
             {
                 player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96);
+            }
+
+            else if (CharacterSwitch.PlayerCharacter.Equals("Samus"))
+            {
+                player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96);
             }
             controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
             weapons = new Weapon[100];
@@ -567,6 +572,11 @@ namespace DiDo
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_max.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Max.png"));
+            }
+            else if (CharacterSwitch.PlayerCharacter.Equals("Samus"))
+            {
+                Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_samus.png"));
+                Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/samus.png"));
             }
             Health_Full = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-full.png"));
             Health_Half = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/Health/health-half.png"));

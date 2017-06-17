@@ -80,5 +80,11 @@ namespace DiDo.MenuFolder
             this.Frame.Navigate(typeof(MainPage));
 
         }
+
+        private void SamusBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayerCharacter = "Samus";
+            this.Frame.Navigate(typeof(MainPage));
+        }
     }
 }

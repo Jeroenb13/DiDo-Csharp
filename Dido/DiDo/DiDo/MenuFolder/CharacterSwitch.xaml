@@ -42,10 +42,10 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Char/Char_UI/Jeroen.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="JeroenBtn" Content="&lt;-- Jeroen" Grid.Column="2" HorizontalAlignment="Left" Height="44" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="225" Tapped="JeroenBtn_Tapped"/>
-        <Button x:Name="JeffreyBtn" Content="&lt;-- Jeffrey" Grid.Column="2" HorizontalAlignment="Left" Height="44" Margin="0,1,0,0" Grid.Row="5" VerticalAlignment="Top" Width="225" Tapped="JeffreyBtn_Tapped"/>
-        <Button x:Name="JordyBtn" Content="&lt;-- Jordy" Grid.Column="2" HorizontalAlignment="Left" Height="46" Grid.Row="7" VerticalAlignment="Top" Width="225" Tapped="JordyBtn_Tapped"/>
-        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="0,2,0,0" Grid.Row="5" Stroke="Black" VerticalAlignment="Top" Width="140">
+        <Button x:Name="JeroenBtn" Content="&lt;-- Jeroen" Grid.Column="2" HorizontalAlignment="Left" Height="50" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="225" Tapped="JeroenBtn_Tapped"/>
+        <Button x:Name="JeffreyBtn" Content="&lt;-- Jeffrey" Grid.Column="2" HorizontalAlignment="Left" Height="50" Margin="0,1,0,0" Grid.Row="5" VerticalAlignment="Top" Width="225" Tapped="JeffreyBtn_Tapped"/>
+        <Button x:Name="JordyBtn" Content="&lt;-- Jordy" Grid.Column="2" HorizontalAlignment="Left" Height="50" Grid.Row="7" VerticalAlignment="Top" Width="225" Tapped="JordyBtn_Tapped"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="0,0,0,0" Grid.Row="5" Stroke="Black" VerticalAlignment="Top" Width="140">
             <Rectangle.Fill>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Char/Char_UI/Jeffrey.png"/>
             </Rectangle.Fill>
@@ -55,10 +55,10 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Char/Char_UI/Jordy.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="MatthewBtn" Content="Matthew -->" Grid.Column="3" HorizontalAlignment="Left" Height="44" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="225" Tapped="MatthewBtn_Tapped"/>
-        <Button x:Name="MaxBtn" Content="Max -->" Grid.Column="3" HorizontalAlignment="Left" Height="49" Grid.Row="5" VerticalAlignment="Bottom" Width="225" Grid.RowSpan="2" Margin="0,0,0,7" Tapped="MaxBtn_Tapped"/>
-        <Button x:Name="DaanBtn" Content="Daan -->" Grid.Column="3" HorizontalAlignment="Left" Height="51" Grid.Row="7" VerticalAlignment="Top" Width="225" Grid.RowSpan="2" Tapped="DaanBtn_Tapped"/>
-        <Button x:Name="HayriBtn" Content="&lt;-- Hayri -->" Grid.Column="2" HorizontalAlignment="Left" Height="44" Margin="0,4,0,0" Grid.Row="9" VerticalAlignment="Top" Width="450" Grid.ColumnSpan="2" Tapped="HayriBtn_Tapped"/>
+        <Button x:Name="MatthewBtn" Content="Matthew -->" Grid.Column="3" HorizontalAlignment="Left" Height="50" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="225" Tapped="MatthewBtn_Tapped"/>
+        <Button x:Name="MaxBtn" Content="Max -->" Grid.Column="3" HorizontalAlignment="Left" Height="50" Grid.Row="5" VerticalAlignment="Bottom" Width="225" Margin="0,0,0,2" Tapped="MaxBtn_Tapped"/>
+        <Button x:Name="DaanBtn" Content="Daan -->" Grid.Column="3" HorizontalAlignment="Left" Height="50" Grid.Row="7" VerticalAlignment="Top" Width="225" Tapped="DaanBtn_Tapped"/>
+        <Button x:Name="HayriBtn" Content="&lt;-- Hayri" Grid.Column="2" HorizontalAlignment="Left" Height="44" Margin="0,4,0,0" Grid.Row="9" VerticalAlignment="Top" Width="225" Tapped="HayriBtn_Tapped"/>
         <Rectangle Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="48" Grid.Row="9" Stroke="Black" VerticalAlignment="Top" Width="141">
             <Rectangle.Fill>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Char/Char_UI/Hayri.png"/>
@@ -66,7 +66,7 @@
         </Rectangle>
         <Rectangle Grid.ColumnSpan="2" Grid.Column="3" HorizontalAlignment="Left" Height="48" Grid.Row="9" Stroke="Black" VerticalAlignment="Top" Width="141" Margin="224,2,0,0" Grid.RowSpan="2">
             <Rectangle.Fill>
-                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Char/Char_UI/Hayri.png"/>
+                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Char/Char_UI/samus.png"/>
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Grid.Column="4" HorizontalAlignment="Left" Height="46" Margin="0,2,0,0" Grid.Row="7" Stroke="Black" VerticalAlignment="Top" Width="140">
@@ -85,6 +85,7 @@
             </Rectangle.Fill>
         </Rectangle>
         <Button x:Name="BackBtn" Content="Main Menu" Grid.Column="2" HorizontalAlignment="Left" Height="45" Grid.Row="11" VerticalAlignment="Top" Width="450" Grid.ColumnSpan="2" Tapped="Back_Tapped"/>
+        <Button x:Name="SamusBtn" Content="Samus -->" Grid.Column="3" HorizontalAlignment="Left" Height="50" Margin="0,2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="225" Tapped="SamusBtn_Tapped"/>
 
 
     </Grid>
