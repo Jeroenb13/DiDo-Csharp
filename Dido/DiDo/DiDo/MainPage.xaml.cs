@@ -382,6 +382,7 @@ namespace DiDo
         {
             // Play background music
             setSounds();
+            ApplicationView.GetForCurrentView().ExitFullScreenMode();
             //snd_backgroundMusic = getSound("Zapper-16-Bit.mp3").Result;
             //snd_shot = getSound("shot.mp3").Result;
             //snd_reload = getSound("reload.mp3").Result;
