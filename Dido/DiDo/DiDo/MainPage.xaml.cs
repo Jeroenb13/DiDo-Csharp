@@ -21,6 +21,7 @@ using Windows.System;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
+using Microsoft.Graphics.Canvas.Brushes;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
@@ -34,21 +35,23 @@ namespace DiDo
     /// </summary>
     public sealed partial class MainPage : Page
     {           
-
         //CanvastBitmap: The images used by the game
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public Rect ui = new Rect(1150, 5, 200, 755); //UI element 
+        public Rect ui = new Rect(1150, 5, 300, 800); //UI element 
         public static float pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
-        public static int countdown = 60; // 60
+        public static int countdown = 60; // 60 frames per second
         private ClientController controller;
         public static bool RoundEnded = false;
         private Levels.Levels levels;
         private bool assetsLoaded = false;
         public static string[,] ChosenLevel;
+
+        public ICanvasBrush uiBrush;
+
         //Lists Projectile
         public List<Bullet> bullets = new List<Bullet>();
 
@@ -156,74 +159,52 @@ namespace DiDo
             /// <summary>
             /// //Adding the healthbar to the UI element
             /// </summary>
-            //int maxHealth = player.getHealth() + 10; //Get the health and adding 10 to it
-            //for (int i = 0; i < 5; i++) // Draws 5 lives to the UI
-            //{
-            //    maxHealth -= 20; //Max health is 100 / 5 lives = 20
-
-            //    int x = 1000 + (i * 60); //Positions of the lives
-            //    if (maxHealth >= 9)
-            //    {
-            //        args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
-            //    }
-            //    else if (maxHealth >= -1)
-            //    {
-            //        args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
-            //    }
-            //    else
-            //    {
-            //        args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
-            //    }
-            //}
-
             double maxHealth = player.getMaxHealth();
             double currentHealth = player.getHealth();
+            double calc = (currentHealth / maxHealth) * 100 + 10;
 
-            double calc = (currentHealth / maxHealth) * 100;
-            Debug.WriteLine("calc         : " + calc);
-            Debug.WriteLine("maxHealth    : " + maxHealth);
-            Debug.WriteLine("currentHealth: " + currentHealth);
+            for (int i = 0; i < 5; i++)
+            {
+                int x = 1125 + (i * 50);
+                calc -= 20;
 
-            //for (int i = 0; i < 5; i++)   
-            //{
-            //    int x = 1000 + (i * 60);
-            //    calc -= 20;
-
-            //    if (calc)
-            //    {
-            //        args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
-            //    }
-            //    else if (calc)
-            //    {
-            //        args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
-            //    }
-            //    else
-            //    {
-            //        args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
-            //    }
-            //}
+                if (calc >= 9)
+                {
+                    args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
+                }
+                else if (calc >= -1)
+                {
+                    args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
+                }
+                else
+                {
+                    args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
+                }
+            }
 
             reloadArms(); //Method for showing the right gun in the UI
 
             args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            //args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            //args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
-            //args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
-            //args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
-            //args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
+            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
+            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
+            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
 
             args.DrawingSession.DrawText("PLAYER", 1225, 10, Colors.Black); // Adding text to the UI element
             args.DrawingSession.DrawText(player.name, 1225, 40, Colors.MediumBlue); //Adding playername to the UI element
             args.DrawingSession.DrawImage(Char_UI, 1210, 70); //Adding the character playing to the UI element
             args.DrawingSession.DrawText("WEAPON", 1210, 210, Colors.Navy); // Adding text to the UI 
+
             if (player.currentWeapon != null)
             {
                 args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
                 args.DrawingSession.DrawImage(CurrentWeapon, 1225, 270); //Adding the current weapon to the UI element
             }
             args.DrawingSession.DrawText("AMMO", 1225, 410, Colors.Navy); //Adding text to the UI element
+
             if (player.currentWeapon != null)
             {
                 args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue); //Adding the bullets and the total bulletamount to the UI element
@@ -231,7 +212,7 @@ namespace DiDo
             args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed); //Adding text to the UI element
             args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed); //Adding the health amount to the UI element
             args.DrawingSession.DrawText("STAMINA", 1225, 610, Colors.DarkRed); //Adding text to the UI element
-            args.DrawingSession.DrawText(player.stamina + "", 1230, 640, Colors.DarkRed); //Adding the health amount to the UI element
+            args.DrawingSession.DrawText(player.stamina + "", 1230, 640, Colors.DarkRed); //Adding the stamina amount to the UI element
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
             //Debug end
 
