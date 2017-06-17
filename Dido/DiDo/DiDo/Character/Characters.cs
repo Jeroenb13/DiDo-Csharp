@@ -19,7 +19,7 @@ namespace DiDo.Character
         public Weapon currentWeapon;
         protected int currentWeaponIndex;
         public Boolean alive = true;
-        public Characters(string name, int maxHealth, int healthPoints,int stamina, int move_speed,float x, float y) : base(x, y)
+        public Characters(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(x, y)
         {
             this.name = name;
             this.stamina = stamina;

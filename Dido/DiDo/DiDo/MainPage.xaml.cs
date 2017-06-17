@@ -1,6 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Text;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ using Windows.System;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
-using Microsoft.Graphics.Canvas.Brushes;
+using Windows.UI.Xaml.Shapes;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
@@ -39,7 +41,6 @@ namespace DiDo
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-        public Rect ui = new Rect(1150, 5, 300, 800); //UI element 
         public static float pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
@@ -50,29 +51,23 @@ namespace DiDo
         private bool assetsLoaded = false;
         public static string[,] ChosenLevel;
 
-        public ICanvasBrush uiBrush;
-
         //Lists Projectile
         public List<Bullet> bullets = new List<Bullet>();
-
         public Weapon[] weapons;
-
         public static int GameState = 0; // startscreen
-
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
-
         public MyPlayer player;
-
         public List<Enemy> enemies = new List<Enemy>();
-
         public float temp_x, temp_y; // Temporary
-
         public double frames = 0;
-
         public Random random = new Random();
-
         public MediaElement snd_backgroundMusic, snd_shot, snd_reload;
- 
+
+        //Ui elements
+        public CanvasTextFormat font = new CanvasTextFormat();
+        public Rect ui = new Rect(1150, 5, 300, 800); //UI element 
+        public Rect playerRect = new Rect(1150, 5, 300, 200); // Rectangle for the player UI element
+        public Rect weaponRect = new Rect(1150, 5, 300, 400); // Rectangle for the player ui element
 
         /// <summary>
         /// Creates the resources of the game
@@ -91,7 +86,6 @@ namespace DiDo
             meBackground.SetSource(streamBackground, fileBackground.ContentType);
 
             snd_backgroundMusic = meBackground;
-
 
             MediaElement meShot = new MediaElement();
             var uriShot = new Uri("ms-appx:///Assets/Sound/shot.mp3");
@@ -156,6 +150,50 @@ namespace DiDo
                 }
             }
 
+            string fontUI = "ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward";
+
+            reloadArms(); //Method for showing the right gun in the UI
+
+            args.DrawingSession.FillRectangle(ui, Colors.SlateGray); //Color of the UI element (1150, 5, 300, 200)
+            args.DrawingSession.DrawRectangle(ui, Colors.Black, 10); //UI element (1150, 5, 300, 800)
+            args.DrawingSession.DrawRectangle(playerRect, Colors.Black, 10);
+            args.DrawingSession.DrawRectangle(weaponRect, Colors.Black, 10);
+
+
+            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
+
+            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
+            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
+            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
+            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
+            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
+
+            args.DrawingSession.DrawText("PLAYER", 1245, 10, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); // Adding text to the UI element
+            args.DrawingSession.DrawText(player.name, 1255, 60, Colors.Black, new CanvasTextFormat() { FontSize = 10, FontFamily = fontUI }); //Adding playername to the UI element
+            args.DrawingSession.DrawImage(Char_UI, 1155, 50); //Adding the character playing to the UI element
+            args.DrawingSession.DrawText("WEAPON", 1240, 210, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); // Adding text to the UI 
+
+            if (player.currentWeapon != null)
+            {
+                //args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
+                args.DrawingSession.DrawImage(CurrentWeapon, 1255, 230); //Adding the current weapon to the UI element
+            }
+
+            if (player.currentWeapon != null)
+            {
+                args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1275, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the bullets and the total bulletamount to the UI element
+            }
+
+            //args.DrawingSession.DrawText("AMMO", 1255, 255, Colors.Firebrick, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
+
+            args.DrawingSession.DrawText("STATS", 1250, 410, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); //Adding text to the UI element
+            args.DrawingSession.DrawText("Health:", 1175, 460, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
+            args.DrawingSession.DrawText(player.getHealth() + " | " + player.getMaxHealth(), 1285, 460, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the health amount to the UI element
+            args.DrawingSession.DrawText("Stamina: ", 1175, 500, Colors.DeepSkyBlue, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
+            args.DrawingSession.DrawText(player.stamina + "", 1285, 500, Colors.DeepSkyBlue, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the stamina amount to the UI element
+
             /// <summary>
             /// //Adding the healthbar to the UI element
             /// </summary>
@@ -165,56 +203,22 @@ namespace DiDo
 
             for (int i = 0; i < 5; i++)
             {
-                int x = 1125 + (i * 50);
+                int x = 1148 + (i * 50);
                 calc -= 20;
 
                 if (calc >= 9)
                 {
-                    args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
+                    args.DrawingSession.DrawImage(Health_Full, x, 525); //Show full lives
                 }
                 else if (calc >= -1)
                 {
-                    args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
+                    args.DrawingSession.DrawImage(Health_Half, x, 525); //Show half-full lives
                 }
                 else
                 {
-                    args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
+                    args.DrawingSession.DrawImage(Health_Empty, x, 525); //Show empty lives
                 }
             }
-
-            reloadArms(); //Method for showing the right gun in the UI
-
-            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
-            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
-            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
-            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
-            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
-            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-
-            args.DrawingSession.DrawText("PLAYER", 1225, 10, Colors.Black); // Adding text to the UI element
-            args.DrawingSession.DrawText(player.name, 1225, 40, Colors.MediumBlue); //Adding playername to the UI element
-            args.DrawingSession.DrawImage(Char_UI, 1210, 70); //Adding the character playing to the UI element
-            args.DrawingSession.DrawText("WEAPON", 1210, 210, Colors.Navy); // Adding text to the UI 
-
-            if (player.currentWeapon != null)
-            {
-                args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
-                args.DrawingSession.DrawImage(CurrentWeapon, 1225, 270); //Adding the current weapon to the UI element
-            }
-            args.DrawingSession.DrawText("AMMO", 1225, 410, Colors.Navy); //Adding text to the UI element
-
-            if (player.currentWeapon != null)
-            {
-                args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1225, 440, Colors.MediumBlue); //Adding the bullets and the total bulletamount to the UI element
-            }
-            args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed); //Adding text to the UI element
-            args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed); //Adding the health amount to the UI element
-            args.DrawingSession.DrawText("STAMINA", 1225, 610, Colors.DarkRed); //Adding text to the UI element
-            args.DrawingSession.DrawText(player.stamina + "", 1230, 640, Colors.DarkRed); //Adding the stamina amount to the UI element
-            args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
-            //Debug end
 
             //Triggers the draw event 60 times per second
             GameCanvas.Invalidate();
@@ -234,7 +238,8 @@ namespace DiDo
         }
 
         public double xPos, yPos, xPos2, yPos2; // Temporary
-                                                //public String type_tile;
+
+        //public String type_tile;
 
         /// <summary>
         /// Checks if the player ammo is null or not and returns the amount
@@ -342,11 +347,6 @@ namespace DiDo
                         );
 
                     }
-
-
-
-
-
                 }
             }
 
@@ -420,9 +420,6 @@ namespace DiDo
             this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
             this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
             this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
-
-
-
         }
         
         public void updatePoint(Player player)
