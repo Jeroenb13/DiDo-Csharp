@@ -176,13 +176,13 @@ namespace DiDo
             //    }
             //}
 
-            int maxHealth = player.getMaxHealth();
-            int currentHealth = player.getHealth();
+            double maxHealth = player.getMaxHealth();
+            double currentHealth = player.getHealth();
 
-            int calc = (currentHealth / maxHealth) * 100;
-            Debug.WriteLine(calc);
-            Debug.WriteLine(maxHealth);
-            Debug.WriteLine(currentHealth);
+            double calc = (currentHealth / maxHealth) * 100;
+            Debug.WriteLine("calc         : " + calc);
+            Debug.WriteLine("maxHealth    : " + maxHealth);
+            Debug.WriteLine("currentHealth: " + currentHealth);
 
             //for (int i = 0; i < 5; i++)   
             //{
