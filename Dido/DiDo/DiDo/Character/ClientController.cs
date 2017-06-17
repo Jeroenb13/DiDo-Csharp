@@ -17,7 +17,7 @@ namespace DiDo.Character
         private MainPage mainPage;
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public ClientController(MainPage mainPage, string name, float x, float y) : base(name, x, y)
+        public ClientController(MainPage mainPage, string name, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, healthPoints, stamina, move_speed, x, y)
         {
             this.mainPage = mainPage;   
         }

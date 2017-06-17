@@ -361,33 +361,33 @@ namespace DiDo
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
-                player = new MyPlayer("Jeroen", 32, 96);
+                player = new MyPlayer("Jeroen", 100, 20, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
             {
-                player = new MyPlayer("Jeffrey", 32, 96);
+                player = new MyPlayer("Jeffrey", 100, 30, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
             {
-                player = new MyPlayer("Daan", 32, 96);
+                player = new MyPlayer("Daan", 100, 20, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
             {
-                player = new MyPlayer("Jordy", 32, 96);
+                player = new MyPlayer("Jordy", 150, 0, 3, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
             {
-                player = new MyPlayer("Matthew", 32, 96);
+                player = new MyPlayer("Matthew", 100, 40, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
             {
-                player = new MyPlayer("Hayri", 32, 96);
+                player = new MyPlayer("Hayri", 80, 60, 8, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
             {
-                player = new MyPlayer("Max", 32, 96);
+                player = new MyPlayer("Max", 100, 30, 6, 32, 96);
             }
-            controller = new ClientController(this, player.name, player.x, player.y);
+            controller = new ClientController(this, player.name, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
             weapons = new Weapon[100];
             levels = new Levels.Levels();
             
@@ -401,9 +401,9 @@ namespace DiDo
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            this.enemies.Add(new Enemy("Freek", 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 256, 128)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Freek", 100, 0, 5, 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 100, 0, 5, 256, 128)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 100, 0, 5, 256, 128)); // The AI Enemy 3
 
 
 

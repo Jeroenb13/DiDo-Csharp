@@ -16,10 +16,12 @@ namespace DiDo.Character
         public int stepSize = 2;
         private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 0, 0);
 
-        public Enemy(String name, float x, float y) : base(name, x, y)
+        public Enemy(String name, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, healthPoints, stamina, move_speed, x, y)
         {
             this.name = name;
-            healthPoints = 100;
+            this.healthPoints = healthPoints;
+            this.stamina = stamina;
+            this.move_speed = move_speed;
             weapons = new Weapon[1];
             setItem(0, pistol);
             currentWeapon = weapons[0];

@@ -10,17 +10,21 @@ namespace DiDo.Character
     public abstract class Characters : Entity
     {
         public string name { get; }
-        protected int healthPoints { get; set; }
+        public int healthPoints { get; set; }
+        public int stamina { get; set; }
+        public int move_speed { get; set; }
         protected Weapon[] weapons;
         public Weapon currentWeapon;
         protected int currentWeaponIndex;
         public Boolean alive = true;
-        public Characters(string name, float x, float y) : base(x, y)
+        public Characters(string name, int healthPoints,int stamina, int move_speed,float x, float y) : base(x, y)
         {
             this.name = name;
+            this.stamina = stamina;
+            this.move_speed = move_speed;
             currentWeaponIndex = 0;
             weapons = new Weapon[3];
-            healthPoints = 100;
+            this.healthPoints = healthPoints;
         }
 
         public int getHealth()
