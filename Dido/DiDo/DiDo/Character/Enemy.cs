@@ -10,13 +10,13 @@ namespace DiDo.Character
 {
     public class Enemy : Characters
     {
-        public String name { get; }
+        public string name { get; }
         private Random random;
         public int direction;
         public int stepSize = 2;
         private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 0, 0);
 
-        public Enemy(String name, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, healthPoints, stamina, move_speed, x, y)
+        public Enemy(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
             this.name = name;
             this.healthPoints = healthPoints;

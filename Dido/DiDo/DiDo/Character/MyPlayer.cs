@@ -13,8 +13,9 @@ namespace DiDo.Character
         private PistolWeapon pistol = new PistolWeapon(15, 60, 15, 0, 0);
         private ARWeapon ar = new ARWeapon(15, 60, 0, 0);
         private SMGWeapon smg = new SMGWeapon(15, 60, 0, 0);
-        public MyPlayer(string name, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, healthPoints, stamina, move_speed, x, y)
+        public MyPlayer(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
+            this.maxHealth = maxHealth;
             this.healthPoints = healthPoints;
             this.stamina = stamina;
             this.move_speed = move_speed;

@@ -33,7 +33,7 @@ namespace DiDo
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
-    {
+    {           
 
         //CanvastBitmap: The images used by the game
         public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
@@ -156,25 +156,52 @@ namespace DiDo
             /// <summary>
             /// //Adding the healthbar to the UI element
             /// </summary>
-            int tempHealth = player.getHealth() + 10; //Get the health and adding 10 to it
-            for (int i = 0; i < 5; i++) // Draws 5 lives to the UI
-            {
-                tempHealth -= 20; //Max health is 100 / 5 lives = 20
+            //int maxHealth = player.getHealth() + 10; //Get the health and adding 10 to it
+            //for (int i = 0; i < 5; i++) // Draws 5 lives to the UI
+            //{
+            //    maxHealth -= 20; //Max health is 100 / 5 lives = 20
 
-                int x = 1000 + (i * 60); //Positions of the lives
-                if (tempHealth >= 9)
-                {
-                    args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
-                }
-                else if (tempHealth >= -1)
-                {
-                    args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
-                }
-                else
-                {
-                    args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
-                }
-            }
+            //    int x = 1000 + (i * 60); //Positions of the lives
+            //    if (maxHealth >= 9)
+            //    {
+            //        args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
+            //    }
+            //    else if (maxHealth >= -1)
+            //    {
+            //        args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
+            //    }
+            //    else
+            //    {
+            //        args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
+            //    }
+            //}
+
+            int maxHealth = player.getMaxHealth();
+            int currentHealth = player.getHealth();
+
+            int calc = (currentHealth / maxHealth) * 100;
+            Debug.WriteLine(calc);
+            Debug.WriteLine(maxHealth);
+            Debug.WriteLine(currentHealth);
+
+            //for (int i = 0; i < 5; i++)   
+            //{
+            //    int x = 1000 + (i * 60);
+            //    calc -= 20;
+
+            //    if (calc)
+            //    {
+            //        args.DrawingSession.DrawImage(Health_Full, x, 705); //Show full lives
+            //    }
+            //    else if (calc)
+            //    {
+            //        args.DrawingSession.DrawImage(Health_Half, x, 705); //Show half-full lives
+            //    }
+            //    else
+            //    {
+            //        args.DrawingSession.DrawImage(Health_Empty, x, 705); //Show empty lives
+            //    }
+            //}
 
             reloadArms(); //Method for showing the right gun in the UI
 
@@ -361,33 +388,33 @@ namespace DiDo
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
-                player = new MyPlayer("Jeroen", 100, 20, 5, 32, 96);
+                player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
             {
-                player = new MyPlayer("Jeffrey", 100, 30, 5, 32, 96);
+                player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
             {
-                player = new MyPlayer("Daan", 100, 20, 5, 32, 96);
+                player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
             {
-                player = new MyPlayer("Jordy", 150, 0, 3, 32, 96);
+                player = new MyPlayer("Jordy", 150, 150, 0, 3, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
             {
-                player = new MyPlayer("Matthew", 100, 40, 5, 32, 96);
+                player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
             {
-                player = new MyPlayer("Hayri", 80, 60, 8, 32, 96);
+                player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96);
             }
             else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
             {
-                player = new MyPlayer("Max", 100, 30, 6, 32, 96);
+                player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96);
             }
-            controller = new ClientController(this, player.name, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
+            controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
             weapons = new Weapon[100];
             levels = new Levels.Levels();
             
@@ -401,9 +428,9 @@ namespace DiDo
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
-            this.enemies.Add(new Enemy("Freek", 100, 0, 5, 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 100, 0, 5, 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 100, 0, 5, 256, 128)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
 
 
 

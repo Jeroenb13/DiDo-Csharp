@@ -12,7 +12,7 @@ namespace DiDo
     {
         public float velX { get; set; } = 0;
         public float velY { get; set; } = 0;
-        public Player(String name, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, healthPoints, stamina, move_speed, x, y)
+        public Player(String name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
 
         }
