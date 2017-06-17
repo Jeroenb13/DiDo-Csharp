@@ -52,41 +52,85 @@ namespace DiDo.Character
             player.x += player.velX;
             player.y += player.velY;
 
-            if (keyPressed(VirtualKey.A))
+            if (keyPressed(VirtualKey.A) && !keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x -1, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positive
                 {
                     player.x -= player.move_speed;
+                    player.returnStamina();
                 }
                 
             }
-            else if (keyPressed(VirtualKey.S))
+            else if (keyPressed(VirtualKey.S) && !keyPressed(VirtualKey.Shift))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
                 Tile tile = level.getPlayerTile(player.x, player.y+33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y += player.move_speed;
+                    player.returnStamina();
                 }
                
             }
-            else if (keyPressed(VirtualKey.D))
+            else if (keyPressed(VirtualKey.D) && !keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x+33, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positive
                 {
                     player.x += player.move_speed;
+                    player.returnStamina();
                 }
                 
             }
-            else if (keyPressed(VirtualKey.W))
+            else if (keyPressed(VirtualKey.W) && !keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x, player.y-1, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
+                    player.returnStamina();
                 }
+            }
+            else if (keyPressed(VirtualKey.A) && keyPressed(VirtualKey.Shift))
+            {
+                Tile tile = level.getPlayerTile(player.x - 1, player.y, level.gekozenLevel);
+                if (tile.CanWalk == true) //positive
+                {
+                    player.x -= player.run();
+                }
+
+            }
+            else if (keyPressed(VirtualKey.S) && keyPressed(VirtualKey.Shift))
+            {
+                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                Tile tile = level.getPlayerTile(player.x, player.y + 33, level.gekozenLevel);
+                if (tile.CanWalk == true)
+                {
+                    player.y += player.run();
+                }
+
+            }
+            else if (keyPressed(VirtualKey.D) && keyPressed(VirtualKey.Shift))
+            {
+                Tile tile = level.getPlayerTile(player.x + 33, player.y, level.gekozenLevel);
+                if (tile.CanWalk == true) //positive
+                {
+                    player.x += player.run();
+                }
+
+            }
+            else if (keyPressed(VirtualKey.W) && keyPressed(VirtualKey.Shift))
+            {
+                Tile tile = level.getPlayerTile(player.x, player.y - 1, level.gekozenLevel);
+                if (tile.CanWalk == true)
+                {
+                    player.y -= player.run();
+                }
+            }
+            else if (!keyPressed(VirtualKey.Shift))
+            {
+                    player.returnStamina();
             }
             else if(keyPressed(VirtualKey.G))
             {
@@ -163,21 +207,37 @@ namespace DiDo.Character
             keysPressed[args.VirtualKey] = true;
 
             // TODO: make keylist
-            if (args.VirtualKey == VirtualKey.A)
+            if (args.VirtualKey == VirtualKey.A && args.VirtualKey != VirtualKey.Shift)
             {
                 velX = -move_speed;
             }
-            else if (args.VirtualKey == VirtualKey.D)
+            else if (args.VirtualKey == VirtualKey.D && args.VirtualKey != VirtualKey.Shift)
             {
                 velX = move_speed;
             }
-            else if (args.VirtualKey == VirtualKey.W)
+            else if (args.VirtualKey == VirtualKey.W && args.VirtualKey != VirtualKey.Shift)
             {
                 velY = -move_speed;
             }
-            else if (args.VirtualKey == VirtualKey.S)
+            else if (args.VirtualKey == VirtualKey.S && args.VirtualKey != VirtualKey.Shift)
             {
                 velY = move_speed;
+            }
+            else if (args.VirtualKey == VirtualKey.A && args.VirtualKey == VirtualKey.Shift)
+            {
+                velX = - run();
+            }
+            else if (args.VirtualKey == VirtualKey.D && args.VirtualKey == VirtualKey.Shift)
+            {
+                velX = run();
+            }
+            else if (args.VirtualKey == VirtualKey.W && args.VirtualKey == VirtualKey.Shift)
+            {
+                velY = - run();
+            }
+            else if (args.VirtualKey == VirtualKey.S && args.VirtualKey == VirtualKey.Shift)
+            {
+                velY = run();
             }
         }
 

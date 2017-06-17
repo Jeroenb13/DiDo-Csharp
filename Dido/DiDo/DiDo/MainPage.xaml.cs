@@ -230,6 +230,8 @@ namespace DiDo
             }
             args.DrawingSession.DrawText("HEALTH", 1225, 510, Colors.DarkRed); //Adding text to the UI element
             args.DrawingSession.DrawText(player.getHealth() + "", 1230, 540, Colors.DarkRed); //Adding the health amount to the UI element
+            args.DrawingSession.DrawText("STAMINA", 1225, 610, Colors.DarkRed); //Adding text to the UI element
+            args.DrawingSession.DrawText(player.stamina + "", 1230, 640, Colors.DarkRed); //Adding the health amount to the UI element
             args.DrawingSession.DrawRectangle(ui, Colors.Black); //UI element (5, 700, 800, 100)
             //Debug end
 
