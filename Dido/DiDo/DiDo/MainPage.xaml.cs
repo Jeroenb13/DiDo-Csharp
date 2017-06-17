@@ -79,15 +79,33 @@ namespace DiDo
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
         }
 
-        private async Task<MediaElement> getSound(String filename)
+        private async void setSounds()
         {
-            MediaElement mysong = new MediaElement();
-            var uri = new Uri("ms-appx:///Assets/Sound/" + filename);
-            Windows.Storage.StorageFile file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uri);
-            var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            mysong.SetSource(stream, file.ContentType);
+            MediaElement meBackground = new MediaElement();
+            var uriBackground = new Uri("ms-appx:///Assets/Sound/Zapper-16-Bit.mp3");
+            Windows.Storage.StorageFile fileBackground = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriBackground);
+            var streamBackground = await fileBackground.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            meBackground.SetSource(streamBackground, fileBackground.ContentType);
 
-            return mysong;
+            snd_backgroundMusic = meBackground;
+
+
+            MediaElement meShot = new MediaElement();
+            var uriShot = new Uri("ms-appx:///Assets/Sound/shot.mp3");
+            Windows.Storage.StorageFile fileShot = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriShot);
+            var streamShot = await fileShot.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            meShot.SetSource(streamShot, fileShot.ContentType);
+
+            snd_shot = meShot;
+
+
+            MediaElement meReload = new MediaElement();
+            var uriReload = new Uri("ms-appx:///Assets/Sound/reload.mp3");
+            Windows.Storage.StorageFile fileReload = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriReload);
+            var streamReload = await fileReload.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            meReload.SetSource(streamReload, fileReload.ContentType);
+
+            snd_reload = meReload;
         }
 
         /// <summary>
@@ -334,9 +352,11 @@ namespace DiDo
         public MainPage()
         {
             // Play background music
-            snd_backgroundMusic = getSound("Zapper-16-Bit.mp3").Result;
-            snd_shot = getSound("shot.mp3").Result;
-            snd_reload = getSound("reload.mp3").Result;
+            setSounds();
+            //snd_backgroundMusic = getSound("Zapper-16-Bit.mp3").Result;
+            //snd_shot = getSound("shot.mp3").Result;
+            //snd_reload = getSound("reload.mp3").Result;
+
             snd_backgroundMusic.Play();
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
