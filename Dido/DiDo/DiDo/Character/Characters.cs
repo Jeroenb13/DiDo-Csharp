@@ -12,6 +12,7 @@ namespace DiDo.Character
         public string name { get; }
         public int healthPoints { get; set; }
         public int stamina { get; set; }
+        public int maxStamina { get; set; }
         public int move_speed { get; set; }
         protected Weapon[] weapons;
         public Weapon currentWeapon;
@@ -21,6 +22,7 @@ namespace DiDo.Character
         {
             this.name = name;
             this.stamina = stamina;
+            this.maxStamina = stamina;
             this.move_speed = move_speed;
             currentWeaponIndex = 0;
             weapons = new Weapon[3];
@@ -42,6 +44,29 @@ namespace DiDo.Character
                     this.alive = false;
                 }
             }
+        }
+
+        public void returnStamina()
+        {
+            if(stamina < maxStamina)
+            {
+                stamina = stamina + 1;
+            }
+        }
+
+        public int run()
+        {
+            int run_speed;
+            if(this.stamina > 0)
+            {
+                run_speed = move_speed + 2;
+                stamina = stamina - 1;
+            }
+            else
+            {
+                run_speed = move_speed;
+            }
+            return run_speed;
         }
 
         public Item getItem(int index)
