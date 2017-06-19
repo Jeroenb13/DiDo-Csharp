@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -34,6 +35,8 @@ namespace DiDo.MenuFolder
             Settings.FontFamily = fffForward;
             Help.FontFamily = fffForward;
             Exit.FontFamily = fffForward;
+
+            ApplicationView.GetForCurrentView().ExitFullScreenMode();
         }
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {

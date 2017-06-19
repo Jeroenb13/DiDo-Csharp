@@ -61,7 +61,6 @@ namespace DiDo
         public float temp_x, temp_y; // Temporary
         public double frames = 0;
         public Random random = new Random();
-        public MediaElement snd_backgroundMusic, snd_shot, snd_reload;
 
         //Ui elements
         public CanvasTextFormat font = new CanvasTextFormat();
@@ -69,40 +68,14 @@ namespace DiDo
         public Rect playerRect = new Rect(1150, 5, 300, 200); // Rectangle for the player UI element
         public Rect weaponRect = new Rect(1150, 5, 300, 400); // Rectangle for the player ui element
 
+        public SoundEffects soundController;
+
         /// <summary>
         /// Creates the resources of the game
         /// </summary>
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
-        }
-
-        private async void setSounds()
-        {
-            MediaElement meBackground = new MediaElement();
-            var uriBackground = new Uri("ms-appx:///Assets/Sound/Zapper-16-Bit.mp3");
-            Windows.Storage.StorageFile fileBackground = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriBackground);
-            var streamBackground = await fileBackground.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            meBackground.SetSource(streamBackground, fileBackground.ContentType);
-
-            snd_backgroundMusic = meBackground;
-
-            MediaElement meShot = new MediaElement();
-            var uriShot = new Uri("ms-appx:///Assets/Sound/shot.mp3");
-            Windows.Storage.StorageFile fileShot = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriShot);
-            var streamShot = await fileShot.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            meShot.SetSource(streamShot, fileShot.ContentType);
-
-            snd_shot = meShot;
-
-
-            MediaElement meReload = new MediaElement();
-            var uriReload = new Uri("ms-appx:///Assets/Sound/reload.mp3");
-            Windows.Storage.StorageFile fileReload = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriReload);
-            var streamReload = await fileReload.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            meReload.SetSource(streamReload, fileReload.ContentType);
-
-            snd_reload = meReload;
         }
 
         /// <summary>
@@ -362,13 +335,8 @@ namespace DiDo
         public MainPage()
         {
             // Play background music
-            setSounds();
-            ApplicationView.GetForCurrentView().ExitFullScreenMode();
-            //snd_backgroundMusic = getSound("Zapper-16-Bit.mp3").Result;
-            //snd_shot = getSound("shot.mp3").Result;
-            //snd_reload = getSound("reload.mp3").Result;
-
-            snd_backgroundMusic.Play();
+            soundController = new SoundEffects();
+            soundController.Play(SoundEfxEnum.BACKGROUND);
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
@@ -672,7 +640,7 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
-                            snd_shot.Play();
+                            soundController.Play(SoundEfxEnum.SHOOT);
 
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
