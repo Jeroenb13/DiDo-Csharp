@@ -9,19 +9,71 @@ namespace DiDo.Character
 {
     public abstract class Characters : Entity
     {
-        private int healthPoints { get; set; }
+        public string name { get; }
+        public int maxHealth;
+        public int healthPoints { get; set; }
+        public int stamina { get; set; }
+        public int maxStamina { get; set; }
+        public int move_speed { get; set; }
         protected Weapon[] weapons;
         public Weapon currentWeapon;
         protected int currentWeaponIndex;
-        public Characters(float x, float y) : base(x, y)
+        public Boolean alive = true;
+        public Characters(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(x, y)
         {
+            this.name = name;
+            this.stamina = stamina;
+            this.maxStamina = stamina;
+            this.move_speed = move_speed;
             currentWeaponIndex = 0;
             weapons = new Weapon[3];
+            this.healthPoints = healthPoints;
+            this.maxHealth = maxHealth;
         }
 
         public int getHealth()
         {
             return healthPoints;
+        }
+
+        public int getMaxHealth()
+        {
+            return maxHealth;
+        }
+
+        public void hit(int damage)
+        {
+            if (this.alive)
+            {
+                this.healthPoints = this.healthPoints - damage;
+                if (this.healthPoints <= 0)
+                {
+                    this.alive = false;
+                }
+            }
+        }
+
+        public void returnStamina()
+        {
+            if(stamina < maxStamina)
+            {
+                stamina = stamina + 1;
+            }
+        }
+
+        public int run()
+        {
+            int run_speed;
+            if(this.stamina > 0)
+            {
+                run_speed = move_speed + 2;
+                stamina = stamina - 1;
+            }
+            else
+            {
+                run_speed = move_speed;
+            }
+            return run_speed;
         }
 
         public Item getItem(int index)
@@ -31,13 +83,13 @@ namespace DiDo.Character
 
         public Item dropItem()
         {
-            Item droppedWeapon = currentWeapon;
-            if (currentWeapon != null)
+            Item droppedWeapon = this.currentWeapon;
+            if (droppedWeapon != null)
             {
                 weapons[currentWeaponIndex].x = x;
                 weapons[currentWeaponIndex].y = y;
                 weapons[currentWeaponIndex] = null;
-                currentWeapon = null;
+                this.currentWeapon = null;
             }
             return droppedWeapon;
         }
@@ -63,26 +115,22 @@ namespace DiDo.Character
 
         public void pickUpWeapon(Weapon weapon)
         {
-                if (weapons[0] != null && weapons[1] != null && weapons[2] != null)
+            bool setWeapon = false;
+            for(int i = 0; i < weapons.Length && !setWeapon; i ++)
+            {
+                if (weapons[i] == null)
                 {
-                    setItem(currentWeaponIndex, weapon);
+                    setItem(i, weapon);
+                    setWeapon = true;
                 }
-                else if (weapons[0] == null && weapons[1] != null && weapons[2] != null)
-                {
-                    setItem(0, weapon);
-                }
-                else if (weapons[0] != null && weapons[1] == null && weapons[2] != null)
-                {
-                    setItem(1, weapon);
-                }
-                else if (weapons[0] != null && weapons[1] != null && weapons[2] == null)
-                {
-                    setItem(2, weapon);
-                }
-                else if (weapons[0] == null && weapons[1] == null && weapons[2] == null)
-                {
-                    setItem(0, weapon);
-                }
+                             
+            }
+            if (setWeapon == false)
+            {
+                dropItem();
+                setItem(currentWeaponIndex, weapon);
+                setWeapon = true;
+            }
         }
 
         public void changeWeapon(int number)

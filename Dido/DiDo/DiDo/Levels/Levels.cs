@@ -8,7 +8,7 @@ namespace DiDo.Levels
 {
     public class Levels
     {
-        public String[,] gekozenLevel = levelFive;
+        public String[,] gekozenLevel = levelTwo;
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
@@ -112,7 +112,7 @@ namespace DiDo.Levels
             { "V", new Tile("fence", new Uri("ms-appx:///Assets/Tiles/fence.png")) },
             { "W", new Tile("gas", new Uri("ms-appx:///Assets/Tiles/gas.png")) },
             { "X", new Tile("rubbishbin", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png") ) },
-            { "Y", new Tile("rubbishbin", new Uri("ms-appx:///Assets/Tiles/empty.png") ) },
+            { "Y", new Tile("rubbishbin", new Uri("ms-appx:///Assets/Tiles/rubbishbin.png") ) },
             { "Z", new Tile("table", new Uri("ms-appx:///Assets/Tiles/table.png") ) },
             { "1", new Tile("tree", new Uri("ms-appx:///Assets/Tiles/tree.png")) },
             { "2", new Tile("water", new Uri("ms-appx:///Assets/Tiles/water/1.png")) },

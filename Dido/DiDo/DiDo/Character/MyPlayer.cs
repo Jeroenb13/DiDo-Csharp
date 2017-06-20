@@ -10,35 +10,21 @@ namespace DiDo.Character
 {
     public class MyPlayer : ClientPlayer
     {
-        private PistolWeapon pistol = new PistolWeapon(15, 0, 0);
-        public MyPlayer(string name, float x, float y) : base(name, x, y)
+        private PistolWeapon pistol = new PistolWeapon(15, 60, 15, 0, 0);
+        private ARWeapon ar = new ARWeapon(15, 60, 0, 0);
+        private SMGWeapon smg = new SMGWeapon(15, 60, 0, 0);
+        public MyPlayer(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
+            this.maxHealth = maxHealth;
+            this.healthPoints = healthPoints;
+            this.stamina = stamina;
+            this.move_speed = move_speed;
+            weapons = new Weapon[3];
             setItem(0, pistol);
+            setItem(1, ar);
+            setItem(2, smg);
             currentWeapon = weapons[0];
-        }
-
-
-        public void pickUpWeapon(Weapon weapon)
-        {
-            if (weapon.x >= x && weapon.x <= (x + 16) && weapon.y >= y && weapon.y <= (y - 16))
-            {
-                if (weapons[0] != null && weapons[1] != null && weapons[2] != null)
-                {
-                    setItem(currentWeaponIndex, weapon);
-                }
-                else if(weapons[0] == null && weapons[1] != null && weapons[2] != null)
-                {
-                    setItem(0, weapon);
-                }
-                else if (weapons[0] != null && weapons[1] == null && weapons[2] != null)
-                {
-                    setItem(1, weapon);
-                }
-                else
-                {
-                    setItem(2, weapon);
-                }
-            }
+            //weapons[0].x = 1337;
         }
     }
 }

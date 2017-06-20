@@ -17,9 +17,12 @@ namespace DiDo.Character
         private MainPage mainPage;
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        public ClientController(MainPage mainPage, string name, float x, float y) : base(name, x, y)
+        private SoundEffects soundController;
+
+        public ClientController(MainPage mainPage, string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
-            this.mainPage = mainPage;   
+            this.mainPage = mainPage;
+            this.soundController = new SoundEffects();
         }
 
         private Boolean keyPressed(VirtualKey key)
@@ -52,49 +55,88 @@ namespace DiDo.Character
             player.x += player.velX;
             player.y += player.velY;
 
-            if (keyPressed(VirtualKey.A))
+            if (keyPressed(VirtualKey.A) && !keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x -1, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positive
                 {
                     player.x -= player.move_speed;
+                    player.returnStamina();
                 }
                 
             }
-            else if (keyPressed(VirtualKey.S))
+             if (keyPressed(VirtualKey.S) && !keyPressed(VirtualKey.Shift))
             {
                 //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
-                Tile tile = level.getPlayerTile(player.x, player.y+31, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x, player.y+33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y += player.move_speed;
+                    player.returnStamina();
                 }
                
             }
-            else if (keyPressed(VirtualKey.D))
+             if (keyPressed(VirtualKey.D) && !keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x+33, player.y, level.gekozenLevel);
                 if (tile.CanWalk == true) //positive
                 {
                     player.x += player.move_speed;
+                    player.returnStamina();
                 }
                 
             }
-            else if (keyPressed(VirtualKey.W))
+             if (keyPressed(VirtualKey.W) && !keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x, player.y-1, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
+                    player.returnStamina();
                 }
             }
-            else if(keyPressed(VirtualKey.G))
+             if (keyPressed(VirtualKey.A) && keyPressed(VirtualKey.Shift))
             {
-                mainPage.addItem();
-                Weapon weapon = (Weapon)player.dropItem();
+                Tile tile = level.getPlayerTile(player.x - 1, player.y, level.gekozenLevel);
+                if (tile.CanWalk == true) //positive
+                {
+                    player.x -= player.run();
+                }
 
             }
-            else if (keyPressed(VirtualKey.H))
+             if (keyPressed(VirtualKey.S) && keyPressed(VirtualKey.Shift))
+            {
+                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
+                Tile tile = level.getPlayerTile(player.x, player.y + 33, level.gekozenLevel);
+                if (tile.CanWalk == true)
+                {
+                    player.y += player.run();
+                }
+
+            }
+             if (keyPressed(VirtualKey.D) && keyPressed(VirtualKey.Shift))
+            {
+                Tile tile = level.getPlayerTile(player.x + 33, player.y, level.gekozenLevel);
+                if (tile.CanWalk == true) //positive
+                {
+                    player.x += player.run();
+                }
+
+            }
+             if (keyPressed(VirtualKey.W) && keyPressed(VirtualKey.Shift))
+            {
+                Tile tile = level.getPlayerTile(player.x, player.y - 1, level.gekozenLevel);
+                if (tile.CanWalk == true)
+                {
+                    player.y -= player.run();
+                }
+            }
+             if(keyPressed(VirtualKey.G))
+            {
+                mainPage.addItem(player);
+            }
+
+             if (keyPressed(VirtualKey.H))
             {
                 for (int i = 0; i < mainPage.weapons.Length; i++)
                 {
@@ -113,17 +155,50 @@ namespace DiDo.Character
                     }
                 }
             }
-            else if(keyPressed(VirtualKey.Number1))
+             if (keyPressed(VirtualKey.R))
+            {
+                // The current weapon holds less bullets than it can
+                if (player.currentWeapon.getAmmo() < player.currentWeapon.getMagazineSize())
+                {
+                    // The current weapon has additional ammo
+                    if (player.currentWeapon.getAdditionalAmmo() > 0)
+                    {
+                        soundController.Play(SoundEfxEnum.RELOAD);
+                        int difference = player.currentWeapon.getMagazineSize() - player.currentWeapon.getAmmo();
+                        if (player.currentWeapon.getAdditionalAmmo() <= difference)
+                        {
+                            player.currentWeapon.setAmmo(player.currentWeapon.getAmmo() + player.currentWeapon.getAdditionalAmmo());
+                            player.currentWeapon.setAdditionalAmmo(0);
+                        } else
+                        {
+                            player.currentWeapon.setAmmo(player.currentWeapon.getMagazineSize());
+                            player.currentWeapon.setAdditionalAmmo(player.currentWeapon.getAdditionalAmmo() - difference);
+                        }
+                    }
+                }
+            }
+             if(keyPressed(VirtualKey.Number1))
             {
                 player.changeWeapon(1);
+                mainPage.reloadArms();
             }
-            else if (keyPressed(VirtualKey.Number2))
+             if (keyPressed(VirtualKey.Number2))
             {
                 player.changeWeapon(2);
+                mainPage.reloadArms();
             }
-            else if (keyPressed(VirtualKey.Number3))
+             if (keyPressed(VirtualKey.Number3))
             {
                 player.changeWeapon(3);
+                mainPage.reloadArms();
+            }
+             if (keyPressed(VirtualKey.Space))
+            {
+                player.hit(1);
+            }
+             if (!keyPressed(VirtualKey.Shift))
+            {
+                player.returnStamina();
             }
         }
 
@@ -135,21 +210,37 @@ namespace DiDo.Character
             keysPressed[args.VirtualKey] = true;
 
             // TODO: make keylist
-            if (args.VirtualKey == VirtualKey.A)
+            if (args.VirtualKey == VirtualKey.A && args.VirtualKey != VirtualKey.Shift)
             {
                 velX = -move_speed;
             }
-            else if (args.VirtualKey == VirtualKey.D)
+             if (args.VirtualKey == VirtualKey.D && args.VirtualKey != VirtualKey.Shift)
             {
                 velX = move_speed;
             }
-            else if (args.VirtualKey == VirtualKey.W)
+             if (args.VirtualKey == VirtualKey.W && args.VirtualKey != VirtualKey.Shift)
             {
                 velY = -move_speed;
             }
-            else if (args.VirtualKey == VirtualKey.S)
+             if (args.VirtualKey == VirtualKey.S && args.VirtualKey != VirtualKey.Shift)
             {
                 velY = move_speed;
+            }
+             if (args.VirtualKey == VirtualKey.A && args.VirtualKey == VirtualKey.Shift)
+            {
+                velX = - run();
+            }
+             if (args.VirtualKey == VirtualKey.D && args.VirtualKey == VirtualKey.Shift)
+            {
+                velX = run();
+            }
+             if (args.VirtualKey == VirtualKey.W && args.VirtualKey == VirtualKey.Shift)
+            {
+                velY = - run();
+            }
+             if (args.VirtualKey == VirtualKey.S && args.VirtualKey == VirtualKey.Shift)
+            {
+                velY = run();
             }
         }
 
@@ -164,15 +255,15 @@ namespace DiDo.Character
             {
                 velX = 0;
             }
-            else if (args.VirtualKey == VirtualKey.D)
+             if (args.VirtualKey == VirtualKey.D)
             {
                 velX = 0;
             }
-            else if (args.VirtualKey == VirtualKey.W)
+             if (args.VirtualKey == VirtualKey.W)
             {
                 velY = 0;
             }
-            else if (args.VirtualKey == VirtualKey.S)
+             if (args.VirtualKey == VirtualKey.S)
             {
                 velY = 0;
             }

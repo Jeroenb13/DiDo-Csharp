@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -34,13 +35,15 @@ namespace DiDo.MenuFolder
             Settings.FontFamily = fffForward;
             Help.FontFamily = fffForward;
             Exit.FontFamily = fffForward;
+
+            ApplicationView.GetForCurrentView().ExitFullScreenMode();
         }
         private void Start_Tapped(object sender, TappedRoutedEventArgs e)
         {
             try
             {
                 MainPage.countdown = 10;
-                this.Frame.Navigate(typeof(MainPage));
+                this.Frame.Navigate(typeof(CharacterSwitch));
 
             }
             catch (Exception ex)
@@ -51,7 +54,7 @@ namespace DiDo.MenuFolder
 
         private void Invade_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            this.Frame.Navigate(typeof(InvadePage));
         }
 
         private async void Settings_Tapped(object sender, TappedRoutedEventArgs e)

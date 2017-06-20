@@ -11,7 +11,7 @@ namespace DiDo.Items
         private int magazine { get; set; }  //Number of Rounds per Magazine
         private int damage = 20;            //Damage per Round
 
-        public ARWeapon(int magazine, float x, float y) : base(x, y)
+        public ARWeapon(int magazine, int total, float x, float y) : base(x, y)
         {
             name = "Assault Rifle";
             if (magazine >= 30)
