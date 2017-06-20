@@ -106,7 +106,7 @@ namespace DiDo
                 }
             }
         }
-
+        #region
         /// <summary>
         /// This method draws the player and the level 60 times per second
         /// </summary>
