@@ -6,11 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0.796"/>
+                <GradientStop Color="#FF58B4D6" Offset="0.017"/>
+                <GradientStop Color="#FF4789A2" Offset="0.409"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="645*"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="319*"/>
+            <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
@@ -29,62 +36,21 @@
             <RowDefinition Height="90*"/>
 
         </Grid.RowDefinitions>
-        <Rectangle x:Name="Logo" Stroke="Black" Grid.Row="1" d:LayoutOverrides="TopPosition, BottomPosition" Grid.Column="1">
-            <Rectangle.Fill>
-                <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/logo.png"/>
-            </Rectangle.Fill>
-        </Rectangle>
 
 
-        <Button x:Name="Start" Grid.Column="1" Content="Start" FontSize="30" Background="White" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Tapped="Start_Tapped" BorderThickness="0">
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF70467A" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-        </Button>
+        <Button x:Name="Start" Content="Start" FontSize="30" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Tapped="Start_Tapped" BorderThickness="0" Foreground="White" Margin="6,8,0,1" Opacity="0.5" Grid.RowSpan="2" Grid.Column="1" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward"/>
 
 
-        <Button x:Name="Invade" Grid.Column="1" Content="Invade" FontSize="30" Background="White"  HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" Tapped="Invade_Tapped"  BorderThickness="0">
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF70467A" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-        </Button>
+        <Button x:Name="Invade" Content="Invade" FontSize="30" Background="{x:Null}"  HorizontalAlignment="Stretch" Grid.Row="4" VerticalAlignment="Stretch" Tapped="Invade_Tapped"  BorderThickness="0" Foreground="White" Margin="6,8,0,1" Grid.RowSpan="2" Opacity="0.5" Grid.Column="1" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward"/>
 
 
-        <Button x:Name="Settings" Grid.Column="1" Content="Settings" FontSize="30" Background="White"  HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" Tapped="Settings_Tapped"  BorderThickness="0">
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF70467A" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-        </Button>
+        <Button x:Name="Settings" Content="Settings" FontSize="30" Background="{x:Null}"  HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch" Tapped="Settings_Tapped"  BorderThickness="0" Foreground="White" Margin="6,8,0,1.333" Grid.RowSpan="2"  Opacity="0.5" Grid.Column="1" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward"/>
 
 
-        <Button x:Name="Help" Grid.Column="1" Content="Help" FontSize="30" Background="White"  HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Tapped="Help_Tapped" BorderThickness="0">
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF70467A" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-        </Button>
+        <Button x:Name="Help" Content="Help" FontSize="30" Background="{x:Null}"  HorizontalAlignment="Stretch" Grid.Row="8" VerticalAlignment="Stretch" Tapped="Help_Tapped" BorderThickness="0" Foreground="White" Margin="6,7.667,0,1.333" Grid.RowSpan="2"  Opacity="0.75" Grid.Column="1" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward"/>
 
 
-        <Button x:Name="Exit" Grid.Column="1" Content="Exit" FontSize="30" Background="White"  HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" Tapped="Exit_Tapped" BorderThickness="0">
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF70467A" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-
-        </Button>
+        <Button x:Name="Exit" Content="Exit" FontSize="30" Background="{x:Null}"  HorizontalAlignment="Stretch" Grid.Row="10" VerticalAlignment="Stretch" Tapped="Exit_Tapped" BorderThickness="0" Foreground="White" Margin="6,7.667,0,1.667"  Opacity="0.75" Grid.RowSpan="2" Grid.Column="1" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward"/>
     </Grid>
 </Page>
 

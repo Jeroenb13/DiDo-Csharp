@@ -144,9 +144,9 @@ namespace DiDo
             }
 
             setSprite(sender, args);
-            
 
 
+#region
             string fontUI = "ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward";
             
             reloadArms(); //Method for showing the right gun in the UI
