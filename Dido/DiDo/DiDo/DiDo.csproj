@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Character\Player.cs" />
     <Compile Include="Multiplayer\MpTest.cs" />
+    <Compile Include="Multiplayer\NetHandlerClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

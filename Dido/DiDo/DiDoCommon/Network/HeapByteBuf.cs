@@ -64,7 +64,7 @@ namespace DiDoCommon.Network
                 throw new ArgumentNullException("initialArray");
             }
 
-            if(initialArray.Length <= maxCapacity)
+            if(initialArray.Length > maxCapacity)
             {
                 throw new ArgumentOutOfRangeException("The initialArray should be smaller than maxCapacity");
             }
