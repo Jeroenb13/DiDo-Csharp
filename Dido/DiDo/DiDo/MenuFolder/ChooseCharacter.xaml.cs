@@ -31,6 +31,7 @@ namespace DiDo.MenuFolder
         public Uri hayri = new Uri("ms-appx:///Assets/Char/Char_UI/Hayri.png");
         public Uri max = new Uri("ms-appx:///Assets/Char/Char_UI/Max.png");
         public Uri matthew = new Uri("ms-appx:///Assets/Char/Char_UI/Matthew.png");
+        public Uri samus = new Uri("ms-appx:///Assets/Char/Char_UI/samus.png");
 
         private int currentIndex = 0;
 
@@ -65,13 +66,14 @@ namespace DiDo.MenuFolder
             players.Add(hayri);
             players.Add(max);
             players.Add(matthew);
+            players.Add(samus);
         }
 
         private void btn_Left_Click(object sender, RoutedEventArgs e)
         { 
             if (currentIndex <= 0)
             {
-                currentIndex = 6;
+                currentIndex = 7;
             }
 
             currentIndex--;
@@ -80,7 +82,7 @@ namespace DiDo.MenuFolder
 
         private void btn_Right_Click(object sender, RoutedEventArgs e)
         {
-            if (currentIndex >= 6)
+            if (currentIndex >= 7)
             {
                 currentIndex = 0;
             }
