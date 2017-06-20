@@ -148,6 +148,8 @@
     <Compile Include="Multiplayer\MpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundEffects.cs" />
+    <Compile Include="Sounds\File.cs" />
+    <Compile Include="Sounds\Sounds.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
