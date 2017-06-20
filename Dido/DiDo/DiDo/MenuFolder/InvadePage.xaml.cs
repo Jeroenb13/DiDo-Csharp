@@ -52,7 +52,7 @@ namespace DiDo.MenuFolder
                 }
                 catch(Exception ex)
                 {
-                    MessageDialog msgError = new MessageDialog("The current value of the port is not an existing port");
+                    MessageDialog msgError = new MessageDialog("The current value of the port is not an existing port : " + ex);
                     await msgError.ShowAsync();
                 }
                 

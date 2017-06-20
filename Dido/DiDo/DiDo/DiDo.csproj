@@ -114,6 +114,7 @@
     <Compile Include="Character\Entity.cs" />
     <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\ImageManipulation.cs" />
+    <Compile Include="Items\Fist.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ItemEntity.cs" />
     <Compile Include="Items\PistolWeapon.cs" />
