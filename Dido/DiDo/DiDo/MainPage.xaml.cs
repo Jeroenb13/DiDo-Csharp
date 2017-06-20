@@ -156,17 +156,36 @@ namespace DiDo
 
             if (player.currentWeapon != null)
             {
-                args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1275, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the bullets and the total bulletamount to the UI element
-                if (player.currentWeapon.getAmmo() == 0)
+                args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + "", 1275, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the bullets to the UI element
+                args.DrawingSession.DrawText(player.currentWeapon.getAdditionalAmmo() + "", 1325, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the the total bullet amount to the UI element
+
+                if (player.currentWeapon.getAmmo() < 10)
                 {
-                    args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + "", 1275, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
-                    args.DrawingSession.DrawText("RELOAD", 1265, 340, Colors.DarkRed, new CanvasTextFormat() { FontSize = 11, FontFamily = fontUI });
-                } else if (player.currentWeapon.getAdditionalAmmo() == 0)
+                    args.DrawingSession.DrawText("0", 1265, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+
+                    if (player.currentWeapon.getAmmo() == 0)
+                    {
+                        args.DrawingSession.DrawText("0", 1265, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + "", 1275, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        args.DrawingSession.DrawText("RELOAD", 1275, 340, Colors.DarkRed, new CanvasTextFormat() { FontSize = 11, FontFamily = fontUI });
+                    }
+                    else if(player.currentWeapon.getAmmo() == 0 && player.currentWeapon.getAdditionalAmmo() == 0)
+                    {
+                        args.DrawingSession.DrawText("OUT OF AMMO", 1275, 340, Colors.DarkRed, new CanvasTextFormat() { FontSize = 11, FontFamily = fontUI });
+                    }
+                }
+
+                if (player.currentWeapon.getAdditionalAmmo() < 10) 
                 {
-                    args.DrawingSession.DrawText(player.currentWeapon.getAdditionalAmmo() + "", 1275, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                    args.DrawingSession.DrawText("0", 1315, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+
+                    if (player.currentWeapon.getAdditionalAmmo() == 0)
+                    {
+                        args.DrawingSession.DrawText("0", 1315, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        args.DrawingSession.DrawText(player.currentWeapon.getAdditionalAmmo() + "", 1325, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                    }
                 }
             }
-
             //args.DrawingSession.DrawText("AMMO", 1255, 255, Colors.Firebrick, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
 
             args.DrawingSession.DrawText("STATS", 1250, 410, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); //Adding text to the UI element
