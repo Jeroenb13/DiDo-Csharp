@@ -38,7 +38,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {           
         //CanvastBitmap: The images used by the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, Health_Full, Health_Half, Health_Empty, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, SMG, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float pointX, pointY;
@@ -48,7 +48,6 @@ namespace DiDo
         private ClientController controller;
         public static bool RoundEnded = false;
         private Levels.Levels levels;
-        private bool assetsLoaded = false;
         public static string[,] ChosenLevel;
 
         //Lists Projectile
@@ -76,6 +75,36 @@ namespace DiDo
         private void GameCanvas_CreateResources(CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
             args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
+        }
+
+        /// <summary>
+        /// Goes through the weaponList and places the bitmap on the canvas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public async void setSprite(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        {
+            foreach (Weapon weapon in weapons)
+            {
+                if (weapon != null)
+                {
+                    if (weapon.name == "Assault Rifle")
+                    {
+                        Assault_Rifle = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-1.png"));
+                        args.DrawingSession.DrawImage(Assault_Rifle, weapon.x, weapon.y);
+                    }
+                    else if (weapon.name == "Sub Machine Gun")
+                    {
+                        SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-2.png"));
+                        args.DrawingSession.DrawImage(SMG, weapon.x, weapon.y);
+                    }
+                    else if (weapon.name == "Pistol")
+                    {
+                        Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-3.png"));
+                        args.DrawingSession.DrawImage(Pistol, weapon.x, weapon.y);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -114,15 +143,10 @@ namespace DiDo
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
 
-            //Debug
-            foreach(Weapon weapon in weapons)
-            {
-                if(weapon != null)
-                {
-                    args.DrawingSession.DrawImage(UI_Pistol, weapon.x, weapon.y);
-                }
-            }
-#region
+            setSprite(sender, args);
+            
+
+
             string fontUI = "ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward";
             
             reloadArms(); //Method for showing the right gun in the UI
@@ -356,14 +380,20 @@ namespace DiDo
             }
 
         }
+
+        public async void soundHandler()
+        {
+            soundController = new SoundEffects();
+            await soundController.Play(SoundEfxEnum.BACKGROUND);
+        }
+
        /// <summary>
        /// Initialisation of the mainpage for singleplayer
        /// </summary>
         public MainPage()
         {
             // Play background music
-            soundController = new SoundEffects();
-            soundController.Play(SoundEfxEnum.BACKGROUND);
+            soundHandler();
 
             if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
             {
@@ -491,14 +521,17 @@ namespace DiDo
         public void reloadArms()
         {
             Type weaponType = null;
-            try
-            {
-                weaponType = player.currentWeapon.GetType();
-            }
-            catch (Exception e)
+
+            if(player.currentWeapon.GetType() == null)
             {
                 weaponType = typeof(PistolWeapon);
             }
+            else
+            {
+                weaponType = player.currentWeapon.GetType();
+            }
+            weaponType = typeof(PistolWeapon);
+
             if (weaponType == typeof(ARWeapon))
             {
                 CurrentArms = Arms_AR;
@@ -519,6 +552,7 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
+            
             Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
             Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
             Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
@@ -631,7 +665,7 @@ namespace DiDo
 
  
 
-        private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
             
             if (RoundEnded == true)
@@ -667,7 +701,7 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
-                            soundController.Play(SoundEfxEnum.SHOOT);
+                            await soundController.Play(SoundEfxEnum.SHOOT);
 
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));

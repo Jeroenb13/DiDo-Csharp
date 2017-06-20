@@ -9,7 +9,7 @@ namespace DiDo.Character
 {
     public abstract class Characters : Entity
     {
-        public string name { get; }
+        public string name { get; set; }
         public int maxHealth;
         public int healthPoints { get; set; }
         public int stamina { get; set; }

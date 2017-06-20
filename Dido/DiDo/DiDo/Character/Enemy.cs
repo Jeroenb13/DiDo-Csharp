@@ -10,7 +10,6 @@ namespace DiDo.Character
 {
     public class Enemy : Characters
     {
-        public string name { get; }
         private Random random;
         public int direction;
         public int stepSize = 2;
@@ -31,11 +30,6 @@ namespace DiDo.Character
             this.random = new Random(seed);
 
             this.direction = random.Next(0, 4);
-        }
-
-        public void hit(int damage = 1)
-        {
-            this.healthPoints = this.healthPoints - damage;
         }
 
         public String debugName()

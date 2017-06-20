@@ -50,7 +50,7 @@ namespace DiDo.Character
         /// <param name="player"> The player character</param>
         /// <param name="gekozenLevel">The chosen level</param>
         /// <param name="level">the tilemap for the level</param>
-        public void movementCharacter(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args, Player player, Levels.Levels level)
+        public async void movementCharacter(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args, Player player, Levels.Levels level)
         {
             player.x += player.velX;
             player.y += player.velY;
@@ -163,7 +163,7 @@ namespace DiDo.Character
                     // The current weapon has additional ammo
                     if (player.currentWeapon.getAdditionalAmmo() > 0)
                     {
-                        soundController.Play(SoundEfxEnum.RELOAD);
+                        await soundController.Play(SoundEfxEnum.RELOAD);
                         int difference = player.currentWeapon.getMagazineSize() - player.currentWeapon.getAmmo();
                         if (player.currentWeapon.getAdditionalAmmo() <= difference)
                         {

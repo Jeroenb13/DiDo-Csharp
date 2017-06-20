@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace DiDo.Items
 {
-    public class ARWeapon : Weapon
+    class Fist : Weapon
     {
-        private int damage = 20;            //Damage per Round
+        private int damage = 50;            //Damage per Round
 
-        public ARWeapon(int magazine, int total, float x, float y) : base(x, y)
+        public Fist(int magazine, int total, float x, float y) : base(x, y)
         {
-            name = "Assault Rifle";
-            if (magazine >= 30)
+            name = "Fists";
+            if (magazine >= 1)
             {
-                this.magazine = 30;
+                this.magazine = 1;
             }
             else if (magazine <= 0)
             {

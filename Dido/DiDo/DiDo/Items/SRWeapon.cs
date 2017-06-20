@@ -8,7 +8,6 @@ namespace DiDo.Items
 {
     public class SRWeapon : Weapon
     {
-        private int magazine { get; set; }  //Number of Rounds per Magazine
         private int damage = 45;            //Damage per Round
 
         public SRWeapon(int magazine, int total, float x, float y) : base(x, y)
