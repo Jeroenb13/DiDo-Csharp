@@ -122,9 +122,9 @@ namespace DiDo
                     args.DrawingSession.DrawImage(UI_Pistol, weapon.x, weapon.y);
                 }
             }
-
+#region
             string fontUI = "ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward";
-
+            
             reloadArms(); //Method for showing the right gun in the UI
 
             args.DrawingSession.FillRectangle(ui, Colors.SlateGray); //Color of the UI element (1150, 5, 300, 200)
@@ -157,6 +157,14 @@ namespace DiDo
             if (player.currentWeapon != null)
             {
                 args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + " | " + player.currentWeapon.getAdditionalAmmo(), 1275, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the bullets and the total bulletamount to the UI element
+                if (player.currentWeapon.getAmmo() == 0)
+                {
+                    args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + "", 1275, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                    args.DrawingSession.DrawText("RELOAD", 1265, 340, Colors.DarkRed, new CanvasTextFormat() { FontSize = 11, FontFamily = fontUI });
+                } else if (player.currentWeapon.getAdditionalAmmo() == 0)
+                {
+                    args.DrawingSession.DrawText(player.currentWeapon.getAdditionalAmmo() + "", 1275, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                }
             }
 
             //args.DrawingSession.DrawText("AMMO", 1255, 255, Colors.Firebrick, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
@@ -209,7 +217,7 @@ namespace DiDo
             }
             return inventory;
         }
-
+#endregion
         public double xPos, yPos, xPos2, yPos2; // Temporary
 
         //public String type_tile;
