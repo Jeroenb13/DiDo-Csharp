@@ -139,7 +139,7 @@ namespace DiDo
             foreach (Enemy enemy in enemies)
             {
                 enemy.randomWalk();
-                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
+                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
 
@@ -452,6 +452,7 @@ namespace DiDo
             Point newPoint = new Point(player.x, player.y);
             this.playerPoint = newPoint;
         }
+
 
 
         public void updateMousePoint(object sender, PointerRoutedEventArgs e)
