@@ -51,7 +51,7 @@ namespace DiDo
         public static string[,] ChosenLevel;
 
         //Lists Projectile
-        public List<Bullet> bullets = new List<Bullet>();
+        public static List<Bullet> bullets = new List<Bullet>();
         public List<Weapon> weapons;
         public static int GameState = 0; // startscreen
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
@@ -741,7 +741,7 @@ namespace DiDo
                     //await soundController.Play(SoundEfxEnum.SHOOT);
 
                     //Debug.WriteLine(player.currentWeapon.getDamage());
-                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
                     player.currentWeapon.reduceAmmo();
                 }
             }
