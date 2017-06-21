@@ -72,7 +72,5 @@ namespace DiDo.MenuFolder
         {
             Application.Current.Exit();
         }
-
-    
     }
 }

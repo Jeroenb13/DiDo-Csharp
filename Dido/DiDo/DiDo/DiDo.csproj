@@ -129,6 +129,9 @@
     <Compile Include="MenuFolder\CharacterSwitch.xaml.cs">
       <DependentUpon>CharacterSwitch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuFolder\ChooseCharacter.xaml.cs">
+      <DependentUpon>ChooseCharacter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuFolder\Help\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
@@ -337,6 +340,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MenuFolder\CharacterSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFolder\ChooseCharacter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
