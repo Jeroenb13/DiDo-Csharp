@@ -139,7 +139,75 @@ namespace DiDo
             foreach (Enemy enemy in enemies)
             {
                 enemy.randomWalk();
-                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
+                if (enemy.direction == 0)
+                {
+                    if(enemy.x == player.x && enemy.y < player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
+                    //}
+                }
+                else if(enemy.direction == 1)
+                {
+                    if(enemy.x < player.x && enemy.y == player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
+                    //}
+                }
+                else if(enemy.direction == 2)
+                {
+                    if(enemy.x == player.x && enemy.y > player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
+                    //}
+                }
+                else if(enemy.direction == 3)
+                {
+                    if(enemy.x > player.x && enemy.y == player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
+                    //}
+                }
+                else
+                {
+                    if (enemy.direction == 0)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
+                    }
+                    else if (enemy.direction == 1)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
+                    }
+                    else if (enemy.direction == 2)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
+                    }
+                    else
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
+                    }
+                }
+
+
+                //args.DrawingSession.DrawImage(ImageManipulation.img(Enemy1), enemy.x, enemy.y); //Enemy doesn't turn and faces the direction in which he spawned
+                //args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);  //Enemy turns around player
+                //args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);                     //Enemy turns with player around mouse
+                //args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, new Point(player.x, player.y))), enemy.x, enemy.y);   //Enemy turns around mouse
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
 
