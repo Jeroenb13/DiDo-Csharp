@@ -52,14 +52,17 @@ namespace DiDo.Character
                     if (this.currentWeapon.getAmmo() >= 1)
                     {
 
-                        float xPos = MainPage.player.x; //(float)e.GetPosition(GameCanvas).X; // punt waar word geklikt, dus waar je naartoe schiet normaal, nu dus naar de player
-                        float yPos = MainPage.player.y; //(float)e.GetPosition(GameCanvas).Y;
+                        //float xPos = MainPage.player.x;
+                        float xPos = random.Next((int)(MainPage.player.x - 40), (int)(MainPage.player.x + 40));
+                        float yPos = random.Next((int)(MainPage.player.y - 40), (int)(MainPage.player.y + 40));
 
-                        //float xVel = x - MainPage.player.x;
-                        //float yVel = y - MainPage.player.y;
+                        //float xPos = (float)e.GetPosition(GameCanvas).X;
+                        //float yPos = (float)e.GetPosition(GameCanvas).Y;
 
-                        float xVel = xPos - x;
-                        float yVel = yPos - y;
+                        float xVel = (xPos - x) / 15;
+                        float yVel = (yPos - y) / 15;
+
+                        
 
                         MainPage.bullets.Add(new DiDo.Bullet(x, y, xVel, yVel, currentWeapon.getDamage(), name));
                         this.currentWeapon.reduceAmmo();
