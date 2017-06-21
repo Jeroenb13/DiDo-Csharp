@@ -58,6 +58,9 @@ namespace DiDo
         public static MyPlayer player;
         public List<Enemy> enemies = new List<Enemy>();
         public float temp_x, temp_y; // Temporary
+
+
+
         public double frames = 0;
         public Random random = new Random();
 
@@ -636,10 +639,10 @@ namespace DiDo
                 int enemiesCount = 0;
                 foreach (Enemy enemy in enemies)
                 {
-                    if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
+                    if ((bullet.y > enemy.y - 16 && bullet.y < enemy.y + 16) && (bullet.x > enemy.x - 16 && bullet.x < enemy.x + 16) && (bullet.eigenaar != enemy.name))
                     {
                         enemy.hit(player.currentWeapon.getDamage());
-                        if(enemy.getHealth() <= 0)
+                        if (enemy.getHealth() <= 0)
                         {
                             addItem(enemy);
                             enemiesToRemove.Add(enemiesCount); // Enemy klaar zetten om te verwijderen
@@ -648,7 +651,14 @@ namespace DiDo
                     }
                     enemiesCount++;
                 }
+
+                if ((player.y > player.y - 16 && bullet.y < player.y + 16) && (bullet.x > player.x - 16 && bullet.x < player.x + 16) && (bullet.eigenaar != player.name))
+                {
+                    player.hit(bullet.damage);
+                }
+
             }
+            
 
             // Remove Bullets
             foreach (Bullet bullet in bulletsToRemove)
@@ -662,8 +672,6 @@ namespace DiDo
                 enemies.RemoveAt(removeEnemy);
             }
         }
-
- 
 
         private async void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -704,7 +712,7 @@ namespace DiDo
                             //await soundController.Play(SoundEfxEnum.SHOOT);
 
                             //Debug.WriteLine(player.currentWeapon.getDamage());
-                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
                             player.currentWeapon.reduceAmmo();
                         }
                     }
@@ -712,6 +720,32 @@ namespace DiDo
             }
         }
 
+        private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            float xPos = (float)e.GetPosition(GameCanvas).X;
+            float yPos = (float)e.GetPosition(GameCanvas).Y;
+
+            float xVel = xPos - player.x;
+            float yVel = yPos - player.y;
+
+            // pythagorasmagic
+            float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+            float scaling = distance / 25;
+
+            xVel = xVel / scaling;
+            yVel = yVel / scaling;
+            if (player.currentWeapon.name.Equals("Assault Rifle"))
+            {
+                if (player.currentWeapon.getAmmo() >= 1)
+                {
+                    //await soundController.Play(SoundEfxEnum.SHOOT);
+
+                    //Debug.WriteLine(player.currentWeapon.getDamage());
+                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                    player.currentWeapon.reduceAmmo();
+                }
+            }
+        }
         private void GameCanvas_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             updateMousePoint(sender, e);

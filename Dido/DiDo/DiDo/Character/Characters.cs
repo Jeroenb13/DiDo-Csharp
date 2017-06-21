@@ -130,6 +130,7 @@ namespace DiDo.Character
                 if (weaponType == typeof(Fist))
                 {
                     setItem(i, pickedUpWeapon);
+                    currentWeapon = weapons[currentWeaponIndex];
                     setWeapon = true;
                 }
                              

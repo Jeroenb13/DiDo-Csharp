@@ -13,7 +13,7 @@ namespace DiDo.Character
         private Random random;
         public int direction;
         public int stepSize = 2;
-        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 0, 0);
+        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 60, 0);
 
         public Enemy(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
@@ -47,17 +47,18 @@ namespace DiDo.Character
                 this.direction = random.Next(0, 4);
             } else
             {
-                if (this.random.Next(0, 10) == 1) { // Niet altijd schieten
+                if (this.random.Next(0, 90) == 1) { // Niet altijd schieten
                     // Schieten als de enemy stilstaat
                     if (this.currentWeapon.getAmmo() >= 1)
                     {
-                        //float xPos = (float)e.GetPosition(MainPage.GameCanvas).X;
-                        //float yPos = (float)e.GetPosition(MainPage.GameCanvas).Y;
 
-                        float xVel = MainPage.player.x - this.x;
-                        float yVel = MainPage.player.y - this.y;
+                        float xPos = MainPage.player.x; //(float)e.GetPosition(GameCanvas).X;
+                        float yPos = MainPage.player.y; //(float)e.GetPosition(GameCanvas).Y;
 
-                        //MainPage.bullets.Add(new DiDo.Bullet(this.x, this.y, xVel, yVel, this.currentWeapon.getDamage()));
+                        float xVel = x - MainPage.player.x;
+                        float yVel = y - MainPage.player.y;
+
+                        MainPage.bullets.Add(new DiDo.Bullet(x, y, xVel, yVel, currentWeapon.getDamage(), name));
                         this.currentWeapon.reduceAmmo();
                     }
                 }
