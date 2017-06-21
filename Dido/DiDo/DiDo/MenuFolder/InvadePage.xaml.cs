@@ -47,15 +47,14 @@ namespace DiDo.MenuFolder
                 Adress = IpAdressTBX.Text;
                 try
                 {
-                    Port = Convert.ToUInt16(PoortTBX);
+                    Port = Convert.ToUInt16(PoortTBX.Text);
                     this.Frame.Navigate(typeof(InvadeConnect));
                 }
                 catch(Exception ex)
                 {
-                    MessageDialog msgError = new MessageDialog("The current value of the port is not an existing port");
+                    MessageDialog msgError = new MessageDialog("The current value of the port is not a valid port");
                     await msgError.ShowAsync();
                 }
-                
             }
         }
     }
