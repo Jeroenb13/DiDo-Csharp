@@ -31,7 +31,7 @@ namespace DiDo
         {
             effects.Add(SoundEfxEnum.BACKGROUND, await LoadSoundFile("ms-appx:///Assets/Sound/Zapper-16-Bit.mp3"));
             effects.Add(SoundEfxEnum.SHOOT, await LoadSoundFile("ms-appx:///Assets/Sound/shot.mp3"));
-            effects.Add(SoundEfxEnum.RELOAD, await LoadSoundFile("ms-appx:///Assets/Sound/shot.mp3"));
+            effects.Add(SoundEfxEnum.RELOAD, await LoadSoundFile("ms-appx:///Assets/Sound/reload.mp3"));
         }
 
         private async Task<MediaElement> LoadSoundFile(string v)
