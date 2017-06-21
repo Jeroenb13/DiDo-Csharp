@@ -9,6 +9,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <canvas:CanvasAnimatedControl x:Name="GameCanvas" CreateResources="GameCanvas_CreateResources"  Draw="GameCanvas_Draw" IsTapEnabled="True" Tapped="GameCanvas_Tapped" PointerMoved="GameCanvas_PointerMoved"/>
+        <canvas:CanvasAnimatedControl x:Name="GameCanvas" CreateResources="GameCanvas_CreateResources" Holding="GameCanvas_Holding" Draw="GameCanvas_Draw" IsTapEnabled="True" Tapped="GameCanvas_Tapped" PointerMoved="GameCanvas_PointerMoved"/>
     </Grid>
 </Page>
