@@ -712,6 +712,7 @@ namespace DiDo
                 }
             }
         }
+
         private void GameCanvas_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             updateMousePoint(sender, e);
