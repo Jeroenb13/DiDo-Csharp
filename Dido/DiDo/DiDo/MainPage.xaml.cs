@@ -38,7 +38,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {           
         //CanvastBitmap: The images used by the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, SMG, Health_Full, Health_Half, Health_Empty, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, UI_Fists, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Arms_Fists, Player_sprite, Pistol, Assault_Rifle, SMG, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float pointX, pointY;
@@ -55,7 +55,7 @@ namespace DiDo
         public List<Weapon> weapons;
         public static int GameState = 0; // startscreen
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
-        public MyPlayer player;
+        public static MyPlayer player;
         public List<Enemy> enemies = new List<Enemy>();
         public float temp_x, temp_y; // Temporary
         public double frames = 0;
@@ -67,7 +67,7 @@ namespace DiDo
         public Rect playerRect = new Rect(1150, 5, 300, 200); // Rectangle for the player UI element
         public Rect weaponRect = new Rect(1150, 5, 300, 400); // Rectangle for the player ui element
 
-        public SoundEffects soundController;
+        //public SoundEffects soundController;
 
         /// <summary>
         /// Creates the resources of the game
@@ -139,14 +139,14 @@ namespace DiDo
             foreach (Enemy enemy in enemies)
             {
                 enemy.randomWalk();
-                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);
+                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
 
             setSprite(sender, args);
-            
 
 
+#region
             string fontUI = "ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward";
             
             reloadArms(); //Method for showing the right gun in the UI
@@ -381,11 +381,11 @@ namespace DiDo
 
         }
 
-        public async void soundHandler()
-        {
-            soundController = new SoundEffects();
-            await soundController.Play(SoundEfxEnum.BACKGROUND);
-        }
+        //public async void soundHandler()
+        //{
+        //    soundController = new SoundEffects();
+        //    await soundController.Play(SoundEfxEnum.BACKGROUND);
+        //}
 
        /// <summary>
        /// Initialisation of the mainpage for singleplayer
@@ -393,38 +393,38 @@ namespace DiDo
         public MainPage()
         {
             // Play background music
-            soundHandler();
+            //soundHandler();
 
-            if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
             {
                 player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey"))
             {
                 player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Daan"))
             {
                 player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy"))
             {
                 player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew"))
             {
                 player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri"))
             {
                 player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Max"))
             {
                 player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96);
             }
 
-            else if (CharacterSwitch.PlayerCharacter.Equals("Samus"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Samus"))
             {
                 player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96);
             }
@@ -452,6 +452,7 @@ namespace DiDo
             Point newPoint = new Point(player.x, player.y);
             this.playerPoint = newPoint;
         }
+
 
 
         public void updateMousePoint(object sender, PointerRoutedEventArgs e)
@@ -553,6 +554,7 @@ namespace DiDo
             Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
             Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
             Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
+            Arms_Fists = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Fists.png"));
             reloadArms();
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
@@ -561,42 +563,42 @@ namespace DiDo
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
 
-            if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeffrey.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeffrey.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Daan"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_daan.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Daan.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jordy.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jordy.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_matthew.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Matthew.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Hayri.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Max"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_max.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Max.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Samus"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Samus"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_samus.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/samus.png"));
@@ -698,7 +700,7 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
-                            await soundController.Play(SoundEfxEnum.SHOOT);
+                            //await soundController.Play(SoundEfxEnum.SHOOT);
 
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
@@ -708,6 +710,7 @@ namespace DiDo
                 }
             }
         }
+
         private void GameCanvas_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             updateMousePoint(sender, e);
@@ -715,3 +718,4 @@ namespace DiDo
         }
     }
 }
+#endregion

@@ -17,12 +17,12 @@ namespace DiDo.Character
         private MainPage mainPage;
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        private SoundEffects soundController;
+        //private SoundEffects soundController;
 
         public ClientController(MainPage mainPage, string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
             this.mainPage = mainPage;
-            this.soundController = new SoundEffects();
+            //this.soundController = new SoundEffects();
         }
 
         private Boolean keyPressed(VirtualKey key)
@@ -163,7 +163,7 @@ namespace DiDo.Character
                     // The current weapon has additional ammo
                     if (player.currentWeapon.getAdditionalAmmo() > 0)
                     {
-                        await soundController.Play(SoundEfxEnum.RELOAD);
+                        //await soundController.Play(SoundEfxEnum.RELOAD);
                         int difference = player.currentWeapon.getMagazineSize() - player.currentWeapon.getAmmo();
                         if (player.currentWeapon.getAdditionalAmmo() <= difference)
                         {

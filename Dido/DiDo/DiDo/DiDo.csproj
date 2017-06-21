@@ -90,6 +90,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\Char\arms\AR.png" />
+    <Content Include="Assets\Char\arms\Fists.png" />
     <Content Include="Assets\Char\arms\Pistol.png" />
     <Content Include="Assets\Char\arms\SMG.png" />
     <Content Include="Assets\Char\Char_UI\samus.png" />
@@ -129,6 +130,9 @@
     <Compile Include="MenuFolder\CharacterSwitch.xaml.cs">
       <DependentUpon>CharacterSwitch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuFolder\ChooseCharacter.xaml.cs">
+      <DependentUpon>ChooseCharacter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuFolder\Help\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
@@ -163,18 +167,6 @@
     <Content Include="Assets\BG\level.png" />
     <Content Include="Assets\Bullets\bullet.png" />
     <Content Include="Assets\Bullets\drink-4.png" />
-    <Content Include="Assets\Char\arms\AR\aiming\1.png" />
-    <Content Include="Assets\Char\arms\AR\aiming\2.png" />
-    <Content Include="Assets\Char\arms\AR\aiming\3.png" />
-    <Content Include="Assets\Char\arms\AR\aiming\4.png" />
-    <Content Include="Assets\Char\arms\AR\idle\1.png" />
-    <Content Include="Assets\Char\arms\AR\idle\2.png" />
-    <Content Include="Assets\Char\arms\AR\idle\3.png" />
-    <Content Include="Assets\Char\arms\AR\idle\4.png" />
-    <Content Include="Assets\Char\arms\AR\walking\1.png" />
-    <Content Include="Assets\Char\arms\AR\walking\2.png" />
-    <Content Include="Assets\Char\arms\AR\walking\3.png" />
-    <Content Include="Assets\Char\arms\AR\walking\4.png" />
     <Content Include="Assets\Char\Char_UI\Daan.png" />
     <Content Include="Assets\Char\Char_UI\Hayri.png" />
     <Content Include="Assets\Char\Char_UI\Jeffrey.png" />
@@ -341,6 +333,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MenuFolder\ChooseCharacter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MenuFolder\Help\HelpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -364,8 +360,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
-    <Folder Include="Assets\Char\arms\Pistol\" />
-    <Folder Include="Assets\Char\arms\SMG\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
