@@ -383,8 +383,11 @@ namespace DiDo
 
         public async void soundHandler()
         {
+            Debug.WriteLine("SoundHandler");
             soundController = new SoundEffects();
+            Debug.WriteLine("Soundcontroller");
             await soundController.Play(SoundEfxEnum.BACKGROUND);
+            Debug.WriteLine("Einde van soundhandler");
         }
 
        /// <summary>

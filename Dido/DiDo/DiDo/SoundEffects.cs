@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,10 @@ namespace DiDo
         public SoundEffects()
         {
             effects = new Dictionary<SoundEfxEnum, MediaElement>();
-            LoadEfx();
+            LoadEfx().Wait();
         }
 
-        private async void LoadEfx()
+        private async Task LoadEfx()
         {
             effects.Add(SoundEfxEnum.BACKGROUND, await LoadSoundFile("ms-appx:///Assets/Sound/Zapper-16-Bit.mp3"));
             effects.Add(SoundEfxEnum.SHOOT, await LoadSoundFile("ms-appx:///Assets/Sound/shot.mp3"));
