@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DiDo.Multiplayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -48,7 +50,10 @@ namespace DiDo.MenuFolder
                 try
                 {
                     Port = Convert.ToUInt16(PoortTBX.Text);
-                    this.Frame.Navigate(typeof(InvadeConnect));
+
+                    NetHandlerClient netHandler = new NetHandlerClient(new HostName(Adress), Port);
+
+                    this.Frame.Navigate(typeof(InvadeConnect), netHandler);
                 }
                 catch(Exception ex)
                 {

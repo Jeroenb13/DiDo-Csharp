@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiDo.Multiplayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +14,22 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace DiDo.MenuFolder
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class InvadeConnect : Page
     {
+        private NetHandlerClient netHandler;
+
         public InvadeConnect()
         {
             this.InitializeComponent();
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.netHandler = e.Parameter as NetHandlerClient;
+
+            await this.netHandler.ConnectAsync();
         }
     }
 }
