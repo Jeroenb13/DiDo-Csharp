@@ -34,7 +34,7 @@ namespace DiDo.Character
 
         public String debugName()
         {
-            return this.name + " (" + this.getHealth() + ")";
+            return this.name + " (" + this.currentWeapon.name + " - "  + this.currentWeapon.getAmmo() + ")";
         }
 
         public void randomWalk()
@@ -45,7 +45,24 @@ namespace DiDo.Character
             if (this.random.Next(0, 30) == 1)
             {
                 this.direction = random.Next(0, 4);
+            } else
+            {
+                if (this.random.Next(0, 10) == 1) { // Niet altijd schieten
+                    // Schieten als de enemy stilstaat
+                    if (this.currentWeapon.getAmmo() >= 1)
+                    {
+                        //float xPos = (float)e.GetPosition(MainPage.GameCanvas).X;
+                        //float yPos = (float)e.GetPosition(MainPage.GameCanvas).Y;
+
+                        float xVel = MainPage.player.x - this.x;
+                        float yVel = MainPage.player.y - this.y;
+
+                        MainPage.bullets.Add(new DiDo.Bullet(this.x, this.y, xVel, yVel, this.currentWeapon.getDamage()));
+                        this.currentWeapon.reduceAmmo();
+                    }
+                }
             }
+
             if (this.direction == 0)
             {
                 Tile nextTile = level.getPlayerTile(this.x, this.y + 1, level.gekozenLevel);

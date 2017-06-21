@@ -43,7 +43,7 @@ namespace DiDo.MenuFolder
             try
             {
                 MainPage.countdown = 10;
-                this.Frame.Navigate(typeof(CharacterSwitch));
+                Frame.Navigate(typeof(ChooseCharacter));
 
             }
             catch (Exception ex)
@@ -54,18 +54,18 @@ namespace DiDo.MenuFolder
 
         private void Invade_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(InvadePage));
+            Frame.Navigate(typeof(InvadePage));
         }
 
         private async void Settings_Tapped(object sender, TappedRoutedEventArgs e)
         {
            
-            this. Frame.Navigate(typeof(SettingPage), null);
+            Frame.Navigate(typeof(SettingPage), null);
         }
 
         private async void Help_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(HelpPage), null);
+            Frame.Navigate(typeof(HelpPage), null);
         }
 
         private void Exit_Tapped(object sender, TappedRoutedEventArgs e)
