@@ -57,7 +57,7 @@ namespace DiDo.Character
                         float xVel = MainPage.player.x - this.x;
                         float yVel = MainPage.player.y - this.y;
 
-                        MainPage.bullets.Add(new DiDo.Bullet(this.x, this.y, xVel, yVel, this.currentWeapon.getDamage()));
+                        //MainPage.bullets.Add(new DiDo.Bullet(this.x, this.y, xVel, yVel, this.currentWeapon.getDamage()));
                         this.currentWeapon.reduceAmmo();
                     }
                 }

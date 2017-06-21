@@ -542,8 +542,8 @@ namespace DiDo
             }
             else if (weaponType == typeof(Fist))
             {
-                CurrentArms = Arms_SMG;
-                CurrentWeapon = UI_SMG;
+                CurrentArms = Arms_Fists;
+                CurrentWeapon = UI_Fists;
             }
         }
 
@@ -560,6 +560,7 @@ namespace DiDo
             UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
             UI_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-2.png"));
             UI_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-3.png"));
+            UI_Fists = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/fists.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
 
