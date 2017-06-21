@@ -34,7 +34,7 @@ namespace DiDo.Character
 
         public String debugName()
         {
-            return this.name + " (" + this.currentWeapon.name + " - "  + this.currentWeapon.getAmmo() + ")";
+            return this.name + " (" + this.getHealth() + "/"+this.currentWeapon.getAmmo()+")";
         }
 
         public void randomWalk()
