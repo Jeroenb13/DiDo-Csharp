@@ -29,7 +29,9 @@ namespace DiDoCommon.Network.Packet
             {
                 Type type = types[id];
                 ConstructorInfo ctor = type.GetConstructor(Type.EmptyTypes);
-                return (AbstractPacket)ctor.Invoke(new object[0]);
+                AbstractPacket packet = (AbstractPacket)ctor.Invoke(new object[0]);
+                packet.Id = id;
+                return packet;
             }catch(Exception e)
             {
                 return null;

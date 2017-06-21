@@ -639,5 +639,10 @@ namespace DiDoCommon.Network
                 throw new IndexOutOfRangeException($"srcIndex: {srcIndex}, length: {length} (expected: range(0, {srcCapacity}))");
             }
         }
+
+        internal byte[] GetBackingArray()
+        {
+            return this.array;
+        }
     }
 }

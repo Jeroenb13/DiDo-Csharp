@@ -55,7 +55,7 @@ namespace DiDoServer
 
                 connHandler.ReceiveBuffer = new byte[4];
                 clientSocket.BeginReceive(connHandler.ReceiveBuffer, 0, connHandler.ReceiveBuffer.Length, SocketFlags.None, new AsyncCallback(HeaderCallback), connHandler);
-                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+                serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), serverSocket);
             }
             catch (Exception e)
             {

@@ -24,6 +24,8 @@ using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
 using Windows.UI.Xaml.Shapes;
+using DiDo.Multiplayer;
+using Windows.UI.Xaml.Navigation;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
@@ -70,6 +72,18 @@ namespace DiDo
 
         public SoundEffects soundController;
 
+        private NetHandlerClient netHandler;
+        private bool isMultiplayerClient = false;
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if(e.Parameter != null && e.Parameter is NetHandlerClient)
+            {
+                this.netHandler = e.Parameter as NetHandlerClient;
+                this.isMultiplayerClient = true;
+            }
+        }
+        
         /// <summary>
         /// Creates the resources of the game
         /// </summary>
@@ -191,6 +205,11 @@ namespace DiDo
                 {
                     args.DrawingSession.DrawImage(Health_Empty, x, 525); //Show empty lives
                 }
+            }
+
+            if (this.isMultiplayerClient)
+            {
+                this.netHandler.ReadAsync();
             }
 
             //Triggers the draw event 60 times per second

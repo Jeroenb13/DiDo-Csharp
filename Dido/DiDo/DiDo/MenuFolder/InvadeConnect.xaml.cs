@@ -1,4 +1,5 @@
 ﻿using DiDo.Multiplayer;
+using DiDoCommon.Network.Packet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,11 @@ namespace DiDo.MenuFolder
             this.netHandler = e.Parameter as NetHandlerClient;
 
             await this.netHandler.ConnectAsync();
+            await this.netHandler.SendPacketAsync(new PacketPlayerLogin("Harrie"));
+
+            this.ConnectBox.Text = "Connected!";
+
+            this.Frame.Navigate(typeof(MainPage), this.netHandler);
         }
     }
 }
