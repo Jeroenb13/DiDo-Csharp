@@ -67,7 +67,7 @@ namespace DiDo
         public Rect playerRect = new Rect(1150, 5, 300, 200); // Rectangle for the player UI element
         public Rect weaponRect = new Rect(1150, 5, 300, 400); // Rectangle for the player ui element
 
-        public SoundEffects soundController;
+        //public SoundEffects soundController;
 
         /// <summary>
         /// Creates the resources of the game
@@ -381,11 +381,11 @@ namespace DiDo
 
         }
 
-        public async void soundHandler()
-        {
-            soundController = new SoundEffects();
-            await soundController.Play(SoundEfxEnum.BACKGROUND);
-        }
+        //public async void soundHandler()
+        //{
+        //    soundController = new SoundEffects();
+        //    await soundController.Play(SoundEfxEnum.BACKGROUND);
+        //}
 
        /// <summary>
        /// Initialisation of the mainpage for singleplayer
@@ -393,7 +393,7 @@ namespace DiDo
         public MainPage()
         {
             // Play background music
-            soundHandler();
+            //soundHandler();
 
             if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
             {
@@ -703,7 +703,7 @@ namespace DiDo
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
-                            await soundController.Play(SoundEfxEnum.SHOOT);
+                            //await soundController.Play(SoundEfxEnum.SHOOT);
 
                             //Debug.WriteLine(player.currentWeapon.getDamage());
                             bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
