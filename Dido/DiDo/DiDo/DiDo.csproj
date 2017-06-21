@@ -199,6 +199,7 @@
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
     <Content Include="Assets\Items\gun-1.png" />
+    <Content Include="Assets\Items\gun-2.png" />
     <Content Include="Assets\Items\gun-3.png" />
     <Content Include="Assets\Items\key.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

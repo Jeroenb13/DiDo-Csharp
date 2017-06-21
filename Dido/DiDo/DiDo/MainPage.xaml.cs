@@ -52,7 +52,7 @@ namespace DiDo
 
         //Lists Projectile
         public List<Bullet> bullets = new List<Bullet>();
-        public Weapon[] weapons;
+        public List<Weapon> weapons;
         public static int GameState = 0; // startscreen
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
         public MyPlayer player;
@@ -429,7 +429,7 @@ namespace DiDo
                 player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96);
             }
             controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
-            weapons = new Weapon[100];
+            weapons = new List<Weapon>();
             levels = new Levels.Levels();
             
             mousePoint = new Point();
@@ -492,19 +492,19 @@ namespace DiDo
 
         public void addItem(Characters character)
         {
-            for (int i = 0; i < weapons.Length; i++)
+            for (int i = 0; i <= weapons.Count; i++)
             {
-                if (weapons[i] == null)
+                if(character.dropItem() != null)
                 {
-                    weapons[i] = character.currentWeapon;
-                    character.dropItem();
+                    weapons.Add(character.weaponToDrop);
+                    character.weaponToDrop = null;
                 }
             }
         }
 
         public void removeItem(Weapon item)
         {
-            for (int i = 0; i < weapons.Length; i++)
+            for (int i = 0; i < weapons.Count; i++)
             {
                 if (weapons[i] == item)
                 {
@@ -522,15 +522,7 @@ namespace DiDo
         {
             Type weaponType = null;
 
-            if(player.currentWeapon.GetType() == null)
-            {
-                weaponType = typeof(PistolWeapon);
-            }
-            else
-            {
-                weaponType = player.currentWeapon.GetType();
-            }
-            weaponType = typeof(PistolWeapon);
+            weaponType = player.currentWeapon.GetType();
 
             if (weaponType == typeof(ARWeapon))
             {
@@ -543,6 +535,11 @@ namespace DiDo
                 CurrentWeapon = UI_Pistol;
             }
             else if (weaponType == typeof(SMGWeapon))
+            {
+                CurrentArms = Arms_SMG;
+                CurrentWeapon = UI_SMG;
+            }
+            else if (weaponType == typeof(Fist))
             {
                 CurrentArms = Arms_SMG;
                 CurrentWeapon = UI_SMG;
