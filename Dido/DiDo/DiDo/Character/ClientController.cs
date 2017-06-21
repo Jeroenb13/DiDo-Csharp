@@ -130,15 +130,15 @@ namespace DiDo.Character
                 {
                     player.y -= player.run();
                 }
-            }
+            }//Drop item in hand
              if(keyPressed(VirtualKey.G))
             {
                 mainPage.addItem(player);
             }
-
+             //Pickup Item 
              if (keyPressed(VirtualKey.H))
             {
-                for (int i = 0; i < mainPage.weapons.Length; i++)
+                for (int i = 0; i < mainPage.weapons.Count; i++)
                 {
                     System.Diagnostics.Debug.WriteLine("Player: " + player.x + ", " + player.y);
                     System.Diagnostics.Debug.Write(weapons);
