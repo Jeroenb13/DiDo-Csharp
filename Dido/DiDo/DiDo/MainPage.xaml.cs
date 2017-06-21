@@ -38,7 +38,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {           
         //CanvastBitmap: The images used by the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Player_sprite, Pistol, Assault_Rifle, SMG, Health_Full, Health_Half, Health_Empty, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, UI_Fists, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Arms_Fists, Player_sprite, Pistol, Assault_Rifle, SMG, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float pointX, pointY;
@@ -525,7 +525,7 @@ namespace DiDo
 
             if(player.currentWeapon.GetType() == null)
             {
-                weaponType = typeof(PistolWeapon);
+                CurrentArms = Arms_Fists;
             }
             else
             {
@@ -557,6 +557,7 @@ namespace DiDo
             Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
             Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
             Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
+            Arms_Fists = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Fists.png"));
             reloadArms();
             Bullet = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Bullets/bullet.png"));
             UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
