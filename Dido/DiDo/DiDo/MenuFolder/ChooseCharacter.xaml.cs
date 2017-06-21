@@ -35,7 +35,7 @@ namespace DiDo.MenuFolder
         public Uri matthew = new Uri("ms-appx:///Assets/Char/Char_UI/Matthew.png");
         public Uri samus = new Uri("ms-appx:///Assets/Char/Char_UI/samus.png");
         public static string PlayerCharacter { get; set; }
-        private int currentIndex;
+        private int currentIndex = 0;
         public List<Uri> players = new List<Uri>();
         public List<BitmapImage> images = new List<BitmapImage>();
 
@@ -44,7 +44,6 @@ namespace DiDo.MenuFolder
             this.InitializeComponent();
             addPlayer();
             getPlayer();
-            currentIndex = 0;
         }
 
         /// <summary>
@@ -78,24 +77,28 @@ namespace DiDo.MenuFolder
 
         private void btn_Left_Click(object sender, RoutedEventArgs e)
         { 
-            if (currentIndex <= 0) 
+            if (currentIndex < 0) 
             {
                 currentIndex = 7; //When the currentIndex is below 0, the currentIndex is set to 7
             }
 
+            Debug.WriteLine(currentIndex);
             currentIndex--;
             img_Player.Source = images[currentIndex]; //The Image object on the canvas is set each time the player clicks on the button
+            
         }
 
         private void btn_Right_Click(object sender, RoutedEventArgs e)
         {
-            if (currentIndex >= 7)
+            if (currentIndex > players.Count - 1)
             {
-                currentIndex = 0; //When the currentIndex is higher then 7, the currentIndex is set to 0
+                currentIndex = 0; //When the currentIndex is higher then 8, the currentIndex is set to 0
             }
 
+            Debug.WriteLine(currentIndex);
+
             currentIndex++;
-            img_Player.Source = images[currentIndex]; //The Image object on the canvas is set each time the player clicks on the button
+            img_Player.Source = images[currentIndex]; //The Image object on the canvas is set each time the player clicks on the button                
         }
 
         private void btn_ChoosePlayer_Click(object sender, RoutedEventArgs e)
