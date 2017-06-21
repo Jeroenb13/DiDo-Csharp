@@ -384,7 +384,16 @@ namespace DiDo
         public async void soundHandler()
         {
             soundController = new SoundEffects();
-            await soundController.Play(SoundEfxEnum.BACKGROUND);
+            try
+            {
+                Debug.WriteLine("Await soundController.Play");
+                await soundController.Play(SoundEfxEnum.BACKGROUND);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            
         }
 
        /// <summary>

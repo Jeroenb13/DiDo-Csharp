@@ -29,7 +29,17 @@ namespace DiDo
 
         private async Task LoadEfx()
         {
-            effects.Add(SoundEfxEnum.BACKGROUND, await LoadSoundFile("ms-appx:///Assets/Sound/Zapper-16-Bit.mp3"));
+            try
+            {
+                Debug.WriteLine("Add Backgroundsound");
+                effects.Add(SoundEfxEnum.BACKGROUND, await LoadSoundFile("ms-appx:///Assets/Sound/Zapper-16-Bit.mp3"));
+                Debug.WriteLine("Backgroundsound is added");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            
             effects.Add(SoundEfxEnum.SHOOT, await LoadSoundFile("ms-appx:///Assets/Sound/shot.mp3"));
             effects.Add(SoundEfxEnum.RELOAD, await LoadSoundFile("ms-appx:///Assets/Sound/reload.mp3"));
         }
