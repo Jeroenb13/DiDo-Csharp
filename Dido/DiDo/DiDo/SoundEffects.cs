@@ -46,12 +46,14 @@ namespace DiDo
 
         private async Task<MediaElement> LoadSoundFile(string v)
         {
+            Debug.WriteLine("LoadSoundFile voor: " + v);
             MediaElement snd = new MediaElement();
 
             snd.AutoPlay = false;
             StorageFile file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(v));
             var stream = await file.OpenAsync(FileAccessMode.Read);
             snd.SetSource(stream, file.ContentType);
+            Debug.WriteLine("Einde van LoadSoundFile voor: " + v);
             return snd;
         }
 
