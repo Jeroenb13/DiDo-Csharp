@@ -93,7 +93,9 @@
     <Content Include="Assets\Char\arms\Fists.png" />
     <Content Include="Assets\Char\arms\Pistol.png" />
     <Content Include="Assets\Char\arms\SMG.png" />
+    <Content Include="Assets\Char\Char_UI\rob.png" />
     <Content Include="Assets\Char\Char_UI\samus.png" />
+    <Content Include="Assets\Char\spr_rob.png" />
     <Content Include="Assets\Char\spr_samus.png" />
     <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
@@ -191,6 +193,7 @@
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
     <Content Include="Assets\Items\gun-1.png" />
+    <Content Include="Assets\Items\gun-2.png" />
     <Content Include="Assets\Items\gun-3.png" />
     <Content Include="Assets\Items\key.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -307,12 +310,14 @@
     <Content Include="Assets\Tiles\water\4.png" />
     <Content Include="Assets\Tiles\water\water_sand.png" />
     <Content Include="Assets\Tiles\whiteTile.png" />
+    <Content Include="Assets\UI\fists.png" />
     <Content Include="Assets\UI\gun-1.png" />
     <Content Include="Assets\UI\gun-2.png" />
     <Content Include="Assets\UI\gun-3.png" />
     <Content Include="Assets\UI\Health\health-empty.png" />
     <Content Include="Assets\UI\Health\health-full.png" />
     <Content Include="Assets\UI\Health\health-half.png" />
+    <Content Include="Assets\Weapons\fists.png" />
     <Content Include="Assets\Weapons\gun-1.png" />
     <Content Include="Assets\Weapons\gun-2.png" />
     <Content Include="Assets\Weapons\gun-3.png" />

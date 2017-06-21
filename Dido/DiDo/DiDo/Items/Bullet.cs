@@ -11,12 +11,15 @@ namespace DiDo
         public float velX { get; set; }
         public float velY { get; set; }
 
+        public String eigenaar { get; set; }
+
         public int damage { get; set; }
-        public Bullet(float x, float y, float velX, float velY, int damage) : base(x, y)
+        public Bullet(float x, float y, float velX, float velY, int damage, String eigenaar) : base(x, y)
         {
             this.velX = velX;
             this.velY = velY;
             this.damage = damage;
+            this.eigenaar = eigenaar;
         }
     }
 }
