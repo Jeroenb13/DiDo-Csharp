@@ -33,6 +33,8 @@ namespace DiDo.MenuFolder
         public Uri matthew = new Uri("ms-appx:///Assets/Char/Char_UI/Matthew.png");
         public Uri samus = new Uri("ms-appx:///Assets/Char/Char_UI/samus.png");
 
+        public static string PlayerCharacter { get; set; }
+
         private int currentIndex = 0;
 
         public List<Uri> players = new List<Uri>();
@@ -89,6 +91,63 @@ namespace DiDo.MenuFolder
 
             currentIndex++;
             img_Player.Source = images[currentIndex];
+        }
+
+        private void btn_ChoosePlayer_Click(object sender, RoutedEventArgs e)
+        {
+
+            switch (currentIndex)
+            {
+                case 0:
+                    PlayerCharacter = "Daan";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 1:
+                    PlayerCharacter = "Jordy";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 2:
+                    PlayerCharacter = "Jeroen";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 3:
+                    PlayerCharacter = "Jeffrey";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 4:
+                    PlayerCharacter = "Hayri";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 5:
+                    PlayerCharacter = "Max";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 6:
+                    PlayerCharacter = "Matthew";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                case 7:
+                    PlayerCharacter = "Samus";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+
+                default:
+                    PlayerCharacter = "Hayri";
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+            }
+        }
+
+        private void btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MenuPage));
         }
     }
 }
