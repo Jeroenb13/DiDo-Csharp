@@ -51,11 +51,11 @@ namespace DiDo
         public static string[,] ChosenLevel;
 
         //Lists Projectile
-        public List<Bullet> bullets = new List<Bullet>();
+        public static List<Bullet> bullets = new List<Bullet>();
         public Weapon[] weapons;
         public static int GameState = 0; // startscreen
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
-        public MyPlayer player;
+        public static MyPlayer player;
         public List<Enemy> enemies = new List<Enemy>();
         public float temp_x, temp_y; // Temporary
         public double frames = 0;
