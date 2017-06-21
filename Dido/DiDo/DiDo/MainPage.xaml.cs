@@ -381,20 +381,6 @@ namespace DiDo
 
         }
 
-        public async void soundHandler()
-        {
-            soundController = new SoundEffects();
-            try
-            {
-                Debug.WriteLine("Await soundController.Play");
-                await soundController.Play(SoundEfxEnum.BACKGROUND);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-            
-        }
         //public async void soundHandler()
         //{
         //    soundController = new SoundEffects();
