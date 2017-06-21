@@ -50,8 +50,11 @@ namespace DiDo
             MediaElement snd = new MediaElement();
 
             snd.AutoPlay = false;
+            Debug.WriteLine("Voor StorageFile");
             StorageFile file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(v));
+            Debug.WriteLine("Voor openAsync");
             var stream = await file.OpenAsync(FileAccessMode.Read);
+            Debug.WriteLine("Voor setSource");
             snd.SetSource(stream, file.ContentType);
             Debug.WriteLine("Einde van LoadSoundFile voor: " + v);
             return snd;
