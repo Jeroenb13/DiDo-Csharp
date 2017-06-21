@@ -13,7 +13,7 @@ namespace DiDo.Character
         private Random random;
         public int direction;
         public int stepSize = 2;
-        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 0, 0);
+        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 60, 0);
 
         public Enemy(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
@@ -34,7 +34,7 @@ namespace DiDo.Character
 
         public String debugName()
         {
-            return this.name + " (" + this.currentWeapon.name + " - "  + this.currentWeapon.getAmmo() + ")";
+            return this.name + " (" + this.getHealth() + "/"+this.currentWeapon.getAmmo()+")";
         }
 
         public void randomWalk()
@@ -47,17 +47,24 @@ namespace DiDo.Character
                 this.direction = random.Next(0, 4);
             } else
             {
-                if (this.random.Next(0, 10) == 1) { // Niet altijd schieten
+                if (this.random.Next(0, 90) == 1) { // Niet altijd schieten
                     // Schieten als de enemy stilstaat
                     if (this.currentWeapon.getAmmo() >= 1)
                     {
-                        //float xPos = (float)e.GetPosition(MainPage.GameCanvas).X;
-                        //float yPos = (float)e.GetPosition(MainPage.GameCanvas).Y;
 
-                        float xVel = MainPage.player.x - this.x;
-                        float yVel = MainPage.player.y - this.y;
+                        //float xPos = MainPage.player.x;
+                        float xPos = random.Next((int)(MainPage.player.x - 40), (int)(MainPage.player.x + 40));
+                        float yPos = random.Next((int)(MainPage.player.y - 40), (int)(MainPage.player.y + 40));
 
-                        //MainPage.bullets.Add(new DiDo.Bullet(this.x, this.y, xVel, yVel, this.currentWeapon.getDamage()));
+                        //float xPos = (float)e.GetPosition(GameCanvas).X;
+                        //float yPos = (float)e.GetPosition(GameCanvas).Y;
+
+                        float xVel = (xPos - x) / 15;
+                        float yVel = (yPos - y) / 15;
+
+                        
+
+                        MainPage.bullets.Add(new DiDo.Bullet(x, y, xVel, yVel, currentWeapon.getDamage(), name));
                         this.currentWeapon.reduceAmmo();
                     }
                 }

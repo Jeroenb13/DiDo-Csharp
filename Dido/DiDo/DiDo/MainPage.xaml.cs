@@ -52,7 +52,7 @@ namespace DiDo
         bool holding = false;
 
         //Lists Projectile
-        public List<Bullet> bullets = new List<Bullet>();
+        public static List<Bullet> bullets = new List<Bullet>();
         public List<Weapon> weapons;
         public static int GameState = 0; // startscreen
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
@@ -153,7 +153,75 @@ namespace DiDo
             foreach (Enemy enemy in enemies)
             {
                 enemy.randomWalk();
-                args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
+                if (enemy.direction == 0)
+                {
+                    if(enemy.x == player.x && enemy.y < player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
+                    //}
+                }
+                else if(enemy.direction == 1)
+                {
+                    if(enemy.x < player.x && enemy.y == player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
+                    //}
+                }
+                else if(enemy.direction == 2)
+                {
+                    if(enemy.x == player.x && enemy.y > player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
+                    //}
+                }
+                else if(enemy.direction == 3)
+                {
+                    if(enemy.x > player.x && enemy.y == player.y)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                    }
+                    //else
+                    //{
+                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
+                    //}
+                }
+                else
+                {
+                    if (enemy.direction == 0)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
+                    }
+                    else if (enemy.direction == 1)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
+                    }
+                    else if (enemy.direction == 2)
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
+                    }
+                    else
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
+                    }
+                }
+
+
+                //args.DrawingSession.DrawImage(ImageManipulation.img(Enemy1), enemy.x, enemy.y); //Enemy doesn't turn and faces the direction in which he spawned
+                //args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);  //Enemy turns around player
+                //args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, playerPoint)), enemy.x, enemy.y);                     //Enemy turns with player around mouse
+                //args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(mousePoint, new Point(player.x, player.y))), enemy.x, enemy.y);   //Enemy turns around mouse
                 args.DrawingSession.DrawText(enemy.debugName(), enemy.x - 16, enemy.y - 16, Colors.Black); // Toon de player location, Tijdelijk
             }
 
@@ -602,7 +670,7 @@ namespace DiDo
             UI_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-1.png"));
             UI_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-2.png"));
             UI_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-3.png"));
-            UI_Fists = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/gun-3.png"));
+            UI_Fists = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/fists.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
 
@@ -678,10 +746,10 @@ namespace DiDo
                 int enemiesCount = 0;
                 foreach (Enemy enemy in enemies)
                 {
-                    if ((bullet.y > enemy.y-16 && bullet.y < enemy.y+16) && (bullet.x > enemy.x-16 && bullet.x < enemy.x+16))
+                    if ((bullet.y > enemy.y - 16 && bullet.y < enemy.y + 16) && (bullet.x > enemy.x - 16 && bullet.x < enemy.x + 16) && (bullet.eigenaar != enemy.name))
                     {
                         enemy.hit(player.currentWeapon.getDamage());
-                        if(enemy.getHealth() <= 0)
+                        if (enemy.getHealth() <= 0)
                         {
                             addItem(enemy);
                             enemiesToRemove.Add(enemiesCount); // Enemy klaar zetten om te verwijderen
@@ -690,7 +758,16 @@ namespace DiDo
                     }
                     enemiesCount++;
                 }
+
+                if ((player.y > player.y - 16 && bullet.y < player.y + 16) && (bullet.x > player.x - 16 && bullet.x < player.x + 16) && (bullet.eigenaar != player.name))
+                {
+
+                    player.hit(bullet.damage);
+                    bulletsToRemove.Add(bullet);
+                }
+
             }
+            
 
             // Remove Bullets
             foreach (Bullet bullet in bulletsToRemove)
@@ -705,9 +782,7 @@ namespace DiDo
             }
         }
 
- 
-
-        private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
             
             if (RoundEnded == true)
@@ -746,7 +821,7 @@ namespace DiDo
                             //await soundController.Play(SoundEfxEnum.SHOOT);
 
                             //Debug.WriteLine(player.currentWeapon.getDamage());
-                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
                             player.currentWeapon.reduceAmmo();
                         }
                     }
