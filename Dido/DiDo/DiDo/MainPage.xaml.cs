@@ -51,11 +51,11 @@ namespace DiDo
         public static string[,] ChosenLevel;
 
         //Lists Projectile
-        public List<Bullet> bullets = new List<Bullet>();
+        public static List<Bullet> bullets = new List<Bullet>();
         public Weapon[] weapons;
         public static int GameState = 0; // startscreen
         public static DispatcherTimer RoundTimer = new DispatcherTimer();
-        public MyPlayer player;
+        public static MyPlayer player;
         public List<Enemy> enemies = new List<Enemy>();
         public float temp_x, temp_y; // Temporary
         public double frames = 0;
@@ -395,36 +395,36 @@ namespace DiDo
             // Play background music
             soundHandler();
 
-            if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
             {
                 player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey"))
             {
                 player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Daan"))
             {
                 player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy"))
             {
                 player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew"))
             {
                 player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri"))
             {
                 player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96);
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Max"))
             {
                 player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96);
             }
 
-            else if (CharacterSwitch.PlayerCharacter.Equals("Samus"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Samus"))
             {
                 player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96);
             }
@@ -565,42 +565,42 @@ namespace DiDo
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
 
-            if (CharacterSwitch.PlayerCharacter.Equals("Jeroen"))
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeroen.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeroen.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jeffrey"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jeffrey.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jeffrey.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Daan"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Daan"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_daan.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Daan.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Jordy"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_jordy.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Jordy.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Matthew"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_matthew.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Matthew.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Hayri"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Hayri.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Max"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Max"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_max.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/Max.png"));
             }
-            else if (CharacterSwitch.PlayerCharacter.Equals("Samus"))
+            else if (ChooseCharacter.PlayerCharacter.Equals("Samus"))
             {
                 Player_sprite = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_samus.png"));
                 Char_UI = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/Char_UI/samus.png"));

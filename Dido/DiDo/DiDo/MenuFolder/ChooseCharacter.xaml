@@ -10,7 +10,9 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Image x:Name="img_Player" HorizontalAlignment="Left" Height="100" Margin="272,76,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="-0.095,0.465"/>
         <Button x:Name="btn_Left" Content="Left" HorizontalAlignment="Left" Margin="88,262,0,0" VerticalAlignment="Top" Click="btn_Left_Click"/>
-        <Button x:Name="btn_Right" Content="Right" HorizontalAlignment="Left" Margin="474,262,0,0" VerticalAlignment="Top" Click="btn_Right_Click"/>
+        <Button x:Name="btn_Right" Content="Right" HorizontalAlignment="Left" Margin="517,262,0,0" VerticalAlignment="Top" Click="btn_Right_Click"/>
+        <Button x:Name="btn_ChoosePlayer" Content="Choose player&#xD;&#xA;" HorizontalAlignment="Left" Margin="223,262,0,0" VerticalAlignment="Top" Width="197" Height="32" Click="btn_ChoosePlayer_Click"/>
+        <Button x:Name="btn_Back" Content="Button" HorizontalAlignment="Left" Margin="223,325,0,0" VerticalAlignment="Top" Height="25" Width="197" Click="btn_Back_Click"/>
 
     </Grid>
 </Page>
