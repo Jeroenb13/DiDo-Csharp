@@ -70,7 +70,14 @@ namespace DiDo
 
         private void GameCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            holding = false;
+            if (holding)
+            {
+                shootTimer.Cancel();
+                holding = false;
+            }
+            
+            
+            
         }
 
         public Random random = new Random();
@@ -519,7 +526,7 @@ namespace DiDo
             
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
-            GameCanvas.Holding += GameCanvas_Holding;
+           
             RoundTimer.Tick += RoundTimer_Tick;
             RoundTimer.Interval = new TimeSpan(0, 0, 1);
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
@@ -530,32 +537,32 @@ namespace DiDo
             this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
         }
 
-        private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-            float xPos = (float)e.GetPosition(GameCanvas).X;
-            float yPos = (float)e.GetPosition(GameCanvas).Y;
+        //private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
+        //{
+        //    float xPos = (float)e.GetPosition(GameCanvas).X;
+        //    float yPos = (float)e.GetPosition(GameCanvas).Y;
 
-            float xVel = xPos - player.x;
-            float yVel = yPos - player.y;
+        //    float xVel = xPos - player.x;
+        //    float yVel = yPos - player.y;
 
-            // pythagorasmagic
-            float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-            float scaling = distance / 25;
+        //    // pythagorasmagic
+        //    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+        //    float scaling = distance / 25;
 
-            xVel = xVel / scaling;
-            yVel = yVel / scaling;
-            if (player.currentWeapon != null)
-            {
-                if (player.currentWeapon.getAmmo() >= 1)
-                {
-                    //await soundController.Play(SoundEfxEnum.SHOOT);
+        //    xVel = xVel / scaling;
+        //    yVel = yVel / scaling;
+        //    if (player.currentWeapon != null)
+        //    {
+        //        if (player.currentWeapon.getAmmo() >= 1)
+        //        {
+        //            //await soundController.Play(SoundEfxEnum.SHOOT);
 
-                    //Debug.WriteLine(player.currentWeapon.getDamage());
-                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-                    player.currentWeapon.reduceAmmo();
-                }
-            }
-        }
+        //            //Debug.WriteLine(player.currentWeapon.getDamage());
+        //            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
+        //            player.currentWeapon.reduceAmmo();
+        //        }
+        //    }
+        //}
 
         public void updatePoint(Player player)
         {
@@ -782,9 +789,9 @@ namespace DiDo
             }
         }
 
-        private async void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
+        private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+
             if (RoundEnded == true)
             {
                 GameState = 0;
@@ -814,7 +821,7 @@ namespace DiDo
 
                     xVel = xVel / scaling;
                     yVel = yVel / scaling;
-                    if(player.currentWeapon != null)
+                    if (player.currentWeapon != null)
                     {
                         if (player.currentWeapon.getAmmo() >= 1)
                         {
@@ -837,7 +844,7 @@ namespace DiDo
             if(ptr.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
             {
                 Windows.UI.Input.PointerPoint ptrPt = e.GetCurrentPoint(GameCanvas);
-                if(ptrPt.Properties.IsLeftButtonPressed)
+                if(ptrPt.Properties.IsLeftButtonPressed && player.currentWeapon.name.Equals("Assault Rifle"))
                 {
                     holding = true;
                 }
@@ -864,7 +871,7 @@ namespace DiDo
                         {
 
                             shootTimer = ThreadPoolTimer.CreatePeriodicTimer(TimerElapsedHandler, new TimeSpan(0, 0, 1));
-                            player.currentWeapon.reduceAmmo();
+                            
                         }
                     }
                 }
@@ -876,7 +883,8 @@ namespace DiDo
 
         private void TimerElapsedHandler(ThreadPoolTimer timer)
         {
-            bullets.Add(new DiDo.Bullet(player.x, player.y, xVelAR, yVelAR, player.currentWeapon.getDamage()));
+            bullets.Add(new DiDo.Bullet(player.x, player.y, xVelAR, yVelAR, player.currentWeapon.getDamage(), player.name));
+            player.currentWeapon.reduceAmmo();
         }
     }
 }
