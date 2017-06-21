@@ -12,6 +12,8 @@ namespace DiDo.Items
 
         public SMGWeapon(int magazine, int total, float x, float y) : base(x, y)
         {
+            name = "Sub Machine Gun";
+
             if (magazine >= 25)
             {
                 this.magazine = 25;

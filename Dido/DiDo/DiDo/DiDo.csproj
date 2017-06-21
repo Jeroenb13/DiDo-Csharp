@@ -93,7 +93,9 @@
     <Content Include="Assets\Char\arms\Fists.png" />
     <Content Include="Assets\Char\arms\Pistol.png" />
     <Content Include="Assets\Char\arms\SMG.png" />
+    <Content Include="Assets\Char\Char_UI\rob.png" />
     <Content Include="Assets\Char\Char_UI\samus.png" />
+    <Content Include="Assets\Char\spr_rob.png" />
     <Content Include="Assets\Char\spr_samus.png" />
     <Content Include="Assets\FFFFORWARD.TTF" />
     <None Include="project.json" />
@@ -191,6 +193,7 @@
     <Content Include="Assets\Items\food-1.png" />
     <Content Include="Assets\Items\food-2.png" />
     <Content Include="Assets\Items\gun-1.png" />
+    <Content Include="Assets\Items\gun-2.png" />
     <Content Include="Assets\Items\gun-3.png" />
     <Content Include="Assets\Items\key.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

@@ -13,10 +13,12 @@ namespace DiDo.Character
         public int maxHealth;
         public int healthPoints { get; set; }
         public int stamina { get; set; }
+        private Fist fists = new Fist(1, 1, 0, 0);
         public int maxStamina { get; set; }
         public int move_speed { get; set; }
         protected Weapon[] weapons;
         public Weapon currentWeapon;
+        public Weapon weaponToDrop;
         protected int currentWeaponIndex;
         public Boolean alive = true;
         public Characters(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(x, y)
@@ -84,12 +86,17 @@ namespace DiDo.Character
         public Item dropItem()
         {
             Item droppedWeapon = this.currentWeapon;
-            if (droppedWeapon != null)
+            if (droppedWeapon != null && droppedWeapon.name != "Fists")
             {
                 weapons[currentWeaponIndex].x = x;
                 weapons[currentWeaponIndex].y = y;
-                weapons[currentWeaponIndex] = null;
-                this.currentWeapon = null;
+                weapons[currentWeaponIndex] = fists;
+                this.currentWeapon = fists;
+                weaponToDrop = (Weapon)droppedWeapon;
+            }
+            else
+            {
+                droppedWeapon = null;
             }
             return droppedWeapon;
         }
@@ -115,12 +122,15 @@ namespace DiDo.Character
 
         public void pickUpWeapon(Weapon weapon)
         {
+            Weapon pickedUpWeapon = weapon;
             bool setWeapon = false;
             for(int i = 0; i < weapons.Length && !setWeapon; i ++)
             {
-                if (weapons[i] == null)
+                Type weaponType = weapons[i].GetType();
+                if (weaponType == typeof(Fist))
                 {
-                    setItem(i, weapon);
+                    setItem(i, pickedUpWeapon);
+                    currentWeapon = weapons[currentWeaponIndex];
                     setWeapon = true;
                 }
                              
@@ -128,7 +138,8 @@ namespace DiDo.Character
             if (setWeapon == false)
             {
                 dropItem();
-                setItem(currentWeaponIndex, weapon);
+                setItem(currentWeaponIndex, pickedUpWeapon);
+                currentWeapon = weapons[currentWeaponIndex];
                 setWeapon = true;
             }
         }
