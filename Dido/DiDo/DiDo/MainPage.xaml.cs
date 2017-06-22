@@ -166,10 +166,10 @@ namespace DiDo
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
-                    //else
-                    //{
-                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
-                    //}
+                    else
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
+                    }
                 }
                 else if(enemy.direction == 1)
                 {
@@ -177,10 +177,10 @@ namespace DiDo
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
-                    //else
-                    //{
-                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
-                    //}
+                    else
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
+                    }
                 }
                 else if(enemy.direction == 2)
                 {
@@ -188,10 +188,10 @@ namespace DiDo
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
-                    //else
-                    //{
-                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
-                    //}
+                    else
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
+                    }
                 }
                 else if(enemy.direction == 3)
                 {
@@ -199,10 +199,10 @@ namespace DiDo
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
-                    //else
-                    //{
-                    //    args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
-                    //}
+                    else
+                    {
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
+                    }
                 }
                 else
                 {
