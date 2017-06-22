@@ -53,8 +53,8 @@ namespace DiDo.Character
                     {
 
                         //float xPos = MainPage.player.x;
-                        float xPos = random.Next((int)(MainPage.player.x - 40), (int)(MainPage.player.x + 40));
-                        float yPos = random.Next((int)(MainPage.player.y - 40), (int)(MainPage.player.y + 40));
+                        float xPos = random.Next((int)(MainPage.player.x - 60), (int)(MainPage.player.x + 60));
+                        float yPos = random.Next((int)(MainPage.player.y - 60), (int)(MainPage.player.y + 60));
 
                         //float xPos = (float)e.GetPosition(GameCanvas).X;
                         //float yPos = (float)e.GetPosition(GameCanvas).Y;
