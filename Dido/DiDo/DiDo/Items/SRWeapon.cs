@@ -25,6 +25,7 @@ namespace DiDo.Items
             {
                 this.magazine = magazine;
             }
+            this.RandomisationFactor = 0;
         }
 
         public override void reduceAmmo()

@@ -72,12 +72,12 @@ namespace DiDo
         {
             if (holding)
             {
-                shootTimer.Cancel();
+                if(shootTimer != null)
+                {
+                    shootTimer.Cancel();
+                }
                 holding = false;
             }
-            
-            
-            
         }
 
         public Random random = new Random();
@@ -850,9 +850,13 @@ namespace DiDo
             if(ptr.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
             {
                 Windows.UI.Input.PointerPoint ptrPt = e.GetCurrentPoint(GameCanvas);
-                if(ptrPt.Properties.IsLeftButtonPressed && player.currentWeapon.name.Equals("Assault Rifle"))
+                if(ptrPt.Properties.IsLeftButtonPressed && !holding)
                 {
-                    holding = true;
+                    if (player.currentWeapon.ShouldRepeat)
+                    {
+                        holding = true;
+                        shootTimer = ThreadPoolTimer.CreatePeriodicTimer(ShootTimerHandler, new TimeSpan(0, 0, 0 ,0, player.currentWeapon.BulletsPerMilliSecond));
+                    }
                 }
             }
             float xPos = (float)e.GetCurrentPoint(GameCanvas).RawPosition.X;
@@ -867,30 +871,24 @@ namespace DiDo
 
             xVelAR = xVelAR / scaling;
             yVelAR = yVelAR / scaling;
-            if (holding)
-            {
-                if (player.currentWeapon != null)
-                {
-                    if (player.currentWeapon.name.Equals("Assault Rifle"))
-                    {
-                        if (player.currentWeapon.getAmmo() >= 1)
-                        {
-
-                            shootTimer = ThreadPoolTimer.CreatePeriodicTimer(TimerElapsedHandler, new TimeSpan(0, 0, 1));
-                            
-                        }
-                    }
-                }
-            }
 
 
             //Debug.WriteLine(e.GetCurrentPoint(GameCanvas).RawPosition.ToString());
         }
 
-        private void TimerElapsedHandler(ThreadPoolTimer timer)
+        /// <summary>
+        /// When the timer is elapsed it shoots a bullet
+        /// </summary>
+        /// <param name="timer"> threadpool timer</param>
+        private void ShootTimerHandler(ThreadPoolTimer timer)
         {
-            bullets.Add(new DiDo.Bullet(player.x, player.y, xVelAR, yVelAR, player.currentWeapon.getDamage(), player.name));
-            player.currentWeapon.reduceAmmo();
+            if (player.currentWeapon.getAmmo() >= 1)
+            {
+                float xRand = (float)(random.NextDouble() - 0.5) * player.currentWeapon.RandomisationFactor;
+                float yRand = (float)(random.NextDouble() - 0.5) * player.currentWeapon.RandomisationFactor;
+                bullets.Add(new DiDo.Bullet(player.x, player.y, xVelAR + xRand, yVelAR + yRand, player.currentWeapon.getDamage(), player.name));
+                player.currentWeapon.reduceAmmo();
+            }
         }
     }
 }

@@ -14,9 +14,13 @@ namespace DiDo.Items
         protected int magazine;       //Number of rounds per magazine
         protected int additional;       //Number of rounds in total 
         protected int magazineSize;       //Number of rounds in total 
+        public bool ShouldRepeat { get; protected set; } // Is the weapon a repeating product
+        public int BulletsPerMilliSecond { get; protected set; } // bullet per millisecond
+        public float RandomisationFactor { get; protected set; } // randomises the bullet for automatic weapons
 
         public Weapon(float x, float y) : base(x, y)
         {
+            this.ShouldRepeat = false;
         }
 
         public int getMagazineSize()

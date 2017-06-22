@@ -13,6 +13,7 @@ namespace DiDo.Items
         public ARWeapon(int magazine, int total, float x, float y) : base(x, y)
         {
             name = "Assault Rifle";
+            this.ShouldRepeat = true;
             if (magazine >= 30)
             {
                 this.magazine = 30;
@@ -25,6 +26,8 @@ namespace DiDo.Items
             {
                 this.magazine = magazine;
             }
+            this.BulletsPerMilliSecond = 200;
+            this.RandomisationFactor = 1.25F;
         }
 
         public override void reduceAmmo()
