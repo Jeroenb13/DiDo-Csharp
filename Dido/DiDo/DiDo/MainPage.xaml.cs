@@ -745,6 +745,12 @@ namespace DiDo
                 bullet.y += bullet.velY;
                 args.DrawingSession.DrawImage(Bullets, bullet.x, bullet.y);
 
+                
+                if (levels.getPlayerTile(bullet.x, bullet.y, levels.gekozenLevel).TileType.Contains("wall"))
+                {
+                    bulletsToRemove.Add(bullet);
+                }
+
                 if (bullet.y < 0f || bullet.y > 1080 || bullet.x > 1920f || bullet.x < 0f)
                 {
                     bulletsToRemove.Add(bullet);
