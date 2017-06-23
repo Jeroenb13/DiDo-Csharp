@@ -13,7 +13,7 @@ namespace DiDo.Character
         private Random random; 
         public int direction; //Direction of the enemy
         public int stepSize = 2; //Amount of steps the enemy can take 
-        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 60, 0); // Weapon of the enemy
+        private Weapon weapon; // Weapon of the enemy
 
         /// <summary>
         /// Constructor of the enemy
@@ -31,9 +31,6 @@ namespace DiDo.Character
             this.healthPoints = healthPoints;
             this.stamina = stamina;
             this.move_speed = move_speed;
-            weapons = new Weapon[1];
-            setItem(0, pistol);
-            currentWeapon = weapons[0]; // Sets the weapon as the current Weapon
 
             int seed = char.ToUpper(name[0]) - 64;
             seed += char.ToUpper(name[2]) - 64;
@@ -42,6 +39,24 @@ namespace DiDo.Character
 
             this.direction = random.Next(0, 4);
             // Calculates a random location
+
+
+            switch (random.Next(4))
+            {
+                case 0:
+                    weapon = new PistolWeapon(15, 60, 15, 60, 0);
+                    break;
+                case 1:
+                    weapon = new SMGWeapon(15, 60, 60, 0);
+                    break;
+                default:
+                    weapon = new ARWeapon(15, 60, 60, 0);
+                    break;
+            }
+
+            weapons = new Weapon[1];
+            setItem(0, weapon);
+            currentWeapon = weapons[0]; // Sets the weapon as the current Weapon
         }
 
         /// <summary>
@@ -70,6 +85,10 @@ namespace DiDo.Character
             {
                 if (this.random.Next(0, 360) == 1) { // 1 on 120 chance that the enemy will shoot
                     // Shoot if the enemy stands still
+
+                    this.currentWeapon.reload();
+                    // Reload
+
                     if (this.currentWeapon.getAmmo() >= 1) // Looks if there are bullets in the magazine
                     {
 

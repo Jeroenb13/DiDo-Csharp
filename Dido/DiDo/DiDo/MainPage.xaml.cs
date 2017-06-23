@@ -754,7 +754,8 @@ namespace DiDo
                 args.DrawingSession.DrawImage(Bullets, bullet.x, bullet.y);
 
                 
-                if (levels.getPlayerTile(bullet.x, bullet.y, levels.gekozenLevel).TileType.Contains("wall")) // If the bullet hits the wall
+                if (levels.getPlayerTile(bullet.x, bullet.y, levels.gekozenLevel).TileType.Contains("wall") // If the bullet hits a wall
+                    || levels.getPlayerTile(bullet.x, bullet.y, levels.gekozenLevel).TileType.Contains("tree")) // If the bullet hits a tree
                 {
                     bulletsToRemove.Add(bullet);
                     // Add the bullet to the list of bullets to remove
