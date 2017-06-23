@@ -307,11 +307,6 @@ namespace DiDo
             /*
                     !! Na debug verwijderen !! 
             */
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Show the player location
-            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
-            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
-            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
             args.DrawingSession.DrawText("PLAYER", 1245, 10, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); // Adding text to the UI element
             args.DrawingSession.DrawText(player.name, 1255, 60, Colors.Black, new CanvasTextFormat() { FontSize = 10, FontFamily = fontUI }); //Adding playername to the UI element
             args.DrawingSession.DrawImage(Char_UI, 1155, 50); //Adding the character playing to the UI element
@@ -553,34 +548,6 @@ namespace DiDo
         //    await soundController.Play(SoundEfxEnum.BACKGROUND);
         //}
 
-
-        //private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
-        //{
-        //    float xPos = (float)e.GetPosition(GameCanvas).X;
-        //    float yPos = (float)e.GetPosition(GameCanvas).Y;
-
-        //    float xVel = xPos - player.x;
-        //    float yVel = yPos - player.y;
-
-        //    // pythagorasmagic
-        //    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-        //    float scaling = distance / 25;
-
-        //    xVel = xVel / scaling;
-        //    yVel = yVel / scaling;
-        //    if (player.currentWeapon != null)
-        //    {
-        //        if (player.currentWeapon.getAmmo() >= 1)
-        //        {
-        //            //await soundController.Play(SoundEfxEnum.SHOOT);
-
-        //            //Debug.WriteLine(player.currentWeapon.getDamage());
-        //            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-        //            player.currentWeapon.reduceAmmo();
-        //        }
-        //    }
-        //}
-
         public void updatePoint(Player player)
         {
             Point newPoint = new Point(player.x, player.y);
@@ -588,8 +555,6 @@ namespace DiDo
             this.playerPoint = newPoint;
             // Set the playerpoint
         }
-
-
 
         public void updateMousePoint(object sender, PointerRoutedEventArgs e)
         {
