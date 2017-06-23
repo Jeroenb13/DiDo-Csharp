@@ -70,6 +70,10 @@ namespace DiDo.Character
             {
                 if (this.random.Next(0, 360) == 1) { // 1 on 120 chance that the enemy will shoot
                     // Shoot if the enemy stands still
+
+                    this.currentWeapon.reload();
+                    // Reload
+
                     if (this.currentWeapon.getAmmo() >= 1) // Looks if there are bullets in the magazine
                     {
 

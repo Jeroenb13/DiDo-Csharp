@@ -98,5 +98,28 @@ namespace DiDo.Items
 
         public abstract int getDamage();
         // Get the damage
+
+        public void reload()
+        {
+            if (getAmmo() < getMagazineSize())
+            {
+                // The current weapon has additional ammo
+                if (getAdditionalAmmo() > 0)
+                {
+                    //await soundController.Play(SoundEfxEnum.RELOAD);
+                    int difference = getMagazineSize() - getAmmo();
+                    if (getAdditionalAmmo() <= difference)
+                    {
+                        setAmmo(getAmmo() + getAdditionalAmmo());
+                        setAdditionalAmmo(0);
+                    }
+                    else
+                    {
+                        setAmmo(getMagazineSize());
+                        setAdditionalAmmo(getAdditionalAmmo() - difference);
+                    }
+                }
+            }
+        }
     }
 }
