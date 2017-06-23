@@ -14,13 +14,23 @@ namespace DiDo
         public String eigenaar { get; set; } // Wie de kogel afschiet
 
         public int damage { get; set; } // Schade dat de kogel doet
+
+        /// <summary>
+        /// Constructor for the bullet
+        /// </summary>
+        /// <param name="x">X location of the bullet</param>
+        /// <param name="y">Y location of the bullet</param>
+        /// <param name="velX">X Velocity of the bullet</param>
+        /// <param name="velY">Y Velocity of the bullet</param>
+        /// <param name="damage">Damage of the bullet</param>
+        /// <param name="eigenaar">Who did shoot the bullet</param>
         public Bullet(float x, float y, float velX, float velY, int damage, String eigenaar) : base(x, y)
         {
             this.velX = velX;
             this.velY = velY;
             this.damage = damage;
             this.eigenaar = eigenaar;
-            // Zet de waardes van de huidige kogel
+            // Set the values for the current bullet
         }
     }
 }

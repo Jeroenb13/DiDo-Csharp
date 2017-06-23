@@ -11,6 +11,11 @@ namespace DiDo.Character
         public float x { get; set; }
         public float y { get; set; }
 
+        /// <summary>
+        /// Constructor of the Position
+        /// </summary>
+        /// <param name="x">X coördinate of the Position</param>
+        /// <param name="y">Y coördinate of the Position</param>
         public Position(float x, float y)
         {
             this.x = x;
