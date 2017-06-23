@@ -9,6 +9,8 @@ namespace DiDo.Levels
     public class Levels
     {
         public String[,] gekozenLevel = levelTwo;
+        // Set choosen level
+
         public static Dictionary<String, Tile> tiles = new Dictionary<String, Tile>()
         {
             { "a", new Tile("bridge0", new Uri("ms-appx:///Assets/Tiles/bridge/0.png"), true) },
@@ -23,42 +25,36 @@ namespace DiDo.Levels
             { "j", new Tile("crack4", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-4.png"), true) },
             { "k", new Tile("crack5", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-5.png"), true) },
             { "l", new Tile("crack6", new Uri("ms-appx:///Assets/Tiles/floors/cracked/crack-6.png"), true) },
-
             { "m", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
             { "m_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
             { "m_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
             { "m_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
-
             { "m2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
-            { "m2_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) }, // yellow
-            { "m2_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) }, // pink
-            { "m2_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) }, // green
-            { "m2_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) }, // cyan
-            { "m2_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) }, // blue
-            
+            { "m2_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
+            { "m2_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
+            { "m2_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
+            { "m2_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
+            { "m2_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m3_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
             { "m3_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
             { "m3_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
             { "m3_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
             { "m3_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
-
             { "m4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m4_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
             { "m4_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
             { "m4_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m4_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
             { "m4_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
-
             { "m5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
             { "m5_1", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/pink.png"), true) },
             { "m5_2", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/green.png"), true) },
             { "m5_3", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/cyan.png"), true) },
             { "m5_4", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/yellow.png"), true) },
             { "m5_5", new Tile("disco", new Uri("ms-appx:///Assets/Tiles/floors/disco/blue.png"), true) },
-
             { "n", new Tile("flower1", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_1.png"), true) },
             { "o", new Tile("flower2", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_2.png"), true) },
             { "p", new Tile("flower3", new Uri("ms-appx:///Assets/Tiles/floors/flowers/flower_3.png"), true) },
@@ -139,22 +135,28 @@ namespace DiDo.Levels
             { "(", new Tile("wallinset180", new Uri("ms-appx:///Assets/Tiles/walls/inset/180.png")) },
             { ")", new Tile("wallinset270", new Uri("ms-appx:///Assets/Tiles/walls/inset/270.png")) }
         };
+        // Dictionary with all Tile generation
 
         public static Tile getTile(String key)
         {
             Tile tile = tiles[key];
+            // Get the tile on the choosen index
             return tile;
+            // Return the tile
         }
 
 
         public String getTileType(float x, float y, String [,] gekozenLevel)
         {
             Tile tile = getPlayerTile(x, y, gekozenLevel);
+            // Get the tile on the choosen player location
             if(tile == null)
             {
                 return null;
+                // No tile, return null
             }
             return tile.TileType;
+            // Return the tile type
         }
 
         /// <summary>
@@ -168,20 +170,26 @@ namespace DiDo.Levels
         {
             double x_round = Math.Floor((x) / 32);
             double y_round = Math.Floor((y) / 32);
+            // Rounded x and y, devided by the sprite size (32)
+
             double xPos = x_round * 32;
             double yPos = y_round * 32;
             double xPos2 = xPos + 32;
             double yPos2 = yPos + 32;
+            // x and y locations
 
-            if(y_round >= gekozenLevel.GetLength(0) || x_round >= gekozenLevel.GetLength(1))
+            if(y_round >= gekozenLevel.GetLength(0) || x_round >= gekozenLevel.GetLength(1)) // If its in the array
             {
                 return null;
             }
 
             String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
+            // Get the tile type
             Tile tile = getTile(tile_Type);
+            // Get the type information of the type
 
             return tile;
+            // Return the tile
         }
 
         //dungeon
@@ -201,6 +209,7 @@ namespace DiDo.Levels
             {"L","w","w","w","w","w","w","w","w","w","w","w","w","J"},
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","S"},
         };
+        // Tile information of the level
        
         //grassy planes
         public static String[,] levelTwo =  { // 35 x 24
@@ -229,6 +238,7 @@ namespace DiDo.Levels
             {"L","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","s","2","2","2","2","s","s","s","s","s","s","s","s","J"},
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","S"}
         };
+        // Tile information of the level
 
         public static String[,] levelThree =  { //20x25
             {"H","H","H","H","H","H","H","Q","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","R"},
@@ -251,6 +261,8 @@ namespace DiDo.Levels
             {"L","U","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","U","w","w","J"},
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","S"},
         };
+        // Tile information of the level
+
         public static String[,] levelFour = { // 26 x 26
             {"Q","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","R","H","H","H"},
             {"L","U","U","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J","H","H","H"},
@@ -279,6 +291,7 @@ namespace DiDo.Levels
             {"H","H","H","L","w","w","w","w","w","w","J","H","H","H","H","L","w","w","w","w","w","w","w","w","w","J"},
             {"H","H","H","T","K","K","K","K","K","K","S","H","H","H","H","T","K","K","K","K","K","K","K","K","K","S"}
         };
+        // Tile information of the level
 
         //Disco YEAH
         public static String[,] levelFive = { // 39 x 21
@@ -305,12 +318,11 @@ namespace DiDo.Levels
             {"L","m5","m4","m2","m2","m2","m4","m","m5","m4","m2","m2","m2","m4","m2","m5","m5","m3","m2","m3","m4","m2","m3","m4","m5","m4","m2","m5","m4","m2","m3","w","w","w","w","w","w","w","w","w","J"},
             {"L","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","^","@","%","m","m","m","m","m","w","w","w","w","w","w","J"},
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","S"}
-
         };
+        // Tile information of the level
 
 
-        public static String[,] levelSix =
-        { // 36x25
+        public static String[,] levelSix = { // 36x25
             {"Q","I","I","I","I","I","I","I","R","H","H","H","H","H","H","H","H","H","H","H","H","H","Q","I","I","I","I","I","I","I","I","I","I","I","I","R"},
             {"L","w","w","w","w","w","w","w","J","H","H","H","H","H","H","H","H","H","H","H","H","H","L","w","w","w","w","w","w","w","w","w","w","w","w","J"},
             {"L","w","w","w","w","w","w","w","J","H","H","H","H","H","H","H","H","H","H","H","H","H","L","w","w","w","w","w","w","w","w","w","w","w","w","J"},
@@ -336,24 +348,26 @@ namespace DiDo.Levels
             {"L","w","U","U","U","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
             {"L","w","w","w","w","w","w","w","w","w","w","w","U","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","w","J"},
             {"T","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","S"}
-    };
+        };
+        // Tile information of the level
 
-    public static String[,] testLevel = {
-        {"Q","M","M","M","I","I","I","I","I","I","I","I","I","I","I","R"},
-        {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
-        {"L","m5","m4","m3","m2","m","r","q","p","o","n","2","w","w","w","N"},
-        {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
-        {"P","m5","m4","m3","m2","m","w","w","w","w","w","w","w","w","w","N"},
-        {"P","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
-        {"P","v","u","t","s","w","w","w","w","w","w","w","w","w","w","J"},
-        {"L","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
-        {"L","v","u","t","s","w","w","w","K","K","K","K","K","K","w","J"},
-        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
-        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
-        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
-        {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
-        {"T","K","K","O","O","O","K","K","K","K","K","K","K","K","K","S"}
-    };
+        public static String[,] testLevel = {
+            {"Q","M","M","M","I","I","I","I","I","I","I","I","I","I","I","R"},
+            {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
+            {"L","m5","m4","m3","m2","m","r","q","p","o","n","2","w","w","w","N"},
+            {"L","m","m2","m3","m4","m5","n","o","p","q","r","2","w","w","w","N"},
+            {"P","m5","m4","m3","m2","m","w","w","w","w","w","w","w","w","w","N"},
+            {"P","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
+            {"P","v","u","t","s","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","s","t","u","v","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","v","u","t","s","w","w","w","K","K","K","K","K","K","w","J"},
+            {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+            {"L","2","2","2","2","w","w","w","w","w","w","w","w","w","w","J"},
+            {"T","K","K","O","O","O","K","K","K","K","K","K","K","K","K","S"}
+        };
+        // Tile information of the level
 
     }
 }
