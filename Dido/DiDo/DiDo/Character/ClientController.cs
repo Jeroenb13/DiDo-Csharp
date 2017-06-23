@@ -19,12 +19,28 @@ namespace DiDo.Character
 
         //private SoundEffects soundController;
 
+        /// <summary>
+        /// Constructor of the clientController
+        /// </summary>
+        /// <param name="mainPage">Mainpage reference</param>
+        /// <param name="name">Name of the character</param>
+        /// <param name="maxHealth">Maximum health that the character can have</param>
+        /// <param name="healthPoints">Current health of the character</param>
+        /// <param name="stamina">Maximum stamina of the character</param>
+        /// <param name="move_speed">Move speed of the character</param>
+        /// <param name="x">X coördinate of the character</param>
+        /// <param name="y">Y coördinate of the character</param>
         public ClientController(MainPage mainPage, string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
             this.mainPage = mainPage;
             //this.soundController = new SoundEffects();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private Boolean keyPressed(VirtualKey key)
         {
             if (keysPressed.ContainsKey(key))
