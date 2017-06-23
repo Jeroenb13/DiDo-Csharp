@@ -20,6 +20,7 @@ using DiDo.MenuFolder;
 using Windows.System.Threading;
 using DiDo.Multiplayer;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Core;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
