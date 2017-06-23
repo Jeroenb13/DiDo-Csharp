@@ -66,7 +66,71 @@ namespace DiDo
 
         public double frames = 0;
 
+        /// <summary>
+        /// Initialisation of the mainpage for singleplayer
+        /// </summary>
+        public MainPage()
+        {
+            // Play background music
+            //soundHandler();
 
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
+            {
+                player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96);
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey"))
+            {
+                player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96);
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Daan"))
+            {
+                player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96);
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy"))
+            {
+                player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96);
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew"))
+            {
+                player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96);
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri"))
+            {
+                player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96);
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Max"))
+            {
+                player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96);
+            }
+
+            else if (ChooseCharacter.PlayerCharacter.Equals("Samus"))
+            {
+                player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96);
+            }
+            controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina, player.move_speed, player.x, player.y);
+            weapons = new List<Weapon>();
+            levels = new Levels.Levels();
+
+            mousePoint = new Point();
+
+            this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
+
+            RoundTimer.Tick += RoundTimer_Tick;
+            RoundTimer.Interval = new TimeSpan(0, 0, 1);
+            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
+
+            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
+        }
+
+        //public async void soundHandler()
+        //{
+        //    soundController = new SoundEffects();
+        //    await soundController.Play(SoundEfxEnum.BACKGROUND);
+        //}
 
         private void GameCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
@@ -455,72 +519,6 @@ namespace DiDo
                 this.frames = 0;
             }
 
-        }
-
-        //public async void soundHandler()
-        //{
-        //    soundController = new SoundEffects();
-        //    await soundController.Play(SoundEfxEnum.BACKGROUND);
-        //}
-
-       /// <summary>
-       /// Initialisation of the mainpage for singleplayer
-       /// </summary>
-        public MainPage()
-        {
-            // Play background music
-            //soundHandler();
-
-            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
-            {
-                player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96);
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey"))
-            {
-                player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96);
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Daan"))
-            {
-                player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96);
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy"))
-            {
-                player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96);
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew"))
-            {
-                player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96);
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri"))
-            {
-                player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96);
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Max"))
-            {
-                player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96);
-            }
-
-            else if (ChooseCharacter.PlayerCharacter.Equals("Samus"))
-            {
-                player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96);
-            }
-            controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
-            weapons = new List<Weapon>();
-            levels = new Levels.Levels();
-            
-            mousePoint = new Point();
-            
-            this.InitializeComponent();
-            Window.Current.SizeChanged += Current_SizeChanged;
-           
-            RoundTimer.Tick += RoundTimer_Tick;
-            RoundTimer.Interval = new TimeSpan(0, 0, 1);
-            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
-            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
-
-            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
         }
 
         //private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
