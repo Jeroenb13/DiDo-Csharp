@@ -11,6 +11,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DiDoCommon", "DiDoCommon\Di
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DiDoCommon\DiDoCommon.projitems*{013e3f2e-2516-4c4e-9493-0f7a53439710}*SharedItemsImports = 4
+		DiDoCommon\DiDoCommon.projitems*{3db946d4-34fb-415e-a79e-4d1638ba0133}*SharedItemsImports = 4
 		DiDoCommon\DiDoCommon.projitems*{58b4d80e-c033-47f2-9ccc-7d6159fac8b9}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
