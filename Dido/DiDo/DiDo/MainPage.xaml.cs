@@ -792,6 +792,14 @@ namespace DiDo
                     // Let the player take damage from the bullet
                     bulletsToRemove.Add(bullet);
                     // Add the bullet to the list of bullets to remove
+
+                    if (!player.alive)
+                    {
+                        Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                       {
+                            Frame.Navigate(typeof(GameOver));
+                                                   }).AsTask().Wait();
+                       }
                 }
 
             }
