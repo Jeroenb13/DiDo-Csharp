@@ -324,7 +324,7 @@ namespace DiDo
 
 
             args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y); // Show the correct arms
-            //args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // make it so that scaling and rotation is not processed each frame      
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // make it so that scaling and rotation is not processed each frame      
 
 
             /*
