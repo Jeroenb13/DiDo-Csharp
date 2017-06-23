@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="DiDoCommon.Network.HeapByteBuf" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SABCkCyBCChAkDJqQk0YjAoKQKBIAWIgQAAYAICIBUA=</HashCode>
+      <FileName>C:\Users\Daan\Source\Repos\DiDo-Csharp\Dido\DiDo\DiDoCommon\Network\HeapByteBuf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDoCommon.Network.Packet.AbstractPacket" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAgAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\Daan\Source\Repos\DiDo-Csharp\Dido\DiDo\DiDoCommon\Network\Packet\AbstractPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDoCommon.Network.Packet.PacketPlayerLogin" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAgAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\Daan\Source\Repos\DiDo-Csharp\Dido\DiDo\DiDoCommon\Network\Packet\PacketPlayerLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDoCommon.Network.Packet.PacketRegistry" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>C:\Users\Daan\Source\Repos\DiDo-Csharp\Dido\DiDo\DiDoCommon\Network\Packet\PacketRegistry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.App" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAIAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.Entity" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Player" Collapsed="true">
+    <Position X="8" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Character\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Collide" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAEAAAAAAAAEAEAAAA=</HashCode>
+      <FileName>GameElements\Collide.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Bullet" Collapsed="true">
+    <Position X="2.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Items\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.MainPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIMGg2CsgNIwVIEEoQKA5GSSwRkIE4ADMBSKEwAQIwA=</HashCode>
+      <FileName>MainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.SuccessPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuccessPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.Character.Characters" Collapsed="true">
+    <Position X="7" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAggAMRgAgAsAAAACAAYABBAAEEAAAIEACEAAgAAA=</HashCode>
+      <FileName>Character\Characters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Character.ClientController" Collapsed="true">
+    <Position X="9.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAQAEAAA=</HashCode>
+      <FileName>Character\ClientController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Character.ClientPlayer" Collapsed="true">
+    <Position X="8" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\ClientPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Character.Enemy" Collapsed="true">
+    <Position X="4.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAIAIAAAAAAAAAAACAAAAAAAAAQAAAIAAAA=</HashCode>
+      <FileName>Character\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Character.MyPlayer" Collapsed="true">
+    <Position X="7" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAEAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\MyPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Character.Position" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Character\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.GameElements.GameUI" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameElements\GameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.GameElements.ImageManipulation" Collapsed="true">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAEAAAACAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameElements\ImageManipulation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.ARWeapon" Collapsed="true">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAgAAAAAAAAAEAEAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ARWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.Fist" Collapsed="true">
+    <Position X="11.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAgAAAAAAAAAEAEAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Fist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.Item" Collapsed="true">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.ItemEntity">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Items\ItemEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.PistolWeapon" Collapsed="true">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAgAAAAAAAAAEAEAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\PistolWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.SMGWeapon" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAgAAAAAAAAAEAEAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\SMGWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.SRWeapon" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAgAAAAAAAAAEAEAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\SRWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Items.Weapon" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAACgEABAAAAAAAAAAAACAIEAAIABAAAAAIIAEAAgA=</HashCode>
+      <FileName>Items\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Levels.Levels" Collapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAEAABAAAAQAKAAAEAAgAgAAAAAAACAAEEAAA=</HashCode>
+      <FileName>Levels\Levels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Levels.Tile" Collapsed="true">
+    <Position X="21" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAIIAgAAIAAAAgAAAAAAQAAAJAAAAAAAQAAAAA=</HashCode>
+      <FileName>Levels\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.MenuFolder.CharacterSwitch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAIAAAIAAAAAEAAAgAAAQAAABAAAEAEAAAAg=</HashCode>
+      <FileName>MenuFolder\CharacterSwitch.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.ChooseCharacter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEAEAAAAAAYCCAARAABAAEAAACAAAIARAAggAAQA=</HashCode>
+      <FileName>MenuFolder\ChooseCharacter.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.GameOver" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuFolder\GameOver.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.InvadeConnect" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>MenuFolder\InvadeConnect.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.InvadePage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuFolder\InvadePage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.MenuPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACAAAAAAEAIAgAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>MenuFolder\MenuPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.Help.HelpPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuFolder\Help\HelpPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.MenuFolder.Settings.SettingPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuFolder\Settings\SettingPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DiDo.Multiplayer.MpTest" Collapsed="true">
+    <Position X="21" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Multiplayer\MpTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiDo.Multiplayer.NetHandlerClient" Collapsed="true">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAEAAQoAAAgAAEEAAAAAAAA=</HashCode>
+      <FileName>Multiplayer\NetHandlerClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
