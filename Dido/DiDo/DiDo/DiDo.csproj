@@ -135,6 +135,9 @@
     <Compile Include="MenuFolder\ChooseCharacter.xaml.cs">
       <DependentUpon>ChooseCharacter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuFolder\GameOver.xaml.cs">
+      <DependentUpon>GameOver.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuFolder\Help\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
@@ -338,6 +341,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuFolder\ChooseCharacter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFolder\GameOver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,7 +8,13 @@
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     >
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FF6794A4" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="645*"/>
@@ -31,20 +37,18 @@
             <RowDefinition Height="90*"/>
 
         </Grid.RowDefinitions>
-
-        <Rectangle x:Name="Settings" Stroke="Black" Grid.Row="1" Grid.Column="1" >
-            <Rectangle.Fill>
-                <ImageBrush Stretch="Uniform" ImageSource="/Assets/Menu/HelpButton.png"/>
-            </Rectangle.Fill>
-        </Rectangle>
-
         <canvas:CanvasControl x:Name="GameCanvas"/>
-        <TextBlock x:Name="textblok" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="46" Width="733" Text="Use the WASD keys to move. tap on the screen to shoot"/>
-        <Button x:Name="close" Grid.Column="1" HorizontalAlignment="Left" Margin="0.5,2,0,0" Grid.Row="11" VerticalAlignment="Top" Height="48" Width="732" Tapped="close_Tapped" Grid.RowSpan="2">
-            <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Menu/kruis.png"/>
-            </Button.Background>
-        </Button>
-
+        <TextBlock x:Name="textblok" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="488" Text="W: Up, A: Left, S: Down, D: Right" Margin="0.333,3,0,0" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" Grid.RowSpan="3"/>
+        <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="0.333,21,0,0" TextWrapping="Wrap" Text="HELP" VerticalAlignment="Top" Grid.RowSpan="3" Height="121" Width="488" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" FontSize="72" TextAlignment="Center">
+    
+        </TextBlock>
+        <TextBlock x:Name="textblok_Copy" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="488" Margin="0.333,4.667,0,0" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" Grid.RowSpan="3">
+            <Run Text="R: Reload"/>
+            <Run Text=" "/>
+            <Run Text="Weapon"/>
+        </TextBlock>
+        <TextBlock x:Name="textblok_Copy1" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="488" Text="G: Drop Weapon" Margin="0.333,2.333,0,0" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" Grid.RowSpan="3"/>
+        <TextBlock x:Name="textblok_Copy2" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Left" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="488" Text="H: Pickup Weapon" Margin="0.333,3,0,0" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" Grid.RowSpan="3"/>
+        <Button x:Name="button" Content="Back" Grid.Column="1" HorizontalAlignment="Left" Margin="143.333,5,0,0" Grid.Row="11" VerticalAlignment="Top" Grid.RowSpan="2" Width="193" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" Click="button_Click" Background="{x:Null}"/>
     </Grid>
 </Page>

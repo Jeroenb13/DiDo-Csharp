@@ -774,9 +774,15 @@ namespace DiDo
 
                 if ((player.y > player.y - 16 && bullet.y < player.y + 16) && (bullet.x > player.x - 16 && bullet.x < player.x + 16) && (bullet.eigenaar != player.name))
                 {
-
                     player.hit(bullet.damage);
                     bulletsToRemove.Add(bullet);
+                    if (!player.alive)
+                    {
+                        Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            Frame.Navigate(typeof(GameOver));
+                        }).AsTask().Wait();                   
+                    }
                 }
 
             }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DiDo.Items;
 using System.Threading.Tasks;
+using DiDo.MenuFolder;
+using Windows.UI.Xaml.Controls;
 
 namespace DiDo.Character
 {
@@ -45,15 +47,18 @@ namespace DiDo.Character
 
         public void hit(int damage)
         {
-            if (this.alive)
+            if (alive)
             {
-                this.healthPoints = this.healthPoints - damage;
-                if (this.healthPoints <= 0)
+                healthPoints = healthPoints - damage;
+                if (healthPoints <= 0)
                 {
-                    this.alive = false;
+                    alive = false;
+                    this.OnDeath();
                 }
             }
         }
+
+        public virtual void OnDeath() { }
 
         public void returnStamina()
         {
