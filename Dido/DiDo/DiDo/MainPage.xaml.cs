@@ -66,6 +66,84 @@ namespace DiDo
 
         public double frames = 0;
 
+        public Random random = new Random();
+
+        //Ui elements
+        public CanvasTextFormat font = new CanvasTextFormat();
+        public Rect ui = new Rect(1150, 5, 300, 800); //UI element 
+        public Rect playerRect = new Rect(1150, 5, 300, 200); // Rectangle for the player UI element
+        public Rect weaponRect = new Rect(1150, 5, 300, 400); // Rectangle for the player ui element
+
+        /// <summary>
+        /// Initialisation of the mainpage for singleplayer
+        /// </summary>
+        public MainPage()
+        {
+            // Play background music
+            //soundHandler();
+
+            // Player selection
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen")) // Jeroen is choosen as the player
+            {
+                player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96); // Set the name and stats of the player
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey")) // Jeffreyis choosen as the player
+            {
+                player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96); // Set the name and stats of the player
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Daan")) // Daanis choosen as the player
+            {
+                player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96); // Set the name and stats of the player
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy")) // Jordyis choosen as the player
+            {
+                player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96); // Set the name and stats of the player
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew")) // Matthewis choosen as the player
+            {
+                player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96); // Set the name and stats of the player
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri")) // Hayriis choosen as the player
+            {
+                player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96); // Set the name and stats of the player
+            }
+            else if (ChooseCharacter.PlayerCharacter.Equals("Max")) // Maxis choosen as the player
+            {
+                player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96); // Set the name and stats of the player
+            }
+
+            else if (ChooseCharacter.PlayerCharacter.Equals("Samus")) // Samusis choosen as the player
+            {
+                player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96); // Set the name and stats of the player
+            }
+
+            controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina, player.move_speed, player.x, player.y);
+            // Add the player to the ClientController
+            weapons = new List<Weapon>();
+            // Create a list of weapons
+            levels = new Levels.Levels();
+            // Get the current level
+
+            // Update the mousePointer, Needed to make the player sprite follow the mouse
+            mousePoint = new Point();
+
+            this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
+
+            // Timer for round time
+            RoundTimer.Tick += RoundTimer_Tick;
+            RoundTimer.Interval = new TimeSpan(0, 0, 1);
+
+            // Set the key events
+            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
+            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
+
+            // Add the enemies
+            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
+        }
+
 
         /// <summary>
         /// Method for pointer released
@@ -85,14 +163,6 @@ namespace DiDo
                 // DThe mouse isnt pressed
             }
         }
-
-        public Random random = new Random();
-
-        //Ui elements
-        public CanvasTextFormat font = new CanvasTextFormat();
-        public Rect ui = new Rect(1150, 5, 300, 800); //UI element 
-        public Rect playerRect = new Rect(1150, 5, 300, 200); // Rectangle for the player UI element
-        public Rect weaponRect = new Rect(1150, 5, 300, 400); // Rectangle for the player ui element
 
         //public SoundEffects soundController;
 
@@ -506,75 +576,6 @@ namespace DiDo
         //    await soundController.Play(SoundEfxEnum.BACKGROUND);
         //}
 
-       /// <summary>
-       /// Initialisation of the mainpage for singleplayer
-       /// </summary>
-        public MainPage()
-        {
-            // Play background music
-            //soundHandler();
-
-            // Player selection
-            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen")) // Jeroen is choosen as the player
-            {
-                player = new MyPlayer("Jeroen", 100, 100, 20, 5, 32, 96); // Set the name and stats of the player
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Jeffrey")) // Jeffreyis choosen as the player
-            {
-                player = new MyPlayer("Jeffrey", 100, 100, 30, 5, 32, 96); // Set the name and stats of the player
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Daan")) // Daanis choosen as the player
-            {
-                player = new MyPlayer("Daan", 100, 100, 20, 5, 32, 96); // Set the name and stats of the player
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Jordy")) // Jordyis choosen as the player
-            {
-                player = new MyPlayer("Jordy", 150, 150, 10, 3, 32, 96); // Set the name and stats of the player
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Matthew")) // Matthewis choosen as the player
-            {
-                player = new MyPlayer("Matthew", 100, 100, 40, 5, 32, 96); // Set the name and stats of the player
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Hayri")) // Hayriis choosen as the player
-            {
-                player = new MyPlayer("Hayri", 80, 80, 60, 8, 32, 96); // Set the name and stats of the player
-            }
-            else if (ChooseCharacter.PlayerCharacter.Equals("Max")) // Maxis choosen as the player
-            {
-                player = new MyPlayer("Max", 100, 100, 30, 6, 32, 96); // Set the name and stats of the player
-            }
-
-            else if (ChooseCharacter.PlayerCharacter.Equals("Samus")) // Samusis choosen as the player
-            {
-                player = new MyPlayer("Samus", 200, 200, 0, 5, 32, 96); // Set the name and stats of the player
-            }
-
-            controller = new ClientController(this, player.name, player.maxHealth, player.healthPoints, player.stamina , player.move_speed, player.x, player.y);
-            // Add the player to the ClientController
-            weapons = new List<Weapon>();
-            // Create a list of weapons
-            levels = new Levels.Levels();
-            // Get the current level
-            
-            // Update the mousePointer, Needed to make the player sprite follow the mouse
-            mousePoint = new Point();
-            
-            this.InitializeComponent();
-            Window.Current.SizeChanged += Current_SizeChanged;
-           
-            // Timer for round time
-            RoundTimer.Tick += RoundTimer_Tick;
-            RoundTimer.Interval = new TimeSpan(0, 0, 1);
-
-            // Set the key events
-            Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
-            Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
-
-            // Add the enemies
-            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
-        }
 
         //private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
         //{
