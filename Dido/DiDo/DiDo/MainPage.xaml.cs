@@ -197,7 +197,7 @@ namespace DiDo
         private void GameCanvas_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             this.frames++;
-            // VIncreate the frames, needed for the animation
+            // Increate the frames, needed for the animation
 
             GameStateManager.GSManager();
             // Load the gameStateManager
@@ -324,7 +324,7 @@ namespace DiDo
 
 
             args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y); // Show the correct arms
-            //args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // make it so that scaling and rotation is not processed each frame      
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // make it so that scaling and rotation is not processed each frame      
 
 
             /*
@@ -727,9 +727,6 @@ namespace DiDo
             ARWeapon.SetImage(await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-1.png")));
             SMGWeapon.SetImage(await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-2.png")));
             PistolWeapon.SetImage(await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-3.png")));
-
-            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
-            // Set the images, so it doesnt load every frame
 
             if (ChooseCharacter.PlayerCharacter.Equals("Jeroen")) // If Jeroen is chooses as as the player
             {
