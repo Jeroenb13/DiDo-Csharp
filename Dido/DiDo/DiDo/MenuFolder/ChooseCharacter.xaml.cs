@@ -45,7 +45,6 @@ namespace DiDo.MenuFolder
             this.InitializeComponent();
             addPlayer();
             getPlayer();
-            Debug.WriteLine(currentIndex);
         }
 
         /// <summary>
