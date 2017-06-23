@@ -12,7 +12,7 @@ namespace DiDo.Character
     {
         private Random random; 
         public int direction;
-        public int stepSize = 2; // De snelheid van het lopen
+        public int stepSize = 2; // 
         private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 60, 0); // Het wapen van de enemy
 
         public Enemy(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)

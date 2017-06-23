@@ -115,7 +115,6 @@
     <Compile Include="Items\Bullet.cs" />
     <Compile Include="GameElements\Collide.cs" />
     <Compile Include="Character\Entity.cs" />
-    <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\ImageManipulation.cs" />
     <Compile Include="Items\Fist.cs" />
     <Compile Include="Items\Item.cs" />

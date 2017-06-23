@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Text;
@@ -18,12 +17,7 @@ using DiDo.Levels;
 using DiDo.Character;
 using DiDo.Items;
 using DiDo.MenuFolder;
-using System.Diagnostics;
-using Windows.System;
-using Windows.Graphics.Imaging;
-using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
-using Windows.UI.Xaml.Shapes;
 using DiDo.Multiplayer;
 using Windows.UI.Xaml.Navigation;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -46,7 +40,7 @@ namespace DiDo
         public static float pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
-        public static int countdown = 60; // 60 frames per second
+
         private ClientController controller;
         public static bool RoundEnded = false;
         private Levels.Levels levels;
@@ -56,8 +50,6 @@ namespace DiDo
         //Lists Projectile
         public static List<Bullet> bullets = new List<Bullet>();
         public List<Weapon> weapons;
-        public static int GameState = 0; // startscreen
-        public static DispatcherTimer RoundTimer = new DispatcherTimer();
         public static MyPlayer player;
         public List<Enemy> enemies = new List<Enemy>();
         public float temp_x, temp_y; // Temporary
@@ -131,10 +123,6 @@ namespace DiDo
 
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
-
-            // Timer for round time
-            RoundTimer.Tick += RoundTimer_Tick;
-            RoundTimer.Interval = new TimeSpan(0, 0, 1);
 
             // Set the key events
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
@@ -212,9 +200,6 @@ namespace DiDo
         {
             this.frames++;
             // Increate the frames, needed for the animation
-
-            GameStateManager.GSManager();
-            // Load the gameStateManager
 
             // scales the player
             if (player.x == 0 && player.y == 0) // If player is spawned
@@ -598,19 +583,6 @@ namespace DiDo
             return radians + (0.5 * Math.PI); // half of pi added, so that the players head follows the cursor, instead of its arms.
         }
 
-
-        private void RoundTimer_Tick(object sender, object e)
-        {
-            // Lower the round time
-            countdown -= 1;
-            if (countdown < 1) // When round time is up
-            {
-                RoundTimer.Stop();
-                RoundEnded = true;
-                // Round is ended
-            }
-        }
-
         public void addItem(Characters character)
         {
             for (int i = 0; i <= weapons.Count; i++) // Loop through the weapons
@@ -842,59 +814,37 @@ namespace DiDo
         private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            if (RoundEnded == true)
+            float xPos = (float)e.GetPosition(GameCanvas).X;
+            // X location of the click
+            float yPos = (float)e.GetPosition(GameCanvas).Y;
+            // Y location of the click
+
+            float xVel = xPos - player.x;
+            // Calculate the X velocity
+            float yVel = yPos - player.y;
+            // Calculate the Y velocity
+
+            float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+            // Pythagoras for calculation of the distance
+
+            float scaling = distance / 25;
+            // Scaling for the distance
+
+            xVel = xVel / scaling;
+            // X velocity
+            yVel = yVel / scaling;
+
+            // Y velocity
+            if (player.currentWeapon != null) // If there is weapon choosen
             {
-                GameState = 0;
-                RoundEnded = false;
-                countdown = 60;
-                // Roundtime up
-            }
-            else
-            {
-                if (GameState == 0)
+                if (player.currentWeapon.getAmmo() >= 1) // If there are bullets
                 {
-                    GameState += 1;
-                    // Increase the gameState
-                    RoundTimer.Start();
-                    // Start the round
-                }
-                else if (GameState > 0)
-                {
-                    RoundTimer.Start();
-                    // Start the round
+                    //await soundController.Play(SoundEfxEnum.SHOOT);
 
-                    float xPos = (float)e.GetPosition(GameCanvas).X;
-                    // X location of the click
-                    float yPos = (float)e.GetPosition(GameCanvas).Y;
-                    // Y location of the click
-
-                    float xVel = xPos - player.x;
-                    // Calculate the X velocity
-                    float yVel = yPos - player.y;
-                    // Calculate the Y velocity
-
-                    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-                    // Pythagoras for calculation of the distance
-
-                    float scaling = distance / 25;
-                    // Scaling for the distance
-
-                    xVel = xVel / scaling;
-                    // X velocity
-                    yVel = yVel / scaling;
-                    // Y velocity
-                    if (player.currentWeapon != null) // If there is weapon choosen
-                    {
-                        if (player.currentWeapon.getAmmo() >= 1) // If there are bullets
-                        {
-                            //await soundController.Play(SoundEfxEnum.SHOOT);
-
-                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
-                            // Add the bullet
-                            player.currentWeapon.reduceAmmo();
-                            // Decrease the ammo of the player
-                        }
-                    }
+                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
+                    // Add the bullet
+                    player.currentWeapon.reduceAmmo();
+                    // Decrease the ammo of the player
                 }
             }
         }
