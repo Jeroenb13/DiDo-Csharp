@@ -115,7 +115,6 @@
     <Compile Include="Items\Bullet.cs" />
     <Compile Include="GameElements\Collide.cs" />
     <Compile Include="Character\Entity.cs" />
-    <Compile Include="GameElements\GameStateManager.cs" />
     <Compile Include="GameElements\ImageManipulation.cs" />
     <Compile Include="Items\Fist.cs" />
     <Compile Include="Items\Item.cs" />
@@ -160,6 +159,9 @@
     <Compile Include="SoundEffects.cs" />
     <Compile Include="Sounds\File.cs" />
     <Compile Include="Sounds\Sounds.cs" />
+    <Compile Include="SuccessPage.xaml.cs">
+      <DependentUpon>SuccessPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -365,6 +367,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuFolder\Settings\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SuccessPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
