@@ -30,6 +30,7 @@ namespace DiDo.MenuFolder.Help
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MenuPage));
+            // Navigate to the menu page
         }
     }
 }

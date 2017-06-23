@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DiDo.Multiplayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -47,15 +49,17 @@ namespace DiDo.MenuFolder
                 Adress = IpAdressTBX.Text;
                 try
                 {
-                    Port = Convert.ToUInt16(PoortTBX);
-                    this.Frame.Navigate(typeof(InvadeConnect));
+                    Port = Convert.ToUInt16(PoortTBX.Text);
+
+                    NetHandlerClient netHandler = new NetHandlerClient(new HostName(Adress), Port);
+
+                    this.Frame.Navigate(typeof(InvadeConnect), netHandler);
                 }
                 catch(Exception ex)
                 {
-                    MessageDialog msgError = new MessageDialog("The current value of the port is not an existing port : " + ex);
+                    MessageDialog msgError = new MessageDialog("The current value of the port is not a valid port");
                     await msgError.ShowAsync();
                 }
-                
             }
         }
     }

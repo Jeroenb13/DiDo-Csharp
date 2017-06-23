@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Text;
@@ -18,13 +17,9 @@ using DiDo.Levels;
 using DiDo.Character;
 using DiDo.Items;
 using DiDo.MenuFolder;
-using System.Diagnostics;
-using Windows.System;
-using Windows.Graphics.Imaging;
-using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
-using Windows.UI.Xaml.Shapes;
-using Windows.ApplicationModel.Core;
+using DiDo.Multiplayer;
+using Windows.UI.Xaml.Navigation;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
@@ -45,7 +40,7 @@ namespace DiDo
         public static float pointX, pointY;
         public Point playerPoint;
         public Point mousePoint;
-        public static int countdown = 60; // 60 frames per second
+
         private ClientController controller;
         public static bool RoundEnded = false;
         private Levels.Levels levels;
@@ -55,8 +50,6 @@ namespace DiDo
         //Lists Projectile
         public static List<Bullet> bullets = new List<Bullet>();
         public List<Weapon> weapons;
-        public static int GameState = 0; // startscreen
-        public static DispatcherTimer RoundTimer = new DispatcherTimer();
         public static MyPlayer player;
         public List<Enemy> enemies = new List<Enemy>();
         public float temp_x, temp_y; // Temporary
@@ -131,10 +124,6 @@ namespace DiDo
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
 
-            // Timer for round time
-            RoundTimer.Tick += RoundTimer_Tick;
-            RoundTimer.Interval = new TimeSpan(0, 0, 1);
-
             // Set the key events
             Window.Current.CoreWindow.KeyDown += controller.CoreWindow_Keydown;
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
@@ -167,6 +156,18 @@ namespace DiDo
 
         //public SoundEffects soundController;
 
+        private NetHandlerClient netHandler;
+        private bool isMultiplayerClient = false;
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if(e.Parameter != null && e.Parameter is NetHandlerClient)
+            {
+                this.netHandler = e.Parameter as NetHandlerClient;
+                this.isMultiplayerClient = true;
+            }
+        }
+        
         /// <summary>
         /// Creates the resources of the game
         /// </summary>
@@ -200,9 +201,6 @@ namespace DiDo
             this.frames++;
             // Increate the frames, needed for the animation
 
-            GameStateManager.GSManager();
-            // Load the gameStateManager
-
             // scales the player
             if (player.x == 0 && player.y == 0) // If player is spawned
             {
@@ -230,79 +228,56 @@ namespace DiDo
             {
                 enemy.randomWalk();
                 // Let the enemy walk
-                if (enemy.direction == 0)
+                if (enemy.direction == 0)//if enemy is walking and looking up 
                 {
-                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y < player.y)
+                    if ((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y < player.y)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
-                else if(enemy.direction == 1)
+                else if (enemy.direction == 1)//if enemy is walking and looking right
                 {
-                    if(enemy.x < player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
+                    if (enemy.x < player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
-                else if(enemy.direction == 2)
+                else if (enemy.direction == 2)//if enemy is walking and looking down
                 {
-                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y > player.y)
+                    if ((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y > player.y)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
-                else if(enemy.direction == 3)
+                else if (enemy.direction == 3)//if enemy is walking and looking left
                 {
-                    if(enemy.x > player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
+                    if (enemy.x > player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                }
-                else
-                {
-                    if (enemy.direction == 0)
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                    else if (enemy.direction == 1)
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                    else if (enemy.direction == 2)
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                    else
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
 
@@ -331,11 +306,6 @@ namespace DiDo
             /*
                     !! Na debug verwijderen !! 
             */
-            args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
-            args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Show the player location
-            args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
-            args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
-            args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
             args.DrawingSession.DrawText("PLAYER", 1245, 10, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); // Adding text to the UI element
             args.DrawingSession.DrawText(player.name, 1255, 60, Colors.Black, new CanvasTextFormat() { FontSize = 10, FontFamily = fontUI }); //Adding playername to the UI element
             args.DrawingSession.DrawImage(Char_UI, 1155, 50); //Adding the character playing to the UI element
@@ -422,6 +392,11 @@ namespace DiDo
                 {
                     args.DrawingSession.DrawImage(Health_Empty, x, 525); //Show empty lives
                 }
+            }
+
+            if (this.isMultiplayerClient)
+            {
+                this.netHandler.ReadAsync();
             }
 
             //Triggers the draw event 60 times per second
@@ -577,34 +552,6 @@ namespace DiDo
         //    await soundController.Play(SoundEfxEnum.BACKGROUND);
         //}
 
-
-        //private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
-        //{
-        //    float xPos = (float)e.GetPosition(GameCanvas).X;
-        //    float yPos = (float)e.GetPosition(GameCanvas).Y;
-
-        //    float xVel = xPos - player.x;
-        //    float yVel = yPos - player.y;
-
-        //    // pythagorasmagic
-        //    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-        //    float scaling = distance / 25;
-
-        //    xVel = xVel / scaling;
-        //    yVel = yVel / scaling;
-        //    if (player.currentWeapon != null)
-        //    {
-        //        if (player.currentWeapon.getAmmo() >= 1)
-        //        {
-        //            //await soundController.Play(SoundEfxEnum.SHOOT);
-
-        //            //Debug.WriteLine(player.currentWeapon.getDamage());
-        //            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-        //            player.currentWeapon.reduceAmmo();
-        //        }
-        //    }
-        //}
-
         public void updatePoint(Player player)
         {
             Point newPoint = new Point(player.x, player.y);
@@ -612,8 +559,6 @@ namespace DiDo
             this.playerPoint = newPoint;
             // Set the playerpoint
         }
-
-
 
         public void updateMousePoint(object sender, PointerRoutedEventArgs e)
         {
@@ -636,19 +581,6 @@ namespace DiDo
             double radians = Math.Atan2((y2 - y1), (x2 - x1));
             double Angle = radians * (180 / Math.PI);
             return radians + (0.5 * Math.PI); // half of pi added, so that the players head follows the cursor, instead of its arms.
-        }
-
-
-        private void RoundTimer_Tick(object sender, object e)
-        {
-            // Lower the round time
-            countdown -= 1;
-            if (countdown < 1) // When round time is up
-            {
-                RoundTimer.Stop();
-                RoundEnded = true;
-                // Round is ended
-            }
         }
 
         public void addItem(Characters character)
@@ -852,6 +784,14 @@ namespace DiDo
                     // Let the player take damage from the bullet
                     bulletsToRemove.Add(bullet);
                     // Add the bullet to the list of bullets to remove
+
+                    if (!player.alive)
+                    {
+                        Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                       {
+                            Frame.Navigate(typeof(GameOver));
+                                                   }).AsTask().Wait();
+                       }
                 }
 
             }
@@ -887,59 +827,37 @@ namespace DiDo
         private void GameCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            if (RoundEnded == true)
+            float xPos = (float)e.GetPosition(GameCanvas).X;
+            // X location of the click
+            float yPos = (float)e.GetPosition(GameCanvas).Y;
+            // Y location of the click
+
+            float xVel = xPos - player.x;
+            // Calculate the X velocity
+            float yVel = yPos - player.y;
+            // Calculate the Y velocity
+
+            float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
+            // Pythagoras for calculation of the distance
+
+            float scaling = distance / 25;
+            // Scaling for the distance
+
+            xVel = xVel / scaling;
+            // X velocity
+            yVel = yVel / scaling;
+
+            // Y velocity
+            if (player.currentWeapon != null) // If there is weapon choosen
             {
-                GameState = 0;
-                RoundEnded = false;
-                countdown = 60;
-                // Roundtime up
-            }
-            else
-            {
-                if (GameState == 0)
+                if (player.currentWeapon.getAmmo() >= 1) // If there are bullets
                 {
-                    GameState += 1;
-                    // Increase the gameState
-                    RoundTimer.Start();
-                    // Start the round
-                }
-                else if (GameState > 0)
-                {
-                    RoundTimer.Start();
-                    // Start the round
+                    //await soundController.Play(SoundEfxEnum.SHOOT);
 
-                    float xPos = (float)e.GetPosition(GameCanvas).X;
-                    // X location of the click
-                    float yPos = (float)e.GetPosition(GameCanvas).Y;
-                    // Y location of the click
-
-                    float xVel = xPos - player.x;
-                    // Calculate the X velocity
-                    float yVel = yPos - player.y;
-                    // Calculate the Y velocity
-
-                    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-                    // Pythagoras for calculation of the distance
-
-                    float scaling = distance / 25;
-                    // Scaling for the distance
-
-                    xVel = xVel / scaling;
-                    // X velocity
-                    yVel = yVel / scaling;
-                    // Y velocity
-                    if (player.currentWeapon != null) // If there is weapon choosen
-                    {
-                        if (player.currentWeapon.getAmmo() >= 1) // If there are bullets
-                        {
-                            //await soundController.Play(SoundEfxEnum.SHOOT);
-
-                            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
-                            // Add the bullet
-                            player.currentWeapon.reduceAmmo();
-                            // Decrease the ammo of the player
-                        }
-                    }
+                    bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage(), player.name));
+                    // Add the bullet
+                    player.currentWeapon.reduceAmmo();
+                    // Decrease the ammo of the player
                 }
             }
         }

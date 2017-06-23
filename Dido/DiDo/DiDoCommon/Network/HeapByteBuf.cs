@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DiDoCommon.Network
 {
@@ -63,7 +64,7 @@ namespace DiDoCommon.Network
                 throw new ArgumentNullException("initialArray");
             }
 
-            if(initialArray.Length <= maxCapacity)
+            if(initialArray.Length > maxCapacity)
             {
                 throw new ArgumentOutOfRangeException("The initialArray should be smaller than maxCapacity");
             }
@@ -184,6 +185,14 @@ namespace DiDoCommon.Network
             }
         }
 
+        public string GetString(int index)
+        {
+            ushort length = (ushort)this.GetShort(index);
+            byte[] data = new byte[length];
+            Array.Copy(this.array, index + 2, data, 0, length);
+            return Encoding.UTF8.GetString(data);
+        }
+
         public HeapByteBuf SetByte(int index, int value)
         {
             this._SetByte(index, value);
@@ -264,6 +273,15 @@ namespace DiDoCommon.Network
             }
         }
 
+        public HeapByteBuf SetString(int index, string value)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(value);
+
+            this.SetShort(index, data.Length);
+            this.SetBytes(index + 2, data);
+            return this;
+        }
+
         protected void CheckIndex(int index)
         {
             if (index < 0 || index >= this.Capacity)
@@ -342,6 +360,18 @@ namespace DiDoCommon.Network
             long v = this._GetLong(this.ReaderIndex);
             this.ReaderIndex += 8;
             return v;
+        }
+
+        public virtual string ReadString()
+        {
+            this.CheckReadableBytes(2);
+            ushort length = (ushort)this.GetShort(this.ReaderIndex);
+            this.CheckReadableBytes(2 + length);
+            byte[] data = new byte[length];
+            Array.Copy(this.array, this.ReaderIndex + 2, data, 0, length);
+            string ret = Encoding.UTF8.GetString(data);
+            this.ReaderIndex += 2 + length;
+            return ret;
         }
 
         public virtual char ReadChar() => (char)this.ReadShort();
@@ -457,6 +487,16 @@ namespace DiDoCommon.Network
             this.EnsureWritable(length);
             this.SetZero(this.WriterIndex, length);
             this.WriterIndex += length;
+            return this;
+        }
+
+        public virtual HeapByteBuf WriteString(string value)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(value);
+            this.EnsureWritable(2 + data.Length);
+            this.WriteUnsignedShort((ushort)data.Length);
+            this.WriteBytes(data);
+            this.WriterIndex += 2 + data.Length;
             return this;
         }
 
@@ -598,6 +638,11 @@ namespace DiDoCommon.Network
             {
                 throw new IndexOutOfRangeException($"srcIndex: {srcIndex}, length: {length} (expected: range(0, {srcCapacity}))");
             }
+        }
+
+        internal byte[] GetBackingArray()
+        {
+            return this.array;
         }
     }
 }

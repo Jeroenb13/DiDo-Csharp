@@ -42,7 +42,6 @@ namespace DiDo.MenuFolder
         {
             try
             {
-                MainPage.countdown = 10;
                 Frame.Navigate(typeof(ChooseCharacter));
 
             }
