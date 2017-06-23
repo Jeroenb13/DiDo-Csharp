@@ -576,34 +576,6 @@ namespace DiDo
         //    await soundController.Play(SoundEfxEnum.BACKGROUND);
         //}
 
-
-        //private void GameCanvas_Holding(object sender, HoldingRoutedEventArgs e)
-        //{
-        //    float xPos = (float)e.GetPosition(GameCanvas).X;
-        //    float yPos = (float)e.GetPosition(GameCanvas).Y;
-
-        //    float xVel = xPos - player.x;
-        //    float yVel = yPos - player.y;
-
-        //    // pythagorasmagic
-        //    float distance = (float)Math.Sqrt(Math.Pow((double)xVel, 2) + Math.Pow((double)yVel, 2));
-        //    float scaling = distance / 25;
-
-        //    xVel = xVel / scaling;
-        //    yVel = yVel / scaling;
-        //    if (player.currentWeapon != null)
-        //    {
-        //        if (player.currentWeapon.getAmmo() >= 1)
-        //        {
-        //            //await soundController.Play(SoundEfxEnum.SHOOT);
-
-        //            //Debug.WriteLine(player.currentWeapon.getDamage());
-        //            bullets.Add(new DiDo.Bullet(player.x, player.y, xVel, yVel, player.currentWeapon.getDamage()));
-        //            player.currentWeapon.reduceAmmo();
-        //        }
-        //    }
-        //}
-
         public void updatePoint(Player player)
         {
             Point newPoint = new Point(player.x, player.y);
@@ -611,8 +583,6 @@ namespace DiDo
             this.playerPoint = newPoint;
             // Set the playerpoint
         }
-
-
 
         public void updateMousePoint(object sender, PointerRoutedEventArgs e)
         {
