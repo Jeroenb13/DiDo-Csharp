@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,16 @@ namespace DiDo.Items
 {
     public class SRWeapon : Weapon
     {
+        private static CanvasBitmap image;
+
+        public override CanvasBitmap Image
+        {
+            get
+            {
+                return image;
+            }
+        }
+
         private int damage = 45;            //Damage per Round
 
         public SRWeapon(int magazine, int total, float x, float y) : base(x, y)
@@ -43,6 +54,11 @@ namespace DiDo.Items
         public override int getDamage()
         {
             return this.damage;
+        }
+
+        public static void SetImage(CanvasBitmap img)
+        {
+            image = img;
         }
     }
 }

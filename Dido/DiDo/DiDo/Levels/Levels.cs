@@ -173,10 +173,10 @@ namespace DiDo.Levels
             double xPos2 = xPos + 32;
             double yPos2 = yPos + 32;
 
-            //if(y_round >= gekozenLevel.GetLength(1) || x_round >= gekozenLevel.GetLength(2))
-            //{
-            //    return null;
-            //}
+            if(y_round >= gekozenLevel.GetLength(0) || x_round >= gekozenLevel.GetLength(1))
+            {
+                return null;
+            }
 
             String tile_Type = gekozenLevel[(int)y_round, (int)x_round].ToString();
             Tile tile = getTile(tile_Type);

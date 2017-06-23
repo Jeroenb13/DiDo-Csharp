@@ -38,7 +38,7 @@ namespace DiDo
     public sealed partial class MainPage : Page
     {           
         //CanvastBitmap: The images used by the game
-        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, UI_Fists, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Arms_Fists, Player_sprite, Pistol, Assault_Rifle, SMG, Health_Full, Health_Half, Health_Empty, Char_UI;
+        public static CanvasBitmap BG, StartScreen, Bullet, Enemy1, Enemy2, CurrentWeapon, sprite, UI_Pistol, UI_SMG, UI_AR, UI_Fists, CurrentArms, Arms_AR, Arms_Pistol, Arms_SMG, Arms_Fists, Player_sprite, Health_Full, Health_Half, Health_Empty, Char_UI;
         public static Transform2DEffect Bullets, PlayerA, PlayerS, PlayerD, PlayerW;
         public static Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
         public static float pointX, pointY;
@@ -111,24 +111,7 @@ namespace DiDo
             {
                 if (weapon != null) // Als er wel een wapen is gekozen, toon dat de sprites
                 {
-                    if (weapon.name == "Assault Rifle")
-                    {
-                        Assault_Rifle = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-1.png"));
-                        args.DrawingSession.DrawImage(Assault_Rifle, weapon.x, weapon.y);
-                        // Teken de Assault rifle
-                    }
-                    else if (weapon.name == "Sub Machine Gun")
-                    {
-                        SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-2.png"));
-                        args.DrawingSession.DrawImage(SMG, weapon.x, weapon.y);
-                        // Teken de Sub Machine Gun
-                    }
-                    else if (weapon.name == "Pistol")
-                    {
-                        Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-3.png"));
-                        args.DrawingSession.DrawImage(Pistol, weapon.x, weapon.y);
-                        // Teken de Pistol
-                    }
+                    args.DrawingSession.DrawImage(weapon.Image, weapon.x, weapon.y);
                 }
             }
         }
@@ -173,7 +156,7 @@ namespace DiDo
                 // Laat de enemy random lopen
                 if (enemy.direction == 0)
                 {
-                    if(enemy.x == player.x && enemy.y < player.y)
+                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y < player.y)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                         // Teken de enemy die naar de player kijkt
@@ -186,7 +169,7 @@ namespace DiDo
                 }
                 else if(enemy.direction == 1)
                 {
-                    if(enemy.x < player.x && enemy.y == player.y)
+                    if(enemy.x < player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                         // Teken de enemy die naar de player kijkt
@@ -199,7 +182,7 @@ namespace DiDo
                 }
                 else if(enemy.direction == 2)
                 {
-                    if(enemy.x == player.x && enemy.y > player.y)
+                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y > player.y)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                         // Teken de enemy die naar de player kijkt
@@ -212,7 +195,7 @@ namespace DiDo
                 }
                 else if(enemy.direction == 3)
                 {
-                    if(enemy.x > player.x && enemy.y == player.y)
+                    if(enemy.x > player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                         // Teken de enemy die naar de player kijkt
@@ -716,7 +699,6 @@ namespace DiDo
 
         async Task CreateResourcesAsync(CanvasAnimatedControl sender)
         {
-            
             Arms_AR = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/AR.png"));
             Arms_Pistol = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/Pistol.png"));
             Arms_SMG = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/arms/SMG.png"));
@@ -729,6 +711,12 @@ namespace DiDo
             UI_Fists = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/UI/fists.png"));
             Bullets = ImageManipulation.img(Bullet);
             Enemy1 = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Char/spr_hayri.png"));
+            
+            ARWeapon.SetImage(await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-1.png")));
+            SMGWeapon.SetImage(await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-2.png")));
+            PistolWeapon.SetImage(await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/Weapons/gun-3.png")));
+
+            if (ChooseCharacter.PlayerCharacter.Equals("Jeroen"))
             // Bewaar de images, zodat deze niet elke keer worden opgehaald
 
             if (ChooseCharacter.PlayerCharacter.Equals("Jeroen")) // Als Jeroen is gekozen als player

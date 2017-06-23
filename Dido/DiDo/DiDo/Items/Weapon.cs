@@ -17,6 +17,10 @@ namespace DiDo.Items
         public bool ShouldRepeat { get; protected set; } // Is the weapon a repeating product
         public int BulletsPerMilliSecond { get; protected set; } // bullet per millisecond
         public float RandomisationFactor { get; protected set; } // randomises the bullet for automatic weapons
+        /// <summary>
+        /// The image for this weapon
+        /// </summary>
+        public abstract CanvasBitmap Image { get; }
 
         public Weapon(float x, float y) : base(x, y)
         {
