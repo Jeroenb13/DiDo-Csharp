@@ -30,19 +30,6 @@ namespace DiDo.Multiplayer
             this.socket = new StreamSocket();
 
             await this.socket.ConnectAsync(this.address, this.port.ToString());
-
-            
-            
-            /*Stream streamOut = socket.OutputStream.AsStreamForWrite();
-            StreamWriter writer = new StreamWriter(streamOut);
-            string request = "test";
-            await writer.WriteLineAsync(request);
-            await writer.FlushAsync();
-
-            //Read data from the echo server.
-            Stream streamIn = socket.InputStream.AsStreamForRead();
-            StreamReader reader = new StreamReader(streamIn);
-            string response = await reader.ReadLineAsync();*/
         }
 
         internal async Task SendPacketAsync(AbstractPacket packet)
