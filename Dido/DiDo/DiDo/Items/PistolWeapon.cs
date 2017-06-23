@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas.UI.Xaml;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,16 @@ namespace DiDo.Items
 {
     class PistolWeapon : Weapon
     {
+        private static CanvasBitmap image;
+
+        public override CanvasBitmap Image
+        {
+            get
+            {
+                return image;
+            }
+        }
+
         private int damage = 10;            //Damage per round
 
         public PistolWeapon(int magazine, int additional, int magazineSize, float x, float y) : base(x, y)
@@ -46,6 +57,11 @@ namespace DiDo.Items
         public override int getDamage()
         {
             return this.damage;
+        }
+
+        public static void SetImage(CanvasBitmap img)
+        {
+            image = img;
         }
     }
 }
