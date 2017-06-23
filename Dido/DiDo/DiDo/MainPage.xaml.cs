@@ -24,6 +24,7 @@ using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.System.Threading;
 using Windows.UI.Xaml.Shapes;
+using Windows.ApplicationModel.Core;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
@@ -139,9 +140,9 @@ namespace DiDo
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
             // Add the enemies
-            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Freek", 100, 10, 0, 5, 256, 128)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 100, 10, 0, 5, 256, 128)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 100, 10, 0, 5, 256, 128)); // The AI Enemy 3
         }
 
 
@@ -836,6 +837,7 @@ namespace DiDo
                             // Drop the weapon
                             enemiesToRemove.Add(enemiesCount);
                             // Add the enemy to the enemies to delete
+
                         }
                         bulletsToRemove.Add(bullet);
                         // Add the bullet to the list of bullets to remove
@@ -867,6 +869,18 @@ namespace DiDo
             {
                 enemies.RemoveAt(removeEnemy);
                 // Remove enemy
+
+                // Check if there are enemies left. If not; game is finished
+                if (enemies.Count == 0)
+                {
+                    // Run on UI thread
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        // Navigate to success page
+                        Frame.Navigate(typeof(SuccessPage));
+                    });
+                }
             }
         }
 
