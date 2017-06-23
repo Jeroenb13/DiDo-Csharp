@@ -229,79 +229,56 @@ namespace DiDo
             {
                 enemy.randomWalk();
                 // Let the enemy walk
-                if (enemy.direction == 0)
+                if (enemy.direction == 0)//if enemy is walking and looking up 
                 {
-                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y < player.y)
+                    if ((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y < player.y)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
-                else if(enemy.direction == 1)
+                else if (enemy.direction == 1)//if enemy is walking and looking right
                 {
-                    if(enemy.x < player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
+                    if (enemy.x < player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
-                else if(enemy.direction == 2)
+                else if (enemy.direction == 2)//if enemy is walking and looking down
                 {
-                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y > player.y)
+                    if ((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y > player.y)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
-                else if(enemy.direction == 3)
+                else if (enemy.direction == 3)//if enemy is walking and looking left
                 {
-                    if(enemy.x > player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
+                    if (enemy.x > player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)//check if player is in peripheral vision
                     {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
+                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(enemy.x, enemy.y))), enemy.x, enemy.y);
                         // Draw the enemy looking to the player
                     }
                     else
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                }
-                else
-                {
-                    if (enemy.direction == 0)
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                    else if (enemy.direction == 1)
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 0.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                    else if (enemy.direction == 2)
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, 0), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
-                    }
-                    else
-                    {
-                        args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, Math.PI * 1.5), enemy.x, enemy.y);
-                        // Draw the enemy looking to the choosen direction
+                        // Draw the enemy looking to the chosen direction
                     }
                 }
 
