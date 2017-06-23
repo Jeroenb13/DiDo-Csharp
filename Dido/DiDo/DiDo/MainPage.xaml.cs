@@ -20,6 +20,7 @@ using DiDo.MenuFolder;
 using Windows.System.Threading;
 using DiDo.Multiplayer;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Core;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 // Resource list:
@@ -129,9 +130,18 @@ namespace DiDo
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
             // Add the enemies
-            this.enemies.Add(new Enemy("Freek", 100, 100, 0, 5, 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 100, 100, 0, 5, 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 100, 100, 0, 5, 256, 128)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Freek", 50, randomHealth(), 0, 5, 50, 300)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 50, randomHealth(), 0, 5, 50, 300)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 50, randomHealth(), 0, 5, 500, 200)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Tamara", 50, randomHealth(), 0, 5, 500, 400)); // The AI Enemy 4
+            this.enemies.Add(new Enemy("Daphne", 50, randomHealth(), 0, 5, 500, 200)); // The AI Enemy 5
+            this.enemies.Add(new Enemy("Jorn", 50, randomHealth(), 0, 5, 900, 300)); // The AI Enemy 6
+            this.enemies.Add(new Enemy("Rachid", 50, randomHealth(), 0, 5, 900, 300)); // The AI Enemy 7
+        }
+
+        private int randomHealth()
+        {
+            return random.Next(10, 50);
         }
 
 
@@ -769,6 +779,7 @@ namespace DiDo
                             // Drop the weapon
                             enemiesToRemove.Add(enemiesCount);
                             // Add the enemy to the enemies to delete
+
                         }
                         bulletsToRemove.Add(bullet);
                         // Add the bullet to the list of bullets to remove
@@ -808,6 +819,18 @@ namespace DiDo
             {
                 enemies.RemoveAt(removeEnemy);
                 // Remove enemy
+
+                // Check if there are enemies left. If not; game is finished
+                if (enemies.Count == 0)
+                {
+                    // Run on UI thread
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        // Navigate to success page
+                        Frame.Navigate(typeof(SuccessPage));
+                    });
+                }
             }
         }
 
