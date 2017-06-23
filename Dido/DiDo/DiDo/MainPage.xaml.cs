@@ -130,9 +130,18 @@ namespace DiDo
             Window.Current.CoreWindow.KeyUp += controller.CoreWindow_Keyup;
 
             // Add the enemies
-            this.enemies.Add(new Enemy("Freek", 100, 10, 0, 5, 256, 128)); // The AI Enemy 1
-            this.enemies.Add(new Enemy("Albert", 100, 10, 0, 5, 256, 128)); // The AI Enemy 2
-            this.enemies.Add(new Enemy("Karel", 100, 10, 0, 5, 256, 128)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Freek", 50, randomHealth(), 0, 5, 50, 300)); // The AI Enemy 1
+            this.enemies.Add(new Enemy("Albert", 50, randomHealth(), 0, 5, 50, 300)); // The AI Enemy 2
+            this.enemies.Add(new Enemy("Karel", 50, randomHealth(), 0, 5, 500, 200)); // The AI Enemy 3
+            this.enemies.Add(new Enemy("Tamara", 50, randomHealth(), 0, 5, 500, 400)); // The AI Enemy 4
+            this.enemies.Add(new Enemy("Daphne", 50, randomHealth(), 0, 5, 500, 200)); // The AI Enemy 5
+            this.enemies.Add(new Enemy("Jorn", 50, randomHealth(), 0, 5, 900, 300)); // The AI Enemy 6
+            this.enemies.Add(new Enemy("Rachid", 50, randomHealth(), 0, 5, 900, 300)); // The AI Enemy 7
+        }
+
+        private int randomHealth()
+        {
+            return random.Next(10, 50);
         }
 
 
