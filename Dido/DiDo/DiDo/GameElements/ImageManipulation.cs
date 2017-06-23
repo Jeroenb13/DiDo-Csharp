@@ -20,9 +20,9 @@ namespace DiDo.GameElements
         }
 
         /// <summary>
-        /// 
+        /// Returns the image Transform
         /// </summary>
-        /// <param name="source"></param>
+        /// <param name="source">Source of the image</param>
         /// <returns></returns>
         public static Transform2DEffect img(CanvasBitmap source)
         {
