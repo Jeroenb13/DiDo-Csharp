@@ -162,7 +162,7 @@ namespace DiDo
                 enemy.randomWalk();
                 if (enemy.direction == 0)
                 {
-                    if(enemy.x == player.x && enemy.y < player.y)
+                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y < player.y)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
@@ -173,7 +173,7 @@ namespace DiDo
                 }
                 else if(enemy.direction == 1)
                 {
-                    if(enemy.x < player.x && enemy.y == player.y)
+                    if(enemy.x < player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
@@ -184,7 +184,7 @@ namespace DiDo
                 }
                 else if(enemy.direction == 2)
                 {
-                    if(enemy.x == player.x && enemy.y > player.y)
+                    if((enemy.x - player.x) < 0 || (enemy.x - player.x) > 0 && enemy.y > player.y)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
@@ -195,7 +195,7 @@ namespace DiDo
                 }
                 else if(enemy.direction == 3)
                 {
-                    if(enemy.x > player.x && enemy.y == player.y)
+                    if(enemy.x > player.x && (enemy.y - player.y) < 0 || (enemy.y - player.y) > 0)
                     {
                         args.DrawingSession.DrawImage(ImageManipulation.image(Enemy1, radians(playerPoint, new Point(player.x, player.y))), enemy.x, enemy.y);
                     }
