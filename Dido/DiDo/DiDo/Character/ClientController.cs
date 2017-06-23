@@ -37,7 +37,7 @@ namespace DiDo.Character
         }
 
         /// <summary>
-        /// 
+        /// Returns the key that is pressed.
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -48,14 +48,6 @@ namespace DiDo.Character
                 return keysPressed[key];
             }
             return false;
-        }
-
-        /// <summary>
-        /// Checks if the player can walk on the tile
-        /// </summary>
-        public void checkTile(Player player, Levels.Levels chosenLevel, String[,] level)
-        {
-     
         }
 
         /// <summary>
@@ -83,7 +75,6 @@ namespace DiDo.Character
             }
              if (keyPressed(VirtualKey.S) && !keyPressed(VirtualKey.Shift))
             {
-                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
                 Tile tile = level.getPlayerTile(player.x, player.y+33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
@@ -104,7 +95,7 @@ namespace DiDo.Character
             }
              if (keyPressed(VirtualKey.W) && !keyPressed(VirtualKey.Shift))
             {
-                Tile tile = level.getPlayerTile(player.x, player.y-1, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x, player.y-2, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
@@ -114,7 +105,7 @@ namespace DiDo.Character
              if (keyPressed(VirtualKey.A) && keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x - 1, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positive
+                if (tile.CanWalk == true)
                 {
                     player.x -= player.run();
                 }
@@ -122,7 +113,6 @@ namespace DiDo.Character
             }
              if (keyPressed(VirtualKey.S) && keyPressed(VirtualKey.Shift))
             {
-                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
                 Tile tile = level.getPlayerTile(player.x, player.y + 33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
@@ -133,7 +123,7 @@ namespace DiDo.Character
              if (keyPressed(VirtualKey.D) && keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x + 33, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positive
+                if (tile.CanWalk == true)
                 {
                     player.x += player.run();
                 }
@@ -218,11 +208,13 @@ namespace DiDo.Character
             }
         }
 
-        //Keydown events for character movement
+        /// <summary>
+        /// Keydown events for character movement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
-            //int move_speed = 5;
-
             keysPressed[args.VirtualKey] = true;
 
             // TODO: make keylist
@@ -260,7 +252,11 @@ namespace DiDo.Character
             }
         }
 
-        //Key up events to check if the key is stopped being pressed.
+        /// <summary>
+        /// Key up events to check if the key is stopped being pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
         {
 
@@ -283,7 +279,6 @@ namespace DiDo.Character
             {
                 velY = 0;
             }
-
         }
     }
 }

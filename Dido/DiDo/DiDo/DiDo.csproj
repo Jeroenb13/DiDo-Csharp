@@ -154,8 +154,8 @@
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character\Player.cs" />
-    <Compile Include="Multiplayer\HeapByteBuf.cs" />
     <Compile Include="Multiplayer\MpTest.cs" />
+    <Compile Include="Multiplayer\NetHandlerClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundEffects.cs" />
     <Compile Include="Sounds\File.cs" />
@@ -372,6 +372,7 @@
   <ItemGroup>
     <Folder Include="Assets\Bullets\NewFolder1\" />
   </ItemGroup>
+  <Import Project="..\DiDoCommon\DiDoCommon.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
