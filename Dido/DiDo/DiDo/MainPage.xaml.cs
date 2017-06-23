@@ -248,61 +248,70 @@ namespace DiDo
             args.DrawingSession.DrawRectangle(weaponRect, Colors.Black, 10);
 
 
-            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y);
-            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // TODO: make it so that scaling and rotation is not processed each frame      
+            args.DrawingSession.DrawImage(ImageManipulation.image(CurrentArms, radians(mousePoint, playerPoint)), player.x, player.y); // Toon de juiste armen
+            args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // make it so that scaling and rotation is not processed each frame      
             args.DrawingSession.DrawImage(ImageManipulation.image(Player_sprite, radians(mousePoint, playerPoint)), player.x, player.y); // Later zorgen dat de scaling en rotation niet elke frame gebeurt
 
+
+            // Na debug verwijderen
             args.DrawingSession.DrawText("X1: " + xPos + " | Y1: " + yPos + " | X1: " + xPos2 + " | Y1: " + yPos2 + " | Type: " + levels.getTileType(player.x, player.y, levels.gekozenLevel), 10, 600, Colors.Black); // Toon welke Tile de player is, Tijdelijk
             args.DrawingSession.DrawText("Player X: " + player.x + " | Player Y: " + player.y, 10, 650, Colors.Black); // Toon de player location, Tijdelijk
             args.DrawingSession.DrawText("Player Point: " + playerPoint, 10, 550, Colors.Black);
             args.DrawingSession.DrawText("Mouse Point: " + mousePoint, 10, 500, Colors.Black);
             args.DrawingSession.DrawText("Radians: " + radians(playerPoint, mousePoint), 10, 450, Colors.Black);
-
             args.DrawingSession.DrawText("PLAYER", 1245, 10, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); // Adding text to the UI element
             args.DrawingSession.DrawText(player.name, 1255, 60, Colors.Black, new CanvasTextFormat() { FontSize = 10, FontFamily = fontUI }); //Adding playername to the UI element
             args.DrawingSession.DrawImage(Char_UI, 1155, 50); //Adding the character playing to the UI element
             args.DrawingSession.DrawText("WEAPON", 1240, 210, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); // Adding text to the UI 
 
-            if (player.currentWeapon != null)
+            if (player.currentWeapon != null) // Als er een wapen is gekozen
             {
                 //args.DrawingSession.DrawText(player.currentWeapon.name, 1225, 240, Colors.MediumBlue); // Adding the weaponname to the UI element
                 args.DrawingSession.DrawImage(CurrentWeapon, 1255, 230); //Adding the current weapon to the UI element
             }
 
-            if (player.currentWeapon != null)
+            if (player.currentWeapon != null) // Als er een wapen is gekozen
             {
                 args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + "", 1275, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the bullets to the UI element
                 args.DrawingSession.DrawText(player.currentWeapon.getAdditionalAmmo() + "", 1325, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the the total bullet amount to the UI element
 
-                if (player.currentWeapon.getAmmo() < 10)
+                if (player.currentWeapon.getAmmo() < 10)// Als er minder als 10 kogels zijn
                 {
                     args.DrawingSession.DrawText("0", 1265, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                    // Toon een 0 in de UI
 
-                    if (player.currentWeapon.getAmmo() == 0)
+                    if (player.currentWeapon.getAmmo() == 0) // Als er geen kogels meer zijn
                     {
                         args.DrawingSession.DrawText("0", 1265, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        // Toon een 0 in de UI
                         args.DrawingSession.DrawText(player.currentWeapon.getAmmo() + "", 1275, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        // Toon de ammo in de UI
                         args.DrawingSession.DrawText("RELOAD", 1275, 340, Colors.DarkRed, new CanvasTextFormat() { FontSize = 11, FontFamily = fontUI });
+                        // Geef aan dat er een reload nodig is
                     }
-                    else if(player.currentWeapon.getAmmo() == 0 && player.currentWeapon.getAdditionalAmmo() == 0)
+                    else if(player.currentWeapon.getAmmo() == 0 && player.currentWeapon.getAdditionalAmmo() == 0) // Als er helemaal geen kogels meer zijn
                     {
                         args.DrawingSession.DrawText("OUT OF AMMO", 1275, 340, Colors.DarkRed, new CanvasTextFormat() { FontSize = 11, FontFamily = fontUI });
+                        // Toon OUT OF AMMO
                     }
                 }
 
-                if (player.currentWeapon.getAdditionalAmmo() < 10) 
+                if (player.currentWeapon.getAdditionalAmmo() < 10)  // Als er minder als 10 kogels in het extra magazijn zitten
                 {
                     args.DrawingSession.DrawText("0", 1315, 300, Colors.Black, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                    // Toon een 0 in de UI
 
-                    if (player.currentWeapon.getAdditionalAmmo() == 0)
+                    if (player.currentWeapon.getAdditionalAmmo() == 0) // Als er geen extra kogels meer zijn
                     {
                         args.DrawingSession.DrawText("0", 1315, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        // Toon een 0 in de UI
                         args.DrawingSession.DrawText(player.currentWeapon.getAdditionalAmmo() + "", 1325, 300, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI });
+                        // Toon de extra kogels in het magazijn in de UI
                     }
                 }
             }
-            //args.DrawingSession.DrawText("AMMO", 1255, 255, Colors.Firebrick, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
-
+            
+            // Toon de stats in de UI
             args.DrawingSession.DrawText("STATS", 1250, 410, Colors.Black, new CanvasTextFormat() { FontSize = 24, FontFamily = fontUI }); //Adding text to the UI element
             args.DrawingSession.DrawText("Health:", 1175, 460, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding text to the UI element
             args.DrawingSession.DrawText(player.getHealth() + " | " + player.getMaxHealth(), 1285, 460, Colors.DarkRed, new CanvasTextFormat() { FontSize = 14, FontFamily = fontUI }); //Adding the health amount to the UI element
@@ -313,10 +322,13 @@ namespace DiDo
             /// //Adding the healthbar to the UI element
             /// </summary>
             double maxHealth = player.getMaxHealth();
+            // Maximaal levens van de player
             double currentHealth = player.getHealth();
+            // Toon de huidige levens
             double calc = (currentHealth / maxHealth) * 100 + 10;
+            // Bereken de levens
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++) // Doorloop het maximaal aantal hartjes in de UI
             {
                 int x = 1148 + (i * 50);
                 calc -= 20;
@@ -342,11 +354,11 @@ namespace DiDo
         public string inventory()
         {
             string inventory = "";
-            foreach (Weapon weapon in weapons)
+            foreach (Weapon weapon in weapons) // Doorloop de wapens
             {
-                if (weapon != null)
+                if (weapon != null) // Als er een wapen is
                 {
-                    inventory = inventory + " | " + weapon.name;
+                    inventory = inventory + " | " + weapon.name; // Voeg het wapen toe aan de inventory
                 }
             }
             return inventory;
