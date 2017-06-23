@@ -17,14 +17,30 @@ namespace DiDo.Character
         private MainPage mainPage;
         public Dictionary<VirtualKey, Boolean> keysPressed = new Dictionary<VirtualKey, bool>();
 
-        private SoundEffects soundController;
+        //private SoundEffects soundController;
 
+        /// <summary>
+        /// Constructor of the clientController
+        /// </summary>
+        /// <param name="mainPage">Mainpage reference</param>
+        /// <param name="name">Name of the character</param>
+        /// <param name="maxHealth">Maximum health that the character can have</param>
+        /// <param name="healthPoints">Current health of the character</param>
+        /// <param name="stamina">Maximum stamina of the character</param>
+        /// <param name="move_speed">Move speed of the character</param>
+        /// <param name="x">X coördinate of the character</param>
+        /// <param name="y">Y coördinate of the character</param>
         public ClientController(MainPage mainPage, string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
             this.mainPage = mainPage;
-            this.soundController = new SoundEffects();
+            //this.soundController = new SoundEffects();
         }
 
+        /// <summary>
+        /// Returns the key that is pressed.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private Boolean keyPressed(VirtualKey key)
         {
             if (keysPressed.ContainsKey(key))
@@ -32,14 +48,6 @@ namespace DiDo.Character
                 return keysPressed[key];
             }
             return false;
-        }
-
-        /// <summary>
-        /// Checks if the player can walk on the tile
-        /// </summary>
-        public void checkTile(Player player, Levels.Levels chosenLevel, String[,] level)
-        {
-     
         }
 
         /// <summary>
@@ -67,7 +75,6 @@ namespace DiDo.Character
             }
              if (keyPressed(VirtualKey.S) && !keyPressed(VirtualKey.Shift))
             {
-                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
                 Tile tile = level.getPlayerTile(player.x, player.y+33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
@@ -88,7 +95,7 @@ namespace DiDo.Character
             }
              if (keyPressed(VirtualKey.W) && !keyPressed(VirtualKey.Shift))
             {
-                Tile tile = level.getPlayerTile(player.x, player.y-1, level.gekozenLevel);
+                Tile tile = level.getPlayerTile(player.x, player.y-2, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
                     player.y -= player.move_speed;
@@ -98,7 +105,7 @@ namespace DiDo.Character
              if (keyPressed(VirtualKey.A) && keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x - 1, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positive
+                if (tile.CanWalk == true)
                 {
                     player.x -= player.run();
                 }
@@ -106,7 +113,6 @@ namespace DiDo.Character
             }
              if (keyPressed(VirtualKey.S) && keyPressed(VirtualKey.Shift))
             {
-                //args.DrawingSession.DrawImage(PlayerS, player.x, player.y);
                 Tile tile = level.getPlayerTile(player.x, player.y + 33, level.gekozenLevel);
                 if (tile.CanWalk == true)
                 {
@@ -117,7 +123,7 @@ namespace DiDo.Character
              if (keyPressed(VirtualKey.D) && keyPressed(VirtualKey.Shift))
             {
                 Tile tile = level.getPlayerTile(player.x + 33, player.y, level.gekozenLevel);
-                if (tile.CanWalk == true) //positive
+                if (tile.CanWalk == true)
                 {
                     player.x += player.run();
                 }
@@ -130,15 +136,15 @@ namespace DiDo.Character
                 {
                     player.y -= player.run();
                 }
-            }
+            }//Drop item in hand
              if(keyPressed(VirtualKey.G))
             {
                 mainPage.addItem(player);
             }
-
+             //Pickup Item 
              if (keyPressed(VirtualKey.H))
             {
-                for (int i = 0; i < mainPage.weapons.Length; i++)
+                for (int i = 0; i < mainPage.weapons.Count; i++)
                 {
                     System.Diagnostics.Debug.WriteLine("Player: " + player.x + ", " + player.y);
                     System.Diagnostics.Debug.Write(weapons);
@@ -163,7 +169,7 @@ namespace DiDo.Character
                     // The current weapon has additional ammo
                     if (player.currentWeapon.getAdditionalAmmo() > 0)
                     {
-                        await soundController.Play(SoundEfxEnum.RELOAD);
+                        //await soundController.Play(SoundEfxEnum.RELOAD);
                         int difference = player.currentWeapon.getMagazineSize() - player.currentWeapon.getAmmo();
                         if (player.currentWeapon.getAdditionalAmmo() <= difference)
                         {
@@ -202,11 +208,13 @@ namespace DiDo.Character
             }
         }
 
-        //Keydown events for character movement
+        /// <summary>
+        /// Keydown events for character movement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void CoreWindow_Keydown(CoreWindow sender, KeyEventArgs args)
         {
-            //int move_speed = 5;
-
             keysPressed[args.VirtualKey] = true;
 
             // TODO: make keylist
@@ -244,7 +252,11 @@ namespace DiDo.Character
             }
         }
 
-        //Key up events to check if the key is stopped being pressed.
+        /// <summary>
+        /// Key up events to check if the key is stopped being pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void CoreWindow_Keyup(CoreWindow sender, KeyEventArgs args)
         {
 
@@ -267,7 +279,6 @@ namespace DiDo.Character
             {
                 velY = 0;
             }
-
         }
     }
 }

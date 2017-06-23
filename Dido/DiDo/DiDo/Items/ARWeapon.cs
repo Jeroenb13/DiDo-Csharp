@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,22 @@ namespace DiDo.Items
 {
     public class ARWeapon : Weapon
     {
+        private static CanvasBitmap image;
+
+        public override CanvasBitmap Image
+        {
+            get
+            {
+                return image;
+            }
+        }
+
         private int damage = 20;            //Damage per Round
 
         public ARWeapon(int magazine, int total, float x, float y) : base(x, y)
         {
             name = "Assault Rifle";
+            this.ShouldRepeat = true;
             if (magazine >= 30)
             {
                 this.magazine = 30;
@@ -25,6 +37,8 @@ namespace DiDo.Items
             {
                 this.magazine = magazine;
             }
+            this.BulletsPerMilliSecond = 200;
+            this.RandomisationFactor = 1.25F;
         }
 
         public override void reduceAmmo()
@@ -42,6 +56,11 @@ namespace DiDo.Items
         public override int getDamage()
         {
             return this.damage;
+        }
+
+        public static void SetImage(CanvasBitmap img)
+        {
+            image = img;
         }
     }
 }

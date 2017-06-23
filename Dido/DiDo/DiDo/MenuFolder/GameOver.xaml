@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="DiDo.MenuFolder.GameOver"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DiDo.MenuFolder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125*"/>
+            <ColumnDefinition Width="375*"/>
+            <ColumnDefinition Width="125*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="130*"/>
+            <RowDefinition Height="115*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="button" Content="Play again" Grid.Column="1" HorizontalAlignment="Left" Margin="90,0,0,0" Grid.Row="2" VerticalAlignment="Top" Height="115" Width="202" RenderTransformOrigin="0.5,0.5" FontSize="24" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" Click="button_Click"/>
+        <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="115" Width="384" FontFamily="ms-appx:/Assets/FFFFORWARD.TTF#FFF Forward" TextAlignment="Center">
+            <Run Text="Ugghh, you died, thats bad..."/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="Very bad"/>
+        </TextBlock>
+
+    </Grid>
+</Page>
