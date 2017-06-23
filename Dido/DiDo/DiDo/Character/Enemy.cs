@@ -11,10 +11,20 @@ namespace DiDo.Character
     public class Enemy : Characters
     {
         private Random random; 
-        public int direction;
-        public int stepSize = 2; // 
-        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 60, 0); // Het wapen van de enemy
+        public int direction; //Direction of the enemy
+        public int stepSize = 2; //Amount of steps the enemy can take 
+        private PistolWeapon pistol = new PistolWeapon(15, 60 ,15, 60, 0); // Weapon of the enemy
 
+        /// <summary>
+        /// Constructor of the enemy
+        /// </summary>
+        /// <param name="name">Name of the enemey</param>
+        /// <param name="maxHealth">Maximum amount of health of the enemy</param>
+        /// <param name="healthPoints">Current health of the enemy</param>
+        /// <param name="stamina">Maximum amount of stamina of the enemy</param>
+        /// <param name="move_speed">Move speed of the enemy</param>
+        /// <param name="x">X coördinate of the enemy</param>
+        /// <param name="y">Y coördinate of the enemy</param>
         public Enemy(string name, int maxHealth, int healthPoints, int stamina, int move_speed, float x, float y) : base(name, maxHealth, healthPoints, stamina, move_speed, x, y)
         {
             this.name = name;
@@ -23,7 +33,7 @@ namespace DiDo.Character
             this.move_speed = move_speed;
             weapons = new Weapon[1];
             setItem(0, pistol);
-            currentWeapon = weapons[0]; // Zet het wapen als actief wapen
+            currentWeapon = weapons[0]; // Sets the weapon as the current Weapon
 
             int seed = char.ToUpper(name[0]) - 64;
             seed += char.ToUpper(name[2]) - 64;
@@ -31,87 +41,93 @@ namespace DiDo.Character
             // Seed de random
 
             this.direction = random.Next(0, 4);
-            // Bereken een random direction
+            // Calculates a random location
         }
 
+        /// <summary>
+        /// Returns the name and the health of the enemy
+        /// </summary>
+        /// <returns></returns>
         public String debugName()
         {
             return this.name + " (" + this.getHealth() + ")";
-            // Toon de naam van de enemy, en de levens
         }
 
+        /// <summary>
+        /// Makes it so that the enemy walks a random path
+        /// </summary>
         public void randomWalk()
         {
             DiDo.Levels.Levels level = new DiDo.Levels.Levels();
-            // Haal de tiles van de level op, om te kijken of je op de tile kan lopen
+            // Gets the tiles of the level and looks if they can be walked on
 
-            if (this.random.Next(0, 30) == 1) // 1 op de 29 dat de enemy een stap gaat zetten
+            if (this.random.Next(0, 30) == 1) // A chance of 1 to 29 that the enemy will walk
             {
                 this.direction = random.Next(0, 4);
-                // Bereken een random getal om te kiezen welke richting er op gelopen moet worden
+                // Calculates a random number and walks in the direction of that number
                 
             } else
             {
-                if (this.random.Next(0, 120) == 1) { // Niet altijd schieten
-                    // Schieten als de enemy stilstaat
-                    if (this.currentWeapon.getAmmo() >= 1) // Als er kogels in het magazijn zitten kan er worden geschoten
+                if (this.random.Next(0, 360) == 1) { // 1 on 120 chance that the enemy will shoot
+                    // Shoot if the enemy stands still
+                    if (this.currentWeapon.getAmmo() >= 1) // Looks if there are bullets in the magazine
                     {
 
                         float xPos = random.Next((int)(MainPage.player.x - 70), (int)(MainPage.player.x + 70));
                         float yPos = random.Next((int)(MainPage.player.y - 70), (int)(MainPage.player.y + 70));
-                        // X en Y locatie met een random offset om te zorgen dat het geen scherpschutters zijn.
+                        // Makes the chance of shooting straigh very low
 
                         float xVel = (xPos - x) / 18;
                         float yVel = (yPos - y) / 18;
-                        // Bereken de velocity van de kogel
+                        // Calculates the bullet velocity
 
                         if (xVel > 50) xVel = 50;
                         if (yVel > 50) yVel = 50;
-                        // Zorg dat de velocity niet te hoog kan worden, zodat de kogels niet te snel zijn
+                        // Makes it so that the bullets wont go to fast
 
                         MainPage.bullets.Add(new DiDo.Bullet(x, y, xVel, yVel, currentWeapon.getDamage(), name));
-                        // Voeg de kogels toe aan de lijst met kogels.
+                        // Adds bullets to the list
 
                         this.currentWeapon.reduceAmmo();
-                        // Verlaag het aantal kogels na het schot
+                        // Reduces the ammo
                     }
                 }
             }
 
             if (this.direction == 0)
             {
-                Tile nextTile = level.getPlayerTile(this.x, this.y + 1, level.gekozenLevel); // Haal de informatie van de Tile op
-                if (nextTile.CanWalk == true) // Kijk of er naar de tile beneden je gelopen kan worden
+                Tile nextTile = level.getPlayerTile(this.x, this.y + 1, level.gekozenLevel); // Gets the information of the tile
+                if (nextTile.CanWalk == true) // Checks if the next tile can be walked on.
                 {
                     this.y += stepSize;
-                    // Loop naar beneden
+                    // Walk down
                 }
             }
             else if (this.direction == 1)
             {
-                Tile nextTile = level.getPlayerTile(this.x + 1, this.y, level.gekozenLevel); // Haal de informatie van de Tile op
-                if (nextTile.CanWalk == true) // Kijk of er naar de tile rechts van je gelopen kan worden
+                Tile nextTile = level.getPlayerTile(this.x + 1, this.y, level.gekozenLevel); // Gets the information of the tile
+                if (nextTile.CanWalk == true) // Checks if the next tile can be walked on.
                 {
                     this.x += stepSize;
-                    // Loop naar rechts
+                    // Walk to the right
                 }
             }
             else if (this.direction == 2)
             {
-                Tile nextTile = level.getPlayerTile(this.x, this.y - 1, level.gekozenLevel); // Haal de informatie van de Tile op
-                if (nextTile.CanWalk == true) // Kijk of er naar de tile boven je gelopen kan worden
+                Tile nextTile = level.getPlayerTile(this.x, this.y - 1, level.gekozenLevel); // Gets the information of the tile
+                if (nextTile.CanWalk == true) // Checks if the next tile can be walked on.
                 {
                     this.y -= stepSize;
-                    // Loop naar boven
+                    // Walk up
                 }
             }
             else
             {
-                Tile nextTile = level.getPlayerTile(this.x - 1, this.y, level.gekozenLevel); // Haal de informatie van de Tile op
-                if (nextTile.CanWalk == true) // Kijk of er naar de tile links van je gelopen kan worden
+                Tile nextTile = level.getPlayerTile(this.x - 1, this.y, level.gekozenLevel); // Gets the information of the tile
+                if (nextTile.CanWalk == true) // Checks if the next tile can be walked on.
                 {
                     this.x -= stepSize;
-                    // Loop naar links
+                    // Walk to the left
                 }
             }
         }
