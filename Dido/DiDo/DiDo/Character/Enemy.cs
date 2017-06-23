@@ -62,7 +62,10 @@ namespace DiDo.Character
                         float xVel = (xPos - x) / 18;
                         float yVel = (yPos - y) / 18;
 
-                        
+                        if (xVel > 50) xVel = 50;
+                        if (yVel > 50) yVel = 50;
+
+
 
                         MainPage.bullets.Add(new DiDo.Bullet(x, y, xVel, yVel, currentWeapon.getDamage(), name));
                         this.currentWeapon.reduceAmmo();
