@@ -35,7 +35,7 @@ namespace DiDo.MenuFolder
         /// <summary>
         /// Connect button where you can invade stuff sends you to another xaml page if your ip adress and poort number are not null or empty
         /// </summary>
-        /// <param name="sender">ecent handler</param>
+        /// <param name="sender">event handler</param>
         /// <param name="e">event handler</param>
         private async void ConnectBTN_Click(object sender, RoutedEventArgs e)
         {
