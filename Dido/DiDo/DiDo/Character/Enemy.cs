@@ -47,20 +47,20 @@ namespace DiDo.Character
                 this.direction = random.Next(0, 4);
             } else
             {
-                if (this.random.Next(0, 90) == 1) { // Niet altijd schieten
+                if (this.random.Next(0, 120) == 1) { // Niet altijd schieten
                     // Schieten als de enemy stilstaat
                     if (this.currentWeapon.getAmmo() >= 1)
                     {
 
                         //float xPos = MainPage.player.x;
-                        float xPos = random.Next((int)(MainPage.player.x - 60), (int)(MainPage.player.x + 60));
-                        float yPos = random.Next((int)(MainPage.player.y - 60), (int)(MainPage.player.y + 60));
+                        float xPos = random.Next((int)(MainPage.player.x - 70), (int)(MainPage.player.x + 70));
+                        float yPos = random.Next((int)(MainPage.player.y - 70), (int)(MainPage.player.y + 70));
 
                         //float xPos = (float)e.GetPosition(GameCanvas).X;
                         //float yPos = (float)e.GetPosition(GameCanvas).Y;
 
-                        float xVel = (xPos - x) / 15;
-                        float yVel = (yPos - y) / 15;
+                        float xVel = (xPos - x) / 18;
+                        float yVel = (yPos - y) / 18;
 
                         
 
