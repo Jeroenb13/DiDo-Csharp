@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DiDo.Items;
 using System.Threading.Tasks;
+using DiDo.MenuFolder;
+using Windows.UI.Xaml.Controls;
 
 namespace DiDo.Character
 {
@@ -68,15 +70,18 @@ namespace DiDo.Character
         /// <param name="damage">Amount of damage that is taken</param>
         public void hit(int damage)
         {
-            if (this.alive)//if player is alive
+            if (alive)//if player is alive
             {
-                this.healthPoints = this.healthPoints - damage; //Calculates the healthpoints - damage
-                if (this.healthPoints <= 0) //if healthpoints below 0
+                healthPoints = healthPoints - damage; //Calculates the healthpoints - damage
+                if (healthPoints <= 0) //if healthpoints below 0
                 {
-                    this.alive = false; // alive is false
+                    alive = false; // alive is false
+                    this.OnDeath();
                 }
             }
         }
+
+        public virtual void OnDeath() { }
 
         /// <summary>
         /// Recalculates the stamina if it is below the maximum amount of stamina
